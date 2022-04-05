@@ -1,0 +1,92 @@
+.h2{
+    font-size: 1.7rem !important;
+    font-weight: 500 !important;
+}
+.content-wrapper .form-group {
+    display: flex;
+    margin-bottom: 3rem;
+    align-items: center;
+}
+.content-wrapper .form-group input, select, textarea {
+    width: 500px;
+    margin-left: 50px;
+    height: 3rem;
+    border-radius:20px;
+    border: none;
+    background-color: rgb(227, 227, 228);
+}
+.content-wrapper .form-group textarea {
+    height: 100px;
+}
+.content-wrapper .form-group label {
+    width: 100px;
+    font-size: 1rem;
+    font-weight: 500;
+}
+.card-wrapper {
+    width: 650px;
+    display: flex;
+    justify-content: space-between;
+    padding: 2rem;
+}
+.card-wrapper .card, .partners {
+    padding: 1rem;
+    border: none;
+    box-shadow: 0px 0px 20px rgb(221, 217, 217);
+    border-radius: 20px;
+}
+.card-wrapper .h2 {
+    margin-bottom: 1rem;
+    border-bottom: 2px solid rgb(221, 217, 217);
+
+}
+
+.blueBtn, .redBtn, .greyBtn {
+    height: 3rem;
+    border-radius: 30px;
+    border: none;
+    /* padding: 1rem; */
+}
+.btn-two .btn {
+    width: 200px;
+}
+.blueBtn {
+    background-color: #151F6D !important;
+}
+.redBtn {
+    background-color: #E6007E !important;
+    
+}
+.greyBtn {
+    background-color: gainsboro;
+    
+}
+.buttonGrp {
+    margin-bottom: 2rem;
+}
+.row-bottom {
+    width: 650px;
+    display: flex;
+    /* justify-content: ; */
+    align-items: center;
+    margin-bottom: 2rem;
+}
+.row-bottom input {
+    margin-left: 2rem;
+}
+.countries-wrapper {
+    box-shadow: 0px 0px 10px gainsboro;
+    padding: 1rem;
+    height: 480px;
+    border-radius: 20px;
+}
+.countries-wrapper .form-group input {
+    font-size: 2rem !important;
+}
+.searchInp {
+    margin: 0 0 1rem 0;
+    height: 3rem;
+    border-radius:20px;
+    border: none;
+    background-color: rgb(227, 227, 228);
+}

@@ -1,0 +1,39 @@
+.example-container {
+    height: 100%; 
+    background-color: white !important;
+    color: black;
+  }
+.page-container {
+    display: flex;
+    flex-direction: row;
+    height: 100%;
+
+}
+app-sidebar {
+    width: 100%;
+}
+mat-sidenav {
+    background-color: #ddd !important;
+    color: black;
+    width: 20%;
+    /* position: relative; */
+    /* height: 100%; */
+}
+mat-sidenav-content {
+    padding: 0 20px;
+    /* width: 80%; */
+    height: 100%;
+}
+.headerTop {
+    display: flex;
+    align-items: center;
+}
+/* .menuBtn {
+    border: 2px solid black;
+    padding: 2px;
+    border-radius: 10px;
+} */
+/* .footer {
+    position: sticky;
+    bottom: 0;
+} */

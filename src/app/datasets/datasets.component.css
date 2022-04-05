@@ -1,0 +1,117 @@
+.menu-container{
+    margin: 2rem 0 2rem 20%;
+}
+.menu{
+    /* padding: 0 8rem 0 4rem; */
+    display: flex;
+    flex-direction: row;
+    /* justify-content: center; */
+    list-style: none;
+    gap: 3rem;
+}
+.menu a{
+    text-decoration: none;
+    color: #151F6D !important;
+}
+/* .menu a:active{
+    border: 3px solid red;
+} */
+.active{
+    border-bottom: 4px solid #E6007E;
+}
+.menu a:hover {
+    color: #7e88d6 !important;
+}
+.page-content {
+    display: flex;
+    flex-direction: row;
+}
+.search {
+    display: flex;
+    flex-direction: row;
+    gap: 2rem;
+    padding-right: 2rem;
+}
+/* .tobSearchBtn {
+    background-color: #151F6D !important;
+    font-weight: bold !important;
+} */
+/* .search input {
+    height: 55px;
+} */
+.sidebar {
+    width: 20%;
+}
+.sidebar h2 {
+    font-weight: bolder;
+    letter-spacing: 2px;
+}
+.sidebar .card {
+    border: 2px solid #151F6D;
+    padding: 1rem;
+    /* background-color: #151F6D; */
+    color: white;
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 0;
+    border-top-right-radius: 1.6rem;
+    border-bottom-right-radius: 1.6rem;
+}
+.sidebar .card {
+    margin-bottom: 2rem;
+}
+.sidebar h3 {
+    margin-bottom: 1rem;
+}
+.sidebar form {
+    display: flex;
+    flex-direction: column;
+}
+.sidebarInput, .contryInput, .topSearchInput {
+    padding: 0.5rem 1rem;
+    font-size: 1.3rem;
+}
+.sidebar .btn-group {
+    display: flex;
+    gap: 2rem;
+}
+.sidebar .btn {
+    padding: 0.2rem 0.8rem;
+    font-size: 1.4rem;
+    font-weight: bold;
+}
+.searchBtn{
+    background-color: #E6007E !important;
+    border: none !important;
+
+}
+.resetBtn {
+    background-color: white !important;
+    border: 3px solid #E6007E !important;
+    color: #E6007E;
+    border-radius: 25px !important;
+}
+.filterBtn {
+    background-color: #151F6D !important;
+    border: none !important;
+    border-radius: 25px !important;
+}
+.resetBtn:hover {
+    color: #f16fb7 !important;
+    border: 3px solid #f16fb7 !important;
+}
+.datasets {
+    width: 75%;
+}
+.datasets .card {
+    border: none !important;
+    margin-bottom: 2rem;
+}
+.menu-container .search {
+    display: flex;
+    flex-direction: row;
+}
+thead {
+    color: #E6007E !important;
+    font-size: 18px;
+    font-weight: bold;
+}

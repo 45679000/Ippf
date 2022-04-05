@@ -1,0 +1,26 @@
+<div class="menu-div">
+    <ul class="menu">
+        <li class="menu-items">
+            <a href="#" class="list-item  h3">Home</a>
+        </li>
+        <li class="menu-items">
+            <a [routerLink]="['datasets']" class="list-item h3">Datasets</a>
+        </li>
+        <li class="menu-items">
+            <a href="#" class="list-item h3">WISHScope</a>
+        </li>
+        <li class="menu-items">
+            <a [routerLink]="['datasetrequest']" class="list-item h3 active">Data Requests</a>
+        </li>
+    </ul>
+</div>
+<div class="split-container col-md-8">
+    <form action="">
+        <input type="text" class="form-control form-control-lg" placeholder="Dataset Name">
+        <input type="text" class="form-control form-control-lg" placeholder="Contry of origin">
+        <input type="text" class="form-control form-control-lg" placeholder="Publication Year">
+        <div class="text-center">
+            <button class="btn btn-primary mb-4" id="requestBtn">Request</button>
+        </div>
+    </form>
+</div>

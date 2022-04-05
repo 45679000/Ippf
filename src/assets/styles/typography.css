@@ -1,0 +1,79 @@
+:root {
+    --blue: #151F6D;
+    --white: #ffffff; 
+    --redish: #E6007E;
+    --lightblue: #7e88d6;
+    --yellow: #EAB511;
+    --green: #00625B;
+    --dark: #1D1D1B;
+    --anotherblue: #00A7E1;
+}
+.lead-heading {
+    font-weight: bold !important;
+    font-size: 20px !important;
+    color: var(--blue);
+    margin-top: 1rem !important;
+}
+.lead-heading-mid {
+    font-weight: bold !important;
+    font-size: 1.5rem !important;
+    color: var(--blue);
+}
+.lead-heading-small {
+    font-weight: bold !important;
+    font-size: 1rem !important;
+    color: var(--blue);
+}
+.lead-heading-small-black {
+    font-weight: bold !important;
+    font-size: 1rem !important;
+    color: black;
+}
+.pink-text {
+    color: var(--redish);
+}
+.headingBig {
+    margin: 2rem auto 1rem auto !important;
+    text-align: center !important;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 75px;
+    line-height: 97px;
+    color: var(--white);
+}
+.headingBig span {
+    font-weight: 800 !important;
+}
+.headingMid {
+    font-style: normal !important;
+    font-weight: 500 !important;
+    font-size: 75px !important;
+    line-height: 97px !important;
+    color: var(--blue);
+}
+.greyP {
+    /* font-family: 'Frutiger LT'; */
+    font-style: normal !important;
+    font-weight: 300 !important;
+    font-size: 20px !important;
+    line-height: 38px !important;
+    text-align: center !important;
+
+    color: var(--dark) !important;
+}
+.homeCardP {
+    font-style: normal !important;
+    font-weight: 300 !important;
+    font-size: 30px !important;
+    line-height: 38px !important;
+    color: var(--dark) !important;
+}
+.learnMore a{
+    text-decoration: none;
+    color: var(--white);
+    font-size: 22px;
+}
+.learnMore a:hover {
+    text-decoration: underline;
+    color: antiquewhite;
+}

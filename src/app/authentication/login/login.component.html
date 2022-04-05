@@ -1,0 +1,36 @@
+<div class="g-container">
+    <!-- <div class="split-container col-md-6">
+        <img src="assets/images/surface.jpg" class="banner" width="400"/>
+    </div> -->
+    <div class="split-container col-md-6 ">
+        <div class="logos col-12">
+            <img src="assets/images/wish-header.png" class="float-left" width="500" height="100" alt="">
+            <img src="assets/images/mainlogo.png" class="float-left" alt="" width="500">
+        </div>
+        <h4 class="text-center my-4 font-weight-bold divHeading">Login</h4>
+        <form [formGroup]="loginForm" (ngSubmit)="login()">
+            <p *ngIf="accountCreated" class="text-center info">{{ username }}</p>
+            <!-- {{ loginForm.value | json  }} -->
+            <div *ngIf="(email.invalid && email.touched) || email.dirty || (password.invalid && password.touched) || password.dirty" class="my-3 text-center">
+                <small *ngIf="email.errors?.required" class="text-danger">Email is required</small>
+                <small *ngIf="email.errors?.pattern" class="text-danger">Please provide a valid email address</small>
+                <br>
+                <small *ngIf="password.errors?.required" class="text-danger">Password is required</small>
+            </div>
+            <input type="text" class="form-control form-control-lg" placeholder="Email"  formControlName="email" name="email" required [class.is-invalid] = "loginForm.get('email').invalid && loginForm.get('email').touched">
+            <input type="password" class="form-control form-control-lg" placeholder="Password"  formControlName="password" name="password" [class.is-invalid] = "loginForm.get('password').invalid && loginForm.get('password').touched">
+            <div class="form-group checkbox-div">
+                <div>
+                    <input type="checkbox" name="remember" id="remember" class=" mr-4"  formControlName="remember">
+                    <label for="remember" class="form-check-label">Remember Me</label>
+                </div>
+                <a href="#" class="font-weight-bold text-right">Forgot password?</a>
+            </div>
+            <div class="text-center">
+                <!--  (click)="login() -->
+                <input type="submit" class="btn btn-primary mb-4" id="registerBtn" value="Login">
+                <p>New here? <a [routerLink]="['/registration']"  class="text-danger">Register</a></p>
+            </div>
+        </form>
+    </div>
+</div>

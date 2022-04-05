@@ -1,0 +1,87 @@
+:root {
+    --blue: #151F6D;
+    --white: #ffffff; 
+    --redish: #E6007E;
+    --lightblue: #7e88d6;
+    --yellow: #EAB511;
+    --green: #00625B;
+    --dark: #1D1D1B;
+    --anotherblue: #00A7E1;
+}
+.btnBlue {
+    background-color: var(--blue);
+    color: var(--white);
+    margin: 1rem auto;
+    border: none;
+    border-radius: 25px;
+    width: 7rem;
+    font-size: 1rem;
+    padding: 0.5rem 1rem;
+    font-weight: bold;
+}
+.searchBtn {
+    width: 300px;
+    border-radius: 45px;
+    font-style: normal;
+    font-weight: 500;
+}
+.searchBtnBig {
+    font-weight: bold !important;
+    padding: 1rem 1.3rem !important;
+    border-radius: 45px !important;
+}
+.searchBtnMid {
+    height: 90px;
+    line-height: 51px;
+    font-size: 40px;
+}
+.searchBtnSmall {
+    height: 50px;
+    /* line-height: 51px; */
+    font-size: 30px;
+}
+.actionBtn {
+    background-color: var(--blue) !important;
+}
+.publishBtn {
+    background-color: var(--green) !important;
+}
+.unpublishBtn {
+    background-color: var(--redish) !important;
+}
+.redBtn {
+    background-color: var(--redish);
+}
+.redBtn:hover {
+    background-color: #c0046c;
+}
+.yellowBtn {
+    background-color: var(--yellow);
+}
+.yellowBtn:hover {
+    background-color: #ffbf00;
+}
+.blueBtn {
+    background-color: var(--blue) !important;
+    color: var(--white) !important;
+}
+.blueBtn:hover {
+    background-color: #0a1352;
+    color: var(--white);
+}
+.redBtnOutline {
+    background-color: white !important;
+    border: 2px solid #E6007E !important;
+    color: #E6007E;
+}
+/* .greyishBtn {
+    background-color: var();
+} */
+.cardBtn {
+    width: 100%;
+    height: 50px;
+    border-radius: 45px;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 20px;
+}

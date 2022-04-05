@@ -1,0 +1,26 @@
+.header{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+.logos{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-right: 4rem;
+}
+.logos img{
+    cursor: pointer;
+    width: 300px;
+    height: 70px;
+}
+.avatar a{
+    text-decoration: none;
+    color: black;
+    font-weight: 400;
+}
+.avatar{
+    text-align: right;
+    cursor: pointer;
+    padding-top: 0.5rem;
+}

@@ -1,0 +1,24 @@
+.form-control {
+    /* width: 60%; */
+    /* height: 2.5rem; */
+    margin: 0 0 1.5rem 0;
+    border-radius: 25px !important;
+    background-color: #F0F0F0 !important;
+    border: none !important;
+    height: 59px;
+    width: 476px;
+    border-radius: 53px; 
+    margin: 2rem auto !important;
+}
+.form-group {
+    margin: auto !important;
+    width: 476px;
+}
+.form-group a {
+    text-decoration: none;
+    color: #E6007E;
+}
+.text-danger {
+    color: #E6007E !important;
+    text-decoration: none;
+}

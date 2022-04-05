@@ -1,0 +1,123 @@
+* {
+    margin: 0;
+}
+.landing-page{
+    scroll-behavior: smooth;
+}
+/* .section1{
+    color: aliceblue;
+} */
+/* .section1 .content {
+    width: 100%;
+    padding: 2rem 0 4rem 0;
+    color: #151F6D;
+    position: relative;
+} */
+.menu{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    gap: 3rem;
+    list-style: none;
+}
+.menu a{
+    text-decoration: none;
+    color: #fff !important;
+    letter-spacing: 2px;
+    font-weight: bold;
+}
+.active{
+    border-bottom: 4px solid #E6007E;
+    /* color: #151F6D !important; */
+}
+.menu a:hover {
+    color: #28348d;
+}
+/* .searchData .formgroup {
+    margin: 0 auto 4rem auto !important;
+}
+.section1 input {
+    height: 4rem;
+}
+.section2 .container-fluid{
+    display: flex;
+    justify-content: space-around;
+    margin-bottom: 4rem;
+}
+.section-header {
+    margin: 4rem auto !important;
+} */
+@media (max-width: 1024px) {
+    /* .landing-page{
+        overflow: scroll;
+    } */
+    .menu a{
+        font-size: 1rem !important;
+        letter-spacing: 0px !important;
+    }
+    /* .welcomeMessage {
+        margin: 2rem 0 !important;
+        padding: 0 !important;
+    } */
+    .welcomeMessage p{
+        font-size: 2.5rem;
+    }
+}
+@media (max-width: 768px) {
+    .landing-page{
+        overflow: scroll;
+    }
+    .header{
+        padding: 1rem;
+    }
+    .logos{
+        gap: 1rem  ;
+    }
+    .logos img{
+        width: 80px;
+    }
+    .avatar a{
+        font-size: 1rem;
+        /* margin-bottom: 1rem; */
+    }
+    /* .avatar{
+        
+    } */
+    .section1 .container {
+        margin: 0 !important;
+        padding: 0 !important;
+    }
+    /* .menu {
+       
+    } */
+    .menu a{
+        font-size: 1rem;
+        letter-spacing: 0px;
+    }
+    .welcomeMessage p{
+        font-size: 2.5rem;
+    }
+    .welcomeMessage {
+        margin: 4rem 0 !important;
+        padding: 0 !important;
+    }
+}
+@media (max-width: 600) {
+    .menu{
+        display: none !important;
+    }
+}
+@media (max-width: 350px) {
+    .section1 .container {
+        margin-bottom: 3rem !important;
+    }
+    .logos img{
+        width: 70px;
+    }
+    .logos{
+        gap: 1rem  ;
+    }
+    .section1 form p{
+        font-size: 1rem;
+    }
+}
