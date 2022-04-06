@@ -1,0 +1,82 @@
+:root {
+    --blue: #151F6D;
+    --white: #ffffff; 
+    --redish: #E6007E;
+    --lightblue: #7e88d6;
+    --yellow: #EAB511;
+    --green: #00625B;
+    --dark: #1D1D1B;
+    --anotherblue: #00A7E1;
+}
+.section1 {
+    background-image: url('../../assets/images/maputo.jpg');
+    background-repeat: no-repeat;
+    background-position: center; 
+    background-size: cover;
+    /* filter: brightness(20%); */
+    height: 80vh;
+}
+.portalUsers {
+    text-align: center;
+    margin: 0 auto !important;
+}
+.homeCardsContainer {
+    margin: 50px 0;
+    display: flex;
+    justify-content: space-evenly;
+}
+.homeCards {
+    width: 300px;
+    /* height: 300px; */
+    /* padding: 2rem 1rem; */
+    /* background: #F0F0F0; */
+    /* border-radius: 45px; */
+    border: none !important;
+}
+/* .imageHolder img{
+    border: 10px solid var(--blue);
+    border-radius: 50%;
+
+} */
+.firstImg{
+    background-image: url('../images/sehrish.jpg');
+}
+.secondImg{
+    background-image: url('../images/xaixai.jpg');
+}
+.thirdImg{
+    background-image: url('../images/nadia.jpg');
+}
+.imageHolder {
+    width: 300px;
+    height: 300px;
+    background-position: center;
+    background-size: 100% 100%;
+    border: 8px solid var(--blue);
+    border-radius: 50%;
+    margin: 1rem 0 !important;
+}
+.formDivHolder {
+    margin-bottom: 4rem;
+    color: var(--white);
+    display: flex;
+    align-items: center;
+    /* justify-content: center; */
+}
+.formDivHolder p {
+    font-size: 25px;
+}
+.formDivHolder form {
+    width: 50%;
+    /* align-self: right; */
+}
+.formDivHolder .learnMore {
+    width: 50%;
+}
+.meta-data {
+    display: flex;
+}
+.dataset-info {
+    border-bottom: 1px solid 
+    #C4C4C4 !important;
+}

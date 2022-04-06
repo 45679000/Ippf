@@ -1,0 +1,53 @@
+{
+  "posts": [
+    {
+      "id": 1,
+      "title": "json-server",
+      "author": "typicode"
+    }
+  ],
+  "comments": [
+    {
+      "id": 1,
+      "body": "some comment",
+      "postId": 1
+    }
+  ],
+  "profile": {
+    "name": "typicode"
+  },
+  "users": [
+    {
+      "id": 0,
+      "name": "Korir",
+      "email": "sfsf@dfdf.com",
+      "country": "Kenya",
+      "account": "admin",
+      "password": "fafsdfs"
+    },
+    {
+      "name": "Ian kip",
+      "email": "kkip762@gmail.com",
+      "country": "Kenya",
+      "account": "Malawi",
+      "password": "fasdfasfasf",
+      "id": 1
+    },
+    {
+      "name": "Ian kip",
+      "email": "kkip762@gmail.com",
+      "country": "Kenya",
+      "account": "Malawi",
+      "password": "fasdfasfasf",
+      "id": 2
+    },
+    {
+      "name": "Ian kip",
+      "email": "kkip762@gmail.com",
+      "country": "Kenya",
+      "account": "Malawi",
+      "password": "asfvsfasfs",
+      "id": 3
+    }
+  ]
+}

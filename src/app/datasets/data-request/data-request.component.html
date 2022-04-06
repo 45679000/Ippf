@@ -1,0 +1,44 @@
+<div class="menu-div">
+    <ul class="menu">
+        <li class="menu-items">
+            <a href="#" class="list-item  h3">Home</a>
+        </li>
+        <li class="menu-items">
+            <a [routerLink]="['datasets']" class="list-item h3">Datasets</a>
+        </li>
+        <li class="menu-items">
+            <a href="#" class="list-item h3">WISHScope</a>
+        </li>
+        <li class="menu-items">
+            <a [routerLink]="['datasetrequest']" class="list-item h3 active">Data Requests</a>
+        </li>
+    </ul>
+</div>
+<div class="split-container col-md-8">
+    <form action="">
+        <h2 class="lead-heading">Please provide the following details:</h2>
+        <div>
+            <label for="" class="form-label">Full name</label>
+            <input type="text" class="form-control form-control-lg" placeholder="">
+        </div>
+        <div>
+            <label for="" class="form-label">Email Address</label>
+            <input type="text" class="form-control form-control-lg" placeholder="">
+        </div>
+        <div>
+            <label for="" class="form-label">Country</label>
+            <input type="text" class="form-control form-control-lg" placeholder="">
+        </div>
+        <div>
+            <label for="" class="form-label">Organization</label>
+            <input type="text" class="form-control form-control-lg" placeholder="">
+        </div>
+        <div>
+            <label for="" class="form-label">What will this data be used for?</label>
+            <textarea class="form-control" name="" id="" rows="3"></textarea>
+        </div>
+        <div class="text-center">
+            <button class="btn btn-primary mb-4" id="requestBtn">Request</button>
+        </div>
+    </form>
+</div>

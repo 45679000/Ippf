@@ -1,0 +1,25 @@
+.container {
+    margin-top: 2rem;
+    /* padding: 0 5%; */
+}
+.search {
+    display: flex;
+    flex-direction: row;
+    gap: 2rem;
+    padding-right: 2rem;
+}
+.tobSearchBtn {
+    background-color: #151F6D !important;
+    font-weight: bold !important;
+}
+.search input {
+    height: 55px;
+}
+thead {
+    color: #151F6D !important;
+    font-size: 1.3rem; 
+    font-weight: bold;
+}
+th td {
+    padding: 1rem 0;
+}

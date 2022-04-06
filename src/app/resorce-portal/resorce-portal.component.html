@@ -1,0 +1,54 @@
+<!-- <div class="page-container col-12">
+    <app-sidebar class="sidebar"></app-sidebar>
+
+
+    <div class="routerOutlet">
+        <div>
+            <app-portalheader></app-portalheader>
+            <router-outlet>
+            </router-outlet>
+            <app-portalfooter class="footer"></app-portalfooter>
+        </div>
+        
+    </div>
+    
+</div> -->
+<!-- <mat-drawer-container class="example-container">
+    <mat-drawer>
+        <app-sidebar class="sidebar" mode="side" opened></app-sidebar>
+    </mat-drawer>
+    <mat-drawer-content>
+        <app-portalheader></app-portalheader>
+        <router-outlet></router-outlet>
+        <app-portalfooter class="footer"></app-portalfooter>
+    </mat-drawer-content>
+</mat-drawer-container> -->
+<mat-sidenav-container class="example-container">
+    <mat-sidenav>
+        <div>
+            <mat-icon *ngIf="sidebarOpened && sidebarMode == 'over'" (click)="sidebar.toggle()" class="closeBtn">close</mat-icon>
+            <app-sidebar ></app-sidebar>
+        </div>
+        
+    </mat-sidenav>
+  
+    <mat-sidenav-content>
+        <div [ngClass]="{'headerTop' : true}">
+            <div class="menuBtn">
+                <mat-icon *ngIf="!sidebarOpened" (click)="sidebar.toggle()" >menu</mat-icon>
+            </div>
+            <app-portalheader></app-portalheader>
+        </div>
+        <!-- <button mat-icon-button  (click)="sidebar.toggle()"> -->
+            
+            
+        <!-- </button> -->
+        <router-outlet></router-outlet>
+        <app-portalfooter class="footer"></app-portalfooter>
+    </mat-sidenav-content>
+  </mat-sidenav-container>
+  
+
+  
+  
+

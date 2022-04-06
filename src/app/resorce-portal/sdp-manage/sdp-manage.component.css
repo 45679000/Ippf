@@ -1,0 +1,32 @@
+.h3 {
+    font-size: 25px;
+    color: #000000;
+    font-weight: 700;
+    letter-spacing: 1px;
+    margin-top: 2rem;
+}
+.h5 {
+    font-size: 20px;
+    color: #000000;
+    font-weight: 500;
+    margin: 3rem 0;
+}
+input {
+    height: 50px;
+    border-radius: 45px;
+    font-size: 20px;
+}
+#csv {
+    background-color: #151F6D !important;
+    color: white;
+    width: 264px;
+}
+#upload, #cancel {
+    width: 220px;
+    background-color: gray !important;
+    color: white !important;
+    margin-left: 2rem;
+}
+form{
+    margin-bottom: 40vh;
+}

@@ -1,0 +1,39 @@
+.menu-div {
+    /* width: 100%; */
+    padding: 2rem 20%;
+}
+.menu{
+    /* padding: 0 8rem 0 4rem; */
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    list-style: none;
+}
+.menu a{
+    text-decoration: none;
+    color: #151F6D !important;
+}
+/* .menu a:active{
+    border: 3px solid red;
+} */
+.active{
+    border-bottom: 4px solid #E6007E;
+}
+.menu a:hover {
+    color: #7e88d6 !important;
+}
+.split-container {
+    margin: 4rem auto !important;
+}
+.split-container input {
+    height: 55px;
+    margin-bottom: 2.5rem;
+}
+#requestBtn {
+    width: 150px;
+    background-color: #151F6D;
+    color: white;
+    font-weight: bold;
+    font-size: 1.5rem;
+    border-radius: 1.2rem;
+}

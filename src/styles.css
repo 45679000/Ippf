@@ -1,0 +1,73 @@
+/* You can add global styles to this file, and also import other style files */
+@import '~bootstrap/dist/css/bootstrap.min.css';
+@import './assets/styles/button.css';
+@import './assets/styles/form.css';
+@import './assets/styles/typography.css';
+@import './assets/styles/container.css';
+
+html, body { height: 100%; }
+body { margin: 0; font-family: 'Frutiger LT',Roboto, "Helvetica Neue", sans-serif ; }
+*{
+    padding: 0;
+    margin: 0;
+}
+.banner{
+    width: 100%;
+    height: 100vh;
+}
+.divHeading {
+    font-weight: bold !important;
+    font-size: 2rem !important;
+} 
+.split-container {
+    margin: auto !important;
+}
+.split-container {
+    margin: auto !important;
+}
+.split-container {
+    padding: 5rem 0 0 0;
+}
+
+form input::placeholder{
+    color: #1D1D1B !important;
+    margin-left: 2rem;
+    font-size: 16px;
+}
+#registerBtn{
+    margin: 1rem auto;
+    border: none;
+    border-radius: 25px;
+    width: 7rem;
+    font-size: 1rem;
+    padding: 0.5rem 1rem;
+    font-weight: bold;
+    background-color: #151F6D;
+    /* margin: auto; */
+}
+
+.checkbox-div {
+    display: flex;
+    justify-content: space-between;
+}
+.checkbox-div input{
+    /* border: 1px solid #151F6D !important;
+    color: black !important; */
+    margin-right: 1rem;
+
+}
+.split-container .logos {
+    margin: auto !important;
+    align-items: center;
+}
+.logos{
+    display: flex;
+    flex-direction: column;
+    /* align-items: center; */
+}
+.logos img{
+    width: 200px;
+    height: auto;
+    cursor: pointer;
+}
+

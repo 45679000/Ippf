@@ -1,0 +1,37 @@
+:root {
+    --blue: #151F6D;
+    --white: #ffffff; 
+    --redish: #E6007E;
+    --lightblue: #7e88d6;
+    --yellow: #EAB511;
+    --green: #00625B;
+    --dark: #1D1D1B;
+    --anotherblue: #00A7E1;
+    --greyish: #F0F0F0;
+}
+input, select {
+    border: none !important;
+
+}
+.topSearchInput {
+    padding: 0.5rem 1rem;
+    font-size: 1.5rem;
+    width: 900px;
+    /* height: 60px; */
+    background: var(--greyish);
+    border-radius: 45px;
+}
+.homeSearch {
+    width: 500px;
+    height: 60px;
+    background: var(--greyish);
+    border-radius: 45px;
+    padding: 0 2rem;
+    font-size: 1.5rem;
+}
+.sidebarInput {
+    border-radius: 45px;
+    /* padding: 0 2rem; */
+    font-size: 1.5rem;
+    background: var(--greyish);
+}
