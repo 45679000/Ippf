@@ -68,7 +68,6 @@
     background-color: #E5E5E5;
     border-radius: 1rem;
 }
-.links {
-    display: flex;
-    flex-direction: column;
+.main-content {
+    margin: auto;
 }

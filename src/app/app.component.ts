@@ -29,9 +29,12 @@ export class AppComponent {
           if(event instanceof NavigationStart) {
             // console.log(event.url);
             // event.url == '/datasets' || event.url == '/datasets/datasetdetails' || event.url == '/datasets/datasetdetails/datasetrequest' || event.url == '/home'
-            if(event.url == '/datasets' || event.url == '/datasets/datasetdetails' || event.url == '/datasets/datasetdetails/datasetrequest' || event.url == '/home' || event.url == '/'){
+            if(event.url == '/datasets' || event.url == '/datasets/datasetdetails' || event.url == '/datasets/datasetdetails/datasetrequest' || event.url == '/home' || event.url == '/' || event.url == '/about' || event.url == '/faqs' || event.url == '/contact' || event.url == '/account-settings'){
               this.footerDisp = true;
               this.headerDisp  = true;
+            }else if(event.url == '/login' || event.url == '/register' || event.url == '/change-password' ){
+              this.footerDisp = false
+              this.headerDisp = false
             }
           }
         });

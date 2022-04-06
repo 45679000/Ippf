@@ -11,12 +11,22 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {MatIconModule} from '@angular/material/icon';
+import { AboutComponent } from './about/about.component';
+import { FaqComponent } from './faq/faq.component';
+import { ContactComponent } from './contact/contact.component';
+// import { AccountSettingsComponent } from './authentication/account-settings/account-settings.component';
+// import { PasswordChangeComponent } from './authentication/password-change/password-change.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     HeaderComponent,
     FooterComponent,
+    AboutComponent,
+    FaqComponent,
+    ContactComponent,
+    // AccountSettingsComponent,
+    // PasswordChangeComponent,
   ],
   imports: [
     BrowserModule,

@@ -3,7 +3,11 @@ import { RouterModule, Routes } from '@angular/router';
 import { AuthGuard } from './auth.guard';
 import { LoginComponent } from './authentication/login/login.component';
 import { RegisterComponent } from "./authentication/register/register.component";
-
+import { AboutComponent } from './about/about.component';
+import { FaqComponent } from './faq/faq.component';
+import { ContactComponent } from './contact/contact.component';
+import { PasswordChangeComponent } from './authentication/password-change/password-change.component'; 
+import { AccountSettingsComponent } from './authentication/account-settings/account-settings.component';
 const routes: Routes = [
   {
     path: '', 
@@ -13,6 +17,26 @@ const routes: Routes = [
   {
     path: 'registration', 
     component: RegisterComponent
+  },
+  {
+    path: 'about',
+    component: AboutComponent
+  },
+  {
+    path: 'contact',
+    component: ContactComponent
+  },
+  {
+    path: 'faqs',
+    component: FaqComponent
+  },
+  {
+    path: 'change-password',
+    component: PasswordChangeComponent
+  },
+  { 
+    path: 'account-settings',
+    component: AccountSettingsComponent
   },
   {
     path: 'login', 

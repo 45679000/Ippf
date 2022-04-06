@@ -5,12 +5,15 @@ import { LoginComponent } from './login/login.component';
 import { AuthServiceService } from '../auth-service.service';
 import { ReactiveFormsModule } from '@angular/forms';
 import {RouterModule} from '@angular/router';
-
+import { PasswordChangeComponent } from './password-change/password-change.component';
+import { AccountSettingsComponent } from './account-settings/account-settings.component';
 
 @NgModule({
   declarations: [
     RegisterComponent,
-    LoginComponent
+    LoginComponent,
+    PasswordChangeComponent,
+    AccountSettingsComponent
   ],
   imports: [
     CommonModule,
@@ -19,7 +22,9 @@ import {RouterModule} from '@angular/router';
   ],
   exports: [
     RegisterComponent,
-    LoginComponent
+    LoginComponent,
+    PasswordChangeComponent,
+    AccountSettingsComponent
   ]
 })
 export class AuthenticationModule { }

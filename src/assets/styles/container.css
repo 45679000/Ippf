@@ -21,7 +21,7 @@
     margin: 0 auto !important;
 }
 .homeCardsContainer {
-    margin-top: 1rem;
+    margin: 50px 0;
     display: flex;
     justify-content: space-evenly;
 }
@@ -54,7 +54,7 @@
     background-size: 100% 100%;
     border: 8px solid var(--blue);
     border-radius: 50%;
-    margin: 2rem 0 !important;
+    margin: 1rem 0 !important;
 }
 .formDivHolder {
     margin-bottom: 4rem;
@@ -77,5 +77,6 @@
     display: flex;
 }
 .dataset-info {
-    border-bottom: 1px solid #333 !important;
+    border-bottom: 1px solid 
+    #C4C4C4 !important;
 }
