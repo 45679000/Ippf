@@ -4,6 +4,16 @@
         <img src="assets/images/mainlogo.png" class="float-left" alt="" width="300" height="25">
     </div>
     <div class="avatar">
-        <p class="h3">Good morning, <a href="#" class="h3">Stephen <i class="fas fa-user-circle"></i></a></p>
+        <p class="h3">Good morning, <button class="h3" (click)="toggleShow()">Stephen<i class="fas fa-user-circle"></i></button></p>
+        <div class="user-management" *ngIf="isShown">
+            <!-- <div class="user-avatar"> -->
+                <!-- <i class="fas fa-user-circle"></i> -->
+                <!-- <img src="" alt="X"> -->
+            <!-- </div> -->
+            <!-- <a [routerLink]="['logout']">Logout</a> -->
+            <a [routerLink]="['login']">Login</a>
+            <a [routerLink]="['change-password']">Change password</a>
+            <a [routerLink]="['account-settings']">Account Settings</a>
+        </div>
     </div>
 </div>

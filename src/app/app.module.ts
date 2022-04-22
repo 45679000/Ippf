@@ -14,6 +14,8 @@ import {MatIconModule} from '@angular/material/icon';
 import { AboutComponent } from './about/about.component';
 import { FaqComponent } from './faq/faq.component';
 import { ContactComponent } from './contact/contact.component';
+import { MenuComponent } from './menu/menu.component';
+import { CommonModule } from '@angular/common';
 // import { AccountSettingsComponent } from './authentication/account-settings/account-settings.component';
 // import { PasswordChangeComponent } from './authentication/password-change/password-change.component';
 
@@ -25,6 +27,7 @@ import { ContactComponent } from './contact/contact.component';
     AboutComponent,
     FaqComponent,
     ContactComponent,
+    MenuComponent,
     // AccountSettingsComponent,
     // PasswordChangeComponent,
   ],
@@ -36,10 +39,12 @@ import { ContactComponent } from './contact/contact.component';
     ReactiveFormsModule,
     HttpClientModule,
     BrowserAnimationsModule,
-    MatIconModule
+    MatIconModule,
+    CommonModule 
   ],
   exports: [
-    HeaderComponent
+    HeaderComponent,
+    MenuComponent
   ],
   providers: [],
   bootstrap: [AppComponent]

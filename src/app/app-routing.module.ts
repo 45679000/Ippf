@@ -8,6 +8,12 @@ import { FaqComponent } from './faq/faq.component';
 import { ContactComponent } from './contact/contact.component';
 import { PasswordChangeComponent } from './authentication/password-change/password-change.component'; 
 import { AccountSettingsComponent } from './authentication/account-settings/account-settings.component';
+import { ResourceManagerHomeComponent } from './resorce-portal/resource-manager-home/resource-manager-home.component';
+import { ResourceDetailsComponent } from './resorce-portal/resource-details/resource-details.component';
+import { ResourceManageOneComponent } from './resorce-portal/resource-manage-one/resource-manage-one.component';
+import { ResourceContentComponent } from './resorce-portal/resource-content/resource-content.component';
+import { MenuComponent } from './menu/menu.component';
+
 const routes: Routes = [
   {
     path: '', 
@@ -43,13 +49,18 @@ const routes: Routes = [
     component: LoginComponent
   },
   {
-     path: 'home', 
+    path: 'menu', 
+    component: MenuComponent
+  },
+  {
+     path: '', 
      loadChildren: () => import('./home/home.module').then(m => m.HomeModule),
      canActivate: [AuthGuard] 
   },
   {
      path: 'datasets', 
      loadChildren: () => import('./datasets/datasets.module').then(m => m.DatasetsModule) ,
+     pathMatch: 'prefix',
      canActivate: [AuthGuard] 
   },
   {
@@ -60,7 +71,27 @@ const routes: Routes = [
        headerDisp: false
      } ,
      canActivate: [AuthGuard] 
-  }
+  },
+  {
+    path: 'resources/manage', 
+    component: ResourceManagerHomeComponent  ,
+    canActivate: [AuthGuard] 
+ },
+ {
+  path: 'resources/details', 
+  component: ResourceDetailsComponent ,
+  canActivate: [AuthGuard] 
+},
+{
+  path: 'resource/manage', 
+  component: ResourceManageOneComponent,
+  canActivate: [AuthGuard] 
+},
+{
+  path: 'resource/content', 
+  component: ResourceContentComponent,
+  canActivate: [AuthGuard] 
+},
 ];
 
 @NgModule({

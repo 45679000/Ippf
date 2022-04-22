@@ -10,24 +10,42 @@
         <h4 class="text-center my-4 font-weight-bold divHeading">Register</h4>
         <form [formGroup]="registrationForm" (ngSubmit)="register()">
             
-            <input type="text" class="form-control form-control-lg" placeholder="Full name" formControlName="name" [class.is-invalid] = "registrationForm.get('name').invalid && registrationForm.get('name').touched">
-            <select name="" id="country" class="form-select form-select-lg" value="Country" formControlName="country" [class.is-invalid] = "registrationForm.get('country').invalid && registrationForm.get('country').touched">
+            <div class="form-group">
+                <label for="name">Full Name</label>
+                <input type="text" class="form-control form-control-lg" formControlName="name" [class.is-invalid] = "registrationForm.get('name').invalid && registrationForm.get('name').touched">
+            </div>
+            <div class="form-group">
+                <label for="country">Country</label>
+                <select name="" id="country" class="form-select form-select-lg" formControlName="country" [class.is-invalid] = "registrationForm.get('country').invalid && registrationForm.get('country').touched">
                 <option value="Kenya">Kenya</option>
                 <option value="Malawi">Malawi</option>
                 <option value="Rwanda">Rwanda</option>
                 <option value="Congo">Congo</option>
-            </select>
-            <input type="text" name="email" class="form-control form-control-lg" placeholder="Email" formControlName="email" [class.is-invalid] = "registrationForm.get('email').invalid && registrationForm.get('email').touched">
-            <select name="" id="accountType" class="form-select form-select-lg" formControlName="accountType" [class.is-invalid] = "registrationForm.get('accountType').invalid && registrationForm.get('accountType').touched">
-                <option value="Kenya">Account Type</option>
-                <option value="Malawi">Admin</option>
-                <option value="Rwanda">Publisher</option>
-                <option value="Congo">User</option>
-            </select>
-            <input type="password" class="form-control form-control-lg" placeholder="Password" formControlName="password" [class.is-invalid] = "registrationForm.get('password').invalid && registrationForm.get('password').touched">
-            <input type="password" class="form-control form-control-lg" placeholder="Confirm password" formControlName="passwordConfirmation" [class.is-invalid] = "registrationForm.get('passwordConfirmation').invalid && registrationForm.get('passwordConfirmation').touched">
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="email">Email</label>
+                <input type="text" name="email" class="form-control form-control-lg" formControlName="email" [class.is-invalid] = "registrationForm.get('email').invalid && registrationForm.get('email').touched">
+            </div>
+            <div class="form-group">
+                <label for="accountType">Account Type</label>
+                <select name="" id="accountType" class="form-select form-select-lg" formControlName="accountType" [class.is-invalid] = "registrationForm.get('accountType').invalid && registrationForm.get('accountType').touched">
+                    <option value="Kenya">Account Type</option>
+                    <option value="Malawi">Admin</option>
+                    <option value="Rwanda">Publisher</option>
+                    <option value="Congo">User</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="password">Password</label>
+                <input type="password" class="form-control form-control-lg" formControlName="password" [class.is-invalid] = "registrationForm.get('password').invalid && registrationForm.get('password').touched">
+            </div>
+            <div class="form-group">
+                <label for="Confirm password">Confirm Password</label>
+                <input type="password" class="form-control form-control-lg" formControlName="passwordConfirmation" [class.is-invalid] = "registrationForm.get('passwordConfirmation').invalid && registrationForm.get('passwordConfirmation').touched">
+            </div>
             <div class="text-center">
-                <input type="submit" class="btn btn-primary mb-2" id="registerBtn" value="Register">
+                <input type="submit" class="btn btn-primary mb-2 registerBtn" id="" value="Register">
                 <p>Already part of the community? <a [routerLink]="['/login']" class="text-danger">Login</a></p>
             </div>
         </form>

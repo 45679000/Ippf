@@ -21,9 +21,22 @@ footer {
 }
 .menu-links li {
     list-style: none;
+    margin-bottom: 8px !important;
 }
 #emailInput{
     width: 100%;
+}
+.form-control {
+    /* border-radius: 25px !important; */
+    background-color: #F0F0F0 !important;
+    border: none !important;
+    border-radius: 53px; 
+}
+.comment-form{
+    text-align: right;
+}
+label{
+    font-weight: 500 !important;
 }
 /* .subscribe .btn{
     margin-right: 50%;

@@ -20,7 +20,7 @@
     font-weight: bold;
 }
 .searchBtn {
-    width: 300px;
+    width: 200px;
     border-radius: 45px;
     font-style: normal;
     font-weight: 500;
@@ -38,7 +38,7 @@
 .searchBtnSmall {
     height: 50px;
     /* line-height: 51px; */
-    font-size: 30px;
+    font-size: 20px;
 }
 .actionBtn {
     background-color: var(--blue) !important;
