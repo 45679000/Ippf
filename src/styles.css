@@ -34,7 +34,7 @@ form input::placeholder{
     margin-left: 2rem;
     font-size: 16px;
 }
-#registerBtn{
+.registerBtn{
     margin: 1rem auto;
     border: none;
     border-radius: 25px;
