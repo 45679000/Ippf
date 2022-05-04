@@ -5,6 +5,7 @@ import { HomeRoutingModule } from './home-routing.module';
 import { HomeComponent } from './home.component';
 import { MenuComponent } from '../menu/menu.component';
 import { AppModule } from '../app.module';
+import { SharedModule } from '../shared/shared.module';
 
 @NgModule({
   declarations: [
@@ -16,7 +17,7 @@ import { AppModule } from '../app.module';
     HomeRoutingModule,
     // AppModule,
     // MenuComponent
-
+    SharedModule
   ],
   exports: [
     // HeaderComponent

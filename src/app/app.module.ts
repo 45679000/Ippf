@@ -16,6 +16,7 @@ import { FaqComponent } from './faq/faq.component';
 import { ContactComponent } from './contact/contact.component';
 import { MenuComponent } from './menu/menu.component';
 import { CommonModule } from '@angular/common';
+import { SharedModule } from './shared/shared.module';
 // import { AccountSettingsComponent } from './authentication/account-settings/account-settings.component';
 // import { PasswordChangeComponent } from './authentication/password-change/password-change.component';
 
@@ -28,6 +29,7 @@ import { CommonModule } from '@angular/common';
     FaqComponent,
     ContactComponent,
     MenuComponent,
+    
     // AccountSettingsComponent,
     // PasswordChangeComponent,
   ],
@@ -40,7 +42,8 @@ import { CommonModule } from '@angular/common';
     HttpClientModule,
     BrowserAnimationsModule,
     MatIconModule,
-    CommonModule 
+    CommonModule,
+    SharedModule
   ],
   exports: [
     HeaderComponent,
