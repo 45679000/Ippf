@@ -13,26 +13,7 @@
     color: #151F6D;
     position: relative;
 } */
-.menu{
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    gap: 3rem;
-    list-style: none;
-}
-.menu a{
-    text-decoration: none;
-    color: #fff !important;
-    letter-spacing: 2px;
-    font-weight: bold;
-}
-.active{
-    border-bottom: 4px solid #E6007E;
-    /* color: #151F6D !important; */
-}
-.menu a:hover {
-    color: #28348d;
-}
+
 /* .searchData .formgroup {
     margin: 0 auto 4rem auto !important;
 }
@@ -47,6 +28,9 @@
 .section-header {
     margin: 4rem auto !important;
 } */
+app-navbar {
+    color: black !important;
+}
 @media (max-width: 1024px) {
     /* .landing-page{
         overflow: scroll;
