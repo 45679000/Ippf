@@ -8,7 +8,7 @@
     padding-top: 5rem;
     position: fixed;
     left: 0;
-    /* width: ; */
+    width: 20%;
 }
 .btn-secondary {
     margin: 1rem 0 0 0;
@@ -53,7 +53,33 @@
 .drop-down i{
     float: right;
 }
-
+@media (max-width: 1440px) {
+    .btn-secondary {
+        /* width: 150px; */
+        font-size: 0.8rem;
+        /* padding: 0.5rem 1rem; */
+        border-radius: 45px;
+        border: none !important;
+    }
+    .sidebar-content {
+        width: 30%;
+    }
+}
+@media (max-width: 768px) {
+    .sidebar-content {
+        width: 50%;
+    }
+}
+@media (max-width: 425px) {
+    .sidebar-content {
+        width: 75%;
+    }
+}
+@media (max-width: 320px) {
+    .sidebar-content {
+        width: 90%;
+    }
+}
 /* .sub-menus {
     display: none !important;
 }

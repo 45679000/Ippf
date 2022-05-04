@@ -9,6 +9,9 @@
     height: 100%;
 
 }
+.sidebar-parent {
+    width: 100%;
+}
 app-sidebar {
     width: 100%;
 }
@@ -27,6 +30,11 @@ mat-sidenav-content {
 .headerTop {
     display: flex;
     align-items: center;
+}
+@media (max-width: 1440px) {
+    mat-sidenav {
+        width: 30%;
+    }
 }
 /* .menuBtn {
     border: 2px solid black;
