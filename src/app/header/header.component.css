@@ -20,7 +20,7 @@
     object-fit: cover;
 }
 .logoz img:nth-child(1) {
-    height: 80% !important;
+    height: 50px !important;
 }
 .avatar a{
     text-decoration: none;
@@ -57,4 +57,9 @@
     background-color: #E6007E;
     color: white;
     border-radius: 2px;
+}
+@media (max-width: 425px) {
+    .logoz img{
+        width: 250px;
+    }
 }

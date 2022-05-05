@@ -1,14 +1,16 @@
-<ul class="menu">
-    <li class="menu-items">
-        <a href="#" class="list-item active h3">Home</a>
-    </li>
-    <li class="menu-items">
-        <a [routerLink]="['../datasets']" class="list-item h3">Datasets</a>
-    </li>
-    <li class="menu-items">
-        <a href="#" class="list-item h3">WISHScope</a>
-    </li>
-    <li class="menu-items">
-        <a [routerLink]="['../dataset-request']" class="list-item h3">Data Requests</a>
-    </li>
-</ul>
+<div class="menu-holder">
+    <ul class="menu">
+        <li class="menu-items">
+            <a href="#" class="list-item active h3" [ngClass]=" fontColorBlue? 'whiteText' : 'blueText'">Home</a>
+        </li>
+        <li class="menu-items">
+            <a [routerLink]="['../datasets']" class="list-item h3" [ngClass]=" fontColorBlue? 'whiteText' : 'blueText'">Datasets</a>
+        </li>
+        <li class="menu-items">
+            <a href="#" class="list-item h3" [ngClass]=" fontColorBlue? 'whiteText' : 'blueText'">WISHScope</a>
+        </li>
+        <li class="menu-items">
+            <a [routerLink]="['../dataset-request']" class="list-item h3" [ngClass]=" fontColorBlue? 'whiteText' : 'blueText'">Data Requests</a>
+        </li>
+    </ul>
+</div>

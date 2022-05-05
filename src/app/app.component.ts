@@ -14,14 +14,14 @@ export class AppComponent {
   constructor(route: ActivatedRoute, private auth: AuthServiceService, private router: Router) { 
     
     const user = route.data.subscribe(data => {
-      console.log(data);
+      // console.log(data);
     });
     // console.log(route)
     
   }
 
   ngOnInit(): void {
-    console.log(this.router.events);
+    // console.log(this.router.events);
     
     this.router.events
       .subscribe(

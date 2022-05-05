@@ -1,3 +1,7 @@
+.menu-holder {
+    width: 100%;
+    margin: auto;
+}
 .menu{
     display: flex;
     flex-direction: row;
@@ -7,9 +11,14 @@
 }
 .menu a{
     text-decoration: none;
-    color: #fff !important;
     letter-spacing: 2px;
     font-weight: bold;
+}
+.whiteText {
+    color: #fff !important;
+}
+.blueText {
+    color: #28348d !important;
 }
 .active{
     border-bottom: 4px solid #E6007E;
