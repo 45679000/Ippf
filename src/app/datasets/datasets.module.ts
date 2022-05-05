@@ -6,6 +6,7 @@ import { DatasetsComponent } from './datasets.component';
 import { DatasetDetailsComponent } from './dataset-details/dataset-details.component';
 import { DataRequestComponent } from './data-request/data-request.component';
 // import { HeaderComponent } from '../home/header/header.component';
+import { SharedModule } from '../shared/shared.module';
 
 
 @NgModule({
@@ -17,8 +18,8 @@ import { DataRequestComponent } from './data-request/data-request.component';
   imports: [
     CommonModule,
     DatasetsRoutingModule,
-    NgbModule
-    // HeaderComponent
+    NgbModule,
+    SharedModule
   ]
 })
 export class DatasetsModule { }

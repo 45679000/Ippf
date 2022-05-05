@@ -31,3 +31,8 @@ label{
 .is-invalid {
     border: 1px solid red !important;
 }
+@media (max-width: 600px) {
+    .form-control {
+        width: 100% !important;
+    }
+}

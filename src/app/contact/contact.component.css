@@ -1,1 +1,4 @@
 @import '../../assets/styles/landingpageforms.css';
+.split-container {
+    padding: 0 !important;
+}

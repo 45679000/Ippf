@@ -1,0 +1,29 @@
+.menu-holder {
+    width: 100%;
+    margin: auto;
+}
+.menu{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    gap: 3rem;
+    list-style: none;
+}
+.menu a{
+    text-decoration: none;
+    letter-spacing: 2px;
+    font-weight: bold;
+}
+.whiteText {
+    color: #fff !important;
+}
+.blueText {
+    color: #28348d !important;
+}
+.active{
+    border-bottom: 4px solid #E6007E;
+    /* color: #151F6D !important; */
+}
+.menu a:hover {
+    color: #28348d;
+}

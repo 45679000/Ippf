@@ -49,10 +49,6 @@ const routes: Routes = [
     component: LoginComponent
   },
   {
-    path: 'menu', 
-    component: MenuComponent
-  },
-  {
      path: '', 
      loadChildren: () => import('./home/home.module').then(m => m.HomeModule),
      canActivate: [AuthGuard] 

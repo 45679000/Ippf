@@ -1,35 +1,64 @@
-<app-menu></app-menu>
+<div class="navbar-holder">
+    <app-navbar class="navbar"></app-navbar>
+</div>
 <div class="container-fluid">
     <div class="main-content col-md-5">
         <div>
             <h2 class="lead-heading">Frequently Asked Questions</h2>
             <div class="quiz">
-                <p>What is a multiindicatoor cluster survey?<span>icon</span></p>
-                <p class="answer">Since the mid-1990s, 11 countries have carried out one or more Multiple Indicator Cluster Surveys, generating data on key indicators on the well-being of childen and women, and helping shape policies  for the improvement of their lives</p>
+                <button (click)="showAnswer = !showAnswer">
+                    <p>What is a multiindicatoor cluster survey?</p>
+                    <span><i class="fas fa-caret-down"></i></span>
+                </button>
+                <p [ngClass]=" showAnswer? 'answer-show' : 'answer'">Since the mid-1990s, 11 countries have carried out one or more Multiple Indicator Cluster Surveys, generating data on key indicators on the well-being of childen and women, and helping shape policies  for the improvement of their lives</p>
             </div>
             <div class="quiz">
-                <p>How is such a study helpful?<span>icon</span></p>
+                <button>
+                    <p>How is such a study helpful?</p>
+                    <span><i class="fas fa-caret-down"></i></span>
+                </button>
             </div>
             <div class="quiz">
-                <p>How do i create and account?<span>icon</span></p>
+                <button>
+                    <p>How do i create and account?</p>
+                    <span><i class="fas fa-caret-down"></i></span>
+                </button>
             </div>
             <div class="quiz">
-                <p>How do i download the files?<span>icon</span></p>
+                <button>
+                    <p>How do i download the files?</p>
+                    <span><i class="fas fa-caret-down"></i></span>
+                </button>
             </div>
             <div class="quiz">
-                <p>How is such a study helpful?<span>icon</span></p>
+                <button>
+                    <p>How is such a study helpful?</p>
+                    <span><i class="fas fa-caret-down"></i></span>
+                </button>
             </div>
             <div class="quiz">
-                <p>How is such a study helpful?<span>icon</span></p>
+                <button>
+                    <p>How is such a study helpful?</p>
+                    <span><i class="fas fa-caret-down"></i></span>
+                </button>
             </div>
             <div class="quiz">
-                <p>How is such a study helpful?<span>icon</span></p>
+                <button>
+                    <p>How is such a study helpful?</p>
+                    <span><i class="fas fa-caret-down"></i></span>
+                </button>
             </div>
             <div class="quiz">
-                <p>How is such a study helpful?<span>icon</span></p>
+                <button>
+                    <p>How is such a study helpful?</p>
+                    <span><i class="fas fa-caret-down"></i></span>
+                </button>
             </div>
             <div class="quiz">
-                <p>How is such a study helpful?<span>icon</span></p>
+                <button>
+                    <p>How is such a study helpful?</p>
+                    <span><i class="fas fa-caret-down"></i></span>
+                </button>
             </div>
         </div>
     </div>

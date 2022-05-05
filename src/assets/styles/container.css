@@ -14,7 +14,10 @@
     background-position: center; 
     background-size: cover;
     /* filter: brightness(20%); */
-    height: 80vh;
+    /* height: 80vh; */
+}
+.section1 .content{
+    margin: 1rem;
 }
 .portalUsers {
     text-align: center;
@@ -24,6 +27,7 @@
     margin: 50px 0;
     display: flex;
     justify-content: space-evenly;
+    width: 100%;
 }
 .homeCards {
     width: 300px;
@@ -32,6 +36,9 @@
     /* background: #F0F0F0; */
     /* border-radius: 45px; */
     border: none !important;
+}
+.homeCards .lead-heading {
+    height: 50px;
 }
 /* .imageHolder img{
     border: 10px solid var(--blue);
@@ -79,4 +86,42 @@
 .dataset-info {
     border-bottom: 1px solid 
     #C4C4C4 !important;
+}
+.navbar-holder {
+    width: 100%;
+    padding: 2rem auto !important;
+}
+.navbar {
+    margin: 40px 0 50px 0;
+}
+@media (max-width: 1024px) {
+    .formDivHolder {
+        margin: auto;
+    }
+    .formDivHolder form {
+        width: auto;
+        margin-right: 2rem;
+        /* align-self: right; */
+    }
+    .formDivHolder .learnMore {
+        width: auto;
+    }
+    .homeSearch {
+        width: auto;
+    }
+}
+@media (max-width: 768px) {
+    .formDivHolder {
+        display: block;
+    }
+    .formDivHolder .learnMore {
+        text-align: center;
+    }
+    .homeCardsContainer {
+        /* display: flex; */
+        display: block;
+    }
+    .homeCards {
+        margin: 20px auto !important;
+    }
 }

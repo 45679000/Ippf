@@ -5,9 +5,9 @@ import { DatasetDetailsComponent } from './dataset-details/dataset-details.compo
 import { DatasetsComponent } from './datasets.component';
 
 const routes: Routes = [
-  { path: '/da', component: DatasetsComponent },
-  { path: '/re', component: DatasetDetailsComponent},
-  { path: '', component: DataRequestComponent}
+  { path: '', component: DatasetsComponent },
+  { path: 'dataset-details', component: DatasetDetailsComponent},
+  { path: 'dataset-request', component: DataRequestComponent}
 ];
 
 @NgModule({
