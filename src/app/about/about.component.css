@@ -2,79 +2,50 @@
     /* width: 100%; */
     padding: 2rem 20%;
 }
-.menu{
-    /* padding: 0 8rem 0 4rem; */
-    display: flex;
-    flex-direction: row;
-    justify-content: space-around;
-    list-style: none;
-}
-.menu a{
-    text-decoration: none;
+
+
+.navbar a {
     color: #151F6D !important;
 }
-/* .menu a:active{
-    border: 3px solid red;
-} */
-.active{
-    border-bottom: 4px solid #E6007E;
+.main-content p {
+    font-size: 1.2rem;
 }
-.menu a:hover {
-    color: #7e88d6 !important;
-}
-.dataset-heading {
-    display: flex;
-    justify-content: space-between;
-}
-.details-content {
-    display: flex;
-
-}
-.download-links {
-    width: 30%;
-}
-.file-types {
-    margin-bottom: 40px;
-}
-.file-types:last-child {
-    margin-bottom: 0;
-}
-.file-types .btn{
-    border: none !important;
-    width: 100px;
-    margin-right: 2rem;
-    border-radius: 20px;
-}
-.btnCsv {
-    background-color: #151F6D !important;
-}
-.btnJson {
-    background-color: yellow !important;
-}
-.btnXls {
-    background-color: #E6007E !important;
-}
-.btnPdf {
-    background-color: #7e88d6 !important;
-}
-.file-types a {
-    text-decoration: none;
-    font-size: 20px;
-    font-weight: 700;
-    color: #151F6D;
-}
-.table-of-records {
-    width: 70%;
-    background-color: #E5E5E5;
-    border-radius: 1rem;
-}
-.links {
-    display: flex;
-    flex-direction: column;
+.cards-body .lead-heading, .lead-heading-small {
+    text-align: center;
 }
 .cards-body {
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
     gap: 3;
     margin: 2rem 0;
+
+}
+.links {
+    display: flex;
+    flex-direction: column;
+    padding-left: 3rem;
+}
+.links a {
+    text-decoration: none !important;
+    color: black;
+    margin-bottom: 1rem;
+}
+.team-card {
+    margin: auto;
+}
+@media (max-width: 1024px) {
+    .links {
+        display: none;
+    }
+    .main-content {
+        width: 100% !important;
+    }
+    .cards-body {
+        grid-template-columns: 1fr 1fr;    
+    }
+}
+@media (max-width: 700px) {
+    .cards-body {
+        grid-template-columns: 1fr;
+    }
 }
