@@ -7,6 +7,12 @@ import { Component, OnInit } from '@angular/core';
 })
 export class PasswordChangeComponent implements OnInit {
 
+  isShown: boolean = true ; // hidden by default
+  
+  emailSent() {
+    this.isShown = !this.isShown
+  }
+
   constructor() { }
 
   ngOnInit(): void {

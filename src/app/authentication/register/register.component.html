@@ -28,15 +28,6 @@
                 <input type="text" name="email" class="form-control form-control-lg" formControlName="email" [class.is-invalid] = "registrationForm.get('email').invalid && registrationForm.get('email').touched">
             </div>
             <div class="form-group">
-                <label for="accountType">Account Type</label>
-                <select name="" id="accountType" class="form-select form-select-lg" formControlName="accountType" [class.is-invalid] = "registrationForm.get('accountType').invalid && registrationForm.get('accountType').touched">
-                    <option value="Kenya">Account Type</option>
-                    <option value="Malawi">Admin</option>
-                    <option value="Rwanda">Publisher</option>
-                    <option value="Congo">User</option>
-                </select>
-            </div>
-            <div class="form-group">
                 <label for="password">Password</label>
                 <input type="password" class="form-control form-control-lg" formControlName="password" [class.is-invalid] = "registrationForm.get('password').invalid && registrationForm.get('password').touched">
             </div>
