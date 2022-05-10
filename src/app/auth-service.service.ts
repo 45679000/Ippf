@@ -31,7 +31,7 @@ export class AuthServiceService {
       
     // })
     localStorage.setItem('token', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c')
-    this.route.navigate(['resources']);
+    this.route.navigate(['/']);
 
   }
   createNewUser(name: string, email: string, country: string, accountType: string, password: string): Observable<any>{
