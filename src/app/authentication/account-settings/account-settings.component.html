@@ -1,38 +1,73 @@
-<div class="g-container row">
-    <div class="split-container col-md-6">
-        <!-- <img src="assets/images/surface.jpg" class="banner" width="400" height="300"/> -->
-    </div>
-    <div class="split-container col-12">
-        <div class="logos col-12">
-            <img src="assets/images/wish-header.png" class="float-left" width="500" height="100" alt="">
-            <img src="assets/images/mainlogo.png" class="float-left" alt="" width="500">
+<div class="home-container row fluid-container p-5">
+    <div class="settings col-12 col-md-3">
+        <h2 class="lead-heading-mid">Account Settings</h2>
+        <div class="avatar pink-text">
+            <i class="fas fa-user-circle"></i>
         </div>
-        <h4 class="text-center my-4 font-weight-bold divHeading">Account Settings</h4>
-        <form>
-            <div>
-                <label for="" class="form-label">Name</label>
-                <input type="text" class="form-control form-control-lg">
-            </div>
-            <div>
-                <label for="" class="form-label">Email Address</label>
-                <input type="text" name="email" class="form-control form-control-lg">
-            </div>
-            <div>
-                <label for="" class="form-label">Account Type</label>
-                <select name="" id="country" class="form-select form-select-lg">
-                    <option value="Kenya">Kenya</option>
-                    <option value="Malawi">Malawi</option>
-                    <option value="Rwanda">Rwanda</option>
-                    <option value="Congo">Congo</option>
-                </select>
-            </div>
-            <div class="mb-3">
-              <label for="" class="form-label">Password</label>
-              <input type="password" name="password" class="form-control form-control-lg">
-            </div>
-            <div class="text-center">
-                <input type="submit" class="btn btn-primary mb-2" id="contactUsBtn" value="Save">
-            </div>
-        </form>
+        <div class="user-details mt-3">
+            <form action="">
+                <div class="form-group">
+                    <label for="name">Name</label>
+                    <input type="text" class="form-control form-control-lg" value="John Doe">
+                </div>
+                <div class="form-group">
+                    <label for="name">Email Address</label>
+                    <input type="text" class="form-control form-control-lg" value="jdoe@gmail.com">
+                </div>
+                <div class="form-group">
+                    <label for="name">Account Type</label>
+                    <input type="text" class="form-control form-control-lg" value="Publisher" disabled>
+                </div>
+                <div class="form-group">
+                    <label for="name">Password</label>
+                    <input type="password" class="form-control form-control-lg" value="John Doe" disabled>
+                </div>
+                <div class="form-group">
+                    <label for="name">Interface Language</label>
+                    <input type="password" class="form-control form-control-lg" value="English" disabled>
+                </div>
+                <input type="submit" class="btn btn-primary mb-2 registerBtn" id="" value="Save">
+            </form>
+        </div>
+    </div>
+    <div class="activity px-4 col-12 col-md-9">
+        <h2 class="lead-heading-mid">Account Activity</h2>
+        <div class="saved-datasets col-12 col-md-9 pt-3">
+            <h2 class="lead-heading-small-black">Saved Datasets</h2>
+            <a href="#">Survey 2021-2022, Angola</a>
+        </div>
+        <div class="downloaded-datasets col-12 col-md-9 pt-3">
+            <h2 class="lead-heading-small-black">Downloaded Datasets</h2>
+            <a href="#">Survey 2021-2022, Benin</a>
+        </div>
+        <div class="requested-datasets col-12 col-md-9 pt-3">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>
+                            <h2 class="lead-heading-small-black">Requested Datasets</h2>
+                        </th>
+                        <th>
+                            <h2 class="lead-heading-small-black">Status</h2>
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td scope="row">
+                            <a href="#">Survey 2021-2022, Angola</a>
+                        </td>
+                        <td class="pink-text">Pending</td>
+                    </tr>
+                    <tr>
+                        <td scope="row">
+                            <a href="#">Survey 2021-2022, Angola</a>
+                        </td>
+                        <td class="">Approved</td>
+                        <td></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
     </div>
 </div>
