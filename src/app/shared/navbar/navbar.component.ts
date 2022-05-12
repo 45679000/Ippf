@@ -20,7 +20,7 @@ export class NavbarComponent implements OnInit {
 
     //       if(event instanceof NavigationStart) {
             // console.log(event.url);
-            if(this.href == '/about' || this.href == '/faqs' || this.href == '/contact' || this.href == '/account-settings'){
+            if(this.href == '/about' || this.href == '/faqs' || this.href == '/contact' || this.href == '/account-settings' || this.href == '/datasets' || this.href == '/datasets/dataset-details'){
               this.fontColorBlue = false;
             } else {
               this.fontColorBlue = true              
