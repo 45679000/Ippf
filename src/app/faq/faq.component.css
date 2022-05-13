@@ -4,6 +4,7 @@
 }
 .main-content {
     margin: auto;
+    margin-bottom: 2rem;
 }
 .quiz {
     margin-bottom: 16px;
@@ -33,4 +34,10 @@ span {
 }
 .answer-show {
     display: block;
+}
+.icon {
+    transform: rotate(270deg);
+}
+.rotate-icon {
+    transform: rotate(360deg);
 }

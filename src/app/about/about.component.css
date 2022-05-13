@@ -9,6 +9,7 @@
 }
 .main-content p {
     font-size: 1.2rem;
+    margin: 0 auto;
 }
 .cards-body .lead-heading, .lead-heading-small {
     text-align: center;
@@ -33,6 +34,9 @@
 .team-card {
     margin: auto;
 }
+.background {
+    margin-bottom: 3rem;
+}
 @media (max-width: 1024px) {
     .links {
         display: none;
@@ -47,5 +51,8 @@
 @media (max-width: 700px) {
     .cards-body {
         grid-template-columns: 1fr;
+    }
+    .background {
+        margin-bottom: 1rem;
     }
 }
