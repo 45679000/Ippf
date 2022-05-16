@@ -24,4 +24,8 @@ label{
 .text-danger {
     color: #E6007E !important;
     text-decoration: none;
+    margin-bottom: 2rem !important;
+}
+.text-center {
+    margin-bottom: 2rem !important;
 }
