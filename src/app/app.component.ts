@@ -17,10 +17,15 @@ export class AppComponent {
       // console.log(data);
     });
     // console.log(route)
-    
   }
+  public href: string = "";
 
   ngOnInit(): void {
+    this.href = this.router.url
+    if(this.href == '/account-settings'){
+      this.footerDisp = false
+      this.headerDisp = false
+    } 
     // console.log(this.router.events);
     
     this.router.events

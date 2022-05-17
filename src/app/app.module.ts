@@ -4,7 +4,6 @@ import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { AuthenticationModule } from "./authentication/authentication.module";
-import { HeaderComponent } from './header/header.component';
 import { FooterComponent } from './footer/footer.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { ReactiveFormsModule } from '@angular/forms';
@@ -23,7 +22,6 @@ import { SharedModule } from './shared/shared.module';
 @NgModule({
   declarations: [
     AppComponent,
-    HeaderComponent,
     FooterComponent,
     AboutComponent,
     FaqComponent,
@@ -46,7 +44,6 @@ import { SharedModule } from './shared/shared.module';
     SharedModule
   ],
   exports: [
-    HeaderComponent,
     MenuComponent
   ],
   providers: [],

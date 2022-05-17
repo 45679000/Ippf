@@ -21,10 +21,7 @@
                 <div class="form-group">
                     <label for="name">Password</label>
                     <input type="password" class="form-control form-control-lg" value="John Doe" disabled>
-                </div>
-                <div class="form-group">
-                    <label for="name">Interface Language</label>
-                    <input type="password" class="form-control form-control-lg" value="English" disabled>
+                    <a [routerLink]="['../change-password']" class="pink-text mb-1">Change password</a>
                 </div>
                 <input type="submit" class="btn btn-primary mb-2 registerBtn" id="" value="Save">
             </form>

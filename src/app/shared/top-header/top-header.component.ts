@@ -1,19 +1,19 @@
 import { Component, OnInit } from '@angular/core';
 
 @Component({
-  selector: 'app-header',
-  templateUrl: './header.component.html',
-  styleUrls: ['./header.component.css']
+  selector: 'app-top-header',
+  templateUrl: './top-header.component.html',
+  styleUrls: ['./top-header.component.css']
 })
-export class HeaderComponent implements OnInit {
+export class TopHeaderComponent implements OnInit {
+
+  constructor() { }
   isShown: boolean = false ; // hidden by default
 
 
   toggleShow() {
     this.isShown = !this.isShown;
   }
-  constructor() { }
-
   ngOnInit(): void {
   }
 
