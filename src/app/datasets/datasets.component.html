@@ -1,22 +1,9 @@
 <app-top-header></app-top-header>
 <div>
-    <div class="menu-container">
-        <!-- <ul class="menu my-4">
-            <li class="menu-items">
-                <a href="#" class="list-item  h3">Home</a>
-            </li>
-            <li class="menu-items">
-                <a [routerLink]="['datasets']" class="list-item h3 active">Datasets</a>
-            </li>
-            <li class="menu-items">
-                <a href="#" class="list-item h3">WISHScope</a>
-            </li>
-            <li class="menu-items">
-                <a [routerLink]="['datasetrequest']"  class="list-item h3">Data Requests</a>
-            </li>
-        </ul> -->
+    <div class="my-4">
         <app-navbar></app-navbar>
-
+    </div>
+    <div class="menu-container">
         <form action="" class="search">
             <input type="text" name="" id="" placeholder="Search Datasets" class="topSearchInput col-9">
             <input type="submit" value="Search" class="btn col-2 searchBtnBig blueBtn">
@@ -53,15 +40,55 @@
                 <p>Showing 10 of 300 Surveys</p>
             </div>
             <div class="mb-3 dataset-info">
-                <h3 class="lead-heading-mid">Survey 2021-2022</h3>
-                <p class="lead-heading-small">Angola, 2021-2022</p>
-                <p class="lead-heading-small-black">National Bureau of Statistics</p>
-                <p><span class="text-bold">Collection: </span>International Planned Parenthood Federation</p>
-                <div class="meta-data">
-                    <p class="date-created">Created on: Jan 1, 2021</p>
-                    <p class="date-modified mx-4">Last Modified: Jan 1, 2022</p>
-                    <p class="number-of-times-viewed">Views: 1021</p>
+                <div class="left-side col-1">
+                    <p class="blue-text"><i class="fas fa-lock-open"></i></p>
                 </div>
+                <div class="right-side col-11">
+                    <h3 class="lead-heading-mid">Survey 2021-2022</h3>
+                    <p class="lead-heading-small"><a [routerLink]="['../datasets/dataset-details']">Angola, 2021-2022</a></p>
+                    <p class="lead-heading-small-black">National Bureau of Statistics</p>
+                    <p><span class="text-bold">Collection: </span>International Planned Parenthood Federation</p>
+                    <div class="meta-data">
+                        <p class="date-created">Created on: Jan 1, 2021</p>
+                        <p class="date-modified mx-4">Last Modified: Jan 1, 2022</p>
+                        <p class="number-of-times-viewed">Views: 1021</p>
+                    </div>
+                </div>
+                
+            </div>
+            <div class="mb-3 dataset-info">
+                <div class="left-side col-1">
+                    <p class="pink-text"><i class="fas fa-lock"></i></p>
+                </div>
+                <div class="right-side col-11">
+                    <h3 class="lead-heading-mid">Survey 2021-2022</h3>
+                    <p class="lead-heading-small"><a [routerLink]="['../datasets/dataset-details']">Angola, 2021-2022</a></p>
+                    <p class="lead-heading-small-black">National Bureau of Statistics</p>
+                    <p><span class="text-bold">Collection: </span>International Planned Parenthood Federation</p>
+                    <div class="meta-data">
+                        <p class="date-created">Created on: Jan 1, 2021</p>
+                        <p class="date-modified mx-4">Last Modified: Jan 1, 2022</p>
+                        <p class="number-of-times-viewed">Views: 1021</p>
+                    </div>
+                </div>
+                
+            </div>
+            <div class="mb-3 dataset-info">
+                <div class="left-side col-1">
+                    <p class="blue-text"><i class="fas fa-lock-open"></i></p>
+                </div>
+                <div class="right-side col-11">
+                    <h3 class="lead-heading-mid">Survey 2021-2022</h3>
+                    <p class="lead-heading-small"><a [routerLink]="['../datasets/dataset-details']">Angola, 2021-2022</a></p>
+                    <p class="lead-heading-small-black">National Bureau of Statistics</p>
+                    <p><span class="text-bold">Collection: </span>International Planned Parenthood Federation</p>
+                    <div class="meta-data">
+                        <p class="date-created">Created on: Jan 1, 2021</p>
+                        <p class="date-modified mx-4">Last Modified: Jan 1, 2022</p>
+                        <p class="number-of-times-viewed">Views: 1021</p>
+                    </div>
+                </div>
+                
             </div>
         </div>
     </div>

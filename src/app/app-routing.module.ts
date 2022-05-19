@@ -12,7 +12,6 @@ import { ResourceManagerHomeComponent } from './resorce-portal/resource-manager-
 import { ResourceDetailsComponent } from './resorce-portal/resource-details/resource-details.component';
 import { ResourceManageOneComponent } from './resorce-portal/resource-manage-one/resource-manage-one.component';
 import { ResourceContentComponent } from './resorce-portal/resource-content/resource-content.component';
-import { MenuComponent } from './menu/menu.component';
 
 const routes: Routes = [
   {

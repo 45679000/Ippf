@@ -13,20 +13,11 @@ export class NavbarComponent implements OnInit {
 
   ngOnInit(): void {
     this.href = this.router.url
-    // this.router.events
-    //   .subscribe(
-    //     (event: NavigationEvent) => {
-    //       console.log(event);
-
-    //       if(event instanceof NavigationStart) {
-            // console.log(event.url);
-            if(this.href == '/about' || this.href == '/faqs' || this.href == '/contact' || this.href == '/account-settings' || this.href == '/datasets' || this.href == '/datasets/dataset-details'){
-              this.fontColorBlue = false;
-            } else {
-              this.fontColorBlue = true              
-            }
-        //   }
-        // });
+    if(this.href == '/about' || this.href == '/faqs' || this.href == '/contact' || this.href == '/account-settings' || this.href == '/datasets' || this.href == '/datasets/dataset-request' || '/datasets/dataset-details'){
+      this.fontColorBlue = false;
+    } else {
+      this.fontColorBlue = true              
+    }
   }
   fontColorBlue: boolean = true
 

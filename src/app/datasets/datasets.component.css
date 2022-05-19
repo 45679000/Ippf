@@ -115,3 +115,10 @@ thead {
     font-size: 18px;
     font-weight: bold;
 }
+.dataset-info {
+    margin-top: 2rem;
+    display: flex;   
+}
+.pink-text, .blue-text {
+    font-size: 3rem;
+}

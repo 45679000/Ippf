@@ -1,39 +1,37 @@
-.menu-div {
-    /* width: 100%; */
-    padding: 2rem 20%;
+.form-control {
+    /* width: 60%; */
+    /* height: 2.5rem; */
+    margin: 0 0 1.5rem 0;
+    border-radius: 25px !important;
+    background-color: #F0F0F0 !important;
+    border: none !important;
+    height: 59px;
+    /* width: 476px; */
+    border-radius: 53px; 
+    /* margin: 2rem auto !important; */
 }
-.menu{
-    /* padding: 0 8rem 0 4rem; */
-    display: flex;
-    flex-direction: row;
-    justify-content: space-around;
-    list-style: none;
+label{
+    margin-left: 2rem;
 }
-.menu a{
+.form-group {
+    margin: auto !important;
+    width: 476px;
+}
+.form-group a {
     text-decoration: none;
-    color: #151F6D !important;
+    color: #E6007E;
 }
-/* .menu a:active{
-    border: 3px solid red;
-} */
-.active{
-    border-bottom: 4px solid #E6007E;
+.text-danger {
+    color: #E6007E !important;
+    text-decoration: none;
+    margin-bottom: 2rem !important;
 }
-.menu a:hover {
-    color: #7e88d6 !important;
+.text-center {
+    margin-bottom: 2rem !important;
+}
+.lead-heading {
+    text-align: center;
 }
 .split-container {
-    margin: 4rem auto !important;
-}
-.split-container input {
-    height: 55px;
-    margin-bottom: 2.5rem;
-}
-#requestBtn {
-    width: 150px;
-    background-color: #151F6D;
-    color: white;
-    font-weight: bold;
-    font-size: 1.5rem;
-    border-radius: 1.2rem;
+    padding: 1rem 0 0 0 !important;
 }
