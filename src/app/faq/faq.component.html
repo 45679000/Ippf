@@ -2,13 +2,13 @@
     <app-top-header></app-top-header>
 </div>
 <div class="container-fluid">
-    <div class="main-content col-md-5">
+    <div class="main-content col-md-7 col-12">
         <div>
             <h2 class="lead-heading">Frequently Asked Questions</h2>
             <div class="quiz">
                 <button (click)="showAnswerOne = !showAnswerOne">
-                    <p>How do I access the dataset?</p>
-                    <span [ngClass]=" !showAnswerOne? 'icon' : 'rotate-icon'"><i class="fas fa-caret-down"></i></span>
+                    <p class="col-11">How do I access the dataset?</p>
+                    <span [ngClass]=" !showAnswerOne? 'icon' : 'rotate-icon'" class="col-1"><i class="fas fa-caret-down"></i></span>
                 </button>
                 <p [ngClass]=" showAnswerOne? 'answer-show' : 'answer'">You will be able to access and view the dataset without logging in, but when you decide to download a dataset, you will need to to the Data Sharing Portal.<br><br>For the user registration, you will need to <a [routerLink]="['../registration']"  class="">register</a> and  create a password-protected account.</p>
             </div>

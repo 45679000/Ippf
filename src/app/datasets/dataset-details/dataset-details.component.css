@@ -1,74 +1,54 @@
-.menu-div {
-    /* width: 100%; */
-    padding: 2rem 20%;
-}
-.menu{
-    /* padding: 0 8rem 0 4rem; */
-    display: flex;
-    flex-direction: row;
-    justify-content: space-around;
-    list-style: none;
-}
-.menu a{
-    text-decoration: none;
-    color: #151F6D !important;
-}
-/* .menu a:active{
-    border: 3px solid red;
-} */
-.active{
-    border-bottom: 4px solid #E6007E;
-}
-.menu a:hover {
-    color: #7e88d6 !important;
-}
-.dataset-heading {
-    display: flex;
-    justify-content: space-between;
-}
-.details-content {
-    display: flex;
-
-}
-.download-links {
-    width: 30%;
-}
-.file-types {
-    margin-bottom: 40px;
-}
-.file-types:last-child {
-    margin-bottom: 0;
-}
-.file-types .btn{
-    border: none !important;
-    width: 100px;
-    margin-right: 2rem;
-    border-radius: 20px;
-}
-.btnCsv {
-    background-color: #151F6D !important;
-}
-.btnJson {
-    background-color: yellow !important;
-}
-.btnXls {
-    background-color: #E6007E !important;
-}
-.btnPdf {
-    background-color: #7e88d6 !important;
-}
-.file-types a {
-    text-decoration: none;
-    font-size: 20px;
-    font-weight: 700;
-    color: #151F6D;
-}
-.table-of-records {
-    width: 70%;
-    background-color: #E5E5E5;
-    border-radius: 1rem;
+.container {
+    margin-bottom: 2rem;
 }
 .links {
     display: flex;
     flex-direction: column;
+}
+.links a {
+    text-decoration: none;
+    color: #151F6D;
+    margin-bottom: 1rem;
+    font-size: 1rem;
+}
+.btn-group button{
+    margin-right: 1rem;
+    color: black !important;
+    letter-spacing: 1px;
+    font-size: 25px;
+}
+.blue-text {
+    text-decoration: none;
+    font-size: 1rem;
+}
+.blue-text i {
+    margin: 0 8px;
+}
+.blueBtn {
+    padding: 0 1rem;
+    border-radius: 1rem;
+    text-decoration: none;
+    border: none;
+    color: wheat;
+    font-size: 1rem;
+}
+.pink-border {
+    border-bottom: 3px solid #E6007E;
+}
+table {
+    background-color: rgb(199, 198, 198);
+    color: black;
+    padding: 8px 16px !important;
+}
+.question-title {
+    display: flex;
+    justify-content: space-between;
+    border-bottom: 1px solid #333;
+    margin-bottom: 2rem;
+}
+.question-data {
+    padding-left: 2rem;
+}
+.question-data-bold {
+    font-weight: bold;
 }
