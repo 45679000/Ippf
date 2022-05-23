@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-top-header',
@@ -7,12 +8,16 @@ import { Component, OnInit } from '@angular/core';
 })
 export class TopHeaderComponent implements OnInit {
 
-  constructor() { }
+  constructor(private route: Router) { }
   isShown: boolean = false ; // hidden by default
 
 
   toggleShow() {
     this.isShown = !this.isShown;
+  }
+  takeMeHome(){
+    this.route.navigate(['/']);
+
   }
   ngOnInit(): void {
   }

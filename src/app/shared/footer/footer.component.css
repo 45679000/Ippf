@@ -38,6 +38,17 @@ footer {
 label{
     font-weight: 500 !important;
 }
+.inputFields {
+    display: flex !important;
+    justify-content: space-between;
+}
+.inputFields input:nth-child(1) {
+    width: 60%;
+}
+.inputFields input:nth-child(2) {
+    width: 35% !important;
+    margin: 0 px;
+}
 /* .subscribe .btn{
     margin-right: 50%;
     width: 50% !important;
@@ -54,7 +65,18 @@ label{
     /* margin: 1rem 1.3rem; */
 /* } */
 @media (max-width: 375px) {
-    footer {
+    footer, .inputFields {
+        display: block;
+    }
+    .menu-links {
+        width: 100%;
+    }
+    .subscribe {
+        width: 100%;
+    }
+}
+/* @media (max-width: 1024px) {
+    footer, .inputFields {
         display: block;
     }
     .menu-links {
@@ -64,4 +86,5 @@ label{
         width: 100%;
         text-align: center;
     }
-}
+
+} */
