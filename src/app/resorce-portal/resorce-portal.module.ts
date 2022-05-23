@@ -1,5 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { SharedModule } from '../shared/shared.module';
+
 
 import { ResorcePortalRoutingModule } from './resorce-portal-routing.module';
 import { ResorcePortalComponent } from './resorce-portal.component';
@@ -40,7 +42,8 @@ import { LayoutModule } from '@angular/cdk/layout';
     NgbModule,
     MatIconModule,
     MatSidenavModule,
-    LayoutModule
+    LayoutModule,
+    SharedModule
   ]
 })
 export class ResorcePortalModule { }

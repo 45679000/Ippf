@@ -1,5 +1,5 @@
 <div class="header px-md-5 py-3">
-    <div class="logoz col-sm-3 col-xl-2 col-md-4  mx-2">
+    <div class="logoz col-sm-3 col-xl-2 col-md-4  mx-2" (click)="takeMeHome()">
         <!-- <a routerLink]="['../']"> -->
             <img src="assets/images/wish-header.png" class="float-left" alt="" >
             <img src="assets/images/mainlogo.png" class="float-left" alt="">
@@ -15,6 +15,8 @@
             <a [routerLink]="['login']">Login</a> -->
             <a [routerLink]="['../../change-password']">Change password</a>
             <a [routerLink]="['../../account-settings']">Account Settings</a>
+            <a [routerLink]="['../../logout']">Logout</a>
+            <a [routerLink]="['../../resources']">Resources Portal</a>
         </div> 
     </div>
 </div>

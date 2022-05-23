@@ -37,7 +37,7 @@ export class AppComponent {
             if(event.url == '/datasets' || event.url == '/datasets/datasetdetails' || event.url == '/datasets/datasetdetails/datasetrequest' || event.url == '/home' || event.url == '/' || event.url == '/about' || event.url == '/faqs' || event.url == '/contact'){
               this.footerDisp = true;
               this.headerDisp  = true;
-            }else if(event.url == '/login' || event.url == '/register' || event.url == '/change-password' ){
+            }else if(event.url == '/login' || event.url == '/register' || event.url == '/change-password' || event.url == '/account-settings'){
               this.footerDisp = false
               this.headerDisp = false
             }
