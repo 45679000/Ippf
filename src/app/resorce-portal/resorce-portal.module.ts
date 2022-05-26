@@ -20,6 +20,7 @@ import { MapEngineCountriesComponent } from './map-engine-countries/map-engine-c
 import {MatIconModule} from '@angular/material/icon';
 import {MatSidenavModule} from '@angular/material/sidenav';
 import { LayoutModule } from '@angular/cdk/layout';
+import { ResourcemanageComponent } from './resourcemanage/resourcemanage.component';
 
 @NgModule({
   declarations: [
@@ -35,6 +36,7 @@ import { LayoutModule } from '@angular/cdk/layout';
     SdpHomeComponent,
     SdpManageComponent,
     MapEngineCountriesComponent,
+    ResourcemanageComponent,
   ],
   imports: [
     CommonModule,

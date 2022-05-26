@@ -1,30 +1,5 @@
-<!-- <div class="page-container col-12">
-    <app-sidebar class="sidebar"></app-sidebar>
-
-
-    <div class="routerOutlet">
-        <div>
-            <app-portalheader></app-portalheader>
-            <router-outlet>
-            </router-outlet>
-            <app-portalfooter class="footer"></app-portalfooter>
-        </div>
-        
-    </div>
-    
-</div> -->
-<!-- <mat-drawer-container class="example-container">
-    <mat-drawer>
-        <app-sidebar class="sidebar" mode="side" opened></app-sidebar>
-    </mat-drawer>
-    <mat-drawer-content>
-        <app-portalheader></app-portalheader>
-        <router-outlet></router-outlet>
-        <app-portalfooter class="footer"></app-portalfooter>
-    </mat-drawer-content>
-</mat-drawer-container> -->
-<mat-sidenav-container class="example-container">
-    <mat-sidenav>
+<mat-sidenav-container class="example-container col-12 row">
+    <mat-sidenav class="col-10 col-sm-9 col-md-4 col-lg-4 col-xl-3 col-xxl-2">
         <div class="sidebar-parent">
             <mat-icon *ngIf="sidebarOpened && sidebarMode == 'over'" (click)="sidebar.toggle()" class="closeBtn">close</mat-icon>
             <app-sidebar ></app-sidebar>
@@ -32,19 +7,17 @@
         
     </mat-sidenav>
   
-    <mat-sidenav-content>
+    <mat-sidenav-content class="col-12 col-md-8 col-lg-8 col-xl-7 col-xxl-10">
         <div [ngClass]="{'headerTop' : true}">
             <div class="menuBtn">
                 <mat-icon *ngIf="!sidebarOpened" (click)="sidebar.toggle()" >menu</mat-icon>
             </div>
-            <app-portalheader></app-portalheader>
+            <app-top-header class="col-12 top-header"></app-top-header>
         </div>
-        <!-- <button mat-icon-button  (click)="sidebar.toggle()"> -->
-            
-            
-        <!-- </button> -->
-        <router-outlet></router-outlet>
-        <app-portalfooter class="footer"></app-portalfooter>
+        <div class="mb-5">
+            <router-outlet></router-outlet>
+        </div>
+        <app-portalfooter class="col-12"></app-portalfooter>
     </mat-sidenav-content>
   </mat-sidenav-container>
   

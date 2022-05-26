@@ -7,6 +7,10 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ResourceManageOneComponent implements OnInit {
 
+  activeStatus: boolean = false;
+  toggleBtn(){
+    this.activeStatus = !this.activeStatus
+  }
   constructor() { }
 
   ngOnInit(): void {

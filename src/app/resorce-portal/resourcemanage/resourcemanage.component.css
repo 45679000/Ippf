@@ -21,7 +21,7 @@
 .search input:nth-child(1) {
     background-color: #F0F0F0;
 }
-.submitSearch, .tobSearchBtn {
+.submitSearch {
     background-color: #151F6D !important;
     font-weight: bold !important;
 }
@@ -32,6 +32,9 @@
 .statusBtn {
     background-color: rgb(54, 102, 54) !important;
     color: white !important;
+}
+.actionBtn {
+    width: 100%;
 }
 .filters {
     display: flex;
@@ -55,32 +58,4 @@ table button {
     border-radius: 1.4rem;
     border: none;
     color: white;
-}
-.action-holder {
-    position: relative;
-}
-.toggle-drop {
-    position: absolute;
-    margin-top: 2px;
-    /* top: 0; */
-    border: 1px solid rgb(233, 233, 233);
-    padding: 8px 2px 8px 1rem;
-    border-radius: 3px;
-    background-color: #fff;
-}
-.toggle-drop a {
-    text-decoration: none;
-    display: block;
-    color: #151F6D;
-    font-size: 1rem;
-}
-.toggle-drop a:hover {
-    border-bottom: 1px solid rgb(233, 233, 233);
-}
-.toggle-drop span {
-    margin: 0 5px 0 0;
-}
-.span-icon {
-    margin: 0 0 0 26px;
-
 }

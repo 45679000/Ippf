@@ -2,25 +2,25 @@
     <h2 class=" class h2 mb-3">Main Menu</h2>
     <div class="dashboard-links">
         <div class="dashboard-link">
-            <a href="#" class="btn btn-secondary" [ngClass]="activeDash ? 'success' : 'danger'" ><i class="fas fa-grip-horizontal"></i>Dashboard</a>
+            <a [routerLink]="['/resources']" class="btn btn-secondary col-12" [ngClass]="activeDash ? 'success' : 'danger'" ><i class="fas fa-grip-horizontal"></i>Dashboard</a>
         </div>
         <div class="dashboard-link">
-            <button class="btn btn-secondary" (click)="displayResource()" [ngClass]="activeStatus ? 'success' : 'danger'"><i class="fas fa-list"></i>Resources<span class="drop-down"><i class="fas fa-caret-down"></i></span></button>
+            <button class="btn btn-secondary col-12" (click)="displayResource()" [ngClass]="activeStatus ? 'success' : 'danger'"><i class="fas fa-list"></i>Resources<span class="drop-down"><i class="fas fa-caret-down"></i></span></button>
             <div class="sub-menus" *ngIf="displayResourceLinks">
-                <a href="#" class="btn  sub-menu-links">Home</a>
-                <a href="http://localhost:4200/resources/manage" class="btn sub-menu-links">Manage</a>
-                <a href="" class="btn sub-menu-links">Manage Resources</a>
+                <a [routerLink]="['/resources/resourceshome']" class="btn  sub-menu-links">Home</a>
+                <a [routerLink]="['/resources/manage']" class="btn sub-menu-links">Manage</a>
+                <a [routerLink]="['/resources/manageresources']" class="btn sub-menu-links">Manage Resources</a>
             </div>
         </div>
         <div class="dashboard-link">
-            <button class="btn btn-secondary" (click)="displaySdp()" [ngClass]="activeSdp ? 'success' : 'danger'"><i class="fas fa-band-aid"></i>SDP Segmentation<span class="drop-down"><i class="fas fa-caret-down"></i></span></button>
+            <button class="btn btn-secondary col-12" (click)="displaySdp()" [ngClass]="activeSdp ? 'success' : 'danger'"><i class="fas fa-band-aid"></i>SDP Segmentation<span class="drop-down"><i class="fas fa-caret-down"></i></span></button>
             <div class="sub-menus" *ngIf="displaySdpLinks">
-                <a href="#" class="btn sub-menu-links">Home</a>
-                <a href="" class="btn sub-menu-links">Manage SDP Segmentation</a>
+                <a [routerLink]="['../resources/sdp']" class="btn sub-menu-links">Home</a>
+                <a [routerLink]="['../resources/sdp/manage']" class="btn sub-menu-links">Manage SDP Segmentation</a>
             </div>
         </div>
         <div class="dashboard-link">
-            <button class="btn btn-secondary" (click)="displayMap()" [ngClass]="activeMap ? 'success' : 'danger'"><i class="fas fa-globe"></i>Map Engine<span class="drop-down"><i class="fas fa-caret-down"></i></span></button>
+            <button class="btn btn-secondary col-12" (click)="displayMap()" [ngClass]="activeMap ? 'success' : 'danger'"><i class="fas fa-globe"></i>Map Engine<span class="drop-down"><i class="fas fa-caret-down"></i></span></button>
             <div class="sub-menus" *ngIf="displayMapLinks">
                 <a href="#" class="btn sub-menu-links">Countries</a>
                 <a href="" class="btn sub-menu-links">Service Delivery Points</a>
@@ -28,7 +28,7 @@
             </div>
         </div>
         <div class="dashboard-link">
-            <button class="btn btn-secondary" (click)="displayAdmin()" [ngClass]="activeAdmin ? 'success' : 'danger'"><i class="fas fa-sitemap"></i>Administration<span class="drop-down"><i class="fas fa-caret-down"></i></span></button>
+            <button class="btn btn-secondary col-12" (click)="displayAdmin()" [ngClass]="activeAdmin ? 'success' : 'danger'"><i class="fas fa-sitemap"></i>Administration<span class="drop-down"><i class="fas fa-caret-down"></i></span></button>
             <div class="sub-menus" *ngIf="displayAdminLinks">
                 <a href="#" class="btn sub-menu-links">Countries</a>
                 <a href="" class="btn sub-menu-links">Service Delivery Points</a>

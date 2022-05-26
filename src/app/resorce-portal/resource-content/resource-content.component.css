@@ -4,7 +4,7 @@
 }
 .content-wrapper .form-group {
     display: flex;
-    margin-bottom: 3rem;
+    margin-bottom: 1rem;
     align-items: center;
 }
 .content-wrapper .form-group input, select, textarea {
@@ -42,7 +42,7 @@
 }
 
 .blueBtn, .redBtn, .greyBtn {
-    height: 3rem;
+    /* height: 3rem; */
     border-radius: 30px;
     border: none;
     /* padding: 1rem; */
@@ -58,7 +58,7 @@
     
 }
 .greyBtn {
-    background-color: gainsboro;
+    background-color: #9da4da;
     
 }
 .buttonGrp {

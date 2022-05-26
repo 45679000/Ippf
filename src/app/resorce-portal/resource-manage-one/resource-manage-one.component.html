@@ -5,9 +5,9 @@
         <input type="file" name="" id=""> -->
     </div>
     <form action="" >
-        <div class="search">
-            <input type="text" name="" id="" placeholder="Search Datasets" class="topSearchInput col-9">
-            <input type="submit" value="Search" class="btn btn-secondary col-2 tobSearchBtn">
+        <div class="search col-12 row mb-2">
+            <input type="text" name="" id="" placeholder="Search Datasets" class="col-9">
+            <input type="submit" value="Search" class="col-2 btn btn-secondary submitSearch">
         </div>
         <div class="filters col-9">
             <p>Publish Status: </p>
@@ -42,7 +42,15 @@
                     <td>2021</td>
                     <td>(1) Files</td>
                     <td><button class="statusBtn">Publish</button></td>
-                    <td><button class="tobSearchBtn">Actions</button></td>
+                    <td>
+                    <div class="action-holder col-12">
+                        <button (click)="toggleBtn()" class="tobSearchBtn col-12">Actions<span class="span-icon"><i class="fas fa-caret-down"></i></span></button>
+                        <div *ngIf="activeStatus" class="toggle-drop col-12">
+                            <a [routerLink]="['../content']"><span class=""><i class="fas fa-pencil-alt"></i></span>Manage</a>
+                            <a href="" class="mt-1"><span class=""><i class="fas fa-trash"></i></span>Delete</a>
+                        </div>
+                    </div>
+                    </td>
                 </tr>
                 <tr>
                     <td scope="row">What does it take to be a third party monitor?</td>

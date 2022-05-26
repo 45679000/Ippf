@@ -6,13 +6,13 @@
     height: 100vh;
     background-color: #F0F0F0;
     padding-top: 5rem;
-    position: fixed;
-    left: 0;
-    width: 20%;
+    /* position: fixed;
+    left: 0; */
+    width: 100%;
 }
 .btn-secondary {
     margin: 1rem 0 0 0;
-    width: 270px;
+    /* width: 270px; */
     height: 50px;
     background-color: #E5E5E5 !important;
     color: #151F6D !important;
@@ -61,11 +61,11 @@
         border-radius: 45px;
         border: none !important;
     }
-    .sidebar-content {
-        width: 30%;
-    }
+    /* .sidebar-content {
+        width: 20%;
+    } */
 }
-@media (max-width: 768px) {
+/* @media (max-width: 768px) {
     .sidebar-content {
         width: 50%;
     }
@@ -79,7 +79,7 @@
     .sidebar-content {
         width: 90%;
     }
-}
+} */
 /* .sub-menus {
     display: none !important;
 }
