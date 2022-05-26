@@ -1,13 +1,11 @@
 footer {
     display: flex;
-    /* border-top: 1px solid grey; */
     justify-content: space-between;
     box-shadow: 0px 0px 5px grey;
 }
 .logos{
     display: flex;
     flex-direction: column;
-    /* align-items: center; */
 }
 .logos img{
     cursor: pointer;
@@ -27,7 +25,6 @@ footer {
     width: 100%;
 }
 .form-control {
-    /* border-radius: 25px !important; */
     background-color: #F0F0F0 !important;
     border: none !important;
     border-radius: 53px; 
@@ -49,21 +46,6 @@ label{
     width: 35% !important;
     margin: 0 px;
 }
-/* .subscribe .btn{
-    margin-right: 50%;
-    width: 50% !important;
-    background-color: darkblue !important;
-    color: white !important;
-    font-weight: bold !important;
-    padding: 1rem 1.3rem !important;
-} */
-/* .subscribe input:nth-child(2) { */
-    /* width: 50%; */
-    /* background-color: darkblue; */
-    /* color: white; */
-    /* font-weight: bold; */
-    /* margin: 1rem 1.3rem; */
-/* } */
 @media (max-width: 375px) {
     footer, .inputFields {
         display: block;
@@ -75,16 +57,3 @@ label{
         width: 100%;
     }
 }
-/* @media (max-width: 1024px) {
-    footer, .inputFields {
-        display: block;
-    }
-    .menu-links {
-        width: 100%;
-    }
-    .subscribe {
-        width: 100%;
-        text-align: center;
-    }
-
-} */

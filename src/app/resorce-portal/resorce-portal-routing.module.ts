@@ -10,13 +10,15 @@ import { ResourceManageOneComponent } from './resource-manage-one/resource-manag
 import { ResourceManagerHomeComponent } from './resource-manager-home/resource-manager-home.component';
 import { SdpHomeComponent } from './sdp-home/sdp-home.component';
 import { SdpManageComponent } from './sdp-manage/sdp-manage.component';
+import { ResourcemanageComponent } from './resourcemanage/resourcemanage.component'; 
 
 const routes: Routes = [
   { path: '', component: ResorcePortalComponent, children: [
     {path: '', component: HomeComponent },
-    {path: 'manageresources', component: ResourceManagerHomeComponent },
+    {path: 'resourceshome', component: ResourceManagerHomeComponent },
     {path: 'resourcedetails', component: ResourceDetailsComponent },
-    {path: 'manage', component: ResourceManageOneComponent },
+    {path: 'manage', component: ResourcemanageComponent },
+    {path: 'manageresources', component: ResourceManageOneComponent },
     {path: 'content', component: ResourceContentComponent },
     {path: 'sdp', component: SdpHomeComponent},
     {path: 'sdp/manage', component: SdpManageComponent},
