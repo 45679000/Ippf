@@ -21,7 +21,7 @@
 .search input:nth-child(1) {
     background-color: #F0F0F0;
 }
-.submitSearch {
+.submitSearch, .tobSearchBtn {
     background-color: #151F6D !important;
     font-weight: bold !important;
 }
@@ -79,4 +79,8 @@ table button {
 }
 .toggle-drop span {
     margin: 0 5px 0 0;
+}
+.span-icon {
+    margin: 0 0 0 26px;
+
 }

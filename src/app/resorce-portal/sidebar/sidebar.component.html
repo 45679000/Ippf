@@ -15,8 +15,8 @@
         <div class="dashboard-link">
             <button class="btn btn-secondary col-12" (click)="displaySdp()" [ngClass]="activeSdp ? 'success' : 'danger'"><i class="fas fa-band-aid"></i>SDP Segmentation<span class="drop-down"><i class="fas fa-caret-down"></i></span></button>
             <div class="sub-menus" *ngIf="displaySdpLinks">
-                <a href="#" class="btn sub-menu-links">Home</a>
-                <a href="" class="btn sub-menu-links">Manage SDP Segmentation</a>
+                <a [routerLink]="['../resources/sdp']" class="btn sub-menu-links">Home</a>
+                <a [routerLink]="['../resources/sdp/manage']" class="btn sub-menu-links">Manage SDP Segmentation</a>
             </div>
         </div>
         <div class="dashboard-link">
