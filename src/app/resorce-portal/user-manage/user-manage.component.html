@@ -1,0 +1,77 @@
+<div class="row">
+    <div class="settings col-12 col-md-3">
+        <h2 class="lead-heading-mid">Account Settings</h2>
+        <div class="avatar pink-text">
+            <i class="fas fa-user-circle"></i>
+        </div>
+        <div class="user-details mt-3">
+            <form action="">
+                <div class="form-group">
+                    <label for="name">Name</label>
+                    <input type="text" class="form-control form-control-lg" value="John Doe">
+                </div>
+                <div class="form-group">
+                    <label for="name">Email Address</label>
+                    <input type="text" class="form-control form-control-lg" value="jdoe@gmail.com">
+                </div>
+                <div class="form-group">
+                    <label for="name">Account Type</label>
+                    <div class="mb-3">
+                      <label for="" class="form-label"></label>
+                      <select class="form-control" name="" id="">
+                        <option>Publisher</option>
+                        <option>Admin</option>
+                        <option>Normal User</option>
+                      </select>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <a [routerLink]="['../change-password']" class="pink-text mb-1">Reset users  password</a>
+                    <br>
+                    <a [routerLink]="['../change-password']" class="pink-text mb-1">Activate User</a>
+                </div>
+                <input type="submit" class="btn btn-primary mb-2 registerBtn" id="" value="Save">
+            </form>
+        </div>
+    </div>
+    <div class="activity px-4 col-12 col-md-9">
+        <h2 class="lead-heading-mid">Account Activity</h2>
+        <div class="saved-datasets col-12 col-md-9 pt-3">
+            <h2 class="lead-heading-small-black">Saved Datasets</h2>
+            <a href="#">Survey 2021-2022, Angola</a>
+        </div>
+        <div class="downloaded-datasets col-12 col-md-9 pt-3">
+            <h2 class="lead-heading-small-black">Downloaded Datasets</h2>
+            <a href="#">Survey 2021-2022, Benin</a>
+        </div>
+        <div class="requested-datasets col-12 col-md-9 pt-3">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>
+                            <h2 class="lead-heading-small-black">Requested Datasets</h2>
+                        </th>
+                        <th>
+                            <h2 class="lead-heading-small-black">Status</h2>
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td scope="row">
+                            <a href="#">Survey 2021-2022, Angola</a>
+                        </td>
+                        <td class="pink-text">Pending</td>
+                    </tr>
+                    <tr>
+                        <td scope="row">
+                            <a href="#">Survey 2021-2022, Angola</a>
+                        </td>
+                        <td class="">Approved</td>
+                        <td></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

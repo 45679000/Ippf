@@ -1,16 +1,16 @@
 <div class="menu-holder">
     <ul class="menu">
         <li class="menu-items">
-            <a href="#" class="list-item active h3" [ngClass]=" fontColorBlue? 'whiteText' : 'blueText'">Home</a>
+            <a href="home" class="list-item active h3" [ngClass]=" fontColorBlue? 'blueText' : 'whiteText'">Home</a>
         </li>
         <li class="menu-items">
-            <a [routerLink]="['../../datasets']" class="list-item h3" [ngClass]=" fontColorBlue? 'whiteText' : 'blueText'">Datasets</a>
+            <a [routerLink]="['../datasets']" class="list-item h3" [ngClass]=" fontColorBlue? 'blueText' : 'whiteText'">Datasets</a>
         </li>
         <li class="menu-items">
-            <a href="#" class="list-item h3" [ngClass]=" fontColorBlue? 'whiteText' : 'blueText'">WISHScope</a>
+            <a href="#" class="list-item h3" [ngClass]=" fontColorBlue? 'blueText' : 'whiteText'">WISHScope</a>
         </li>
         <li class="menu-items">
-            <a [routerLink]="['../datasets/dataset-request']" class="list-item h3" [ngClass]=" fontColorBlue? 'whiteText' : 'blueText'">Data Requests</a>
+            <a [routerLink]="['../datasets/dataset-request']" class="list-item h3" [ngClass]=" fontColorBlue? 'blueText' : 'whiteText'">Data Requests</a>
         </li>
     </ul>
 </div>
