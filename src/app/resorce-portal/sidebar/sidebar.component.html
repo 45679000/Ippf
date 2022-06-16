@@ -22,7 +22,7 @@
         <div class="dashboard-link">
             <button class="btn btn-secondary col-12" (click)="displayMap()" [ngClass]="activeMap ? 'success' : 'danger'"><i class="fas fa-globe"></i>Map Engine<span class="drop-down"><i class="fas fa-caret-down"></i></span></button>
             <div class="sub-menus" *ngIf="displayMapLinks">
-                <a href="#" class="btn sub-menu-links">Countries</a>
+                <a [routerLink]="['./map/countries']" class="btn sub-menu-links">Countries</a>
                 <a href="" class="btn sub-menu-links">Service Delivery Points</a>
                 <a href="" class="btn sub-menu-links">Partners</a>
             </div>
@@ -30,9 +30,8 @@
         <div class="dashboard-link">
             <button class="btn btn-secondary col-12" (click)="displayAdmin()" [ngClass]="activeAdmin ? 'success' : 'danger'"><i class="fas fa-sitemap"></i>Administration<span class="drop-down"><i class="fas fa-caret-down"></i></span></button>
             <div class="sub-menus" *ngIf="displayAdminLinks">
-                <a href="#" class="btn sub-menu-links">Countries</a>
-                <a href="" class="btn sub-menu-links">Service Delivery Points</a>
-                <a href="" class="sub-menu-links btn">Partners</a>
+                <a [routerLink]="['./admin/users']" class="btn sub-menu-links">Users</a>
+                <a href="" class="btn sub-menu-links">Faqs</a>
             </div>
         </div>
     </div>

@@ -21,6 +21,8 @@ import {MatIconModule} from '@angular/material/icon';
 import {MatSidenavModule} from '@angular/material/sidenav';
 import { LayoutModule } from '@angular/cdk/layout';
 import { ResourcemanageComponent } from './resourcemanage/resourcemanage.component';
+import { UsersComponent } from './users/users.component';
+import { UserManageComponent } from './user-manage/user-manage.component';
 
 @NgModule({
   declarations: [
@@ -37,6 +39,8 @@ import { ResourcemanageComponent } from './resourcemanage/resourcemanage.compone
     SdpManageComponent,
     MapEngineCountriesComponent,
     ResourcemanageComponent,
+    UsersComponent,
+    UserManageComponent,
   ],
   imports: [
     CommonModule,

@@ -1,0 +1,44 @@
+<div class="container">
+    <div>
+        <h2 class="lead-heading">Users Management</h2>
+    </div>
+    <form action="" class="search">
+        <input type="text" name="" id="" placeholder="Search User" class="topSearchInput col-9">
+        <input type="submit" value="Search" class="btn btn-secondary col-2 tobSearchBtn">
+    </form>
+    <div class="px-md-5 mt-5">
+        <table class="table px-md-5">
+            <thead>
+              <tr>
+                <th scope="col">Name</th>
+                <th scope="col">Account Type</th>
+                <th scope="col">Status</th>
+                <th scope="col">Actions</th>
+              </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td scope="row">John Doe</td>
+                    <td>Admin</td>
+                    <td class="blue-text">Active</td>
+                    <td>
+                        <div class="action-holder col-9">
+                            <button (mouseover)='toggleBtn()' (click)="toggleBtn()" class="tobSearchBtn col-12">Actions<span class="span-icon"><i class="fas fa-caret-down"></i></span></button>
+                            <div *ngIf="activeStatus" class="toggle-drop col-12">
+                                <a [routerLink]="['../user']"><span class=""><i class="fas fa-pencil-alt"></i></span>Manage</a>
+                                <a href="" class="mt-1"><span class=""><i class="fas fa-trash"></i></span>Delete</a>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td scope="row">Jane Doe</td>
+                    <td>Publisher</td>
+                    <td class="pink-text">Inactive</td>
+                    <td>22</td>
+                </tr>
+            </tbody>
+          </table>
+    </div>
+
+</div>

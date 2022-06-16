@@ -22,36 +22,20 @@ export class SidebarComponent implements OnInit {
   displayAdminLinks: boolean = false;
   displayFooter: boolean =false;
   displayResource(){
+    this.displayResourceLinks = !this.displayResourceLinks; 
     this.activeStatus = !this.activeStatus;
-    this.displayResourceLinks = !this.displayResourceLinks;  
-    this.displaySdpLinks = false;
-    this.displayMapLinks = false;
-    this.displayAdminLinks = false;
-    this.activeDash = !this.activeDash;
   }
   displaySdp(){
+    this.displaySdpLinks = !this.displaySdpLinks; 
     this.activeSdp = !this.activeSdp;
-    this.displaySdpLinks= !this.displaySdpLinks;  
-    this.displayResourceLinks = false;
-    this.displayMapLinks = false;
-    this.displayAdminLinks = false;
-    this.activeDash = !this.activeDash;
   }
   displayMap(){
+    this.displayMapLinks = !this.displayMapLinks; 
     this.activeMap = !this.activeMap;
-    this.displayMapLinks= !this.displayMapLinks;  
-    this.displayResourceLinks = false;
-    this.displaySdpLinks = false;
-    this.displayAdminLinks = false;
-    this.activeDash = !this.activeDash;
   }
   displayAdmin(){
+    this.displayAdminLinks = !this.displayAdminLinks; 
     this.activeAdmin = !this.activeAdmin;
-    this.displayAdminLinks= !this.displayAdminLinks;  
-    this.displayResourceLinks = false;
-    this.displaySdpLinks = false;
-    this.displayMapLinks = false;
-    this.activeDash = !this.activeDash;
   }
   
 }

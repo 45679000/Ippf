@@ -11,6 +11,8 @@ import { ResourceManagerHomeComponent } from './resource-manager-home/resource-m
 import { SdpHomeComponent } from './sdp-home/sdp-home.component';
 import { SdpManageComponent } from './sdp-manage/sdp-manage.component';
 import { ResourcemanageComponent } from './resourcemanage/resourcemanage.component'; 
+import { UsersComponent } from "./users/users.component";
+import { UserManageComponent } from "./user-manage/user-manage.component";
 
 const routes: Routes = [
   { path: '', component: ResorcePortalComponent, children: [
@@ -22,7 +24,9 @@ const routes: Routes = [
     {path: 'content', component: ResourceContentComponent },
     {path: 'sdp', component: SdpHomeComponent},
     {path: 'sdp/manage', component: SdpManageComponent},
-    {path: 'map/countries', component: MapEngineCountriesComponent}
+    {path: 'map/countries', component: MapEngineCountriesComponent},
+    {path: 'admin/users', component: UsersComponent},
+    {path: 'admin/user', component: UserManageComponent }
   ] },
 
 ];

@@ -16,7 +16,7 @@ import { ResourceContentComponent } from './resorce-portal/resource-content/reso
 const routes: Routes = [
   {
     path: '', 
-    redirectTo: 'home', 
+    redirectTo: 'resources', 
     pathMatch: 'full' 
   },
   {
@@ -48,7 +48,7 @@ const routes: Routes = [
     component: LoginComponent
   },
   {
-     path: '', 
+     path: 'home', 
      loadChildren: () => import('./home/home.module').then(m => m.HomeModule),
      canActivate: [AuthGuard] 
   },
