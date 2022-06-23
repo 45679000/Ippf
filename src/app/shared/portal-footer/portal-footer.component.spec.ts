@@ -1,20 +1,20 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { PortalfooterComponent } from './portalfooter.component';
+import { PortalFooterComponent } from './portal-footer.component';
 
-describe('PortalfooterComponent', () => {
-  let component: PortalfooterComponent;
-  let fixture: ComponentFixture<PortalfooterComponent>;
+describe('PortalFooterComponent', () => {
+  let component: PortalFooterComponent;
+  let fixture: ComponentFixture<PortalFooterComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ PortalfooterComponent ]
+      declarations: [ PortalFooterComponent ]
     })
     .compileComponents();
   });
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(PortalfooterComponent);
+    fixture = TestBed.createComponent(PortalFooterComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

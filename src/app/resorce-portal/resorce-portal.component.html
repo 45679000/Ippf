@@ -7,7 +7,7 @@
         
     </mat-sidenav>
   
-    <mat-sidenav-content class="col-12 col-md-8 col-lg-8 col-xl-7 col-xxl-10">
+    <mat-sidenav-content class="col-12 col-md-12 col-lg-8 col-xl-7 col-xxl-10 d-flex flex-column min-vh-100">
         <div [ngClass]="{'headerTop' : true}">
             <div class="menuBtn">
                 <mat-icon *ngIf="!sidebarOpened" (click)="sidebar.toggle()" >menu</mat-icon>
@@ -17,7 +17,7 @@
         <div class="mb-5">
             <router-outlet></router-outlet>
         </div>
-        <app-portalfooter class="col-12"></app-portalfooter>
+        <app-portal-footer class="mt-auto col-12"></app-portal-footer>
     </mat-sidenav-content>
   </mat-sidenav-container>
   

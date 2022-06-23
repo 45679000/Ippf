@@ -1,29 +1,51 @@
-<div class="container mt-4">
+<div class="container-fluid mt-4 col-12 ">
     <h2 class="h2 mb-4">WISH Data and Resources Portal</h2>
     <p>The Women's Intergrated Sexual Health (WISH) programme, under the strategy of 'Leave No One Behind', offers quality integrated and inclusive family planning and sexual and reproductive health services - to marginalised and hard to reach populations: the poor, youth under 20 and people living with a disability. Our evidence through the WISH programme adapts and informs integrated sexual and reproductive health and rights around the world. Find ot more in the evidence and resources section. Consortium partners can access country data, heatmaps and more through the login access area.</p>
     <div class="wish-images row col-12">
-        <div class="col-12 col-md-4">
-            <div class="wish-container">
-                <a [routerLink]="['/home']">
-                    <img src="assets/images/wish-resources-button.png" alt="poverty heatmaps" class="wish-image" width=""/>
-                </a>
-            </div>
+        <div class="col-12 col-md-4 mt-5 mt-md-0">
+            <a [routerLink]="['/home']">
+                <div class="links-holder">
+                    <div class="img-links">
+                        <div>
+                            <img src="assets/images/wish-resources-icon.png" alt="">
+                        </div>
+                    </div>
+                    <div class="text-center">
+                        <h2 class="lead-heading blue-txt">WISH<br>Evidence & Resources</h2>
+                    </div>
+                </div>
+            </a>
         </div>
 
-       <div class="col-12 col-md-4">
-           <div class="wish-container">
-               <a [routerLink]="['/map']">
-                   <img src="assets/images/heatmap-button.png" alt="heat map" class="wish-image" width=""/>
-               </a>
-           </div>
+       <div class="col-12 col-md-4 mt-5 mt-md-0">
+            <a [routerLink]="['/map']">
+                <div class="links-holder">
+                    <div class="img-links">
+                        <div>
+                            <img src="assets/images/heatmap-icon.png" alt="">
+                        </div>
+                    </div>
+                    <div class="text-center">
+                        <h2 class="lead-heading blue-txt">Heatmap portal</h2>
+                        <a [routerLink]="['/login']" class="pink-text">(Login Required)</a>
+                    </div>
+                </div>
+            </a>
        </div>
 
-       <div class="col-12 col-md-4">
-        <div class="wish-container">
+       <div class="col-12 col-md-4 mt-5 mt-md-0">
             <a [routerLink]="['/datasets']">
-                <img src="assets/images/wish-resources-button.png" alt="poverty heatmaps" class="wish-image" width=""/>
+                <div class="links-holder">
+                    <div class="img-links">
+                        <div>
+                            <img src="assets/images/image-three.png" alt="">
+                        </div>
+                    </div>
+                    <div class="text-center">
+                        <h2 class="lead-heading blue-txt">DataSharing Portal</h2>
+                    </div>
+                </div>
             </a>
         </div>
     </div>
-   </div>
 </div>

@@ -13,7 +13,15 @@ export class TopHeaderComponent implements OnInit {
 
 
   toggleShow() {
-    this.isShown = !this.isShown;
+    // this.isShown = !this.isShown;
+    if(this.isShown == true) {
+      this.isShown = false
+    }
+  }
+  mouseOverShow() {
+    // if(this.isShown == false){
+      this.isShown = true
+    // }
   }
   takeMeHome(){
     this.route.navigate(['/']);
