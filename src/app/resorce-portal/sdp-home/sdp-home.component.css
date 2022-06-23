@@ -9,7 +9,7 @@
     font-size: 20px;
     font-weight: 500;
 }
-input {
+.form-select {
     width: 264px;
     height: 60px;
     border-radius: 45px;

@@ -5,7 +5,24 @@
     justify-content: space-between;
     /* gap: 2rem; */
 }
+.wish-images a {
+    text-decoration: none !important;
+}
+.links-holder {
+    border: 1px solid rgb(175, 174, 174);
+    padding: 1rem;
+    border-radius: 2rem;
+    height: 250px;
+}
+.links-holder:hover {
+    border: 2px solid #fff;
+    box-shadow: 1px 1px 10px rgb(92, 92, 221);
+}
 .wish-images img {
     width: 100%;
     height: auto;
+}
+.img-links {
+    width: 100px;
+    margin: 0 auto 2rem auto;
 }

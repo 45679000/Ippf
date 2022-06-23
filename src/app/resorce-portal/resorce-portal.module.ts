@@ -7,7 +7,6 @@ import { ResorcePortalRoutingModule } from './resorce-portal-routing.module';
 import { ResorcePortalComponent } from './resorce-portal.component';
 import { SidebarComponent } from './sidebar/sidebar.component';
 import { PortalheaderComponent } from './portalheader/portalheader.component';
-import { PortalfooterComponent } from './portalfooter/portalfooter.component';
 import { HomeComponent } from './home/home.component';
 import { ResourceManagerHomeComponent } from './resource-manager-home/resource-manager-home.component';
 import { ResourceDetailsComponent } from './resource-details/resource-details.component';
@@ -29,7 +28,6 @@ import { UserManageComponent } from './user-manage/user-manage.component';
     ResorcePortalComponent,
     SidebarComponent,
     PortalheaderComponent,
-    PortalfooterComponent,
     HomeComponent,
     ResourceManagerHomeComponent,
     ResourceDetailsComponent,
