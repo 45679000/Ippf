@@ -15,14 +15,14 @@
         <div class="sidebar">
             <h2 class="my-3 mx-2">Refined Search</h2>
             <div class="card">
-                <h3>Search by country</h3>
+                <h3 class="h3">Search by country or tags</h3>
                 <form action="">
+                    <label for="">Tags</label>
                     <select type="text" placeholder="Country Name" class="sidebarInput">
-                        <option value="volvo">Volvo</option>
-                        <option value="saab">Saab</option>
-                        <option value="mercedes">Mercedes</option>
-                        <option value="audi">Audi</option>
+                        <option *ngFor="let tag of tags" value="{{tag}}">{{ tag | titlecase}}</option>
                     </select>
+                    <br>
+                    <label for="">Groups</label>
                     <select type="text" placeholder="Year" class="sidebarInput my-4">
                         <option value="volvo">Volvo</option>
                         <option value="saab">Saab</option>
@@ -39,54 +39,21 @@
         <div class="datasets px-5">
             <div class="">
                 <h3 class="lead-heading-mid">Available Datasets</h3>
-                <p>Showing 10 of 300 Surveys</p>
+                <p>Showing {{xxy}} Survey(s)</p>
             </div>
             <div class="mb-3 dataset-info">
                 <div class="left-side col-1">
-                    <p class="blue-text"><i class="fas fa-lock-open"></i></p>
+                    <p *ngIf="dataOfDataset.state; else elseBlock"class="blue-text"><i class="fas fa-lock-open"></i></p>
+                    <ng-template #elseBlock><p class="pink-text"><i class="fas fa-lock"></i></p></ng-template>
                 </div>
                 <div class="right-side col-11">
-                    <h3 class="lead-heading-mid">Survey 2021-2022</h3>
+                    <h3 class="lead-heading-mid">{{dataOfDataset.title | titlecase}}</h3>
                     <p class="lead-heading-small"><a [routerLink]="['../datasets/dataset-details']">Angola, 2021-2022</a></p>
                     <p class="lead-heading-small-black">National Bureau of Statistics</p>
                     <p><span class="text-bold">Collection: </span>International Planned Parenthood Federation</p>
                     <div class="meta-data">
-                        <p class="date-created">Created on: Jan 1, 2021</p>
-                        <p class="date-modified mx-4">Last Modified: Jan 1, 2022</p>
-                        <p class="number-of-times-viewed">Views: 1021</p>
-                    </div>
-                </div>
-                
-            </div>
-            <div class="mb-3 dataset-info">
-                <div class="left-side col-1">
-                    <p class="pink-text"><i class="fas fa-lock"></i></p>
-                </div>
-                <div class="right-side col-11">
-                    <h3 class="lead-heading-mid">Survey 2021-2022</h3>
-                    <p class="lead-heading-small"><a [routerLink]="['../datasets/dataset-details']">Angola, 2021-2022</a></p>
-                    <p class="lead-heading-small-black">National Bureau of Statistics</p>
-                    <p><span class="text-bold">Collection: </span>International Planned Parenthood Federation</p>
-                    <div class="meta-data">
-                        <p class="date-created">Created on: Jan 1, 2021</p>
-                        <p class="date-modified mx-4">Last Modified: Jan 1, 2022</p>
-                        <p class="number-of-times-viewed">Views: 1021</p>
-                    </div>
-                </div>
-                
-            </div>
-            <div class="mb-3 dataset-info">
-                <div class="left-side col-1">
-                    <p class="blue-text"><i class="fas fa-lock-open"></i></p>
-                </div>
-                <div class="right-side col-11">
-                    <h3 class="lead-heading-mid">Survey 2021-2022</h3>
-                    <p class="lead-heading-small"><a [routerLink]="['../datasets/dataset-details']">Angola, 2021-2022</a></p>
-                    <p class="lead-heading-small-black">National Bureau of Statistics</p>
-                    <p><span class="text-bold">Collection: </span>International Planned Parenthood Federation</p>
-                    <div class="meta-data">
-                        <p class="date-created">Created on: Jan 1, 2021</p>
-                        <p class="date-modified mx-4">Last Modified: Jan 1, 2022</p>
+                        <p class="date-created">Created on: {{dataOfDataset.metadata_created}}</p>
+                        <p class="date-modified mx-4">Last Modified: {{dataOfDataset.metadata_modified}}</p>
                         <p class="number-of-times-viewed">Views: 1021</p>
                     </div>
                 </div>
