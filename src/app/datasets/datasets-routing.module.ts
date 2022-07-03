@@ -6,7 +6,7 @@ import { DatasetsComponent } from './datasets.component';
 
 const routes: Routes = [
   { path: '', component: DatasetsComponent },
-  { path: 'dataset-details', component: DatasetDetailsComponent },
+  { path: 'dataset-details/:id', component: DatasetDetailsComponent },
   { path: 'dataset-request', component: DataRequestComponent}
 ];
 

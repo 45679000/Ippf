@@ -16,7 +16,7 @@ import { ResourceContentComponent } from './resorce-portal/resource-content/reso
 const routes: Routes = [
   {
     path: '', 
-    redirectTo: 'resources', 
+    redirectTo: 'home', 
     pathMatch: 'full' 
   },
   {
