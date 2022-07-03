@@ -3,9 +3,15 @@ import * as $ from "jquery";
 import { DatasetService } from '../services/datasets-services.service';
 import { Observable } from 'rxjs';
 import { data } from 'jquery';
+import { Group } from '../interfaces/groups'
 
 interface Data {
-  result: any;
+  help: string,
+  result: string[],
+  success: boolean
+}
+interface richDataset {
+  result: string[];
 }
 interface dataDaset {
   author: string
@@ -49,7 +55,9 @@ interface dataDaset {
   styleUrls: ['./datasets.component.css']
 })
 export class DatasetsComponent implements OnInit {
-  datasets: any
+  datasets:any = []
+  someDataset:any =[]
+  aalData:dataDaset[] = []
   xxy: any
   dataOfDataset: dataDaset = {
     author: '',
@@ -82,32 +90,37 @@ export class DatasetsComponent implements OnInit {
     url: '',
     version: '',
   }
+  groups:Group []= []
+  groupsLength: boolean = false
   tags: any
   constructor(private datasetService: DatasetService) { }
 
   ngOnInit(): void {
-    this.allDatasets.subscribe(
+    this.datasetService.allDatasets.subscribe(
       value => { 
         this.datasets = value
-        this.xxy = this.datasets.length 
+        this.xxy = this.datasets.length
       }
     );
     this.allTags.subscribe(val=>{
       this.tags = val
-      // console.log(val)
     })
-    this.oneDataset.subscribe(val=>{
-      this.dataOfDataset = val
+    this.datasetService.getAllGroups().subscribe((val: any) => {
+      this.groups = val
+      console.log(this.groups)
+    })
+    this.datasetService.getAllData().
+    subscribe((val: any)=>{
+      this.aalData = [ ...this.aalData, val];
+      // this.aalData = val
       // const dataetData: dataDaset = val;
 
-      // console.log(val)
+      console.log(this.aalData)
     })
-    // this.datasets.forEach(element => {
-      // console.log(this.datasets)
-    // });
   }
-  allDatasets = new Observable((observer) => {
-    console.log('Starting observable');
+
+  allDatasets = new Observable<Data>((observer) => {
+    // console.log('Starting observable');
     $.ajax({
       method: "GET",
       // contentType:'application/json',
@@ -115,24 +128,31 @@ export class DatasetsComponent implements OnInit {
       url:'http://44.204.72.194/api/3/action/package_list',
       success: function (response){
         observer.next(response.result)
+      },
+      error: function(error){
+        console.log(error)
       }
     })
   });
   allTags = new Observable((observer) => {
-    console.log('Starting observable');
+    // console.log('Starting observable');
     $.ajax({
       method: "GET",
       // contentType:'application/json',
       dataType: 'jsonp',
       url:'http://44.204.72.194/api/3/action/tag_list',
       success: function (response){
-        console.log(response)
+        // console.log(response)
         observer.next(response.result)
+      },
+      error: function(error){
+        console.log(error)
       }
     })
   });
   oneDataset = new Observable<dataDaset>((observer) => {
-    console.log('Starting observable');
+    
+    // console.log('Starting observable');
     $.ajax({
       method: "GET",
       // contentType:'application/json',
@@ -144,4 +164,6 @@ export class DatasetsComponent implements OnInit {
       }
     })
   });
+
+  
 }

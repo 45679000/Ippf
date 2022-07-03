@@ -15,6 +15,7 @@ import { ContactComponent } from './contact/contact.component';
 import { MenuComponent } from './menu/menu.component';
 import { CommonModule } from '@angular/common';
 import { SharedModule } from './shared/shared.module';
+import { ErrorPageComponent } from './error-page/error-page.component';
 // import { AccountSettingsComponent } from './authentication/account-settings/account-settings.component';
 // import { PasswordChangeComponent } from './authentication/password-change/password-change.component';
 
@@ -25,6 +26,7 @@ import { SharedModule } from './shared/shared.module';
     FaqComponent,
     ContactComponent,
     MenuComponent,
+    ErrorPageComponent,
     
     // AccountSettingsComponent,
     // PasswordChangeComponent,
