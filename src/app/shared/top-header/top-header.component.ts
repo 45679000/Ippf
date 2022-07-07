@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { AuthServiceService } from '../../auth-service.service'
 
 @Component({
   selector: 'app-top-header',
@@ -8,26 +9,19 @@ import { Router } from '@angular/router';
 })
 export class TopHeaderComponent implements OnInit {
 
-  constructor(private route: Router) { }
-  isShown: boolean = false ; // hidden by default
+  constructor(private route: Router, private authService: AuthServiceService) { }
+  isSignedIn: boolean = false ; // hidden by default
 
-
-  toggleShow() {
-    // this.isShown = !this.isShown;
-    if(this.isShown == true) {
-      this.isShown = false
-    }
-  }
-  mouseOverShow() {
-    // if(this.isShown == false){
-      this.isShown = true
-    // }
-  }
   takeMeHome(){
     this.route.navigate(['/']);
 
   }
   ngOnInit(): void {
+    this.isSignedIn = this.authService.isLoggedIn()
   }
+  signOut() {
+    localStorage.removeItem('token')
+    this.route.navigate(['/login']);
 
+  }
 }

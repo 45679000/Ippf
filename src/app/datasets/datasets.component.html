@@ -6,9 +6,9 @@
         <app-navbar></app-navbar>
     </div>
     <div class="menu-container">
-        <form action="" class="search">
-            <input type="text" name="" id="" placeholder="Search Datasets" class="topSearchInput col-9">
-            <input type="submit" value="Search" class="btn col-2 searchBtnBig blueBtn">
+        <form action="" class="search" [formGroup]="searchForm" (ngSubmit)="onSubmit()">
+            <input type="text" name="" id="" placeholder="Search Datasets" class="topSearchInput col-9" formControlName="q">
+            <input type="submit" value="Search" class="btn col-2 searchBtnBig blueBtn" >
         </form>
     </div>
     <div class="page-content">
@@ -16,23 +16,23 @@
             <h2 class="my-3 mx-2">Refined Search</h2>
             <div class="card">
                 <h3 class="h3">Search by country or tags</h3>
-                <form action="">
+                <form action="" [formGroup]="searchForm" ngSubmit="onSubmit()">
                     <label for="">Tags</label>
-                    <select type="text" placeholder="Country Name" class="sidebarInput">
+                    <select type="text" placeholder="Country Name" class="sidebarInput" formControlName="tag">
                         <option *ngFor="let tag of tags" value="{{tag}}">{{ tag | titlecase}}</option>
                     </select>
                     <br>
                     <label for="">Groups</label>
                     <p class="text-danger">{{(groups)?'No groups set up' : 'shiit'}}</p>
-                    <select type="text" placeholder="Year" class="sidebarInput my-4">
+                    <select type="text" placeholder="Year" class="sidebarInput my-4" formControlName="group">
                         <option *ngFor="let group of groups" value="{{group}}"value="{{group}}">Volvo</option>
                         <!-- <p *ngIf="groups.length > 0; else elseBlock"></p> -->
                         <!-- <ng-template #elseBlock>
                             <option disabled value="">No groups</option></ng-template> -->
                     </select>
                     <div class="btn-group">
-                        <input type="submit" value="Search" class="btn btn-primary filterBtn">
-                        <input type="submit" value="Reset" class="btn btn-primary resetBtn">
+                        <input type="submit" value="Search" class="btn btn-primary filterBtn" (click)="onSubmit()">
+                        <input type="button" value="Reset" class="btn btn-primary resetBtn">
                     </div>
                 </form>
             </div>

@@ -52,7 +52,7 @@ interface dataDaset {
 })
 export class DatasetService {
  
-  baseURL: string = "https://api.github.com/";
+  baseURL: string = "http://44.204.72.194/api/3/action";
   datasetsAr = []
  
   constructor(private http: HttpClient) {
@@ -63,7 +63,7 @@ export class DatasetService {
       method: "GET",
       // contentType:'application/json',
       dataType: 'jsonp',
-      url:'http://44.204.72.194/api/3/action/package_list',
+      url: this.baseURL +'/package_list',
       success: function (response){
         observer.next(response.result)
       },
@@ -78,7 +78,7 @@ export class DatasetService {
         method: "GET",
         // contentType:'application/json',
         dataType: 'jsonp',
-        url:`http://44.204.72.194/api/3/action/package_list`,
+        url:  this.baseURL +'/package_list',
         success: function (response){
           // console.log(response)
           response.result.forEach((el: any) =>{
@@ -105,7 +105,7 @@ export class DatasetService {
         method: "GET",
         // contentType:'application/json',
         dataType: 'jsonp',
-        url:`http://44.204.72.194/api/3/action/package_show?id=${id}`,
+        url:this.baseURL + `/package_show?id=${id}`,
         success: function (response){
           // console.log(response)
           observer.next(response.result)
@@ -115,13 +115,14 @@ export class DatasetService {
     });
     return aDataset
   }
+  
   getAllGroups(): any{
     const groups = new Observable((observer) => {
       $.ajax({
         method: "GET",
         // contentType:'application/json',
         dataType: 'jsonp',
-        url:`http://44.204.72.194/api/3/action/group_list`,
+        url:this.baseURL + `/group_list`,
         success: function (response){
           // console.log(response)
           observer.next(response.result)
@@ -130,6 +131,48 @@ export class DatasetService {
       
     });
     return groups
+  }
+  searchDataset(q: string, tag: string, group: string): any{
+    let url = this.baseURL + '/package_search?'
+    if(q != null ){
+      url += 'q=' +q
+      if(tag != null ){
+        url +='&fq='+tag
+      }
+    }else {
+      if(tag !=null){
+        url +='fq='+tag
+      }
+    }
+    
+    const aDataset = new Observable((observer) => {
+      var settings = {
+        "url": "http://44.204.72.194/api/3/action/package_search?q=ippf",
+        "method": "GET",
+        "timeout": 0,
+      };
+      
+      $.ajax(settings).done(function (response) {
+        console.log(response);
+        observer.next(response.result)
+      });
+      // $.ajax({
+      //   method: "GET",
+      //   // dataType: 'json',
+ 
+      //   data:{
+      //     q: 'ippf',
+      //   },
+      //   url:`http://44.204.72.194/api/3/action/package_search`,
+      //   success: function (response){
+      //     // console.log(response)
+      //     observer.next(response.result)
+      //   }
+      // })
+    });
+    return aDataset
+    // return this.http.get('http://44.204.72.194/api/3/action/package_search?q=ippf')
+   
   }
 
 }

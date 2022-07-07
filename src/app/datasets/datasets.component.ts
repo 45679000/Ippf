@@ -4,6 +4,7 @@ import { DatasetService } from '../services/datasets-services.service';
 import { Observable } from 'rxjs';
 import { data } from 'jquery';
 import { Group } from '../interfaces/groups'
+import { FormGroup, FormControl, Validators } from '@angular/forms'
 
 interface Data {
   help: string,
@@ -55,6 +56,15 @@ interface dataDaset {
   styleUrls: ['./datasets.component.css']
 })
 export class DatasetsComponent implements OnInit {
+  searchForm = new FormGroup({
+    q: new FormControl(),
+    tag: new FormControl(),
+    group: new FormControl()
+  })
+  filterForm = new FormGroup ({
+    tag: new FormControl(),
+    group: new FormControl()
+  })
   datasets:any = []
   someDataset:any =[]
   aalData:dataDaset[] = []
@@ -164,6 +174,15 @@ export class DatasetsComponent implements OnInit {
       }
     })
   });
+  onSubmit() {
+    console.log(this.searchForm.value.q == null)
+    // console.log(this.filterForm.value);
+    this.datasetService.searchDataset(this.searchForm.value.q, this.searchForm.value.tag, this.searchForm.value.group).subscribe((val: any) => {
+      console.log(val);
+      
+    })
+    
+  }
 
   
 }

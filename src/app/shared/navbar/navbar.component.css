@@ -15,7 +15,7 @@
     font-weight: bold;
 }
 .whiteText {
-    color: #fff !important;
+    color:  #28348d !important;
 }
 .blueText {
     color: #28348d !important;
@@ -26,4 +26,42 @@
 }
 .menu a:hover {
     color: #28348d;
+}
+.bread {
+    display: none;
+}
+.bread {
+    border: 2px solid #28348d;
+    border-radius: 5px;
+    padding: 5px;
+    width: 50px;
+}
+.crumb {
+    width: 100%;
+    border: 1px solid #28348d;
+    padding: 0px;
+    margin: 0px;
+    margin-bottom: 5px;
+}
+.crumb:last-child {
+    margin-bottom: 0px;
+}
+@media (max-width: 768px) {
+    .bread {
+        display: block;
+    }
+    .menu-holder {
+        position: relative;
+    }
+    .menu{
+        display: none;
+    }
+    .bread:hover .menu{
+        display: flex !important;
+        flex-direction: column !important;
+        position: absolute !important; 
+        top: 30px !important;
+        z-index: 1 !important;
+        gap: 1rem !important;
+    }
 }
