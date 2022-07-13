@@ -69,6 +69,8 @@ export class DatasetsComponent implements OnInit {
   someDataset:any =[]
   aalData:dataDaset[] = []
   xxy: any
+  searchCount: Number = 0
+  loader:boolean = true
   dataOfDataset: dataDaset = {
     author: '',
     author_email: '',
@@ -103,13 +105,18 @@ export class DatasetsComponent implements OnInit {
   groups:Group []= []
   groupsLength: boolean = false
   tags: any
-  constructor(private datasetService: DatasetService) { }
+  header: string = 'Available datasets'
+  
+  constructor(private datasetService: DatasetService) { 
+    
+  }
 
   ngOnInit(): void {
     this.datasetService.allDatasets.subscribe(
       value => { 
         this.datasets = value
         this.xxy = this.datasets.length
+        this.loader = false
       }
     );
     this.allTags.subscribe(val=>{
@@ -122,15 +129,12 @@ export class DatasetsComponent implements OnInit {
     this.datasetService.getAllData().
     subscribe((val: any)=>{
       this.aalData = [ ...this.aalData, val];
-      // this.aalData = val
-      // const dataetData: dataDaset = val;
-
-      console.log(this.aalData)
+      this.loader = false
     })
+    
   }
 
   allDatasets = new Observable<Data>((observer) => {
-    // console.log('Starting observable');
     $.ajax({
       method: "GET",
       // contentType:'application/json',
@@ -175,14 +179,30 @@ export class DatasetsComponent implements OnInit {
     })
   });
   onSubmit() {
+    this.loader = true
+    this.changeHeader()
     console.log(this.searchForm.value.q == null)
-    // console.log(this.filterForm.value);
+    console.log(this.searchForm);
     this.datasetService.searchDataset(this.searchForm.value.q, this.searchForm.value.tag, this.searchForm.value.group).subscribe((val: any) => {
-      console.log(val);
+      this.loader = false
+      this.xxy = val.count
+      this.aalData = val.results
       
     })
     
   }
+  changeHeader(){
+    this.header = "Available datasets"
+    if(this.searchForm.value.q !== null || this.searchForm.value.tag !== null || this.searchForm.value.group !== null){
+      this.header = "Search results - " 
+      // if (this.searchForm.value.q !=null ) {
+      //   this.header += " of " + this.searchForm.value.q
+      // }
+    }else {
+      this.header = "Available datasets"
+    }
+  }
+  
 
   
 }

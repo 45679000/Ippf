@@ -6,16 +6,16 @@
     </div>
     <ul class="menu" [ngClass]="breadCrumb?'display' : ''">
         <li class="menu-items">
-            <a href="home" class="list-item active h3" [ngClass]=" fontColorBlue? 'blueText' : 'whiteText'">Home</a>
+            <a [routerLink]="['/home']" class="list-item h3" [ngClass]=" fontColorBlue? 'blueText' : 'whiteText'" routerLinkActive="active">Home</a>
         </li>
         <li class="menu-items">
-            <a [routerLink]="['/datasets']" class="list-item h3" [ngClass]=" fontColorBlue? 'blueText' : 'whiteText'">Datasets</a>
+            <a [routerLink]="['/datasets']" class="list-item h3" [ngClass]=" fontColorBlue? 'blueText' : 'whiteText'" routerLinkActive="active">Datasets</a>
         </li>
         <li class="menu-items">
-            <a href="#" class="list-item h3" [ngClass]=" fontColorBlue? 'blueText' : 'whiteText'">WISHScope</a>
+            <a href="#" class="list-item h3" [ngClass]=" fontColorBlue? 'blueText' : 'whiteText'" routerLinkActive="active">WISHScope</a>
         </li>
         <li class="menu-items">
-            <a [routerLink]="['../datasets/dataset-request']" class="list-item h3" [ngClass]=" fontColorBlue? 'blueText' : 'whiteText'">Data Requests</a>
+            <a [routerLink]="['/datasets/dataset-request']" class="list-item h3" [ngClass]=" fontColorBlue? 'blueText' : 'whiteText'" routerLinkActive="active">Data Requests</a>
         </li>
     </ul>
 </div>

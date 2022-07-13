@@ -54,7 +54,7 @@ export class DatasetService {
  
   baseURL: string = "http://44.204.72.194/api/3/action";
   datasetsAr = []
- 
+  covidData = "http://44.204.72.194/dataset/234e5493-8490-40b9-9037-d7640b5dd8f5/resource/b655af33-c738-469f-bae5-4fca1f860cbe/download/test.csv";
   constructor(private http: HttpClient) {
   }
   allDatasets = new Observable<Data>((observer) => {
@@ -134,44 +134,38 @@ export class DatasetService {
   }
   searchDataset(q: string, tag: string, group: string): any{
     let url = this.baseURL + '/package_search?'
-    if(q != null ){
-      url += 'q=' +q
-      if(tag != null ){
-        url +='&fq='+tag
+    let data:Object
+    if(tag != null && q != null){
+      data = {
+        q: q,
+        fq: tag
       }
-    }else {
-      if(tag !=null){
-        url +='fq='+tag
+    }else if(tag != null){
+      data = {
+        fq: tag
+      }
+    }else if (q != null){
+      data = {
+        q: q
       }
     }
-    
     const aDataset = new Observable((observer) => {
-      var settings = {
-        "url": "http://44.204.72.194/api/3/action/package_search?q=ippf",
-        "method": "GET",
-        "timeout": 0,
-      };
-      
-      $.ajax(settings).done(function (response) {
-        console.log(response);
-        observer.next(response.result)
-      });
-      // $.ajax({
-      //   method: "GET",
-      //   // dataType: 'json',
- 
-      //   data:{
-      //     q: 'ippf',
-      //   },
-      //   url:`http://44.204.72.194/api/3/action/package_search`,
-      //   success: function (response){
-      //     // console.log(response)
-      //     observer.next(response.result)
-      //   }
-      // })
+      $.ajax({
+        method: "GET",
+        // dataType: 'text',
+        contentType: 'application/x-www-form-urlencoded',
+        // dataType: "jsonp",
+        data: data ? data : '',
+        url:`http://44.204.72.194/api/3/action/package_search`,
+        success: function (response){
+          // console.log(response)
+          observer.next(response.result)
+        }
+      })
     });
     return aDataset
     // return this.http.get('http://44.204.72.194/api/3/action/package_search?q=ippf')
+    // return this.http.get(this.covidData, {responseType: 'text'});
    
   }
 

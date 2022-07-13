@@ -1,66 +1,74 @@
-<div class="navbar-holder">
-    <app-top-header></app-top-header>
-</div>
-<div>
-    <div class="my-4">
-        <app-navbar></app-navbar>
+<div class="overall-wrap d-flex flex-column min-vh-100">
+    <div class="navbar-holder">
+        <app-top-header></app-top-header>
     </div>
-    <div class="menu-container">
-        <form action="" class="search" [formGroup]="searchForm" (ngSubmit)="onSubmit()">
-            <input type="text" name="" id="" placeholder="Search Datasets" class="topSearchInput col-9" formControlName="q">
-            <input type="submit" value="Search" class="btn col-2 searchBtnBig blueBtn" >
-        </form>
-    </div>
-    <div class="page-content">
-        <div class="sidebar">
-            <h2 class="my-3 mx-2">Refined Search</h2>
-            <div class="card">
-                <h3 class="h3">Search by country or tags</h3>
-                <form action="" [formGroup]="searchForm" ngSubmit="onSubmit()">
-                    <label for="">Tags</label>
-                    <select type="text" placeholder="Country Name" class="sidebarInput" formControlName="tag">
-                        <option *ngFor="let tag of tags" value="{{tag}}">{{ tag | titlecase}}</option>
-                    </select>
-                    <br>
-                    <label for="">Groups</label>
-                    <p class="text-danger">{{(groups)?'No groups set up' : 'shiit'}}</p>
-                    <select type="text" placeholder="Year" class="sidebarInput my-4" formControlName="group">
-                        <option *ngFor="let group of groups" value="{{group}}"value="{{group}}">Volvo</option>
-                        <!-- <p *ngIf="groups.length > 0; else elseBlock"></p> -->
-                        <!-- <ng-template #elseBlock>
-                            <option disabled value="">No groups</option></ng-template> -->
-                    </select>
-                    <div class="btn-group">
-                        <input type="submit" value="Search" class="btn btn-primary filterBtn" (click)="onSubmit()">
-                        <input type="button" value="Reset" class="btn btn-primary resetBtn">
-                    </div>
-                </form>
-            </div>
+    <div>
+        <div class="my-4">
+            <app-navbar></app-navbar>
         </div>
-        <div class="datasets px-5">
-            <div class="">
-                <h3 class="lead-heading-mid">Available Datasets</h3>
-                <p>Showing {{xxy}} Survey(s)</p>
-            </div>
-            <div class="mb-3 dataset-info" *ngFor="let data of aalData">
-                <div class="left-side col-1">
-                    <p *ngIf="data.state; else elseBlock"class="blue-text"><i class="fas fa-lock-open"></i></p>
-                    <ng-template #elseBlock><p class="pink-text"><i class="fas fa-lock"></i></p></ng-template>
+        <div class="menu-container">
+            <form action="" class="" [formGroup]="searchForm" (ngSubmit)="onSubmit()" (change)="onSubmit()">
+                <div class="col-12 row">
+                    <input type="text" name="" id="" placeholder="Search Datasets" class="topSearchInput col-9" formControlName="q">
+                    <input type="submit" value="Search" class="btn col-2 searchBtnBig blueBtn" >
                 </div>
-                <div class="right-side col-11">
-                    <h3 class="lead-heading-mid">{{data.title | titlecase}}</h3>
-                    <p class="lead-heading-small"><a [routerLink]="['../datasets/dataset-details',data.name]">View {{data.title | titlecase}} in detail</a></p>
-                    <p class="lead-heading-small-black">{{data.name}}</p>
-                    <p><span class="text-bold">Collection: </span>{{data.title | titlecase}}</p>
-                    <div class="meta-data">
-                        <p class="date-created">Created on: {{data.metadata_created}}</p>
-                        <p class="date-modified mx-4">Last Modified: {{data.metadata_modified}}</p>
-                        <!-- <p class="number-of-times-viewed">Views: 1021</p> -->
+                <div class="col-md-8 col-12 row mx-auto pt-2">
+                    <h2 class="">Refined Search</h2>
+                    <div class="col-md-4 col-6">
+                        <label for="">Tags</label>
+                        <select type="text" placeholder="Country Name" class="sidebarInput col-12" formControlName="tag">
+                            <option *ngFor="let tag of tags" value="{{tag}}">{{ tag | titlecase}}</option>
+                        </select>
+                    </div>
+                    <div class="col-md-4 col-6">
+                        <label for="">Groups</label>
+                        <select type="text" placeholder="Year" class="sidebarInput col-12" formControlName="group">
+                            <option *ngFor="let group of groups" value="{{group}}"value="{{group}}">Volvo</option>
+                            <!-- <p *ngIf="groups.length > 0; else elseBlock"></p> -->
+                            <!-- <ng-template #elseBlock>
+                                <option disabled value="">No groups</option></ng-template> -->
+                        </select>
+
                     </div>
                 </div>
-                
+            </form>
+        </div>
+        <div class="page-content">
+            
+            <div class="datasets px-5 container">
+                <div class="box" *ngIf="loader">
+                    <div class="contain">
+                        <span class="circle"></span>
+                        <span class="circle"></span>
+                        <span class="circle"></span>
+                        <span class="circle"></span>
+                    </div>
+                </div>
+                <div class="">
+                    <h3 class="lead-heading-mid">{{header}} <span class="text-capitalize text-danger">{{searchForm.value.q !== null ? searchForm.value.q :""}} {{searchForm.value.tag != null ? "with tag - " + searchForm.value.tag :""}} {{searchForm.value.group != null ? "with group - " + searchForm.value.group :""}}</span></h3>
+                    <p>Showing {{xxy}} Survey(s)</p>
+                </div>
+                <div class="text-center text-danger h6" *ngIf="xxy <= 0">No results for this search, try something else</div>
+                <div class="mb-3 dataset-info" *ngFor="let data of aalData">
+                    <div class="left-side col-1">
+                        <p *ngIf="data.state; else elseBlock"class="blue-text"><i class="fas fa-lock-open"></i></p>
+                        <ng-template #elseBlock><p class="pink-text"><i class="fas fa-lock"></i></p></ng-template>
+                    </div>
+                    <div class="right-side col-11">
+                        <h3 class="lead-heading-mid">{{data.title | titlecase}}</h3>
+                        <p class="lead-heading-small"><a [routerLink]="['../datasets/dataset-details',data.name]">View {{data.title | titlecase}} in detail</a></p>
+                        <p class="lead-heading-small-black">{{data.name}}</p>
+                        <p><span class="text-bold">Collection: </span>{{data.title | titlecase}}</p>
+                        <div class="meta-data">
+                            <p class="date-created">Created on: {{data.metadata_created}}</p>
+                            <p class="date-modified mx-4">Last Modified: {{data.metadata_modified}}</p>
+                            <!-- <p class="number-of-times-viewed">Views: 1021</p> -->
+                        </div>
+                    </div>
+                    
+                </div>
             </div>
         </div>
     </div>
+    <app-footer class="mt-auto"></app-footer>
 </div>
-<app-footer></app-footer>
