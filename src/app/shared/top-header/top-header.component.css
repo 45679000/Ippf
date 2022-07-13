@@ -33,9 +33,14 @@
     padding-top: 0.5rem;
     position: relative;
 }
-.user-management{
+.user-management {
+    display: none;
+}
+.salutation:hover .user-management {
     display: flex;
     flex-direction: column;
+}
+.user-management{
     padding: 1rem;
     /* border: 1px solid #333; */
     width: 180px;
@@ -53,7 +58,7 @@
     color: black;
     font-weight: 400;
 }
-.avatar button {
+.avatar .hov {
     background-color: none !important;
     border: none;
     background: none !important;

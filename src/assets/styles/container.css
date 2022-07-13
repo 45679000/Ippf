@@ -9,10 +9,12 @@
     --anotherblue: #00A7E1;
 }
 .section1 {
-    background-image: url('../../assets/images/maputo.jpg');
+    background: rgba(0, 0, 0, 0.7) url('../../assets/images/maput.jpg');
     background-repeat: no-repeat;
     background-position: center; 
     background-size: cover;
+    opacity: 0.9;
+    background-blend-mode: darken;
     /* filter: brightness(20%); */
     /* height: 80vh; */
 }
@@ -127,4 +129,69 @@
     .homeCards {
         margin: 20px auto !important;
     }
+}
+
+.box {
+  /* width: 300px;
+  height: 300px; */
+  /* background: #1a237e; */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  /* box-shadow: 4px 4px 20px rgba(0, 0, 0, 0.3); */
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  z-index: 1;
+}
+
+.contain {
+  height: 15px;
+  width: 105px;
+  display: flex;
+  /* position: relative; */
+  
+}
+.contain .circle {
+    width: 15px;
+    height: 15px;
+    border-radius: 50%;
+    background-color: #1a237e;
+    animation: move 500ms linear 0ms infinite;
+    margin-right: 30px;
+
+  }
+
+  .contain .circle:first-child {
+    position: absolute;
+    top: 0;
+    left: 0;
+    animation: grow 500ms linear 0ms infinite;
+  }
+
+  .contain .circle:last-child {
+    position: absolute;
+    top: 0;
+    right: 0;
+    margin-right: 0;
+    animation: grow 500ms linear 0s infinite reverse;
+  }
+@keyframes grow {
+  from {
+    transform: scale(0, 0);
+    opacity: 0;
+  }
+  to {
+    transform: scale(1, 1);
+    opacity: 1;
+  }
+}
+
+@keyframes move {
+  from {
+    transform: translateX(0px);
+  }
+  to {
+    transform: translateX(45px);
+  }
 }
