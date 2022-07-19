@@ -18,6 +18,7 @@
 }
 .btn-group button{
     margin-right: 1rem;
+    padding-left: 0 !important;
     color: black !important;
     letter-spacing: 1px;
     font-size: 25px;

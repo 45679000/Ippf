@@ -86,6 +86,7 @@ export class DatasetDetailsComponent implements OnInit {
   constructor(private route: ActivatedRoute, private datasetService: DatasetService) { }
 
   ngOnInit(): void {
+    // data of a dataset
     this.id = this.route.snapshot.paramMap.get('id')
     const data = this.datasetService.getADataset(this.id)
     data.subscribe((val: any) => {
@@ -94,7 +95,11 @@ export class DatasetDetailsComponent implements OnInit {
       val.resources.forEach((val: any) => {
         this.resourcesArray = [...this.resourcesArray, val]
       })
-      console.log(this.resourcesArray);
+    })
+    const csvData = this.datasetService.viewCsv('yee')
+    csvData.subscribe((val: any) => {
+      console.log(val);
+      
     })
   }
 

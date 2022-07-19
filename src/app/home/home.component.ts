@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { DatasetService } from '../services/datasets-services.service'
+import { Dataset } from '../interfaces/dataset'
+import { FormGroup, FormControl, Validators } from '@angular/forms'
 
 @Component({
   selector: 'app-home',
@@ -7,9 +10,23 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HomeComponent implements OnInit {
 
-  constructor() { }
+  searchResults: Dataset[] = []
+  searchForm = new FormGroup({
+    q: new FormControl(),
+    tag: new FormControl(),
+    group: new FormControl()
+  })
+
+  constructor(private datasetService: DatasetService) { }
 
   ngOnInit(): void {
   }
-
+  onSubmit() {
+    this.datasetService.searchDataset(this.searchForm.value.q, this.searchForm.value.tag , this.searchForm.value.group).subscribe((val: any) => {
+      this.searchResults = val.result.results
+      console.log(this.searchResults);
+      
+    })
+    
+  }
 }

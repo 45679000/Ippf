@@ -185,8 +185,8 @@ export class DatasetsComponent implements OnInit {
     console.log(this.searchForm);
     this.datasetService.searchDataset(this.searchForm.value.q, this.searchForm.value.tag, this.searchForm.value.group).subscribe((val: any) => {
       this.loader = false
-      this.xxy = val.count
-      this.aalData = val.results
+      this.xxy = val.result.count
+      this.aalData = val.result.results
       
     })
     

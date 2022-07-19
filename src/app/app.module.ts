@@ -6,7 +6,7 @@ import { AppComponent } from './app.component';
 import { AuthenticationModule } from "./authentication/authentication.module";
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { ReactiveFormsModule } from '@angular/forms';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HttpClientJsonpModule } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {MatIconModule} from '@angular/material/icon';
 import { AboutComponent } from './about/about.component';
@@ -16,6 +16,7 @@ import { MenuComponent } from './menu/menu.component';
 import { CommonModule } from '@angular/common';
 import { SharedModule } from './shared/shared.module';
 import { ErrorPageComponent } from './error-page/error-page.component';
+
 // import { AccountSettingsComponent } from './authentication/account-settings/account-settings.component';
 // import { PasswordChangeComponent } from './authentication/password-change/password-change.component';
 
@@ -38,6 +39,7 @@ import { ErrorPageComponent } from './error-page/error-page.component';
     NgbModule,
     ReactiveFormsModule,
     HttpClientModule,
+    HttpClientJsonpModule,
     BrowserAnimationsModule,
     MatIconModule,
     CommonModule,
