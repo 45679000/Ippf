@@ -17,15 +17,20 @@
             <!-- <div class="backImage col-7"></div> -->
         </div>
         <div class="formDivHolder mb-5">
-            <form action="" class="">
-                <div class="formgroup text-center">
+            <form action="" class="" [formGroup]="searchForm" (ngSubmit)="onSubmit()" (change)="onSubmit()">
+                <div class="formgroup text-center mb-4">
                     <p class="">What would you like to find?</p>
-                    <input type="text" class="homeSearch mb-4" placeholder="Search For Datasets"/>
-                    <!-- <input type="submit" value="Search" class="btn btn-primary searchBtn searchBtnMid blueBtn">                 -->
+                    <input type="text" class="homeSearch" placeholder="Search For Datasets" formControlName="q"/>
+                    <button class="search-Btn" (click)="onSubmit()" ><i class="fas fa-search"></i>
+                    </button>
+                    <div class="searchresults">
+                        <div class="result" *ngFor="let result of searchResults">{{result.title}}<a [routerLink]="['../datasets/dataset-details',result.name]" class="mx-2">View in detail</a></div>
+                        <!-- <div class="result">yees</div> -->
+                    </div>
                 </div>
             </form>
             <div class="learnMore">
-                <a href="">Learn More</a>
+                <a [routerLink]="['../datasets']">View More</a>
             </div>
         </div>
     </section>

@@ -1,8 +1,9 @@
+
 {
-    "/echo": {
-        "target": "http://44.204.72.194",
-        "secure": true,
-        "changeOrigin": true,
-        "logLevel": "debug"
+    "/api/*": {
+    "target": "http://44.204.72.194:80",
+    "secure": false,
+    "logLevel": "debug",
+    "changeOrigin": true
     }
 }

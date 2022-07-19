@@ -28,6 +28,24 @@
 .section-header {
     margin: 4rem auto !important;
 } */
+.search-Btn {
+    background: none !important;
+    border: none !important;
+    font-size: 2rem;
+    color: black;
+     /* position: absolute; */
+    margin-left: -3rem;
+}
+/* .searchresults {
+    margin: auto;
+    width: 500px;
+    text-align: left !important;
+    background-color: whitesmoke;
+    color: #333;
+} */
+/* .homeSearch {
+    position: relative;
+} */
 app-navbar {
     color: black !important;
 }

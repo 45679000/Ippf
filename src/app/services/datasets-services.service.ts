@@ -7,6 +7,7 @@ import * as $ from "jquery";
 import {} from '../interfaces/groups'
 
 import { Dataset } from '../interfaces/dataset';
+import { Callbacks } from 'jquery';
 interface Data {
   help: string,
   result: string[],
@@ -134,39 +135,35 @@ export class DatasetService {
   }
   searchDataset(q: string, tag: string, group: string): any{
     let url = this.baseURL + '/package_search?'
-    let data:Object
+    let data:string = ""
     if(tag != null && q != null){
-      data = {
-        q: q,
-        fq: tag
-      }
+      data = "q="+q +"fq="+tag
+        // q: q,
+        // fq: tag
     }else if(tag != null){
-      data = {
-        fq: tag
-      }
+      data = "fq="+tag
     }else if (q != null){
-      data = {
-        q: q
-      }
+      data = "q="+q
     }
-    const aDataset = new Observable((observer) => {
+    return this.http.jsonp(`http://44.204.72.194/api/3/action/package_search?${data}`, 'callback')
+   
+  }
+  viewCsv(csv_link: string): any{
+    const groups = new Observable((observer) => {
       $.ajax({
         method: "GET",
-        // dataType: 'text',
-        contentType: 'application/x-www-form-urlencoded',
-        // dataType: "jsonp",
-        data: data ? data : '',
-        url:`http://44.204.72.194/api/3/action/package_search`,
+        contentType:'text/csv',
+        // dataType: 'jsonp',
+        url: this.covidData,
         success: function (response){
           // console.log(response)
           observer.next(response.result)
         }
       })
+      
     });
-    return aDataset
-    // return this.http.get('http://44.204.72.194/api/3/action/package_search?q=ippf')
-    // return this.http.get(this.covidData, {responseType: 'text'});
-   
+    return groups
+    // return this.http.jsonp(this.covidData, 'text')
   }
 
 }

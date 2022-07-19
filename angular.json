@@ -73,10 +73,12 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
             "production": {
-              "browserTarget": "WishPortal:build:production"
+              "browserTarget": "WishPortal:build:production",
+              "proxyConfig": "src/proxy-prod.conf.js"
             },
             "development": {
-              "browserTarget": "WishPortal:build:development"
+              "browserTarget": "WishPortal:build:development",
+              "proxyConfig": "src/proxy.conf.js"
             }
           },
           "defaultConfiguration": "development"

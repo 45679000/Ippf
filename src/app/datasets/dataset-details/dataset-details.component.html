@@ -7,19 +7,14 @@
 <div class="container px-md-5 mt-5">
     <div class="dataset">
         <h2 class="lead-heading-mid">{{dataOfDataset.title}}</h2>
-        <p class="lead-heading-small">Angola, 2021-2022 <span class="mx-4">{{(dataOfDataset.title.length > 0) ? dataOfDataset.title : 'No title'}}</span></p>
-        <p class="lead-heading-small-black">National Bureau of Statistics</p>
+        <!-- <p class="lead-heading-small">Angola, 2021-2022 <span class="mx-4">{{(dataOfDataset.title.length > 0) ? dataOfDataset.title : 'No title'}}</span></p>
+        <p class="lead-heading-small-black">National Bureau of Statistics</p> -->
+        
         <div class="meta-data">
             <p class="date-created">Created on: <span class="h6 text-info">{{dataOfDataset.metadata_created | date:'mediumDate' }}</span></p>
             <p class="date-modified mx-4">Last Modified: <span class="h6 text-info">{{dataOfDataset.metadata_modified | date:'mediumDate' }}</span></p>
             <!-- <p class="number-of-times-viewed">Views: 1021</p> -->
             <!-- <p class="number-of-times-viewed mx-4">Downloads: 300</p> -->
-        </div>
-        <div class="meta-data" *ngFor="let item of resourcesArray">
-            <a href="{{item.url}}" class="blue-text"><i class="fas fa-file"></i>{{item.format}}</a>
-            <!-- <a href="" class="mx-3 blue-text"><i class="fas fa-download"></i>Metadata</a>
-            <a href="" class="blueBtn">CSV</a>
-            <a href="" class="mx-3 blueBtn">DTA</a> -->
         </div>
         <div class="dataset-content">
             <div class="btn-group mb-3">
@@ -82,14 +77,13 @@
                     <div class="data-description" id="data-description">
                         <div class="links col-12 col-sm-2">
                             <h2 class="lead-heading-small">Data files</h2>
-                            <a href="#">hh</a>
-                            <a href="#">hl</a>
-                            <a href="#">ch</a>
-                            <a href="#">wm</a>
+                            <div class="meta-data" *ngFor="let item of resourcesArray">
+                                <a href="{{item.url}}" class="blue-text"><i class="fas fa-download"></i>{{item.format}}</a>
+                            </div>
                         </div>
-                        <div class="description-data col-12 col-sm-10">
+                        <!-- <div class="description-data col-12 col-sm-10">
                             <p>This part basically gives a legend for the user to know what the different abbreviations used in the data mean (for eaample hh would mean data collected in a household, and hs data collected from a school, etc.)</p>
-                        </div>
+                        </div> -->
                     </div>
                 </div>
             </div>
