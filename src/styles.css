@@ -5,8 +5,15 @@
 @import './assets/styles/typography.css';
 @import './assets/styles/container.css';
 
+@font-face {
+    font-family: Frutiger;
+    src: url(assets/fonts/frutiger/FrutigerLTProRoman.otf) format("opentype");
+}
 html, body { height: 100%; }
-body { margin: 0; font-family: 'Frutiger LT'  !important; }
+body { 
+    margin: 0; 
+    font-family: 'Frutiger'  !important; 
+}
 *{
     padding: 0;
     margin: 0;

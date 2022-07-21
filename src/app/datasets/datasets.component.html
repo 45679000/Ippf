@@ -8,19 +8,23 @@
         </div>
         <div class="menu-container">
             <form action="" class="" [formGroup]="searchForm" (ngSubmit)="onSubmit()" (change)="onSubmit()">
-                <div class="col-12 row">
-                    <input type="text" name="" id="" placeholder="Search Datasets" class="topSearchInput col-9" formControlName="q">
-                    <input type="submit" value="Search" class="btn col-2 searchBtnBig blueBtn" >
+                <div class="col-12 form-search">
+                    <div class="col-10 pr-3">
+                        <input type="text" name="" id="" placeholder="Search Datasets" class="topSearchInput" formControlName="q">
+                    </div>
+                    <div class="col-2">
+                        <input type="submit" value="Search" class="btn col-12 searchBtnBig blueBtn" >
+                    </div>
                 </div>
-                <div class="col-md-8 col-12 row mx-auto pt-2">
-                    <h2 class="">Refined Search</h2>
-                    <div class="col-md-4 col-6">
+                <div class="row mx-auto">
+                    <p class="">* Refined Search</p>
+                    <div class="col-md-4 col-4">
                         <label for="">Tags</label>
                         <select type="text" placeholder="Country Name" class="sidebarInput col-12" formControlName="tag">
                             <option *ngFor="let tag of tags" value="{{tag}}">{{ tag | titlecase}}</option>
                         </select>
                     </div>
-                    <div class="col-md-4 col-6">
+                    <div class="col-md-4 col-4">
                         <label for="">Groups</label>
                         <select type="text" placeholder="Year" class="sidebarInput col-12" formControlName="group">
                             <option *ngFor="let group of groups" value="{{group}}"value="{{group}}">Volvo</option>
@@ -30,10 +34,14 @@
                         </select>
 
                     </div>
+                    <div class="col-md-4 col-4 mx-auto clear-btn">
+                        <button class="btn btn-primary blueBtn" (click)="clearTags()">Clear</button>
+
+                    </div>
                 </div>
             </form>
         </div>
-        <div class="page-content">
+        <div class="page-content mb-5">
             
             <div class="datasets px-5 container">
                 <div class="box" *ngIf="loader">
@@ -45,7 +53,7 @@
                     </div>
                 </div>
                 <div class="">
-                    <h3 class="lead-heading-mid">{{header}} <span class="text-capitalize text-danger">{{searchForm.value.q !== null ? searchForm.value.q :""}} {{searchForm.value.tag != null ? "with tag - " + searchForm.value.tag :""}} {{searchForm.value.group != null ? "with group - " + searchForm.value.group :""}}</span></h3>
+                    <h3 class="lead-heading-mid">{{header}} <span class="text-capitalize">{{searchForm.value.q !== null ? searchForm.value.q :""}} {{searchForm.value.tag != null ? "with tag - " + searchForm.value.tag :""}} {{searchForm.value.group != null ? "with group - " + searchForm.value.group :""}}</span></h3>
                     <p>Showing {{xxy}} Survey(s)</p>
                 </div>
                 <div class="text-center text-danger h6" *ngIf="xxy <= 0">No results for this search, try something else</div>

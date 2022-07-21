@@ -67,9 +67,17 @@
     display: flex;
     flex-direction: column;
 }
-.sidebarInput, .contryInput, .topSearchInput {
+.sidebarInput, .contryInput {
     padding: 0.5rem 1rem;
     font-size: 1.3rem;
+}
+.topSearchInput {
+    padding: 1rem 1rem !important;
+}
+.form-search {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
 }
 .sidebar .btn-group {
     display: flex;

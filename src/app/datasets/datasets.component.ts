@@ -202,7 +202,9 @@ export class DatasetsComponent implements OnInit {
       this.header = "Available datasets"
     }
   }
-  
+  clearTags(){
+    this.searchForm.reset();
+  }
 
   
 }

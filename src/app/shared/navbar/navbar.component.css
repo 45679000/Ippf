@@ -64,4 +64,15 @@
         z-index: 1 !important;
         gap: 1rem !important;
     }
+    .display {
+        display: flex !important;
+        flex-direction: column !important;
+        position: absolute !important; 
+        top: 30px !important;
+        z-index: 1 !important;
+        gap: 1rem !important;
+        background-color: aliceblue;
+        padding: 1rem;
+        border-radius: 25px;
+    }
 }

@@ -149,6 +149,7 @@ export class DatasetService {
    
   }
   viewCsv(csv_link: string): any{
+    var proxy = 'https://cors-anywhere.herokuapp.com/';
     const groups = new Observable((observer) => {
       $.ajax({
         method: "GET",
@@ -156,10 +157,15 @@ export class DatasetService {
         // dataType: 'jsonp',
         url: this.covidData,
         success: function (response){
-          // console.log(response)
+          console.log(response)
           observer.next(response.result)
         }
       })
+      // console.log('yees')
+      // $.get(this.covidData, function(data){
+      //   console.log('yees'+data)
+      //   observer.next(data)
+      // })
       
     });
     return groups
