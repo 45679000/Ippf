@@ -38,5 +38,9 @@ export class NavbarComponent implements OnInit {
       }
     })
   }
-
+  showMenu(){
+    this.breadCrumb = !this.breadCrumb
+    console.log(this.breadCrumb);
+    
+  }
 }

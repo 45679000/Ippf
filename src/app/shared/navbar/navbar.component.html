@@ -1,9 +1,9 @@
 <div class="menu-holder">
-    <div class="bread">
+    <button class="bread" (click)="showMenu()" >
         <div class="crumb"></div>
         <div class="crumb"></div>
         <div class="crumb"></div>
-    </div>
+    </button>
     <ul class="menu" [ngClass]="breadCrumb?'display' : ''">
         <li class="menu-items">
             <a [routerLink]="['/home']" class="list-item h3" [ngClass]=" fontColorBlue? 'blueText' : 'whiteText'" routerLinkActive="active">Home</a>
