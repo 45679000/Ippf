@@ -7,6 +7,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import {RouterModule} from '@angular/router';
 import { PasswordChangeComponent } from './password-change/password-change.component';
 import { AccountSettingsComponent } from './account-settings/account-settings.component';
+import { SharedModule } from '../shared/shared.module'
 
 @NgModule({
   declarations: [
@@ -18,7 +19,8 @@ import { AccountSettingsComponent } from './account-settings/account-settings.co
   imports: [
     CommonModule,
     ReactiveFormsModule,
-    RouterModule
+    RouterModule,
+    SharedModule 
   ],
   exports: [
     RegisterComponent,

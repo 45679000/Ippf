@@ -8,13 +8,15 @@ import { DatasetDetailsComponent } from './dataset-details/dataset-details.compo
 import { DataRequestComponent } from './data-request/data-request.component';
 // import { HeaderComponent } from '../home/header/header.component';
 import { SharedModule } from '../shared/shared.module';
+import { UploadDatasetComponent } from './upload-dataset/upload-dataset.component';
 
 
 @NgModule({
   declarations: [
     DatasetsComponent,
     DatasetDetailsComponent,
-    DataRequestComponent
+    DataRequestComponent,
+    UploadDatasetComponent
   ],
   imports: [
     CommonModule,
