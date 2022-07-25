@@ -19,7 +19,7 @@ footer {
 }
 .menu-links li {
     list-style: none;
-    margin-bottom: 8px !important;
+    /* margin-bottom: 4px !important; */
 }
 #emailInput{
     width: 100%;

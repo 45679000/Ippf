@@ -43,9 +43,11 @@
     font-size: 75px;
     line-height: 97px;
     color: var(--white);
+    
 }
 .headingBig span {
     font-weight: 800 !important;
+    letter-spacing: 2px !important;
 }
 .headingMid {
     font-style: normal !important;
