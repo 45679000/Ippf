@@ -19,14 +19,14 @@
                 <div class="row mx-auto">
                     <p class="">* Refined Search</p>
                     <div class="col-md-4 col-4">
-                        <label for="">Tags</label>
                         <select type="text" placeholder="Country Name" class="sidebarInput col-12" formControlName="tag">
+                            <option [ngValue]="null" [disabled]="true" class="suggestion">Tags</option>
                             <option *ngFor="let tag of tags" value="{{tag}}">{{ tag | titlecase}}</option>
                         </select>
                     </div>
                     <div class="col-md-4 col-4">
-                        <label for="">Groups</label>
                         <select type="text" placeholder="Year" class="sidebarInput col-12" formControlName="group">
+                            <option [ngValue]="null" [disabled]="true" class="suggestion">Group</option>
                             <option *ngFor="let group of groups" value="{{group}}"value="{{group}}">Volvo</option>
                             <!-- <p *ngIf="groups.length > 0; else elseBlock"></p> -->
                             <!-- <ng-template #elseBlock>

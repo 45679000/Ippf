@@ -1,0 +1,105 @@
+<div class="overall-wrap d-flex flex-column min-vh-100">
+    <div class="navbar-holder">
+        <app-top-header></app-top-header>
+    </div>
+    <div>
+        <div class="my-4">
+            <app-navbar></app-navbar>
+        </div>
+        
+        <div class="container-fluid py-3">
+            <h2 class="lead-heading text-center">Select the dataset to visualize it's data</h2>
+            <div class="col-12 top-form">
+                <form action="" [formGroup]="datasetForm">
+                    <div class="mb-3 col-md-6 col-12 mx-auto">
+                      <label for="" class="form-label">Choose the dataset</label>
+                      <div>
+                        <select class="sidebarInput col-12" name="" id="" formControlName="dataset" (change)="getListOfDatafiles()">
+                            <option *ngFor="let item of datasets | keyvalue" value="{{item.value}}">{{item.value}}</option>
+                            <!-- <option>Istanbul</option>
+                            <option>Jakarta</option> -->
+                          </select>
+                      </div>
+
+                      <label for="" class="form-label">Select the data file to visualize</label>
+                      <select class="sidebarInput col-12" name="" id="" formControlName="datafile">
+                        <option *ngFor="let item of dataFiles" value="{{item.url}}">{{item.name}}</option>
+                      </select>
+                    </div>
+                </form>
+            </div>
+            <div class="col-12 px-md-5 px-3 mx-auto">
+              <table class="table table-striped">
+                <thead>
+                <tr>
+                  <th *ngFor="let head of header" scope="col">{{head}}</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr *ngFor="let item of rawData">
+                  <td *ngFor="let i of returnRow(item)">
+                    {{i}}
+                  </td>
+                </tr>
+                </tbody>
+              </table>
+              
+              <div class="d-flex justify-content-between p-2">
+                <ngb-pagination [collectionSize]="collectionSize" [(page)]="page" [pageSize]="pageSize" (pageChange)="refreshCountries()">
+                </ngb-pagination>
+              
+                <select class="form-select" style="width: auto" [(ngModel)]="pageSize" (ngModelChange)="refreshCountries()">
+                  <option [ngValue]="2">2 items per page</option>
+                  <option [ngValue]="4">4 items per page</option>
+                  <option [ngValue]="6">6 items per page</option>
+                </select>
+              </div>
+            </div>
+            <div class="my-3">
+              <hr>
+            </div>
+            <div class="container">
+              <div class="py-2 text-center">
+                <h2 class="lead-heading">Data visualisation</h2>
+              </div>
+              <div class="card p-2 col-md-4 col-6 mb-4">
+                  <form action="" [formGroup]="seriesSetForm" (ngSubmit)="setOptions()">
+                    <div class="mb-2">
+                      <label for="">y axis Values</label>
+                      <select name="" id="" formControlName="xAxisValues" class="sidebarInput col-12" required>
+                          <option *ngFor="let item of header | keyvalue" value="{{item.key}}">{{item.value}}</option>
+                      </select>
+                    </div>  
+                    <div class="mb-2">
+                      <label for="">Select data to x-axis data </label>
+                      <select name="" id="" formControlName="data" class="form-control col-12"  multiple required>
+                          <option *ngFor="let item of header | keyvalue" value="{{item.key}}">{{item.value}}</option>
+                      </select>
+                      <span class="text-danger text-sm">*Hold control and select in the case of multiple</span>
+                    </div> 
+                    <div class="mb-2">
+                      <label for="">Graph type</label>
+                      <select name="" id="" formControlName="type" class="sidebarInput col-12" required>
+                          <option value="bar">Bar graph</option>
+                          <option value="line">Line Chart</option>
+                      </select>
+                    </div> 
+                    <div class="">
+                      <input type="submit" value="create chart" class="btn col-6 blueBtn" >
+                  </div>
+                  </form>
+              </div>
+              <div echarts [options]="chartOptions" class="demo-chart"></div>
+              <!-- <select class="form-control" name="" id="" [(ngModel)]="selectedCountry" (change)="onChangeCountry()">
+                  <option *ngFor="let c of countries$ | async" [value]="c.Slug">{{c.Country}}</option>
+              </select> -->
+            </div>
+        </div>
+        
+        <!-- <div *ngFor="let some of someData">
+            <p>{{some}}</p>
+        </div> -->
+        
+    </div>
+    <app-footer class="mt-auto"></app-footer>
+</div>

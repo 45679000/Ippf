@@ -16,7 +16,10 @@ import { MenuComponent } from './menu/menu.component';
 import { CommonModule } from '@angular/common';
 import { SharedModule } from './shared/shared.module';
 import { ErrorPageComponent } from './error-page/error-page.component';
-
+import { Ng2GoogleChartsModule } from 'ng2-google-charts';
+import * as echarts from 'echarts';
+import { NgxEchartsModule } from 'ngx-echarts';
+import { FormsModule } from '@angular/forms';
 // import { AccountSettingsComponent } from './authentication/account-settings/account-settings.component';
 // import { PasswordChangeComponent } from './authentication/password-change/password-change.component';
 
@@ -43,7 +46,13 @@ import { ErrorPageComponent } from './error-page/error-page.component';
     BrowserAnimationsModule,
     MatIconModule,
     CommonModule,
-    SharedModule
+    SharedModule,
+    Ng2GoogleChartsModule,
+    NgxEchartsModule.forRoot({
+      echarts
+    }),
+    FormsModule
+
   ],
   exports: [
     MenuComponent
