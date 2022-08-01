@@ -93,7 +93,6 @@ export class WishscopeComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.getCsv()
     this.getListOfDatasets()
   }
   returnRow(item:any){
@@ -112,11 +111,11 @@ export class WishscopeComponent implements OnInit {
     })
   }
   getCsv(){
-    this.appService.getAnotherCsv('').subscribe((dat:any) => {
+    this.appService.getAnotherCsv(this.datasetForm.value.datafile).subscribe((dat:any) => {
       console.log(dat);
       
     })
-    this.appService.viewCsv('').subscribe((data: any) => {
+    this.appService.viewCsv(this.datasetForm.value.datafile).subscribe((data: any) => {
       const list = data.split('\n')
       list.forEach( (e: any) => {
         this.someData.push(e)
@@ -144,15 +143,18 @@ export class WishscopeComponent implements OnInit {
   //     this.setOptions();
   //   });
   // }
+  setCsvFile(){
+    this.getCsv()
+  }
   setSeries(){
     // formdata multiple indexes
     this.seriesData.push({name: this.header[0], type: 'bar', data: this.dataArray[0]})
   }
   setOptions() {
+    this.seriesData = []
     let xAxis = this.dataArray[this.seriesSetForm.value.xAxisValues]
     let data = this.seriesSetForm.value.data
     let type = this.seriesSetForm.value.type
-    console.log(this.seriesSetForm);
     
     this.seriesSetForm.value.data.forEach((e:any) => {
       // this.legend = []
@@ -183,6 +185,7 @@ export class WishscopeComponent implements OnInit {
       },
       series: this.seriesData
     };
+    console.log(this.chartOptions)
   }
   refreshCountries() {
     this.someData.slice((this.page - 1) * this.pageSize, (this.page - 1) * this.pageSize + this.pageSize).forEach((e: any) => {

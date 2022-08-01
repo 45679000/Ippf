@@ -16,6 +16,7 @@
                 <small *ngIf="email.errors?.pattern" class="text-danger">Please provide a valid email address</small>
                 <br>
                 <small *ngIf="password.errors?.required" class="text-danger">Password is required</small>
+                <small class="text-danger">{{error}}</small>
             </div>
             <div class="form-group">
                 <label for="email">Email Address</label>

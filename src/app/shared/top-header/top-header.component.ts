@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { use } from 'echarts';
 import { AuthServiceService } from '../../auth-service.service'
+import { Token } from '../../interfaces/Token'
 
 @Component({
   selector: 'app-top-header',
@@ -11,17 +13,28 @@ export class TopHeaderComponent implements OnInit {
 
   constructor(private route: Router, private authService: AuthServiceService) { }
   isSignedIn: boolean = false ; // hidden by default
+  salutation: string = 'Hi'
+  user:Token = {
+    username: '',
+    realm: '',
+    nonce: '',
+    role: '',
+    authtype: '',
+    exp: 0,
+    rights: []
+  }
 
   takeMeHome(){
     this.route.navigate(['/']);
 
   }
   ngOnInit(): void {
-    this.isSignedIn = this.authService.isLoggedIn()
+    this.isSignedIn = this.authService.isAuthenticated()
+    
+    this.user = this.authService.getUser()
   }
   signOut() {
-    localStorage.removeItem('token')
-    this.route.navigate(['/login']);
+    this.authService.logout()
 
   }
 }

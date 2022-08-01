@@ -191,7 +191,9 @@ export class DatasetService {
       // })
       // return this.http.get(`https://demo.ckan.org/dataset/c322307a-b871-44fe-a602-32ee8437ff04/resource/b53c9e72-6b59-4cda-8c0c-7d6a51dad12a/download/sample.csv`)
       var settings = {
-        "url": "https://demo.ckan.org/dataset/c322307a-b871-44fe-a602-32ee8437ff04/resource/9ce6650b-6ff0-4a52-9b10-09cfc29bbd7e/download/co2-mm-mlo_csv.csv",
+        // "url": "https://demo.ckan.org/dataset/c322307a-b871-44fe-a602-32ee8437ff04/resource/9ce6650b-6ff0-4a52-9b10-09cfc29bbd7e/download/co2-mm-mlo_csv.csv",
+        // "url": "https://demo.ckan.org/dataset/c322307a-b871-44fe-a602-32ee8437ff04/resource/b53c9e72-6b59-4cda-8c0c-7d6a51dad12a/download/sample.csv",
+        "url": csv_link,
         "method": "GET",
         "timeout": 0,
       };

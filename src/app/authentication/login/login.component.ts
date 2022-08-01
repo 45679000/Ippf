@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
  import { FormGroup, FormControl, Validators ,FormBuilder} from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
  import { AuthServiceService } from '../../auth-service.service';
+ import { Router } from '@angular/router';
 
 
 
@@ -15,7 +16,9 @@ export class LoginComponent implements OnInit {
   loginForm: any;
   accountCreated = this.auth.accountCreated
   username = this.auth.username;
-  constructor(private fb: FormBuilder, private auth: AuthServiceService) {}
+  error: string = ''
+  success: string = ''
+  constructor(private fb: FormBuilder, private auth: AuthServiceService, private route: Router) {}
 
   // contactForm = new FormGroup({
   //   firstname: new FormControl(),
@@ -27,18 +30,24 @@ export class LoginComponent implements OnInit {
   // })
   ngOnInit(): void {
     this.loginForm = this.fb.group({
-      email: ['',  [Validators.required, Validators.email,Validators.pattern("^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$")]],
+      email: ['',  [Validators.required, ]],
       password: ['',  [Validators.required]],
       remember: [true]
     });
   }
   login() {
     if(this.loginForm.valid){
-        this.auth.login(this.loginForm.value.email, this.loginForm.value.password, this.loginForm.value.remember)
-        
+        this.auth.login(this.loginForm.value.email, this.loginForm.value.password, this.loginForm.value.remember).subscribe((token: any) => {
+          console.log(token);
+          
+          if(token.status == false){
+            this.error = token.error.message
+          }
+          
+          this.route.navigate(['/']);
+        })
     }
     
-    // localStorage.setItem('token', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c')
   }
   get email(){
     return this.loginForm.get('email')
