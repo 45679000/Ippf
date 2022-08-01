@@ -9,21 +9,33 @@ import { DataRequestComponent } from './data-request/data-request.component';
 // import { HeaderComponent } from '../home/header/header.component';
 import { SharedModule } from '../shared/shared.module';
 import { UploadDatasetComponent } from './upload-dataset/upload-dataset.component';
-
+import { WishscopeComponent } from './wishscope/wishscope.component';
+import * as echarts from 'echarts';
+import { NgxEchartsModule } from 'ngx-echarts';
+import { FormsModule } from '@angular/forms';
+import {NgbPaginationModule, NgbAlertModule} from '@ng-bootstrap/ng-bootstrap';
 
 @NgModule({
   declarations: [
     DatasetsComponent,
     DatasetDetailsComponent,
     DataRequestComponent,
-    UploadDatasetComponent
+    UploadDatasetComponent,
+    WishscopeComponent
   ],
   imports: [
     CommonModule,
     DatasetsRoutingModule,
     NgbModule,
     SharedModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    NgxEchartsModule.forRoot({
+      echarts
+    }),
+    FormsModule,
+    NgbPaginationModule, 
+    NgbAlertModule
+
   ]
 })
 export class DatasetsModule { }

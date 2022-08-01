@@ -1,21 +1,31 @@
 import { Injectable } from '@angular/core';
-import { User } from './user';
-import { newUser } from './newUser';
 import { Observable, throwError } from 'rxjs';
 import { catchError, map } from 'rxjs/operators';
+import { JwtHelperService } from '@auth0/angular-jwt';
+import * as moment from 'moment';
 import {
   HttpClient,
   HttpHeaders,
   HttpErrorResponse,
 } from '@angular/common/http';
 import { Router } from '@angular/router';
+import * as $ from "jquery";
+import { Token } from './interfaces/Token'
+
+const jwt = new JwtHelperService();
+class DecodedToken {
+  exp: number = 0;
+  username: string = '';
+}
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthServiceService {
-
-  constructor( private route: Router, private http: HttpClient) { }
+  private decodedToken: any;
+  constructor( private route: Router, private http: HttpClient) {
+    this.decodedToken = localStorage.getItem('auth_meta') || null;
+   }
   footerDisp: boolean= false;
   headerDisp: boolean = false;
   accountCreated: boolean = false;
@@ -25,14 +35,45 @@ export class AuthServiceService {
   }
   headers = new HttpHeaders().set('Content-Type', 'application/json');
   login(email: string, password:string, remember: boolean){
+    const token = new Observable((observer) => {
+      $.ajax({
+        method: "POST",
+        // contentType:'application/json',
+        // dataType: 'json',
+        // data: {
+        //   username: 'admin',
+        //   password: 'AndyDCG*&9'
+        // },
+        data: {
+          username: email,
+          password: password
+        },
+        url:`https://privacyidea.netknights.it/dariangroup/auth`,
+        success: function (response){
+          console.log(response)
+          // this.saveToken(response.result.value.token)
+          this.decodedToken = jwt.decodeToken(response.result.value.token);
+          localStorage.setItem('auth_tkn', response.result.value.token);
+          localStorage.setItem('auth_meta', JSON.stringify(this.decodedToken));
+          observer.next(response)
+          // this.route.navigate(['/']);
+          // observer.next(response.status)
+        },
+        error: function (error){
+          // console.log(error)
+          observer.next(error.responseJSON.result)
+        }
+      });
+    });
+    return token
+  }
+  saveToken(token: any): Observable<any>{
+    console.log('yeah');
     
-    // this.http.post<any>('http://localhost/bookPos/api/booksApi.php', JSON.stringify({email: email, password: password, remember: remember})).subscribe((res: any) =>{
-      // console.log(res);
-      
-    // })
-    localStorage.setItem('token', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c')
-    this.route.navigate(['/']);
-
+    this.decodedToken = jwt.decodeToken(token);
+    localStorage.setItem('auth_tkn', token);
+    localStorage.setItem('auth_meta', JSON.stringify(this.decodedToken));
+    return token;
   }
   createNewUser(name: string, email: string, country: string, accountType: string, password: string): Observable<any>{
     this.accountCreated = true
@@ -48,24 +89,45 @@ export class AuthServiceService {
     return this.http.post('http://localhost:3000/users', body, {'headers':headers, observe: 'response'})
     // this.route.navigate(['login'])
   }
-  // login(){
-  //   return this.http
-  //     .post<any>(`${this.endpoint}/signin`, user)
-  //     .subscribe((res: any) => {
-  //       localStorage.setItem('access_token', res.token);
-  //       this.getUserProfile(res._id).subscribe((res) => {
-  //         this.currentUser = res;
-  //         this.router.navigate(['user-profile/' + res.msg._id]);
-  //       });
-  //     });
-  // }
-  // getUserProfile(id: any): Observable<any> {
-  //   let api = `${this.endpoint}/user-profile/${id}`;
-  //   return this.http.get(api, { headers: this.headers }).pipe(
-  //     map((res) => {
-  //       return res || {};
-  //     }),
-  //     catchError(this.handleError)
-  //   );
-  // }
+  signup(){
+    let data = {
+        username: 'Korir',
+        givenname: 'kk',
+        surname: 'ian',
+        email: 'kkip762@gmail.com',
+        password: 'password'
+      }
+    $.ajax({
+      method: "POST",
+      data: data,
+      url:`https://privacyidea.netknights.it/dariangroup/register`,
+      success: function (response){
+        console.log(response)
+      },
+      error: function (error){
+        console.log(error)
+        // observer.next(error.responseJSON.result)
+      }
+    });
+  }
+  logout() {
+    localStorage.removeItem('auth_tkn');
+    localStorage.removeItem('auth_meta');
+
+    this.decodedToken = null;
+    this.route.navigate(['/login'])
+  }
+  public isAuthenticated(): any {
+    console.log(localStorage.getItem('auth_meta'));
+    if(localStorage.getItem('auth_meta') != null){
+      this.decodedToken = localStorage.getItem('auth_meta') 
+      
+      return moment().isBefore(moment.unix(JSON.parse(this.decodedToken).exp));
+    }else {
+      return false
+    }
+  }
+  getUser(): Token {
+    return JSON.parse(this.decodedToken);
+  }
 }

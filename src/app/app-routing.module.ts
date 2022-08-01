@@ -12,6 +12,7 @@ import { ResourceManagerHomeComponent } from './resorce-portal/resource-manager-
 import { ResourceDetailsComponent } from './resorce-portal/resource-details/resource-details.component';
 import { ResourceManageOneComponent } from './resorce-portal/resource-manage-one/resource-manage-one.component';
 import { ResourceContentComponent } from './resorce-portal/resource-content/resource-content.component';
+import { WishscopeComponent } from './datasets/wishscope/wishscope.component';
 
 const routes: Routes = [
   {
@@ -85,6 +86,11 @@ const routes: Routes = [
 {
   path: 'resource/content', 
   component: ResourceContentComponent,
+  canActivate: [AuthGuard] 
+},
+{
+  path: 'wishscope', 
+  component: WishscopeComponent,
   canActivate: [AuthGuard] 
 },
 ];
