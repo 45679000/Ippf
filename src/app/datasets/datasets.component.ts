@@ -139,7 +139,7 @@ export class DatasetsComponent implements OnInit {
       method: "GET",
       // contentType:'application/json',
       dataType: 'jsonp',
-      url:'http://44.204.72.194/api/3/action/package_list',
+      url:'http://3.236.19.31/api/3/action/package_list',
       success: function (response){
         observer.next(response.result)
       },
@@ -154,7 +154,7 @@ export class DatasetsComponent implements OnInit {
       method: "GET",
       // contentType:'application/json',
       dataType: 'jsonp',
-      url:'http://44.204.72.194/api/3/action/tag_list',
+      url:'http://3.236.19.31/api/3/action/tag_list',
       success: function (response){
         // console.log(response)
         observer.next(response.result)
@@ -171,7 +171,7 @@ export class DatasetsComponent implements OnInit {
       method: "GET",
       // contentType:'application/json',
       dataType: 'jsonp',
-      url:'http://44.204.72.194/api/3/action/package_show?id=ippf',
+      url:'http://3.236.19.31/api/3/action/package_show?id=ippf',
       success: function (response){
         console.log(response)
         observer.next(response.result)

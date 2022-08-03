@@ -1,39 +1,62 @@
+<div class="navbar-holder">
+    <app-top-header></app-top-header>
+</div>
 <div class="g-container row">
     <div class="split-container col-md-6">
         <!-- <img src="assets/images/surface.jpg" class="banner" width="400" height="300"/> -->
     </div>
-    <div class="split-container col-12">
+    <div class="split-container col-12" [class.load] = "load">
         <div class="logos col-12">
             <img src="assets/images/wish-header.png" class="float-left" width="500" height="100" alt="">
             <img src="assets/images/mainlogo.png" class="float-left" alt="" width="500">
         </div>
         <h4 class="text-center my-4 font-weight-bold divHeading">Register</h4>
+        <div class="spin" *ngIf="load">
+            <div class="lds-roller">
+                <div></div>
+                <div></div>
+                <div></div>
+                <div></div>
+                <div></div>
+                <div></div>
+                <div></div>
+                <div></div>
+            </div>
+        </div>
+        <div *ngIf="success" class="col-12 col-md-6 p-3 text-success mx-auto text-center">
+            <p>The user was successfully registered. Check your email to complete registration</p>
+        </div>
+        <div *ngIf="failed" class="col-12 col-md-6 p-3 text-danger mx-auto text-center">
+            <p>The user was not successfully registered. try again</p>
+        </div>
+        <div *ngIf="warn.length > 1" class="col-12 col-md-6 p-3 text-danger mx-auto text-center">
+            <p>{{warn}}</p>
+        </div>
         <form [formGroup]="registrationForm" (ngSubmit)="register()">
             
             <div class="form-group">
-                <label for="name">Full Name</label>
-                <input type="text" class="form-control form-control-lg" formControlName="name" [class.is-invalid] = "registrationForm.get('name').invalid && registrationForm.get('name').touched">
+                <label for="name">Username</label>
+                <input type="text" class="form-control form-control-lg" formControlName="username"  [class.is-invalid] = "registrationForm.controls.username.status == 'INVALID' && registrationForm.controls.username.touched == true">
             </div>
             <div class="form-group">
-                <label for="country">Country</label>
-                <select name="" id="country" class="form-select form-select-lg" formControlName="country" [class.is-invalid] = "registrationForm.get('country').invalid && registrationForm.get('country').touched">
-                <option value="Kenya">Kenya</option>
-                <option value="Malawi">Malawi</option>
-                <option value="Rwanda">Rwanda</option>
-                <option value="Congo">Congo</option>
-                </select>
+                <label for="name">First Name</label>
+                <input type="text" class="form-control form-control-lg" formControlName="givenname" [class.is-invalid] = "registrationForm.controls.givenname.status == 'INVALID' && registrationForm.controls.givenname.touched == true">
+            </div>
+            <div class="form-group">
+                <label for="name">Last Name</label>
+                <input type="text" class="form-control form-control-lg" formControlName="surname" [class.is-invalid] = "registrationForm.controls.surname.status == 'INVALID' && registrationForm.controls.surname.touched == true" >
             </div>
             <div class="form-group">
                 <label for="email">Email</label>
-                <input type="text" name="email" class="form-control form-control-lg" formControlName="email" [class.is-invalid] = "registrationForm.get('email').invalid && registrationForm.get('email').touched">
+                <input type="text" name="email" class="form-control form-control-lg" formControlName="email" [class.is-invalid] = "registrationForm.controls.email.status == 'INVALID' && registrationForm.controls.email.touched == true">
             </div>
             <div class="form-group">
                 <label for="password">Password</label>
-                <input type="password" class="form-control form-control-lg" formControlName="password" [class.is-invalid] = "registrationForm.get('password').invalid && registrationForm.get('password').touched">
+                <input type="password" class="form-control form-control-lg" formControlName="password" [class.is-invalid] = "registrationForm.controls.password.status == 'INVALID' && registrationForm.controls.password.touched == true" >
             </div>
             <div class="form-group">
                 <label for="Confirm password">Confirm Password</label>
-                <input type="password" class="form-control form-control-lg" formControlName="passwordConfirmation" [class.is-invalid] = "registrationForm.get('passwordConfirmation').invalid && registrationForm.get('passwordConfirmation').touched">
+                <input type="password" class="form-control form-control-lg" formControlName="passwordConfirmation" [class.is-invalid] = "registrationForm.controls.passwordConfirmation.status == 'INVALID' && registrationForm.controls.passwordConfirmation.touched == true" >
             </div>
             <div class="text-center">
                 <input type="submit" class="btn btn-primary mb-2 registerBtn" id="" value="Register">
@@ -42,3 +65,4 @@
         </form>
     </div>
 </div>
+<app-footer></app-footer>

@@ -4,53 +4,11 @@ import { DatasetService } from '../../services/datasets-services.service';
 import { FormGroup, FormControl, Validators ,FormBuilder} from '@angular/forms';
 import {NgbPagination} from '@ng-bootstrap/ng-bootstrap';
 import { Dataset } from '../../interfaces/dataset'
+import { Resource } from '../../interfaces/resource'
+import { Series } from '../../interfaces/Series'
+import { CountryStatus } from '../../interfaces/CountryStatus'
 
 
-interface CountryStatus{
-  Slug:any,
-  Date: string,
-  Confirmed: number,
-  Recovered: number,
-  Deaths: number
-}
-interface Series {
-  name: string;
-  type: string;
-  data: any[];
-}
-interface Resource {
-  cache_last_updated: string
-  cache_url: string
-  created: string
-  datastore_active: boolean
-  datastore_contains_all_records_of_source_file: string
-  description: string
-  format: string
-  hash: string
-  id: string
-  last_modified: string
-  metadata_modified: string
-  mimetype: string
-  mimetype_inner: string
-  name: string
-  package_id:string
-  position: number
-  resource_type: string
-  size: number
-  state: "active"
-  url: string
-  url_type: string
-}
-interface Country {
-  id?: number;
-  name: string;
-  flag: string;
-  area: number;
-  population: number;
-}
-interface RowItem {
-  i: string[]
-}
 interface Item {
   item: string[]
 }
@@ -86,14 +44,16 @@ export class WishscopeComponent implements OnInit {
   })
   page = 1;
   pageSize = 10;
-  collectionSize:number = this.dataArray.length;
-  countries: Country[] = [];
+  collectionSize:number = 0;
+  // countries: Country[] = [];
   constructor(private appService: DatasetService) { 
     this.refreshCountries()
+    // console.log(this.collectionSize)
   }
 
   ngOnInit(): void {
     this.getListOfDatasets()
+    // this.getCsv()
   }
   returnRow(item:any){
     return item
@@ -132,6 +92,7 @@ export class WishscopeComponent implements OnInit {
         })
         this.dataArray.push(name)
       }
+      this.collectionSize = this.someData.length;
       this.refreshCountries()
       
       // this.setOptions();
@@ -188,40 +149,11 @@ export class WishscopeComponent implements OnInit {
     console.log(this.chartOptions)
   }
   refreshCountries() {
+    this.rawData = []
     this.someData.slice((this.page - 1) * this.pageSize, (this.page - 1) * this.pageSize + this.pageSize).forEach((e: any) => {
       this.rawData.push(e.split(','))
     })
+    console.log(this.page);
+    console.log(this.pageSize);
   }
-  // this.countryCasesChartOptions = {
-  //   title: {
-  //     text: 'COVID-19 STATUS CHART',
-  //   },
-  //   legend: {
-  //     data: ['Confirmed', 'Recovered', 'Deaths']
-  //   },
-  //   tooltip: {
-  //   },
-  //   xAxis: {
-  //     data: this.cases.map(c => new Date(c.Date).toLocaleDateString()),
-  //   },
-  //   yAxis: {
-  //     type: 'value'
-  //   },
-  //   series: [{
-  //     name: 'Confirmed',
-  //     type: 'line',
-  //     data: this.cases.map(c => c.Confirmed),
-  //   },
-  //   {
-  //     name: 'Recovered',
-  //     type: 'line',
-  //     data: this.cases.map(c => c.Recovered),
-  //   },
-  //   {
-  //     name: 'Deaths',
-  //     type: 'line',
-  //     data: this.cases.map(c => c.Deaths),
-  //   },
-  //   ]
-  // };
 }

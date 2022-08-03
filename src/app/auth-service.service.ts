@@ -61,7 +61,7 @@ export class AuthServiceService {
         },
         error: function (error){
           // console.log(error)
-          observer.next(error.responseJSON.result)
+          observer.next(error.status)
         }
       });
     });
@@ -89,26 +89,30 @@ export class AuthServiceService {
     return this.http.post('http://localhost:3000/users', body, {'headers':headers, observe: 'response'})
     // this.route.navigate(['login'])
   }
-  signup(){
+  signup(username:string, givenname: string,surname:string, email:string, password:string){
     let data = {
-        username: 'Korir',
-        givenname: 'kk',
-        surname: 'ian',
-        email: 'kkip762@gmail.com',
-        password: 'password'
+        username: username,
+        givenname: givenname,
+        surname: surname,
+        email: email,
+        password: password
       }
-    $.ajax({
-      method: "POST",
-      data: data,
-      url:`https://privacyidea.netknights.it/dariangroup/register`,
-      success: function (response){
-        console.log(response)
-      },
-      error: function (error){
-        console.log(error)
-        // observer.next(error.responseJSON.result)
-      }
+    const newUSer = new Observable((observer) => {
+      $.ajax({
+        method: "POST",
+        data: data,
+        url:`https://privacyidea.netknights.it/dariangroup/register`,
+        success: function (response){
+          console.log(response)
+          observer.next(response)
+        },
+        error: function (error){
+          console.log(error)
+          observer.next(error.status)
+        }
+      });
     });
+    return newUSer
   }
   logout() {
     localStorage.removeItem('auth_tkn');
@@ -118,7 +122,7 @@ export class AuthServiceService {
     this.route.navigate(['/login'])
   }
   public isAuthenticated(): any {
-    console.log(localStorage.getItem('auth_meta'));
+    // console.log(localStorage.getItem('auth_meta'));
     if(localStorage.getItem('auth_meta') != null){
       this.decodedToken = localStorage.getItem('auth_meta') 
       

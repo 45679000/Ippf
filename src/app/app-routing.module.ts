@@ -38,11 +38,13 @@ const routes: Routes = [
   },
   {
     path: 'change-password',
-    component: PasswordChangeComponent
+    component: PasswordChangeComponent,
+    canActivate: [AuthGuard] 
   },
   { 
     path: 'account-settings',
-    component: AccountSettingsComponent
+    component: AccountSettingsComponent,
+    canActivate: [AuthGuard] 
   },
   {
     path: 'login', 
