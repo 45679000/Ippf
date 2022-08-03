@@ -8,7 +8,7 @@
         </div>
         <div class="menu-container">
             <form action="" class="" [formGroup]="searchForm" (ngSubmit)="onSubmit()" (change)="onSubmit()">
-                <div class="col-12 form-search">
+                <div class="col-12 col-md-8 mx-auto form-search">
                     <div class="col-10 pr-3">
                         <input type="text" name="" id="" placeholder="Search Datasets" class="topSearchInput" formControlName="q">
                     </div>
@@ -16,7 +16,7 @@
                         <input type="submit" value="Search" class="btn col-12 searchBtnBig blueBtn" >
                     </div>
                 </div>
-                <div class="row mx-auto">
+                <div class="col-12 col-md-8 row mx-auto">
                     <p class="">* Refined Search</p>
                     <div class="col-md-4 col-4">
                         <select type="text" placeholder="Country Name" class="sidebarInput col-12" formControlName="tag">
@@ -42,7 +42,7 @@
             </form>
         </div>
         <div class="page-content mb-5">
-            
+
             <div class="datasets px-5 container">
                 <div class="box" *ngIf="loader">
                     <div class="contain">
@@ -52,9 +52,15 @@
                         <span class="circle"></span>
                     </div>
                 </div>
-                <div class="">
-                    <h3 class="lead-heading-mid">{{header}} <span class="text-capitalize">{{searchForm.value.q !== null ? searchForm.value.q :""}} {{searchForm.value.tag != null ? "with tag - " + searchForm.value.tag :""}} {{searchForm.value.group != null ? "with group - " + searchForm.value.group :""}}</span></h3>
-                    <p>Showing {{xxy}} Survey(s)</p>
+                <div class="row col-12">
+
+                    <div class="col-8">
+                        <h3 class="lead-heading-mid">{{header}} <span class="text-capitalize">{{searchForm.value.q !== null ? searchForm.value.q :""}} {{searchForm.value.tag != null ? "with tag - " + searchForm.value.tag :""}} {{searchForm.value.group != null ? "with group - " + searchForm.value.group :""}}</span></h3>
+                        <p>Showing {{xxy}} Survey(s)</p>
+                    </div>
+                    <div class="col-4">
+                        <a [routerLink]="['/datasets/dataset-upload']" class="btn searchBtnBig"><span class="mx-3"><i class="fas fa-plus"></i></span>Upload new dataset</a>
+                    </div>
                 </div>
                 <div class="text-center text-danger h6" *ngIf="xxy <= 0">No results for this search, try something else</div>
                 <div class="mb-3 dataset-info" *ngFor="let data of aalData">

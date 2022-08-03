@@ -2,12 +2,24 @@
     <!-- <div class="split-container col-md-6">
         <img src="assets/images/surface.jpg" class="banner" width="400"/>
     </div> -->
-    <div class="split-container col-md-6 ">
+    <div class="split-container col-md-6" [class.load] = "load">
         <div class="logos col-12">
             <img src="assets/images/wish-header.png" class="float-left" width="500" height="100" alt="">
             <img src="assets/images/mainlogo.png" class="float-left" alt="" width="500">
         </div>
         <h4 class="text-center my-4 font-weight-bold divHeading">Login</h4>
+        <div class="spin" *ngIf="load">
+            <div class="lds-roller">
+                <div></div>
+                <div></div>
+                <div></div>
+                <div></div>
+                <div></div>
+                <div></div>
+                <div></div>
+                <div></div>
+            </div>
+        </div>
         <form [formGroup]="loginForm" (ngSubmit)="login()">
             <p *ngIf="accountCreated" class="text-center info">{{ username }}</p>
             <!-- {{ loginForm.value | json  }} -->

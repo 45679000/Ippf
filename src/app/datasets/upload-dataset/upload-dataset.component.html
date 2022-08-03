@@ -6,96 +6,121 @@
 </div>
 <div class="container px-md-5 mt-5">
     <h2 class="lead-heading">Upload new Dataset</h2>
+    <div *ngIf="resource_uploaded" class="col-12 col-md-6 text-success">
+        <p>The dataset -{{dataset.name}} was uploaded successfully. <br> To view it follow the link - <a class="text-primary" [routerLink]="['../datasets/dataset-details',dataset.name]">View {{dataset.title | titlecase}} in detail</a></p>
+    </div>
     <div class="form-wrap">
-        <form action="">
+        <form action="" [formGroup]="newDatasetForm" (submit)="onSubmit()" *ngIf="!success">
+            <h2 class="lead-heading text-center">Step 1 of 2</h2>
             <div class="row">
                 <div class="col-12 col-md-6">
                     <div class="mb-3">
                         <label for="">Name</label>
-                        <input type="text" name="name" id="" class="form-control">
+                        <input type="text" name="name" id="" class="sidebarInput col-12 p-2" formControlName="name">
                     </div>
                     <div class="mb-3">
                         <label for="">Title</label>
-                        <input type="text" class="form-control" name="name" id="">
+                        <input type="text" class="sidebarInput col-12 p-2" name="name" id="" formControlName="title">
                     </div>
                     <div class="mb-3 row">
                         <div class="col-6">
                             <label for="">Privacy</label>
-                            <input type="radio" name="" id="" class=" col-6 mx-auto">
-                        </div>
-                        <div class="col-6">
-                            <label for="">Privacy</label>
-                            <input type="radio" name="" id="" class=" col-6 mx-auto">
+                            <input type="checkbox" name="" id="" class=" col-6 mx-auto" formControlName="private">
                         </div>
                     </div>
                     <div class="mb-3">
                         <label for="">Author</label>
-                        <input class="form-control" type="text" name="author" id="">
+                        <input class="sidebarInput col-12 p-2" type="text" name="author" id="" formControlName="author">
                     </div>
                     <div class="mb-3">
                         <label for="">Author email</label>
-                        <input class="form-control" type="email" name="name" id="">
+                        <input class="sidebarInput col-12 p-2" type="email" name="name" id="" formControlName="author_email">
                     </div>
                     <div class="mb-3">
                         <label for="">Maintainer</label>
-                        <input class="form-control" type="text" name="name" id="">
+                        <input class="sidebarInput col-12 p-2" type="text" name="name" id="" formControlName="maintainer">
                     </div>
                     <div class="mb-3">
                         <label for="">Maintainer email</label>
-                        <input class="form-control" type="text" name="name" id="">
+                        <input class="sidebarInput col-12 p-2" type="text" name="name" id="" formControlName="maintainer_email">
                     </div>
                     <div class="mb-3">
                         <label for="">License Id</label>
-                        <input class="form-control" type="text" name="name" id="">
+                        <input class="sidebarInput col-12 p-2" type="text" name="name" id="" value="gfdl" formControlName="license_id">
                     </div>
                 </div>
                 <div class="col-12 col-md-6">
                     <div class="mb-3">
                         <label for="">Description</label>
-                        <textarea type="text" name="notes" id="" class="form-control" cols="6"></textarea>
+                        <textarea type="text" name="notes" id="" class="sidebarInput col-12 p-2" cols="6" formControlName="notes"></textarea>
                     </div>
-                    <div class="mb-3">
+                    <!-- <div class="mb-3">
                         <label for="">Url</label>
-                        <input type="text" class="form-control" name="url" id="">
+                        <input type="text" class="sidebarInput col-12 p-2" name="url" id="">
                     </div>
                     <div class="mb-3">
                         <label for="">Version</label>
-                        <input class="form-control" type="text" name="version" id="">
+                        <input class="sidebarInput col-12 p-2" type="text" name="version" id="">
                     </div>
                     <div class="mb-3">
                         <label for="">State Active or deleted</label>
                         <input class="" type="checkbox" name="name" id="">
-                    </div>
+                    </div> -->
                     <div class="mb-3">
-                        <label for="">Type</label>
-                        <input class="form-control" type="text" name="name" id="">
+                        <label for="">Owner Organisation</label>
+                        <input class="sidebarInput col-12 p-2" type="text" name="name" id="" formControlName="owner_org" value="ippf">
                     </div>
                     <div class="mb-3">
                         <label for="">Tags</label>
-                        <select class="form-control" name="" id="">
-                            <option>New Delhi</option>
-                            <option>Istanbul</option>
-                            <option>Jakarta</option>
+                        <select class="sidebarInput col-12 p-2" name="" id="" multiple formControlName="tags">
+                            <option *ngFor="let i of tags" value="{{i}}">{{i}}</option>
                         </select>
                     </div>
                     <div class="mb-3">
                         <label for="">Groups</label>
-                        <select class="form-control" name="" id="">
-                            <option>New Delhi</option>
-                            <option>Istanbul</option>
-                            <option>Jakarta</option>
+                        <select class="sidebarInput col-12 p-2" name="" id="">
+                            <option *ngFor="let group of groups" value="{{group}}">{{group}}</option>
                         </select>
                     </div>
-                    <div class="mb-3">
-                        <label for="">Name</label>
-                        <input class="form-control" type="text" name="name" id="">
-                    </div>
+                </div>
+                <div class="col-12 mx-auto my-5 text-center">
+                    <input type="submit" value="Submit" class="btn btn-primary btn-primary-lg blueBtn">
                 </div>
             </div>
             <div class="col-12 col-md-8">
                 <div>
                     
                 </div>
+            </div>
+        </form>
+
+        <form action="" *ngIf="success" [formGroup]="newResourceForm" (submit)="submitResource()">
+            <h2 class="lead-heading text-center">Step 2 of 2</h2>
+            <h3 class="h2 text-center">Input the files to be associated with the created dataset in step 1</h3>
+            <div class="col-12 col-md-6 mx-auto">
+                <div class="mb-3">
+                    <label for="">Dataset name / Dataset id</label>
+                    <input type="text" name="name" id="" class="sidebarInput col-12 p-2" formControlName="package_id">
+                </div>
+                <div class="mb-3">
+                    <label for="">Description</label>
+                    <textarea type="text" name="notes" id="" class="sidebarInput col-12 p-2" cols="6" formControlName="description"></textarea>
+                </div>
+                <div class="mb-3">
+                    <label for="">Format</label>
+                    <input type="text" name="" id="" class="sidebarInput col-12 p-2" formControlName="format">
+                </div>
+                <div class="mb-3">
+                    <label for="">Name</label>
+                    <input class="sidebarInput col-12 p-2" type="text" name="author" id="" formControlName="name">
+                </div>
+                <div class="mb-3">
+                    <label for="">Dataset url</label>
+                    <input class="sidebarInput col-12 p-2" type="email" name="name" id="" formControlName="url">
+                </div>
+            </div>
+            <div class="col-12 mx-auto text-center my-5">
+                <input type="submit" value="Submit resource" class="btn btn-primary blueBtn">
             </div>
         </form>
     </div>

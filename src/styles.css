@@ -4,6 +4,7 @@
 @import './assets/styles/form.css';
 @import './assets/styles/typography.css';
 @import './assets/styles/container.css';
+@import './assets/styles/spinner.css';
 
 @font-face {
     font-family: Frutiger;

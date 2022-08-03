@@ -31,7 +31,9 @@ export class TopHeaderComponent implements OnInit {
   ngOnInit(): void {
     this.isSignedIn = this.authService.isAuthenticated()
     
-    this.user = this.authService.getUser()
+    if(this.isSignedIn){
+      this.user = this.authService.getUser()
+    }
   }
   signOut() {
     this.authService.logout()

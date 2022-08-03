@@ -8,7 +8,7 @@
     <div class="avatar">
         <div class="salutation">
             <p   class="h3 ">Hi {{',' +user.username}}<button class="h3 mx-1 hov"><i class="fas fa-user-circle" ></i></button></p>
-            <div class="user-management" >
+            <div class="user-management" *ngIf="isSignedIn">
                 <a [routerLink]="['../change-password']">Change password</a>
                 <a [routerLink]="['/account-settings']">Account Settings</a>
                 <!-- <a [routerLink]="['../logout']">Logout</a> -->
