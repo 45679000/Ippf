@@ -22,6 +22,9 @@ export class LoginComponent implements OnInit {
   load:boolean  = false
   constructor(private fb: FormBuilder, private auth: AuthServiceService, private route: Router, private _location: Location) {}
   ngOnInit(): void {
+    if(this.auth.isAuthenticated()){
+      this.route.navigate(['/'])
+    }
     this.loginForm = this.fb.group({
       email: ['',  [Validators.required, ]],
       password: ['',  [Validators.required]],
@@ -35,6 +38,7 @@ export class LoginComponent implements OnInit {
       this.load = true
         this.auth.login(this.loginForm.value.email, this.loginForm.value.password, this.loginForm.value.remember).subscribe((token: any) => {
           if(token == 500){
+            this.error = ''
             Swal.fire({  
               icon: 'error',  
               title: 'Oops...',  
@@ -42,22 +46,33 @@ export class LoginComponent implements OnInit {
               footer: 'Try again. If problems persist contact the admin'  
             })
             this.load = false
-          }else {
-            this.load = false
-            if(token.status == false){
-              this.error = token.error.message
-            }
-            setInterval(function (){
+          }else if(token == 401) {
+              this.load = false
+              this.error = "Wrong credentials"
               Swal.fire({  
-                icon: 'success',  
-                title: 'Done',  
-                text: 'Logged in successfully',  
-                footer: "Redirecting..."  
-              })   
-            }, 1000);
-              
+                icon: 'error',  
+                title: 'Oops...',  
+                text: 'Wrong credentials'
+              })
+          }else if(token.result.status){
+            this.error = ''
+            this.load = false
+            Swal.fire({  
+              icon: 'success',  
+              title: 'Done',  
+              text: 'Logged in successfully',  
+              footer: "Redirecting..."  
+            });
+            
             this._location.back();
-            // this.route.navigate(['/']);
+          } else {
+            Swal.fire({  
+              icon: 'error',  
+              title: 'Oops...',  
+              text: 'Something went wrong!',  
+              footer: 'Try again. If problems persist contact the admin'  
+            })
+            this.load = false
           }
           
         })

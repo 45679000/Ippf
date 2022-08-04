@@ -14,6 +14,7 @@ import * as echarts from 'echarts';
 import { NgxEchartsModule } from 'ngx-echarts';
 import { FormsModule } from '@angular/forms';
 import {NgbPaginationModule, NgbAlertModule} from '@ng-bootstrap/ng-bootstrap';
+import { AgmCoreModule } from '@agm/core';
 
 @NgModule({
   declarations: [
@@ -34,8 +35,10 @@ import {NgbPaginationModule, NgbAlertModule} from '@ng-bootstrap/ng-bootstrap';
     }),
     FormsModule,
     NgbPaginationModule, 
-    NgbAlertModule
-
+    NgbAlertModule,
+    AgmCoreModule.forRoot({
+      apiKey: 'AIzaSyDBGZADbXeckEmu6QQ_h__N7xjHX8cyZlw'
+    })
   ]
 })
 export class DatasetsModule { }

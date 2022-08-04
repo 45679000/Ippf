@@ -1,25 +1,37 @@
 <div class="navbar-holder">
     <app-top-header></app-top-header>
 </div>
-<div class="home-container row fluid-container p-5">
+<div class="spin" *ngIf="load">
+    <div class="lds-roller">
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+    </div>
+</div>
+<div class="home-container row fluid-container p-5" [class.load] = "load">
     <div class="settings col-12 col-md-3">
         <h2 class="lead-heading-mid">Account Settings</h2>
         <div class="avatar pink-text">
             <i class="fas fa-user-circle"></i>
         </div>
         <div class="user-details mt-3">
-            <form action="">
+            <form action="" [formGroup]="accountDetailsForm" (submit)="updateUser()">
                 <div class="form-group">
                     <label for="name">Name</label>
-                    <input type="text" class="form-control form-control-lg" value="John Doe">
+                    <input type="text" class="form-control form-control-lg" formControlName="username" [class.is-invalid] = "accountDetailsForm.controls.username.status == 'INVALID' && accountDetailsForm.controls.username.touched == true" >
                 </div>
                 <div class="form-group">
                     <label for="name">Email Address</label>
-                    <input type="text" class="form-control form-control-lg" value="jdoe@gmail.com">
+                    <input type="text" class="form-control form-control-lg" formControlName="email" [class.is-invalid] = "accountDetailsForm.controls.email.status == 'INVALID' && accountDetailsForm.controls.email.touched == true">
                 </div>
                 <div class="form-group">
-                    <label for="name">Account Type</label>
-                    <input type="text" class="form-control form-control-lg" value="Publisher" disabled>
+                    <label for="name">Givenname</label>
+                    <input type="text" class="form-control form-control-lg" formControlName="givenname" [class.is-invalid] = "accountDetailsForm.controls.givenname.status == 'INVALID' && accountDetailsForm.controls.givenname.touched == true">
                 </div>
                 <div class="form-group">
                     <label for="name">Password</label>
@@ -33,10 +45,10 @@
     <div class="activity px-4 col-12 col-md-9">
         <h2 class="lead-heading-mid">Account Activity</h2>
         <div class="saved-datasets col-12 col-md-9 pt-3">
-            <h2 class="lead-heading-small-black">Saved Datasets</h2>
-            <a href="#">Survey 2021-2022, Angola</a>
+            <h2 class="lead-heading-small-black">No recorded user activity</h2>
+            <!-- <a href="#">Survey 2021-2022, Angola</a> -->
         </div>
-        <div class="downloaded-datasets col-12 col-md-9 pt-3">
+        <!-- <div class="downloaded-datasets col-12 col-md-9 pt-3">
             <h2 class="lead-heading-small-black">Downloaded Datasets</h2>
             <a href="#">Survey 2021-2022, Benin</a>
         </div>
@@ -68,7 +80,7 @@
                     </tr>
                 </tbody>
             </table>
-        </div>
+        </div> -->
     </div>
 </div>
 <app-footer></app-footer>

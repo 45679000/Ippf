@@ -9,6 +9,10 @@
         
         <div class="container-fluid py-3">
             <h2 class="lead-heading text-center">Select the dataset to visualize it's data</h2>
+            <div echarts [options]="pieOptions" class="demo-chart"></div>
+            <!-- <agm-map [latitude]="lat" [longitude]="lng">
+              <agm-marker [latitude]="lat" [longitude]="lng"></agm-marker>
+            </agm-map> -->
             <div class="col-12 top-form">
                 <form action="" [formGroup]="datasetForm" >
                     <div class="mb-3 col-md-6 col-12 mx-auto">

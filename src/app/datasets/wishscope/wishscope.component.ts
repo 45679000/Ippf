@@ -12,6 +12,10 @@ import { CountryStatus } from '../../interfaces/CountryStatus'
 interface Item {
   item: string[]
 }
+interface Pie {
+  value: number
+  name: string
+}
 @Component({
   selector: 'app-wishscope',
   templateUrl: './wishscope.component.html',
@@ -19,6 +23,10 @@ interface Item {
 })
 export class WishscopeComponent implements OnInit {
   chartOptions: any;
+  lat = 21.3069;
+  lng = -157.8583;
+  mapType = 'satellite';
+  pieOptions: any
   someData:any [] = []
   rawData:Item[] = []
   // dataForDisplay
@@ -49,6 +57,7 @@ export class WishscopeComponent implements OnInit {
   constructor(private appService: DatasetService) { 
     this.refreshCountries()
     // console.log(this.collectionSize)
+    
   }
 
   ngOnInit(): void {
@@ -71,10 +80,11 @@ export class WishscopeComponent implements OnInit {
     })
   }
   getCsv(){
-    this.appService.getAnotherCsv(this.datasetForm.value.datafile).subscribe((dat:any) => {
-      console.log(dat);
+    // this.appService.getAnotherCsv(this.datasetForm.value.datafile).subscribe((dat:any) => {
+    //   console.log(dat);
       
-    })
+    // })
+    
     this.appService.viewCsv(this.datasetForm.value.datafile).subscribe((data: any) => {
       const list = data.split('\n')
       list.forEach( (e: any) => {
@@ -94,7 +104,7 @@ export class WishscopeComponent implements OnInit {
       }
       this.collectionSize = this.someData.length;
       this.refreshCountries()
-      
+      this.generatePieCart()
       // this.setOptions();
     })
   }
@@ -105,6 +115,10 @@ export class WishscopeComponent implements OnInit {
   //   });
   // }
   setCsvFile(){
+    this.header = []
+    this.rawData = []
+    this.someData = []
+    this.dataArray = []
     this.getCsv()
   }
   setSeries(){
@@ -155,5 +169,47 @@ export class WishscopeComponent implements OnInit {
     })
     console.log(this.page);
     console.log(this.pageSize);
+  }
+  generatePieCart() {
+    let uniqueCount = this.dataArray[3];
+    let count:any ={};
+    let pieData:Pie[] =[]
+    uniqueCount.forEach((i:any) => {
+        count[i] = (count[i]||0) + 1;
+    });
+    for (const key in count) {
+      console.log(key);
+      pieData.push({name:key,value:count[key]})
+    }
+    // console.log(pie);
+    this.pieOptions = {
+      title: {
+        text: 'Referer of a Website',
+        subtext: 'Fake Data',
+        left: 'center'
+      },
+      tooltip: {
+        trigger: 'item'
+      },
+      legend: {
+        orient: 'vertical',
+        left: 'left'
+      },
+      series: [
+        {
+          name: 'Access From',
+          type: 'pie',
+          radius: '50%',
+          data: pieData,
+          emphasis: {
+            itemStyle: {
+              shadowBlur: 10,
+              shadowOffsetX: 0,
+              shadowColor: 'rgba(0, 0, 0, 0.5)'
+            }
+          }
+        }
+      ]
+    };
   }
 }
