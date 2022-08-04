@@ -38,12 +38,6 @@ export class AuthServiceService {
     const token = new Observable((observer) => {
       $.ajax({
         method: "POST",
-        // contentType:'application/json',
-        // dataType: 'json',
-        // data: {
-        //   username: 'admin',
-        //   password: 'AndyDCG*&9'
-        // },
         data: {
           username: email,
           password: password
@@ -133,5 +127,76 @@ export class AuthServiceService {
   }
   getUser(): Token {
     return JSON.parse(this.decodedToken);
+  }
+  getUserDetails(): any {
+    let token = localStorage.getItem('auth_tkn')
+    const userDetails = new Observable((observer) => {
+      $.ajax({
+        method: "GET", 
+        headers: {
+          "Authorization": localStorage.getItem('auth_tkn')
+        },
+        url:`https://privacyidea.netknights.it/dariangroup/user/`,
+        success: function (response){
+          console.log(response)
+          observer.next(response.result)
+        },
+        error: function (error){
+          console.log(error)
+          observer.next(error.status)
+        }
+      });
+    });
+    return userDetails 
+
+  }
+  changePassword(): any {
+    let token = localStorage.getItem('auth_tkn')
+
+    const userReset = new Observable((observer) => {
+      $.ajax({
+        method: "POST", 
+        // headers: {
+        //   "Authorization": localStorage.getItem('auth_tkn')
+        // },
+        url:`https://privacyidea.netknights.it/dariangroup/user/`,
+        success: function (response){
+          console.log(response)
+          observer.next(response.result)
+        },
+        error: function (error){
+          console.log(error)
+          observer.next(error.status)
+        }
+      });
+    });
+    return userReset 
+
+  }
+  updateUser(givenname:string, email:String): any {
+    let token = localStorage.getItem('auth_tkn')
+    let data = {
+      givenname: givenname,
+      email: email
+    }
+    const userReset = new Observable((observer) => {
+      $.ajax({
+        method: "PUT", 
+        data: JSON.stringify(data),
+        headers: {
+          "Authorization": localStorage.getItem('auth_tkn')
+        },
+        url:`https://privacyidea.netknights.it/dariangroup/user/`,
+        success: function (response){
+          console.log(response)
+          observer.next(response.result)
+        },
+        error: function (error){
+          console.log(error)
+          observer.next(error.status)
+        }
+      });
+    });
+    return userReset 
   }
 }
