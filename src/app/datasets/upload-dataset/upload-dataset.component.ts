@@ -2,6 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators ,FormBuilder} from '@angular/forms';
 import { DatasetService } from '../../services/datasets-services.service'
 import { Dataset } from '../../interfaces/dataset'
+import { ActivatedRoute } from '@angular/router'
+import Swal from 'sweetalert2';
+
 interface Status {
   success: boolean
 }
@@ -29,6 +32,9 @@ export class UploadDatasetComponent implements OnInit {
     // datafile: new FormControl()
   })
 
+  id:any
+  resource_id:any
+  edit:boolean = false
   tags:any
   groups:any
   success:boolean = false
@@ -76,7 +82,7 @@ export class UploadDatasetComponent implements OnInit {
     name: new FormControl(),
     url: new FormControl()
   })
-  constructor(private datasetService: DatasetService) { }
+  constructor(private datasetService: DatasetService, private route: ActivatedRoute) { }
 
   ngOnInit(): void {
     // this.datasetService.addDataset().subscribe((response: any) => {
@@ -94,15 +100,53 @@ export class UploadDatasetComponent implements OnInit {
     //   console.log(e);
       
     // })
+    this.route.queryParamMap.subscribe(params => { 
+      this.id = params.get('id');
+      this.resource_id = params.get('resource_id')
+      if(this.id.length > 0) {
+        this.edit = true
+        this.datasetService.getADataset(this.id).subscribe((data:any) => {
+          this.dataset = data
+        })
+      }
+      // this.datasetForm.value.dataset = this.id
+      // this.datasetForm.value.datafile = this.resource_id
+      // console.log('Query params ',this.pageNo) 
+    });
   }
   onSubmit(){
     // console.log(this.newDatasetForm.value.dataset)
-    this.datasetService.addDataset(this.newDatasetForm.value).subscribe((response: any) => {
-      console.log(response);
-      this.dataset = response.result
-      this.success = response.success
-      // this.dataset = response.result
-    })
+    if(this.edit){
+      this.datasetService.updateDataset(this.newDatasetForm.value, this.dataset.id).subscribe((response: any) => {
+        console.log(response);
+        this.dataset = response.result
+        // this.success = response.success
+        if(response.success){
+          Swal.fire({  
+            icon: 'success',  
+            title: 'Done',  
+            text: 'Dataset updated successfully',  
+            footer: "Go back to datasets to view the Changes"  
+          });
+        }else {
+          Swal.fire({  
+            icon: 'error',  
+            title: 'Oops...',  
+            text: 'Something went wrong!',  
+            footer: 'Try again. If problems persist contact the admin'  
+          })
+        }
+        // this.dataset = response.result
+      })
+    } else {
+      this.datasetService.addDataset(this.newDatasetForm.value).subscribe((response: any) => {
+        console.log(response);
+        this.dataset = response.result
+        this.success = response.success
+        
+        // this.dataset = response.result
+      })
+    }
     // console.log(this.newDatasetForm.value);
     
   }

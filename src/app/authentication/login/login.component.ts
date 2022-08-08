@@ -37,7 +37,9 @@ export class LoginComponent implements OnInit {
     if(this.loginForm.valid){
       this.load = true
         this.auth.login(this.loginForm.value.email, this.loginForm.value.password, this.loginForm.value.remember).subscribe((token: any) => {
-          if(token == 500){
+          console.log(token);
+          
+          if(token == 500 || token == 0){
             this.error = ''
             Swal.fire({  
               icon: 'error',  

@@ -119,7 +119,7 @@ export class DatasetsComponent implements OnInit {
         this.loader = false
       }
     );
-    this.allTags.subscribe(val=>{
+    this.datasetService.getAllTags().subscribe((val: any)=>{
       this.tags = val
     })
     this.datasetService.getAllGroups().subscribe((val: any) => {
@@ -133,51 +133,6 @@ export class DatasetsComponent implements OnInit {
     })
     
   }
-
-  allDatasets = new Observable<Data>((observer) => {
-    $.ajax({
-      method: "GET",
-      // contentType:'application/json',
-      dataType: 'jsonp',
-      url:'http://3.236.19.31/api/3/action/package_list',
-      success: function (response){
-        observer.next(response.result)
-      },
-      error: function(error){
-        console.log(error)
-      }
-    })
-  });
-  allTags = new Observable((observer) => {
-    // console.log('Starting observable');
-    $.ajax({
-      method: "GET",
-      // contentType:'application/json',
-      dataType: 'jsonp',
-      url:'http://3.236.19.31/api/3/action/tag_list',
-      success: function (response){
-        // console.log(response)
-        observer.next(response.result)
-      },
-      error: function(error){
-        console.log(error)
-      }
-    })
-  });
-  oneDataset = new Observable<dataDaset>((observer) => {
-    
-    // console.log('Starting observable');
-    $.ajax({
-      method: "GET",
-      // contentType:'application/json',
-      dataType: 'jsonp',
-      url:'http://3.236.19.31/api/3/action/package_show?id=ippf',
-      success: function (response){
-        console.log(response)
-        observer.next(response.result)
-      }
-    })
-  });
   onSubmit() {
     this.loader = true
     this.changeHeader()

@@ -20,6 +20,10 @@
 /* .menu a:active{
     border: 3px solid red;
 } */
+.searchBtnBig {
+    color: #E6007E !important;
+    /* border: #E6007E !important; */
+}
 .active{
     border-bottom: 4px solid #E6007E;
 }

@@ -7,6 +7,7 @@ import { Dataset } from '../../interfaces/dataset'
 import { Resource } from '../../interfaces/resource'
 import { Series } from '../../interfaces/Series'
 import { CountryStatus } from '../../interfaces/CountryStatus'
+import { ActivatedRoute } from '@angular/router'
 
 
 interface Item {
@@ -22,7 +23,17 @@ interface Pie {
   styleUrls: ['./wishscope.component.css']
 })
 export class WishscopeComponent implements OnInit {
+  load: boolean = false
+  // pie
   chartOptions: any;
+  displayPie:boolean = false
+  pieChartForm = new FormGroup({
+    column: new FormControl()
+  })
+
+  // bar
+  displayBar: boolean = false
+
   lat = 21.3069;
   lng = -157.8583;
   mapType = 'satellite';
@@ -37,6 +48,7 @@ export class WishscopeComponent implements OnInit {
   legend:string[] = []
   datasets:any = []
   dataFiles: Resource []= []
+  chartsType:any = ['pie','Bar/Line'] 
   datasetForm = new FormGroup({
     dataset: new FormControl(),
     datafile: new FormControl()
@@ -46,15 +58,20 @@ export class WishscopeComponent implements OnInit {
     data: new FormControl(),
     type: new FormControl()
   })
+  chartForm = new FormGroup({
+    chart: new FormControl()
+  })
   topForm = new FormGroup({
     dataset: new FormControl(),
     dataFIle: new FormControl()
   })
   page = 1;
-  pageSize = 10;
+  pageSize = 25;
   collectionSize:number = 0;
+  id:any 
+  resource_id: any
   // countries: Country[] = [];
-  constructor(private appService: DatasetService) { 
+  constructor(private appService: DatasetService, private route: ActivatedRoute) { 
     this.refreshCountries()
     // console.log(this.collectionSize)
     
@@ -62,6 +79,17 @@ export class WishscopeComponent implements OnInit {
 
   ngOnInit(): void {
     this.getListOfDatasets()
+    this.route.queryParamMap.subscribe(params => { 
+      this.id = params.get('id');
+      this.resource_id = params.get('resource_id')
+      this.datasetForm.value.dataset = this.id
+      this.datasetForm.value.datafile = this.resource_id
+      // console.log('Query params ',this.pageNo) 
+    });
+    // this.id = this.route.snapshot.paramMap.get('id')
+    // this.resource_id = this.route.snapshot.paramMap.get('resource_id')
+    console.log('id: ' + this.id + ' resource id:' + this.resource_id);
+    
     // this.getCsv()
   }
   returnRow(item:any){
@@ -80,12 +108,9 @@ export class WishscopeComponent implements OnInit {
     })
   }
   getCsv(){
-    // this.appService.getAnotherCsv(this.datasetForm.value.datafile).subscribe((dat:any) => {
-    //   console.log(dat);
-      
-    // })
-    
+    this.load = true
     this.appService.viewCsv(this.datasetForm.value.datafile).subscribe((data: any) => {
+      this.load = false
       const list = data.split('\n')
       list.forEach( (e: any) => {
         this.someData.push(e)
@@ -104,7 +129,7 @@ export class WishscopeComponent implements OnInit {
       }
       this.collectionSize = this.someData.length;
       this.refreshCountries()
-      this.generatePieCart()
+      // this.generatePieCart()
       // this.setOptions();
     })
   }
@@ -171,7 +196,7 @@ export class WishscopeComponent implements OnInit {
     console.log(this.pageSize);
   }
   generatePieCart() {
-    let uniqueCount = this.dataArray[3];
+    let uniqueCount = this.dataArray[this.pieChartForm.value.column];
     let count:any ={};
     let pieData:Pie[] =[]
     uniqueCount.forEach((i:any) => {
@@ -184,8 +209,8 @@ export class WishscopeComponent implements OnInit {
     // console.log(pie);
     this.pieOptions = {
       title: {
-        text: 'Referer of a Website',
-        subtext: 'Fake Data',
+        text: this.header[this.pieChartForm.value.column],
+        subtext: 'Data',
         left: 'center'
       },
       tooltip: {
@@ -211,5 +236,14 @@ export class WishscopeComponent implements OnInit {
         }
       ]
     };
+  }
+  setChart() {
+    console.log(this.chartForm.value.chart);
+    
+    if(this.chartForm.value.chart == 'pie'){
+      this.displayPie = true
+    } else if(this.chartForm.value.chart == 'Bar/Line') {
+      this.displayBar = true
+    }
   }
 }

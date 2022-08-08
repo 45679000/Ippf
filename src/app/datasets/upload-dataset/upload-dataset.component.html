@@ -16,33 +16,33 @@
                 <div class="col-12 col-md-6">
                     <div class="mb-3">
                         <label for="">Name</label>
-                        <input type="text" name="name" id="" class="sidebarInput col-12 p-2" formControlName="name">
+                        <input type="text" name="name" id="" class="sidebarInput col-12 p-2" formControlName="name" value="{{dataset.name}}">
                     </div>
                     <div class="mb-3">
                         <label for="">Title</label>
-                        <input type="text" class="sidebarInput col-12 p-2" name="name" id="" formControlName="title">
+                        <input type="text" class="sidebarInput col-12 p-2" name="name" id="" formControlName="title" value="{{dataset.title}}">
                     </div>
                     <div class="mb-3 row">
                         <div class="col-6">
                             <label for="">Privacy</label>
-                            <input type="checkbox" name="" id="" class=" col-6 mx-auto" formControlName="private">
+                            <input type="checkbox" name="" id="" class=" col-6 mx-auto" formControlName="private" value="{{dataset.private}}">
                         </div>
                     </div>
                     <div class="mb-3">
                         <label for="">Author</label>
-                        <input class="sidebarInput col-12 p-2" type="text" name="author" id="" formControlName="author">
+                        <input class="sidebarInput col-12 p-2" type="text" name="author" id="" formControlName="author" value="{{dataset.author}}">
                     </div>
                     <div class="mb-3">
                         <label for="">Author email</label>
-                        <input class="sidebarInput col-12 p-2" type="email" name="name" id="" formControlName="author_email">
+                        <input class="sidebarInput col-12 p-2" type="email" name="name" id="" formControlName="author_email" value="{{dataset.author_email}}">
                     </div>
                     <div class="mb-3">
                         <label for="">Maintainer</label>
-                        <input class="sidebarInput col-12 p-2" type="text" name="name" id="" formControlName="maintainer">
+                        <input class="sidebarInput col-12 p-2" type="text" name="name" id="" formControlName="maintainer" value="{{dataset.maintainer}}">
                     </div>
                     <div class="mb-3">
                         <label for="">Maintainer email</label>
-                        <input class="sidebarInput col-12 p-2" type="text" name="name" id="" formControlName="maintainer_email">
+                        <input class="sidebarInput col-12 p-2" type="text" name="name" id="" formControlName="maintainer_email" value="{{dataset.maintainer_email}}">
                     </div>
                     <div class="mb-3">
                         <label for="">License Id</label>
@@ -52,7 +52,7 @@
                 <div class="col-12 col-md-6">
                     <div class="mb-3">
                         <label for="">Description</label>
-                        <textarea type="text" name="notes" id="" class="sidebarInput col-12 p-2" cols="6" formControlName="notes"></textarea>
+                        <textarea type="text" name="notes" id="" class="sidebarInput col-12 p-2" cols="6" formControlName="notes" value="{{dataset.notes}}"></textarea>
                     </div>
                     <!-- <div class="mb-3">
                         <label for="">Url</label>
@@ -72,19 +72,20 @@
                     </div>
                     <div class="mb-3">
                         <label for="">Tags</label>
-                        <select class="sidebarInput col-12 p-2" name="" id="" multiple formControlName="tags">
+                        <select class="sidebarInput col-12 p-2" name="" id="" multiple formControlName="tags" value="{{dataset.tags}}">
                             <option *ngFor="let i of tags" value="{{i}}">{{i}}</option>
                         </select>
                     </div>
                     <div class="mb-3">
                         <label for="">Groups</label>
-                        <select class="sidebarInput col-12 p-2" name="" id="">
+                        <select class="sidebarInput col-12 p-2" name="" id="" value="{{dataset.groups}}">
                             <option *ngFor="let group of groups" value="{{group}}">{{group}}</option>
                         </select>
                     </div>
                 </div>
                 <div class="col-12 mx-auto my-5 text-center">
-                    <input type="submit" value="Submit" class="btn btn-primary btn-primary-lg blueBtn">
+                    <input *ngIf="!edit" type="submit" value="Submit" class="btn btn-primary btn-primary-lg blueBtn">
+                    <input *ngIf="edit" type="submit" value="Update dataset" class="btn btn-primary blueBtn">
                 </div>
             </div>
             <div class="col-12 col-md-8">
@@ -121,6 +122,7 @@
             </div>
             <div class="col-12 mx-auto text-center my-5">
                 <input type="submit" value="Submit resource" class="btn btn-primary blueBtn">
+                
             </div>
         </form>
     </div>

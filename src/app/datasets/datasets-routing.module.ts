@@ -8,7 +8,6 @@ import { UploadDatasetComponent } from './upload-dataset/upload-dataset.componen
 const routes: Routes = [
   { path: '', component: DatasetsComponent },
   { path: 'dataset-details/:id', component: DatasetDetailsComponent },
-  { path: 'dataset-request', component: DataRequestComponent},
   { path: 'dataset-upload', component: UploadDatasetComponent}
 ];
 

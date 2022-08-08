@@ -11,6 +11,7 @@ import {
 import { Router } from '@angular/router';
 import * as $ from "jquery";
 import { Token } from './interfaces/Token'
+import { Constants } from './config/constants'
 
 const jwt = new JwtHelperService();
 class DecodedToken {
@@ -22,6 +23,8 @@ class DecodedToken {
   providedIn: 'root'
 })
 export class AuthServiceService {
+  auth_url:string = Constants.AUTH_ENDPOINT
+
   private decodedToken: any;
   constructor( private route: Router, private http: HttpClient) {
     this.decodedToken = localStorage.getItem('auth_meta') || null;
@@ -42,7 +45,7 @@ export class AuthServiceService {
           username: email,
           password: password
         },
-        url:`https://privacyidea.netknights.it/dariangroup/auth`,
+        url:`${this.auth_url}/auth`,
         success: function (response){
           console.log(response)
           // this.saveToken(response.result.value.token)
@@ -69,20 +72,6 @@ export class AuthServiceService {
     localStorage.setItem('auth_meta', JSON.stringify(this.decodedToken));
     return token;
   }
-  createNewUser(name: string, email: string, country: string, accountType: string, password: string): Observable<any>{
-    this.accountCreated = true
-    this.username = `Account successfully created for ${name}`
-    const headers = {'content-type': 'application/json'}
-    const body = JSON.stringify({
-      name: name,
-      email: email,
-      country: country,
-      account: accountType,
-      password: password
-    })
-    return this.http.post('http://localhost:3000/users', body, {'headers':headers, observe: 'response'})
-    // this.route.navigate(['login'])
-  }
   signup(username:string, givenname: string,surname:string, email:string, password:string){
     let data = {
         username: username,
@@ -95,14 +84,19 @@ export class AuthServiceService {
       $.ajax({
         method: "POST",
         data: data,
-        url:`https://privacyidea.netknights.it/dariangroup/register`,
+        url:`${this.auth_url}/register`,
         success: function (response){
           console.log(response)
           observer.next(response)
         },
         error: function (error){
           console.log(error)
-          observer.next(error.status)
+          if(error.status == 400){
+            let response = error.responseJSON.result
+            observer.next(response)
+          }else {
+            observer.next(error.status)
+          }
         }
       });
     });
@@ -136,7 +130,7 @@ export class AuthServiceService {
         headers: {
           "Authorization": localStorage.getItem('auth_tkn')
         },
-        url:`https://privacyidea.netknights.it/dariangroup/user/`,
+        url:`${this.auth_url}/user`,
         success: function (response){
           console.log(response)
           observer.next(response.result)
@@ -186,7 +180,7 @@ export class AuthServiceService {
         headers: {
           "Authorization": localStorage.getItem('auth_tkn')
         },
-        url:`https://privacyidea.netknights.it/dariangroup/user/`,
+        url:`${this.auth_url}/user/`,
         success: function (response){
           console.log(response)
           observer.next(response.result)
