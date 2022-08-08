@@ -65,6 +65,7 @@ export class DatasetDetailsComponent implements OnInit {
     size: 0,
     state: '',
     url: '',
+    original_url: '',
     url_type: ''
   }
   public studyDescriptionDisp: boolean = true;
@@ -91,6 +92,7 @@ export class DatasetDetailsComponent implements OnInit {
     const data = this.datasetService.getADataset(this.id)
     data.subscribe((val: any) => {
       this.dataOfDataset = val
+      console.log(val);
       
       val.resources.forEach((val: any) => {
         this.resourcesArray = [...this.resourcesArray, val]
@@ -102,5 +104,13 @@ export class DatasetDetailsComponent implements OnInit {
       
     })
   }
-
+  resourceExistUrl(resource :any):boolean{
+    if(resource.url.length > 0){
+      return true
+    } else if(resource.original_url && resource.original_url.length > 0){
+        return true
+    } else {
+      return false
+    }
+  }
 }

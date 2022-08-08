@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthServiceService } from '../../auth-service.service'
-import { User } from 'src/app/interfaces/UserDetails';
+import { User } from '../../interfaces/UserDetails';
 import Swal from 'sweetalert2';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 @Component({
@@ -39,7 +39,7 @@ export class AccountSettingsComponent implements OnInit {
           icon: 'error',  
           title: 'Oops...',  
           text: 'Something went wrong!',  
-          footer: 'Try again. If problems persist contact the admin'  
+          footer: 'Reload the page. If problems persist contact the admin'  
         })
       } else {
         if(item.status == true) {

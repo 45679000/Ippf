@@ -37,12 +37,20 @@ export class RegisterComponent implements OnInit {
       if(this.registrationForm.value.password == this.registrationForm.value.passwordConfirmation){
         this.load = true
         this.auth.signup(this.registrationForm.value.username, this.registrationForm.value.givenname, this.registrationForm.value.surname, this.registrationForm.value.email, this.registrationForm.value.password).subscribe((res: any)=>{
-          console.log(res);
+          console.log(res.error.code);
           if(res == 500) {
             Swal.fire({  
               icon: 'error',  
               title: 'Oops...',  
               text: 'Something went wrong!',  
+              footer: 'Try again. If problems persist contact the admin'  
+            })
+            this.load = false
+          }else if(res.error.code == 402){
+            Swal.fire({  
+              icon: 'error',  
+              title: 'Oops...',  
+              text: res.error.message + ". Try a different username",  
               footer: 'Try again. If problems persist contact the admin'  
             })
             this.load = false

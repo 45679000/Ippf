@@ -13,6 +13,7 @@ import { ResourceDetailsComponent } from './resorce-portal/resource-details/reso
 import { ResourceManageOneComponent } from './resorce-portal/resource-manage-one/resource-manage-one.component';
 import { ResourceContentComponent } from './resorce-portal/resource-content/resource-content.component';
 import { WishscopeComponent } from './datasets/wishscope/wishscope.component';
+import { DataRequestComponent } from './datasets/data-request/data-request.component'
 
 const routes: Routes = [
   {
@@ -39,7 +40,7 @@ const routes: Routes = [
   {
     path: 'change-password',
     component: PasswordChangeComponent,
-    canActivate: [AuthGuard] 
+    // canActivate: [AuthGuard] 
   },
   { 
     path: 'account-settings',
@@ -95,6 +96,11 @@ const routes: Routes = [
   component: WishscopeComponent,
   canActivate: [AuthGuard] 
 },
+{
+  path: 'request-dataset',
+  component: DataRequestComponent,
+  canActivate: [AuthGuard]
+}
 ];
 
 @NgModule({

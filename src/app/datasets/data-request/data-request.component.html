@@ -5,30 +5,51 @@
     <app-navbar></app-navbar>
 </div>
 <div class="split-container col-md-8">
-    <form action="">
+    <div class="col-12 top-form">
+        <form action="" [formGroup]="datasetForm" >
+            <div class="mb-3 col-md-6 col-12 mx-auto">
+              <label for="" class="form-label">Choose the dataset</label>
+              <div>
+                <select class="sidebarInput col-12" name="" id="" formControlName="dataset" (change)="getListOfDatafiles()">
+                    <option *ngFor="let item of datasets | keyvalue" value="{{item.value}}">{{item.value}}</option>
+                    <!-- <option>Istanbul</option>
+                    <option>Jakarta</option> -->
+                  </select>
+              </div>
+
+              <label for="" class="form-label">Select the data file to visualize</label>
+              <select class="sidebarInput col-12" name="" id="" formControlName="datafile" (change)="setDataset()">
+                <option *ngFor="let item of dataFiles" value="{{item.url}}">{{item.name}}</option>
+              </select>
+            </div>
+        </form>
+    </div>
+    <div class="my-3">
+        <h3 class="text-center h3 py-4">Dataset being requested is: <span class="fw-bold blueText">{{datasetRequested | uppercase}}</span></h3>
+    </div>
+    <form action="" [formGroup]="dataRequest" (submit)="submit()">
         <h2 class="lead-heading">Please provide the following details:</h2>
         <div>
             <label for="" class="form-label">Full name</label>
-            <input type="text" class="form-control form-control-lg" placeholder="">
+            <input type="text" class="form-control form-control-lg" placeholder="" formControlName="name" [class.is-invalid] = "dataRequest.controls.name.status == 'INVALID' && dataRequest.controls.name.touched == true">
         </div>
         <div>
             <label for="" class="form-label">Email Address</label>
-            <input type="text" class="form-control form-control-lg" placeholder="">
+            <input type="text" class="form-control form-control-lg" placeholder="" formControlName="email" [class.is-invalid] = "dataRequest.controls.email.status == 'INVALID' && dataRequest.controls.email.touched == true">
         </div>
         <div>
             <label for="" class="form-label">Country</label>
-            <input type="text" class="form-control form-control-lg" placeholder="">
+            <input type="text" class="form-control form-control-lg" placeholder="" formControlName="country" [class.is-invalid] = "dataRequest.controls.country.status == 'INVALID' && dataRequest.controls.country.touched == true">
         </div>
         <div>
             <label for="" class="form-label">Organization</label>
-            <input type="text" class="form-control form-control-lg" placeholder="">
+            <input type="text" class="form-control form-control-lg" placeholder="" formControlName="organisation" [class.is-invalid] = "dataRequest.controls.organisation.status == 'INVALID' && dataRequest.controls.organisation.touched == true">
         </div>
         <div>
             <label for="" class="form-label">What will this data be used for?</label>
-            <textarea class="form-control" name="" id="" rows="3"></textarea>
+            <textarea class="form-control" name="" id="" rows="3" formControlName="reason" [class.is-invalid] = "dataRequest.controls.reason.status == 'INVALID' && dataRequest.controls.reason.touched == true"></textarea>
         </div>
         <div class="text-center">
-            <!-- <button class="btn btn-primary mb-4" id="requestBtn">Request</button> -->
             <input type="submit" class="btn btn-primary mb-4 registerBtn" id="registerBtn" value="Request">
         </div>
     </form>

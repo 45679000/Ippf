@@ -7,9 +7,8 @@
             <app-navbar></app-navbar>
         </div>
         
-        <div class="container-fluid py-3">
+        <div class="container-fluid py-3" [class.load] = "load">
             <h2 class="lead-heading text-center">Select the dataset to visualize it's data</h2>
-            <div echarts [options]="pieOptions" class="demo-chart"></div>
             <!-- <agm-map [latitude]="lat" [longitude]="lng">
               <agm-marker [latitude]="lat" [longitude]="lng"></agm-marker>
             </agm-map> -->
@@ -31,72 +30,115 @@
                       </select>
                     </div>
                 </form>
+                <form action="" [formGroup]="chartForm" *ngIf="someData.length > 0">
+                  <div class="mb-3 col-md-6 col-12 mx-auto">
+                    <label for="" class="form-label">Select the chart to view</label>
+                    <select class="sidebarInput col-12" name="" id="" formControlName="chart" (change)="setChart()">
+                      <option *ngFor="let chart of chartsType" value="{{chart}}">{{chart | uppercase}}</option>
+                    </select>
+                    </div>
+                </form>
             </div>
-            <div class="col-12 px-md-5 px-3 mx-auto">
-              <table class="table table-striped">
-                <thead>
-                <tr>
-                  <th *ngFor="let head of header" scope="col">{{head | uppercase}}</th>
-                </tr>
-                </thead>
-                <tbody>
-                <tr *ngFor="let item of rawData">
-                  <td *ngFor="let i of returnRow(item)">
-                    {{i}}
-                  </td>
-                </tr>
-                </tbody>
-              </table>
-              
-              <div class="d-flex justify-content-between p-2">
-                <ngb-pagination [collectionSize]="collectionSize" [(page)]="page" [pageSize]="pageSize" (pageChange)="refreshCountries()">
-                </ngb-pagination>
-              
-                <select class="form-select" style="width: auto" [(ngModel)]="pageSize" (ngModelChange)="refreshCountries()">
-                  <option [ngValue]="2">2 items per page</option>
-                  <option [ngValue]="4">4 items per page</option>
-                  <option [ngValue]="6">6 items per page</option>
-                </select>
+            <div class="spin" *ngIf="load">
+              <div class="lds-roller">
+                  <div></div>
+                  <div></div>
+                  <div></div>
+                  <div></div>
+                  <div></div>
+                  <div></div>
+                  <div></div>
+                  <div></div>
               </div>
-            </div>
-            <div class="my-3">
-              <hr>
-            </div>
-            <div class="container">
-              <div class="py-2 text-center">
-                <h2 class="lead-heading">Data visualisation</h2>
+          </div>
+            <div *ngIf="someData.length > 0">
+              <div class="col-12 px-md-5 px-3 mx-auto">
+                <table class="table table-striped">
+                  <thead>
+                  <tr>
+                    <th *ngFor="let head of header" scope="col">{{head | uppercase}}</th>
+                  </tr>
+                  </thead>
+                  <tbody>
+                  <tr *ngFor="let item of rawData">
+                    <td *ngFor="let i of returnRow(item)">
+                      {{i}}
+                    </td>
+                  </tr>
+                  </tbody>
+                </table>
+                
+                <div class="d-flex justify-content-between p-2">
+                  <ngb-pagination [collectionSize]="collectionSize" [(page)]="page" [pageSize]="pageSize" (pageChange)="refreshCountries()">
+                  </ngb-pagination>
+                
+                  <select class="form-select" style="width: auto" [(ngModel)]="pageSize" (ngModelChange)="refreshCountries()">
+                    <option [ngValue]="2">2 items per page</option>
+                    <option [ngValue]="4">4 items per page</option>
+                    <option [ngValue]="6">6 items per page</option>
+                  </select>
+                </div>
               </div>
-              <div class="card p-2 col-md-4 col-6 mb-4">
-                  <form action="" [formGroup]="seriesSetForm" (ngSubmit)="setOptions()">
-                    <div class="mb-2">
-                      <label for="">y axis Values</label>
-                      <select name="" id="" formControlName="xAxisValues" class="sidebarInput col-12" required>
+              <div class="my-3">
+                <hr>
+              </div>
+              <div class="container" >
+                <div class="bar-chart" *ngIf="displayBar">
+                  <div class="py-2 text-center">
+                    <h2 class="lead-heading">Data visualisation</h2>
+                  </div>
+                  <div class="card p-2 col-md-4 col-6 mb-4">
+                      <form action="" [formGroup]="seriesSetForm" (ngSubmit)="setOptions()">
+                        <div class="mb-2">
+                          <label for="">y axis Values</label>
+                          <select name="" id="" formControlName="xAxisValues" class="sidebarInput col-12" required>
+                              <option *ngFor="let item of header | keyvalue" value="{{item.key}}">{{item.value}}</option>
+                          </select>
+                        </div>  
+                        <div class="mb-2">
+                          <label for="">Select data to x-axis data </label>
+                          <select name="" id="" formControlName="data" class="form-control col-12"  multiple required>
+                              <option *ngFor="let item of header | keyvalue" value="{{item.key}}">{{item.value}}</option>
+                          </select>
+                          <span class="text-danger text-sm">*Hold control and select in the case of multiple</span>
+                        </div> 
+                        <div class="mb-2">
+                          <label for="">Graph type</label>
+                          <select name="" id="" formControlName="type" class="sidebarInput col-12" required>
+                              <option value="bar">Bar graph</option>
+                              <option value="line">Line Chart</option>
+                          </select>
+                        </div> 
+                        <div class="">
+                          <input type="submit" value="create chart" class="btn col-6 blueBtn" >
+                      </div>
+                      </form>
+                  </div>
+                  <div echarts [options]="chartOptions" class="demo-chart"></div>
+                  <hr class="mb-5">
+                </div>
+               
+                <div *ngIf="displayPie" class="my-5">
+                  <h2 class="h2 lead-heading text-center mb-3">Pie Chart</h2>
+                  <form action="" [formGroup]="pieChartForm" (ngSubmit)="generatePieCart()">
+                    <div class="mb-2 col-sm-6 col-12 mx-auto">
+                      <label for="">Column to visualize it's data in a pie chart</label>
+                      <select name="" id="" formControlName="column" class="sidebarInput col-12" required>
                           <option *ngFor="let item of header | keyvalue" value="{{item.key}}">{{item.value}}</option>
                       </select>
-                    </div>  
-                    <div class="mb-2">
-                      <label for="">Select data to x-axis data </label>
-                      <select name="" id="" formControlName="data" class="form-control col-12"  multiple required>
-                          <option *ngFor="let item of header | keyvalue" value="{{item.key}}">{{item.value}}</option>
-                      </select>
-                      <span class="text-danger text-sm">*Hold control and select in the case of multiple</span>
                     </div> 
-                    <div class="mb-2">
-                      <label for="">Graph type</label>
-                      <select name="" id="" formControlName="type" class="sidebarInput col-12" required>
-                          <option value="bar">Bar graph</option>
-                          <option value="line">Line Chart</option>
-                      </select>
-                    </div> 
-                    <div class="">
-                      <input type="submit" value="create chart" class="btn col-6 blueBtn" >
+                    <div class="col-sm-6 col-12 mx-auto">
+                      <input type="submit" value="Create pie chart" class="btn col-12 blueBtn mx-auto" >
                   </div>
                   </form>
+                  <div echarts [options]="pieOptions" class="demo-chart mx-4"></div>
+
+                </div>
+
+                <!-- <select class="form-control" name="" id="" [(ngModel)]="selectedCountry" (change)="onChangeCountry()">
+                    <option *ngFor="let c of countries$ | async" [value]="c.Slug">{{c.Country}}</option>
+                </select> -->
               </div>
-              <div echarts [options]="chartOptions" class="demo-chart"></div>
-              <!-- <select class="form-control" name="" id="" [(ngModel)]="selectedCountry" (change)="onChangeCountry()">
-                  <option *ngFor="let c of countries$ | async" [value]="c.Slug">{{c.Country}}</option>
-              </select> -->
             </div>
         </div>
         

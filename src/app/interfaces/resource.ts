@@ -19,5 +19,6 @@ export interface Resource {
     size: number
     state: string
     url: string
+    original_url: string
     url_type: string
 }

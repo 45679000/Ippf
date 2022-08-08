@@ -4,7 +4,7 @@
 <div class="my-4">
     <app-navbar></app-navbar>
 </div>
-<div class="container px-md-5 mt-5">
+<div class="container px-md-5 mt-5 min-vh-100">
     <div class="dataset">
         <h2 class="lead-heading-mid">{{dataOfDataset.title}}</h2>
         <!-- <p class="lead-heading-small">Angola, 2021-2022 <span class="mx-4">{{(dataOfDataset.title.length > 0) ? dataOfDataset.title : 'No title'}}</span></p>
@@ -19,61 +19,52 @@
         <div class="dataset-content">
             <div class="btn-group mb-3">
                 <button class="btn lead-heading" [ngClass]=" studyDescriptionDisp? 'pink-border' : ''" (click)="dispStudyDescription()">Survey Description</button>
-                <button class="btn lead-heading" [ngClass]=" documentationDisp? 'pink-border' : ''" (click)="dispDocumentation()">Documentation</button>
+                <button class="btn lead-heading" [ngClass]=" documentationDisp? 'pink-border' : ''" (click)="dispDocumentation()">Documentation & Resources</button>
             </div>
             <div class="study-description row" *ngIf="studyDescriptionDisp">
-                <!-- <div class="links col-12 col-sm-2">
-                    <button class="btn btn-link" href="#" (click)="navigateToSection('series-info')">Identification</button>
-                    <a href="#">Version</a>
-                    <a href="#">Scope</a>
-                    <a href="#">Coverage</a>
-                    <a href="#">Producers and sponsors</a>
-                    <a href="#">Sampling</a>
-                    <a href="#">Data Collection</a>
-                    <a href="#">Questionnaires</a>
-                    <a href="#">Data Processing</a>
-                    <a href="#">Data Appraisal</a>
-                    <a href="#">Access policy</a>
-                    <a href="#">Disclaimers and copyrights</a>
-                    <a href="#">Metadat Production</a>
-                </div> -->
                 <div class="content-data col-12 col-sm-10">
                     <h2 class="lead-heading">Identification</h2>
-                    <div class="id-number">
+                    <div class="id-number mb-4">
                         <h2 class="h2">SURVEY ID NUMBER</h2>
                         <p>{{dataOfDataset.id }}</p>
                     </div>
-                    <div class="survey-title">
+                    <!-- <div class="survey-title">
                         <h2 class="lead-heading">TITLE</h2>
                         <p>{{dataOfDataset.title }}</p>
+                    </div> -->
+                    <div class="col-md-6 col-12">
+                        <div class="author row col-12">
+                            <table class="table">
+                                <tbody>
+                                    <tr>
+                                        <td>Author:</td>
+                                        <td>{{dataOfDataset.author}}</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Author's email:</td>
+                                        <td>{{dataOfDataset.author_email}}</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Maintainer:</td>
+                                        <td>{{dataOfDataset.maintainer}}</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Maintainer's email:</td>
+                                        <td>{{dataOfDataset.maintainer_email}}</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
                     </div>
-                    <div class="survey-country">
-                        <h2 class="lead-heading">COUNTRY/ECONOMY</h2>
-                        {{(dataOfDataset.notes.length > 0) ? dataOfDataset.title : 'No tabular data on country provided'}}
-                        <!-- <table class="col-12 col-md-4 col-sm-6">
-                            <thead>
-                                <tr>
-                                    <th>Name</th>
-                                    <th>Country code</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td >Angola</td>
-                                    <td>ANG</td>
-                                </tr>
-                            </tbody>
-                        </table> -->
-                        
-                    </div>
-                    <div class="study-type">
+                    
+                    <!-- <div class="study-type">
                         <h2 class="lead-heading">STUDY TYPE</h2>
                         <p>{{(dataOfDataset.notes.length > 0) ? dataOfDataset.title : 'Study type not specified'}}</p>
-                    </div>
-                    <div class="col-12 series-info" id="series-info">
+                    </div> -->
+                    <!-- <div class="col-12 series-info" id="series-info">
                         <h2 class="lead-heading">SERIES INFORMATION</h2>
                         {{(dataOfDataset.notes.length > 0) ? dataOfDataset.title : 'Series information not available'}}
-                    </div>
+                    </div> -->
                     <div class="data-description" id="data-description">
                         <div class="links col-12 col-sm-2">
                             <h2 class="lead-heading-small">Data files</h2>
@@ -88,7 +79,49 @@
                 </div>
             </div>
             <div class="documentation" *ngIf="documentationDisp">
-                <div class="questionnaires mt-4">
+                <div *ngIf="resourcesArray.length < 1">
+                    No resources uploaded to this dataset
+                </div>
+                <div *ngIf="resourcesArray.length > 0">
+                    <div *ngFor="let resource of resourcesArray">
+                        <div class="questionnaires mt-4">
+                            <!-- <h2 class="lead-heading">Questionnaires</h2> -->
+                            <div class="questionnaire">
+                                <div class="question-title">
+                                    <div class="question-name">
+                                        <h2 class="lead-heading">{{resource.name | uppercase}}</h2>
+                                    </div>
+                                    
+                                    
+                                </div>
+                                <div class="question-data">
+                                    <p>{{resource.description}}</p>
+                                    <!-- <p><span class="question-data-bold">Download: </span><a href="https://ippf.org/index.php/catlog/1912/download/29499">https://ippf.org/index.php/catlog/1912/download/29499</a></p> -->
+                                    <div class="bottom-items row col-12">
+                                        <div class="col-3 m-auto">
+                                            Date Created: <span class="text-info">{{resource.created | date:'mediumDate'}}</span>
+                                        </div>
+                                        <div class="col-3 m-auto" *ngIf="resourceExistUrl(resource)">
+                                            <a [routerLink]="['/wishscope']" [queryParams]="{ id: 99, resource_id: 20}" class="btn btn-link" ><span class="mx-2"><i class="fas fa-chart-line"></i></span>Visualize in Wishscope</a>
+                                        </div>
+                                        <div class="col-6 m-auto" *ngIf="!resourceExistUrl(resource)">
+                                            No file uploaded
+                                        </div>
+                                        <div class="col-3 m-auto">
+                                            <a [routerLink]="['/datasets/dataset-upload']" [queryParams]="{ id: dataOfDataset.id, resource_id: resource.id}" class="btn btn-primary btnBlue"><span class="mx-2"><i class="fas fa-pen"></i></span>Edit</a>
+                                        </div>
+                                        <div class="col-3 m-auto" *ngIf="resourceExistUrl(resource)">
+                                            <a  href="{{resource.original_url || resource.url}}" class="download-link blue-text"><span class="mx-2"><i class="fas fa-download"></i></span>Download</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <hr>
+                    </div>
+
+                </div>
+                <!-- <div class="questionnaires mt-4">
                     <h2 class="lead-heading">Questionnaires</h2>
                     <div class="questionnaire">
                         <div class="question-title">
@@ -164,10 +197,10 @@
                         <a href="#" class="download-link blue-text"><span class="mx-2"><i class="fas fa-download"></i></span>Download</a>
                     </div>
 
-                </div>
+                </div> -->
             </div>
         </div>
     </div>
     
 </div>
-<app-footer></app-footer>
+<app-footer class="my-auto"></app-footer>
