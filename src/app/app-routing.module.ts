@@ -14,6 +14,7 @@ import { ResourceManageOneComponent } from './resorce-portal/resource-manage-one
 import { ResourceContentComponent } from './resorce-portal/resource-content/resource-content.component';
 import { WishscopeComponent } from './datasets/wishscope/wishscope.component';
 import { DataRequestComponent } from './datasets/data-request/data-request.component'
+import { ErrorPageComponent } from './error-page/error-page.component';
 
 const routes: Routes = [
   {
@@ -22,8 +23,21 @@ const routes: Routes = [
     pathMatch: 'full' 
   },
   {
+    path: '*', 
+    redirectTo: 'home' 
+  },
+  {
+    path: '**', 
+    redirectTo: 'home' 
+  },
+  {
+    path: 'error-page',
+    component: ErrorPageComponent
+  },
+  {
     path: 'registration', 
-    component: RegisterComponent
+    component: RegisterComponent,
+    canActivate: [!AuthGuard] 
   },
   {
     path: 'about',

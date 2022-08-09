@@ -17,13 +17,13 @@
             </ul>
         </div>
         <div class="subscribe col-md-6 col-lg-6 col-sm-6">
-            <form action="">
+            <form action="" [formGroup]="feedbackForm" (submit)="submit()">
                 <div class="form-group">
                     <div class="mb-3">
                       <label for="" class="font-weight-bold mb-2">Feedback</label>  
-                      <textarea class="form-control" name="" id="" rows="2" placeholder="Tell Us How We Can Improve"></textarea>
+                      <textarea class="form-control" name="" id="" rows="2" placeholder="Tell Us How We Can Improve" formControlName="feedback"></textarea>
                       <div class="row inputFields px-3">
-                        <input type="text" name="name" id="name" class="form-control mt-2" placeholder="Please input you name">
+                        <input type="text" name="name" id="name" class="form-control mt-2" placeholder="Please input you name" formControlName="name">
                         <input type="submit" value="Submit" class="mt-2 btn blueBtn searchBtn">
                       </div>
                     </div>

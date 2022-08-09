@@ -1,0 +1,10 @@
+.wrapContent {
+    display: flex;
+    flex-direction: column;
+    justify-content: center !important;
+    align-items: center !important;
+    margin: auto !important;
+}
+.logos {
+    align-items: center !important;
+}
