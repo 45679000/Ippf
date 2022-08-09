@@ -5,6 +5,8 @@ import {RouterModule} from '@angular/router';
 import { TopHeaderComponent } from './top-header/top-header.component';
 import { FooterComponent } from './footer/footer.component';
 import { PortalFooterComponent } from './portal-footer/portal-footer.component';
+import { FormsModule } from '@angular/forms';
+import { ReactiveFormsModule } from '@angular/forms';
 
 
 @NgModule({
@@ -16,7 +18,9 @@ import { PortalFooterComponent } from './portal-footer/portal-footer.component';
   ],
   imports: [
     CommonModule,
-    RouterModule
+    RouterModule,
+    FormsModule,
+    ReactiveFormsModule
   ],
   exports: [
     NavbarComponent,

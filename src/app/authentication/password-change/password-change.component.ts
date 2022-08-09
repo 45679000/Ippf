@@ -16,9 +16,8 @@ export class PasswordChangeComponent implements OnInit {
   load:boolean = false
   passwordResetForm = new FormGroup({
     email: new FormControl('',[Validators.required]),
-    old_password: new FormControl('', [Validators.required]),
-    new_password: new FormControl('',[Validators.required]),
-    confirm_password: new FormControl('', [Validators.required])
+    user: new FormControl('', [Validators.required]),
+    realm: new FormControl('localsql', [Validators.required])
   })
   emailSent() {
     this.isShown = !this.isShown
@@ -31,9 +30,9 @@ export class PasswordChangeComponent implements OnInit {
   changePassword() {
     if(this.passwordResetForm.status == 'VALID'){
       this.load = true
-      this.auth.changePassword().subscribe((response:any) => {
+      this.auth.changePassword(this.passwordResetForm.value).subscribe((response:any) => {
         console.log(response);
-        if(response == 500){
+        if(response == 500 || 0){
           this.load = false
           Swal.fire({  
             icon: 'error',  
@@ -41,29 +40,36 @@ export class PasswordChangeComponent implements OnInit {
             text: 'Something went wrong!',  
             footer: 'Try again. If problems persist contact the admin'  
           })
-        } else if(response == 401) {
+        } else if(response == 400) {
           this.load = false
           Swal.fire({  
             icon: 'error',  
             title: 'Oops...',  
-            text: 'Password did not match',  
-            footer: 'Try again.'  
+            text: 'Email or username mismatch',  
+            footer: 'Make sure you have entered the rigth credentials. However, if problems persist, contact the admin.'  
           })
         } else {
           this.load = false
-          setTimeout(function (){
-            Swal.fire({  
-              icon: 'success',  
-              title: 'Done',  
-              text: 'Your password was changed',  
-              footer: 'You redirecting to login page'  
-            })
-          }, 1000)
-          this.route.navigate(['/login'])
+          if(response.status){
+            setTimeout(function (){
+              Swal.fire({  
+                icon: 'success',  
+                title: 'Done',  
+                text: 'You have been sent an email to reset your password. ',  
+                footer: 'Check your email inbox. Then sign in.'  
+              })
+            }, 2000)
+            this.route.navigate(['/login'])
+          }
         }
       })
     }else {
       this.warn = "Make sure to fill all the required form field before submiting"
+      Swal.fire({  
+        icon: 'error',  
+        title: 'Oops...',  
+        text: 'Username and email address are required',
+      })
     }
   }
 }

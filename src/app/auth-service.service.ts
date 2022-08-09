@@ -144,16 +144,12 @@ export class AuthServiceService {
     return userDetails 
 
   }
-  changePassword(): any {
-    let token = localStorage.getItem('auth_tkn')
-
+  changePassword(data:any): any {
     const userReset = new Observable((observer) => {
       $.ajax({
         method: "POST", 
-        // headers: {
-        //   "Authorization": localStorage.getItem('auth_tkn')
-        // },
-        url:`https://privacyidea.netknights.it/dariangroup/user/`,
+        data: data,
+        url:`https://privacyidea.netknights.it/dariangroup/recover`,
         success: function (response){
           console.log(response)
           observer.next(response.result)
