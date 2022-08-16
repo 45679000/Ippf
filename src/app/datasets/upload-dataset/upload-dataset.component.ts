@@ -29,7 +29,7 @@ export class UploadDatasetComponent implements OnInit {
     license_id: new FormControl(),
     owner_org: new FormControl('',{}),
     // dataset: new FormControl(),
-    // datafile: new FormControl()
+    datafile: new FormControl()
   })
 
   id:any
@@ -37,7 +37,7 @@ export class UploadDatasetComponent implements OnInit {
   edit:boolean = false
   tags:any
   groups:any
-  success:boolean = false
+  success:boolean = true
   resource_uploaded:boolean = false
   dataset: Dataset = {
     author: '',
@@ -80,8 +80,12 @@ export class UploadDatasetComponent implements OnInit {
     format: new FormControl(),
     state: new FormControl(),
     name: new FormControl(),
-    url: new FormControl()
+    upload: new FormControl()
   })
+  file: any
+  onChange(event:any) {
+    this.file = event.target.value;
+  }
   constructor(private datasetService: DatasetService, private route: ActivatedRoute) { }
 
   ngOnInit(): void {
@@ -101,14 +105,17 @@ export class UploadDatasetComponent implements OnInit {
       
     // })
     this.route.queryParamMap.subscribe(params => { 
-      this.id = params.get('id');
-      this.resource_id = params.get('resource_id')
-      if(this.id.length > 0) {
-        this.edit = true
-        this.datasetService.getADataset(this.id).subscribe((data:any) => {
-          this.dataset = data
-        })
+      if(params.get('id') != null){
+        this.id = params.get('id');
+        this.resource_id = params.get('resource_id')
+        if(this.id.length > 0 || this.id != null) {
+          this.edit = true
+          this.datasetService.getADataset(this.id).subscribe((data:any) => {
+            this.dataset = data
+          })
+        }
       }
+      
       // this.datasetForm.value.dataset = this.id
       // this.datasetForm.value.datafile = this.resource_id
       // console.log('Query params ',this.pageNo) 
@@ -151,8 +158,9 @@ export class UploadDatasetComponent implements OnInit {
     
   }
   submitResource() {
+    this.newResourceForm.controls['upload'].setValue(this.file)
     this.datasetService.addResource(this.newResourceForm.value).subscribe((response: any) => {
-      console.log(response);
+      console.log(this.newResourceForm.value);
       this.dataset = response.result
       this.resource_uploaded = response.success
       if(response.success){

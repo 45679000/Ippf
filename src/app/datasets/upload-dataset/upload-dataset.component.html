@@ -117,7 +117,8 @@
                 </div>
                 <div class="mb-3">
                     <label for="">Dataset url</label>
-                    <input class="sidebarInput col-12 p-2" type="email" name="name" id="" formControlName="url">
+                    <!-- <input class="sidebarInput col-12 p-2" type="email" name="name" id="" formControlName="url"> -->
+                    <input class="sidebarInput col-12 p-2" type="file" name="name" id="" (change)="onChange($event)">
                 </div>
             </div>
             <div class="col-12 mx-auto text-center my-5">
