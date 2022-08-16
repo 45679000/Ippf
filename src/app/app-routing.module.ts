@@ -22,14 +22,14 @@ const routes: Routes = [
     redirectTo: 'home', 
     pathMatch: 'full' 
   },
-  {
-    path: '*', 
-    redirectTo: 'home' 
-  },
-  {
-    path: '**', 
-    redirectTo: 'home' 
-  },
+  // {
+  //   path: '*', 
+  //   redirectTo: 'home' 
+  // },
+  // {
+  //   path: '**', 
+  //   redirectTo: 'home' 
+  // },
   {
     path: 'error-page',
     component: ErrorPageComponent
@@ -37,7 +37,7 @@ const routes: Routes = [
   {
     path: 'registration', 
     component: RegisterComponent,
-    canActivate: [!AuthGuard] 
+    // canActivate: [!AuthGuard] 
   },
   {
     path: 'about',

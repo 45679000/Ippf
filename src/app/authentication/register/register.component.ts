@@ -37,7 +37,7 @@ export class RegisterComponent implements OnInit {
       if(this.registrationForm.value.password == this.registrationForm.value.passwordConfirmation){
         this.load = true
         this.auth.signup(this.registrationForm.value.username, this.registrationForm.value.givenname, this.registrationForm.value.surname, this.registrationForm.value.email, this.registrationForm.value.password).subscribe((res: any)=>{
-          console.log(res.error.code);
+          // console.log(res);
           if(res == 500) {
             Swal.fire({  
               icon: 'error',  
@@ -46,7 +46,7 @@ export class RegisterComponent implements OnInit {
               footer: 'Try again. If problems persist contact the admin'  
             })
             this.load = false
-          }else if(res.error.code == 402){
+          }else if(res.error && res.error.code == 402){
             Swal.fire({  
               icon: 'error',  
               title: 'Oops...',  
@@ -64,7 +64,7 @@ export class RegisterComponent implements OnInit {
                 text: 'You created an account successfully. View your email inbox to complete the process',  
                 // footer: 'You '  
               })  
-              this.load = true
+              this.load = false
             }
             else{
               this.success = false
