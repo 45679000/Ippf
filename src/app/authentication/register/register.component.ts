@@ -36,7 +36,7 @@ export class RegisterComponent implements OnInit {
 
       if(this.registrationForm.value.password == this.registrationForm.value.passwordConfirmation){
         this.load = true
-        this.auth.signup(this.registrationForm.value.username, this.registrationForm.value.givenname, this.registrationForm.value.surname, this.registrationForm.value.email, this.registrationForm.value.password).subscribe((res: any)=>{
+        this.auth.signup(this.registrationForm.value.givenname, this.registrationForm.value.surname, this.registrationForm.value.email, this.registrationForm.value.password).subscribe((res: any)=>{
           // console.log(res);
           if(res == 500) {
             Swal.fire({  

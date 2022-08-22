@@ -72,9 +72,9 @@ export class AuthServiceService {
     localStorage.setItem('auth_meta', JSON.stringify(this.decodedToken));
     return token;
   }
-  signup(username:string, givenname: string,surname:string, email:string, password:string){
+  signup(givenname: string,surname:string, email:string, password:string){
     let data = {
-        username: username,
+        username: email,
         givenname: givenname,
         surname: surname,
         email: email,
