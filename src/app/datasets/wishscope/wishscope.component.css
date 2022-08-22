@@ -1,3 +1,7 @@
 .top-form {
     margin-bottom: 3rem;
 }
+iframe {
+    min-width: 100vw;
+    min-height: 100vh;
+}

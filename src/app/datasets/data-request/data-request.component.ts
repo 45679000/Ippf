@@ -33,6 +33,7 @@ export class DataRequestComponent implements OnInit {
     name: new FormControl(this.user.username, [Validators.required]),
     email: new FormControl(this.user.email, [Validators.required]),
     country: new FormControl('', [Validators.required]),
+    dataset: new FormControl('', [Validators.required]),
     organisation: new FormControl('', [Validators.required]),
     reason: new FormControl('', [Validators.required])
   })
