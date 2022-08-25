@@ -17,12 +17,16 @@
     text-decoration: none;
     color: #151F6D !important;
 }
-/* .menu a:active{
-    border: 3px solid red;
-} */
-.searchBtnBig {
-    color: #E6007E !important;
-    /* border: #E6007E !important; */
+.clear-btn {
+    padding-right: 0 !important;
+}
+.inputWrap {
+    display: flex;
+    gap: 2rem;
+    padding: 0 !important;
+}
+.inputWrap select {
+    width: 50%;
 }
 .active{
     border-bottom: 4px solid #E6007E;

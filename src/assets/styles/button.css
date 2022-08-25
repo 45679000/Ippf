@@ -31,18 +31,6 @@
     border-radius: 45px !important;
     line-height: 2rem;
 }
-.clear-btn {
-    display: flex;
-    flex-direction: column;
-    align-self: flex-end;
-    align-items: center;
-}
-.clear-btn button {
-    padding-left: 1rem;
-    padding-right: 1rem;
-    font-size: 1rem;
-    border-radius: 45px;
-}
 .searchBtnMid {
     height: 90px;
     line-height: 51px;

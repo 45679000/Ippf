@@ -4,6 +4,7 @@ import { FormGroup, FormControl, Validators ,FormBuilder} from '@angular/forms';
 import { Resource } from '../../interfaces/resource'
 import { ActivatedRoute } from '@angular/router'
 import { DomSanitizer } from "@angular/platform-browser";
+import { Constants } from "../../config/constants"
 
 interface Item {
   item: string[]
@@ -88,7 +89,7 @@ export class WishscopeComponent implements OnInit {
   }
   getCsv(){
     this.load = true
-    this.url = `http://3.236.19.31/dataset/${this.datasetForm.value.dataset}/resource/${this.datasetForm.value.datafile}`
+    this.url = `${Constants.ckan_url}/dataset/${this.datasetForm.value.dataset}/resource/${this.datasetForm.value.datafile}`
     // this.url = `http://3.236.19.31/dataset/family-planning/resource/e75b0996-3a0b-4e6e-921f-f7e5a1892781/view/8af72bce-43a7-41f3-b7de-eb9fac8f2edb`
 
     this.displayIframe = true
