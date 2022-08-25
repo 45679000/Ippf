@@ -70,7 +70,7 @@ export class DatasetService {
               method: "GET",
               // contentType:'application/json',
               dataType: 'jsonp',
-              url: `http://3.236.19.31/api/3/action/package_show?id=${el}`,
+              url: `http://54.157.112.194/api/3/action/package_show?id=${el}`,
               success: function (response){
                 // console.log(response)
                 observer.next(response.result)
