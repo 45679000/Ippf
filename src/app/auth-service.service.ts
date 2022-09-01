@@ -47,26 +47,19 @@ export class AuthServiceService {
         },
         url:`${this.auth_url}/auth`,
         success: function (response){
-          console.log(response)
-          // this.saveToken(response.result.value.token)
           this.decodedToken = jwt.decodeToken(response.result.value.token);
           localStorage.setItem('auth_tkn', response.result.value.token);
           localStorage.setItem('auth_meta', JSON.stringify(this.decodedToken));
           observer.next(response)
-          // this.route.navigate(['/']);
-          // observer.next(response.status)
         },
         error: function (error){
-          // console.log(error)
           observer.next(error.status)
         }
       });
     });
     return token
   }
-  saveToken(token: any): Observable<any>{
-    console.log('yeah');
-    
+  saveToken(token: any): Observable<any>{    
     this.decodedToken = jwt.decodeToken(token);
     localStorage.setItem('auth_tkn', token);
     localStorage.setItem('auth_meta', JSON.stringify(this.decodedToken));
@@ -86,11 +79,9 @@ export class AuthServiceService {
         data: data,
         url:`${this.auth_url}/register`,
         success: function (response){
-          console.log(response)
           observer.next(response)
         },
         error: function (error){
-          console.log(error)
           if(error.status == 400){
             let response = error.responseJSON.result
             observer.next(response)
@@ -110,7 +101,6 @@ export class AuthServiceService {
     this.route.navigate(['/login'])
   }
   public isAuthenticated(): any {
-    // console.log(localStorage.getItem('auth_meta'));
     if(localStorage.getItem('auth_meta') != null){
       this.decodedToken = localStorage.getItem('auth_meta') 
       
@@ -132,11 +122,9 @@ export class AuthServiceService {
         },
         url:`${this.auth_url}/user`,
         success: function (response){
-          console.log(response)
           observer.next(response.result)
         },
         error: function (error){
-          console.log(error)
           observer.next(error.status)
         }
       });
@@ -144,18 +132,20 @@ export class AuthServiceService {
     return userDetails 
 
   }
-  changePassword(data:any): any {
+  changePassword(email:any): any {
+    let data = {
+      email : email,
+      user : email
+    }
     const userReset = new Observable((observer) => {
       $.ajax({
         method: "POST", 
         data: data,
         url:`https://privacyidea.netknights.it/dariangroup/recover`,
         success: function (response){
-          console.log(response)
           observer.next(response.result)
         },
         error: function (error){
-          console.log(error)
           observer.next(error.status)
         }
       });
@@ -178,11 +168,9 @@ export class AuthServiceService {
         },
         url:`${this.auth_url}/user/`,
         success: function (response){
-          console.log(response)
           observer.next(response.result)
         },
         error: function (error){
-          console.log(error)
           observer.next(error.status)
         }
       });

@@ -18,24 +18,17 @@
                 </div>
                 <div class="col-12 col-md-8 row mx-auto">
                     <p class="">* Refined Search</p>
-                    <div class=" col-10 inputWrap">
-                        <select type="text" placeholder="Country Name" class="sidebarInput" formControlName="tag">
+                    <div class=" col-10 col-md-8 col-sm-6 inputWrap">
+                        <select type="text" placeholder="Country Name" class="topSearchInput" formControlName="tag">
                             <option [ngValue]="null" [disabled]="true" class="suggestion">Tags</option>
                             <option *ngFor="let tag of tags" value="{{tag}}">{{ tag | titlecase}}</option>
                         </select>
-                        <select type="text" placeholder="Year" class="sidebarInput" formControlName="group">
+                        <select type="text" placeholder="Year" class="topSearchInput" formControlName="group">
                             <option [ngValue]="null" [disabled]="true" class="suggestion">Group</option>
                             <option *ngFor="let group of groups" value="{{group}}"value="{{group}}">Volvo</option>
-                            <!-- <p *ngIf="groups.length > 0; else elseBlock"></p> -->
-                            <!-- <ng-template #elseBlock>
-                                <option disabled value="">No groups</option></ng-template> -->
                         </select>
                     </div>
-                    <!-- <div class="col-12">
-                        
-
-                    </div> -->
-                    <div class="col-2 clear-btn">
+                    <div class="col-2 col-md-4 col-sm-6 clear-btn">
                         <button class="btn col-12 searchBtnBig blueBtn" (click)="clearTags()">Clear selection</button>
 
                     </div>

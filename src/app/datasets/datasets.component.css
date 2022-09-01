@@ -28,6 +28,9 @@
 .inputWrap select {
     width: 50%;
 }
+.inputWrap select, .inputWrap button {
+    height: 60px !important;
+}
 .active{
     border-bottom: 4px solid #E6007E;
 }
