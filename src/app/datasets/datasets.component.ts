@@ -46,10 +46,6 @@ interface dataDaset {
   version: string
 
 }
-// const category: Category = {
-//   name: '',
-//   description: 'My Description',
-// };
 @Component({
   selector: 'app-datasets',
   templateUrl: './datasets.component.html',
@@ -124,7 +120,6 @@ export class DatasetsComponent implements OnInit {
     })
     this.datasetService.getAllGroups().subscribe((val: any) => {
       this.groups = val
-      console.log(this.groups)
     })
     this.datasetService.getAllData().
     subscribe((val: any)=>{
@@ -136,8 +131,6 @@ export class DatasetsComponent implements OnInit {
   onSubmit() {
     this.loader = true
     this.changeHeader()
-    console.log(this.searchForm.value.q == null)
-    console.log(this.searchForm);
     this.datasetService.searchDataset(this.searchForm.value.q, this.searchForm.value.tag, this.searchForm.value.group).subscribe((val: any) => {
       this.loader = false
       this.xxy = val.result.count

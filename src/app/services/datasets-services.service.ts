@@ -38,7 +38,6 @@ export class DatasetService {
   constructor(private http: HttpClient) {
   }
   allDatasets = new Observable<Data>((observer) => {
-    // console.log('Starting observable');
     $.ajax({
       method: "GET",
       // contentType:'application/json',
@@ -46,7 +45,6 @@ export class DatasetService {
       url: this.baseURL +'/package_list',
       success: function (response){
         observer.next(response.result)
-        console.log(response);
         
       },
       error: function(error){
@@ -63,7 +61,6 @@ export class DatasetService {
         dataType: 'jsonp',
         url:  this.baseURL +'/package_list',
         success: function (response){
-          // console.log(response)
           let url = this.baseURL
           response.result.forEach((el: any) =>{
             $.ajax({
@@ -72,7 +69,6 @@ export class DatasetService {
               dataType: 'jsonp',
               url: `http://54.157.112.194/api/3/action/package_show?id=${el}`,
               success: function (response){
-                // console.log(response)
                 observer.next(response.result)
               }
             })
@@ -91,7 +87,6 @@ export class DatasetService {
         dataType: 'jsonp',
         url: this.baseURL + `/package_show?id=${id}`,
         success: function (response){
-          // console.log(response)
           observer.next(response.result)
         }
       })
@@ -107,7 +102,6 @@ export class DatasetService {
         dataType: 'jsonp',
         url:this.baseURL + `/group_list`,
         success: function (response){
-          // console.log(response)
           observer.next(response.result)
         }
       })
@@ -123,7 +117,6 @@ export class DatasetService {
         dataType: 'jsonp',
         url:this.baseURL + `/tag_list`,
         success: function (response){
-          // console.log(response)
           observer.next(response.result)
         }
       })
@@ -171,7 +164,6 @@ export class DatasetService {
         data: form_data,
         url:`${this.baseURL}/package_create`,
         success: function (response){
-          console.log(response)
           observer.next(response)
         }
       });
@@ -192,7 +184,6 @@ export class DatasetService {
         data: form_data,
         url:`${this.baseURL}/package_update`,
         success: function (response){
-          console.log(response)
           observer.next(response)
         },
         error: function (error){
@@ -216,7 +207,6 @@ export class DatasetService {
         data: resource_form,
         url:`${this.baseURL}/resource_create`,
         success: function (response){
-          console.log(response)
           observer.next(response)
         }
       });
@@ -242,7 +232,6 @@ export class DatasetService {
           data: JSON.stringify(data),
           url:`${this.baseURL}/resource_view_create`,
           success: function (response){
-            console.log(response)
             observer.next(response)
           }
         });

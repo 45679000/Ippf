@@ -5,7 +5,7 @@ import { AuthServiceService } from '../../auth-service.service';
 import { Router } from '@angular/router';
 import Swal from 'sweetalert2';
 import {Location} from '@angular/common';
-
+import { RoutesService } from '../../services/routes.service'
 
 @Component({
   selector: 'app-login',
@@ -20,8 +20,9 @@ export class LoginComponent implements OnInit {
   error: string = ''
   success: string = ''
   load:boolean  = false
-  constructor(private fb: FormBuilder, private auth: AuthServiceService, private route: Router, private _location: Location) {}
+  constructor(private fb: FormBuilder, private auth: AuthServiceService, private route: Router, private _location: Location, private routesService: RoutesService) {}
   ngOnInit(): void {
+    console.log(this.routesService.previousUrl)
     if(this.auth.isAuthenticated()){
       this.route.navigate(['/'])
     }
@@ -36,9 +37,7 @@ export class LoginComponent implements OnInit {
   login() {
     if(this.loginForm.valid){
       this.load = true
-        this.auth.login(this.loginForm.value.email, this.loginForm.value.password, this.loginForm.value.remember).subscribe((token: any) => {
-          console.log(token);
-          
+        this.auth.login(this.loginForm.value.email, this.loginForm.value.password, this.loginForm.value.remember).subscribe((token: any) => {          
           if(token == 500 || token == 0){
             this.error = ''
             Swal.fire({  
@@ -59,14 +58,13 @@ export class LoginComponent implements OnInit {
           }else if(token.result.status){
             this.error = ''
             this.load = false
-            Swal.fire({  
-              icon: 'success',  
-              title: 'Done',  
-              text: 'Logged in successfully',  
-              footer: "Redirecting..."  
-            });
-            
-            this._location.back();
+            if(this.routesService.previousUrl == 'registration' || this.routesService.previousUrl == 'password-change'){
+              this.routesService.changePrevious('home')
+              this.route.navigate(['/'])
+            } else {  
+              this.routesService.changePrevious('home')          
+              this._location.back();
+            }
           } else {
             Swal.fire({  
               icon: 'error',  

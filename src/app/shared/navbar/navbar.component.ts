@@ -22,7 +22,6 @@ export class NavbarComponent implements OnInit {
     if(this.href == '/home'){{
       this.fontColorBlue = false              
     }}
-    console.log(this.href)
   }
   fontColorBlue: boolean = true
   ngAfterViewInit() {
@@ -30,17 +29,14 @@ export class NavbarComponent implements OnInit {
       
       if(state.matches){
         this.breadCrumb = true
-        console.log('width < 768px');
         
       } else {
         this.breadCrumb = false
-        console.log('width > 768px');
       }
     })
   }
   showMenu(){
     this.breadCrumb = !this.breadCrumb
-    console.log(this.breadCrumb);
     
   }
 }

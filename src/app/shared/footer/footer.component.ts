@@ -20,7 +20,6 @@ export class FooterComponent implements OnInit {
   }
   submit(){
     if(this.feedbackForm.valid){
-      console.log(this.feedbackForm.valid);
       
     }else {
       Swal.fire({  

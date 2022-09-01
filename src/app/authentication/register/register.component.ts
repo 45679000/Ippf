@@ -3,6 +3,7 @@ import { FormGroup, FormControl, Validators ,FormBuilder} from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { AuthServiceService } from '../../auth-service.service';
 import Swal from 'sweetalert2';
+import { RoutesService } from '../../services/routes.service'
 
 @Component({
   selector: 'app-register',
@@ -24,14 +25,14 @@ export class RegisterComponent implements OnInit {
   failed:boolean = false
   warn:string = ''
   load:boolean = false
-  constructor(private fb: FormBuilder, private auth: AuthServiceService, private route: ActivatedRoute) { }
+  constructor(private fb: FormBuilder, private auth: AuthServiceService, private route: ActivatedRoute, private routesService: RoutesService) { }
 
   ngOnInit(): void {
-
+    this.routesService.changePrevious('registration')
   }
   register(){
     
-    if(this.registrationForm.status == 'VALID'){
+    // if(this.registrationForm.status == 'VALID'){
       console.log(this.registrationForm);
 
       if(this.registrationForm.value.password == this.registrationForm.value.passwordConfirmation){
@@ -78,9 +79,9 @@ export class RegisterComponent implements OnInit {
         this.warn = "Passwords did not match"
       }
       // console.log(this.registrationForm.value)
-    } else {
-      alert('All required form fields not filled')
-    }
+    // } else {
+    //   alert('All required form fields not filled')
+    // }
     
   }
 

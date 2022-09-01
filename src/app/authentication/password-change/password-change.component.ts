@@ -3,6 +3,7 @@ import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { AuthServiceService } from 'src/app/auth-service.service';
 import Swal from 'sweetalert2';
 import { Router } from '@angular/router';
+import { RoutesService } from '../../services/routes.service'
 
 @Component({
   selector: 'app-password-change',
@@ -23,14 +24,14 @@ export class PasswordChangeComponent implements OnInit {
     this.isShown = !this.isShown
   }
 
-  constructor(private auth: AuthServiceService, private route: Router) { }
+  constructor(private auth: AuthServiceService, private route: Router, private routesService: RoutesService) { }
 
   ngOnInit(): void {
   }
   changePassword() {
-    if(this.passwordResetForm.status == 'VALID'){
+    if(this.passwordResetForm.value.email){
       this.load = true
-      this.auth.changePassword(this.passwordResetForm.value).subscribe((response:any) => {
+      this.auth.changePassword(this.passwordResetForm.value.email).subscribe((response:any) => {
         console.log(response);
         if(response == 500 || 0){
           this.load = false
@@ -59,6 +60,7 @@ export class PasswordChangeComponent implements OnInit {
                 footer: 'Check your email inbox. Then sign in.'  
               })
             }, 2000)
+            this.routesService.changePrevious('password-change')
             this.route.navigate(['/login'])
           }
         }
@@ -68,7 +70,7 @@ export class PasswordChangeComponent implements OnInit {
       Swal.fire({  
         icon: 'error',  
         title: 'Oops...',  
-        text: 'Username and email address are required',
+        text: 'Email address is required',
       })
     }
   }
