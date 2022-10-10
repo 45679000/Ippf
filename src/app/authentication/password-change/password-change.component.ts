@@ -17,7 +17,6 @@ export class PasswordChangeComponent implements OnInit {
   load:boolean = false
   passwordResetForm = new FormGroup({
     email: new FormControl('',[Validators.required]),
-    user: new FormControl('', [Validators.required]),
     realm: new FormControl('localsql', [Validators.required])
   })
   emailSent() {

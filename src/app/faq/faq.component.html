@@ -1,110 +1,112 @@
-<div class="navbar-holder">
-    <app-top-header></app-top-header>
-</div>
-<div class="container-fluid">
-    <div class="main-content col-md-7 col-12">
-        <div>
-            <h2 class="lead-heading">Frequently Asked Questions</h2>
-            <div class="quiz">
-                <button (click)="showAnswerOne = !showAnswerOne">
-                    <p>How do I access the dataset?</p>
-                    <span [ngClass]=" !showAnswerOne? 'icon' : 'rotate-icon'"><i class="fas fa-caret-down"></i></span>
-                </button>
-                <p [ngClass]=" showAnswerOne? 'answer-show' : 'answer'">You will be able to access and view the dataset without logging in, but when you decide to download a dataset, you will need to to the Data Sharing Portal.<br><br>For the user registration, you will need to <a [routerLink]="['../registration']"  class="">register</a> and  create a password-protected account.</p>
-            </div>
-            <div class="quiz">
-                <button (click)="showAnswerTwo = !showAnswerTwo">
-                    <p>What Datasets are included?</p>
-                    <span [ngClass]=" !showAnswerTwo? 'icon' : 'rotate-icon'"><i class="fas fa-caret-down"></i></span>
-                </button>
-                <ul [ngClass]=" showAnswerTwo? 'answer-show' : 'answer'"
-                    >
-                    <li>Client Exit Interviews</li>
-                    <li>Service Statistics</li>
-                    <li>Impact Data</li>
-                </ul>
-            </div>
-            <div class="quiz">
-                <button (click)="showAnswerThree = !showAnswerThree">
-                    <p>How is the data compiled processed?</p>
-                    <span [ngClass]=" !showAnswerThree? 'icon' : 'rotate-icon'"><i class="fas fa-caret-down"></i></span>
-                </button>
-                <p [ngClass]=" showAnswerThree? 'answer-show' : 'answer'">The service statistics consists of data from various public and private health facilities which is compiled monthly by participating countries and aggregated at a central level for reporting purposes.<br>Impact data is calculated quarterly (and annually) at the central level from the service statistics and Impact 2.5.<br><br>Client Exit Interview data is collected annually in each country in a sample of public and private facilities that report into the service statistics data. Specific variables are then combined for program reporting and adaptive learning. </p>
-            </div>
-            <div class="quiz">
-                <button (click)="showAnswerFour = !showAnswerFour">
-                    <p>How can the datasets be downloaded?</p>
-                    <span [ngClass]=" !showAnswerFour? 'icon' : 'rotate-icon'"><i class="fas fa-caret-down"></i></span>
-                </button>
-                <div [ngClass]=" showAnswerFour? 'answer-show' : 'answer'">Once you have registered to the WISH Data Sharing portal, you will have your own account, which can be accessed by logging in.<br><br>The datasets can be downloaded from their page. 
-                <br>Please include the following information in your request:
-                <ul>
-                    <li>Name</li>
-                    <li>Email</li>
-                    <li>Organisation</li>
-                    <li>Country</li>
-                    <li>Purpose of data use</li>
-                </ul>
+<div class="overall-wrap d-flex flex-column min-vh-100"> 
+    <div class="navbar-holder">
+        <app-top-header></app-top-header>
+    </div>
+    <div class="container-fluid">
+        <div class="main-content col-md-7 col-12">
+            <div>
+                <h2 class="lead-heading">Frequently Asked Questions</h2>
+                <div class="quiz">
+                    <button (click)="showAnswerOne = !showAnswerOne">
+                        <p>How do I access the dataset?</p>
+                        <span [ngClass]=" !showAnswerOne? 'icon' : 'rotate-icon'"><i class="fas fa-caret-down"></i></span>
+                    </button>
+                    <p [ngClass]=" showAnswerOne? 'answer-show' : 'answer'">You will be able to access and view the dataset without logging in, but when you decide to download a dataset, you will need to to the Data Sharing Portal.<br><br>For the user registration, you will need to <a [routerLink]="['../registration']"  class="">register</a> and  create a password-protected account.</p>
                 </div>
-            </div>
-            <div class="quiz">
-                <button (click)="showAnswerFive = !showAnswerFive">
-                    <p>How do I find a dataset?</p>
-                    <span [ngClass]=" !showAnswerFive? 'icon' : 'rotate-icon'"><i class="fas fa-caret-down"></i></span>
-                </button>
-                <p [ngClass]=" showAnswerFive? 'answer-show' : 'answer'">Users can browse through the data catalogue, search for the data using the filters available on the portal, browse through organisations, and find the datasets they are interested in.</p>
-            </div>
-            <div class="quiz">
-                <button (click)="showAnswerSix = !showAnswerSix">
-                    <p>Guidelines on Data Access and Sharing</p>
-                    <span [ngClass]=" !showAnswerSix? 'icon' : 'rotate-icon'"><i class="fas fa-caret-down"></i></span>
-                </button>
-                <p [ngClass]=" showAnswerSix? 'answer-show' : 'answer'">(we will include a few bits from the Terms of Use)</p>
-            </div>
-            <div class="quiz">
-                <button (click)="showAnswerSeven = !showAnswerSeven">
-                    <p>How long does it take to approve a dataset?</p>
-                    <span [ngClass]=" !showAnswerSeven? 'icon' : 'rotate-icon'"><i class="fas fa-caret-down"></i></span>
-                </button>
-                <p [ngClass]=" showAnswerSeven? 'answer-show' : 'answer'">Requests to access datasets will be approved within 48hours. Once your request has been approved, you will receive an email with instructions on how the data can be accessed/downloaded.</p>
-            </div>
-            <div class="quiz">
-                <button (click)="showAnswerEight = !showAnswerEight">
-                    <p>How long will they have access to the datasets?</p>
-                    <span [ngClass]=" !showAnswerEight? 'icon' : 'rotate-icon'"><i class="fas fa-caret-down"></i></span>
-                </button>
-                <p [ngClass]=" showAnswerEight? 'answer-show' : 'answer'">The time allotted for the use of the data is 6 months. If you want to use the same data after the six months, you will need to submit a new request.</p>
-            </div>
-            <div class="quiz">
-                <button (click)="showAnswerNine = !showAnswerNine">
-                    <p>Can I download/request multiple datasets at the same time</p>
-                    <span [ngClass]=" !showAnswerNine? 'icon' : 'rotate-icon'"><i class="fas fa-caret-down"></i></span>
-                </button>
-                <p [ngClass]=" showAnswerNine? 'answer-show' : 'answer'">You can only download up to 3 datasets at an instance.</p>
-            </div>
-            <div class="quiz">
-                <button (click)="showAnswerTen = !showAnswerTen">
-                    <p>How often is the data updated?</p>
-                    <span [ngClass]=" !showAnswerTen? 'icon' : 'rotate-icon'"><i class="fas fa-caret-down"></i></span>
-                </button>
-                <p [ngClass]=" showAnswerTen? 'answer-show' : 'answer'">Annually.</p>
-            </div>
-            <div class="quiz">
-                <button (click)="showAnswerEleven = !showAnswerEleven">
-                    <p>Who can request data?</p>
-                    <span [ngClass]=" !showAnswerEleven? 'icon' : 'rotate-icon'"><i class="fas fa-caret-down"></i></span>
-                </button>
-                <p [ngClass]=" showAnswerEleven? 'answer-show' : 'answer'">Researchers, learning institutions, and organisations may register on the WISH data sharing portal to access and obtain data. Some datasets have restriction on access due to data confidentiality.
-                <br><br>You can use the search filter to get an overview of datasets that are open and restricted.</p>
-            </div>
-            <div class="quiz">
-                <button (click)="showAnswerTwelve = !showAnswerTwelve">
-                    <p>How can I submit feedback about the portal?</p>
-                    <span [ngClass]=" !showAnswerTwelve? 'icon' : 'rotate-icon'"><i class="fas fa-caret-down"></i></span>
-                </button>
-                <p [ngClass]=" showAnswerTwelve? 'answer-show' : 'answer'">Users can leave comments and reviews on the feedback section located at the footer menu of the Data Portal, or use the contacts found at the ‘Contact us’ section still in the footer menu. </p>
+                <div class="quiz">
+                    <button (click)="showAnswerTwo = !showAnswerTwo">
+                        <p>What Datasets are included?</p>
+                        <span [ngClass]=" !showAnswerTwo? 'icon' : 'rotate-icon'"><i class="fas fa-caret-down"></i></span>
+                    </button>
+                    <ul [ngClass]=" showAnswerTwo? 'answer-show' : 'answer'"
+                        >
+                        <li>Client Exit Interviews</li>
+                        <li>Service Statistics</li>
+                        <li>Impact Data</li>
+                    </ul>
+                </div>
+                <div class="quiz">
+                    <button (click)="showAnswerThree = !showAnswerThree">
+                        <p>How is the data compiled processed?</p>
+                        <span [ngClass]=" !showAnswerThree? 'icon' : 'rotate-icon'"><i class="fas fa-caret-down"></i></span>
+                    </button>
+                    <p [ngClass]=" showAnswerThree? 'answer-show' : 'answer'">The service statistics consists of data from various public and private health facilities which is compiled monthly by participating countries and aggregated at a central level for reporting purposes.<br>Impact data is calculated quarterly (and annually) at the central level from the service statistics and Impact 2.5.<br><br>Client Exit Interview data is collected annually in each country in a sample of public and private facilities that report into the service statistics data. Specific variables are then combined for program reporting and adaptive learning. </p>
+                </div>
+                <div class="quiz">
+                    <button (click)="showAnswerFour = !showAnswerFour">
+                        <p>How can the datasets be downloaded?</p>
+                        <span [ngClass]=" !showAnswerFour? 'icon' : 'rotate-icon'"><i class="fas fa-caret-down"></i></span>
+                    </button>
+                    <div [ngClass]=" showAnswerFour? 'answer-show' : 'answer'">Once you have registered to the WISH Data Sharing portal, you will have your own account, which can be accessed by logging in.<br><br>The datasets can be downloaded from their page. 
+                    <br>Please include the following information in your request:
+                    <ul>
+                        <li>Name</li>
+                        <li>Email</li>
+                        <li>Organisation</li>
+                        <li>Country</li>
+                        <li>Purpose of data use</li>
+                    </ul>
+                    </div>
+                </div>
+                <div class="quiz">
+                    <button (click)="showAnswerFive = !showAnswerFive">
+                        <p>How do I find a dataset?</p>
+                        <span [ngClass]=" !showAnswerFive? 'icon' : 'rotate-icon'"><i class="fas fa-caret-down"></i></span>
+                    </button>
+                    <p [ngClass]=" showAnswerFive? 'answer-show' : 'answer'">Users can browse through the data catalogue, search for the data using the filters available on the portal, browse through organisations, and find the datasets they are interested in.</p>
+                </div>
+                <div class="quiz">
+                    <button (click)="showAnswerSix = !showAnswerSix">
+                        <p>Guidelines on Data Access and Sharing</p>
+                        <span [ngClass]=" !showAnswerSix? 'icon' : 'rotate-icon'"><i class="fas fa-caret-down"></i></span>
+                    </button>
+                    <p [ngClass]=" showAnswerSix? 'answer-show' : 'answer'">(we will include a few bits from the Terms of Use)</p>
+                </div>
+                <div class="quiz">
+                    <button (click)="showAnswerSeven = !showAnswerSeven">
+                        <p>How long does it take to approve a dataset?</p>
+                        <span [ngClass]=" !showAnswerSeven? 'icon' : 'rotate-icon'"><i class="fas fa-caret-down"></i></span>
+                    </button>
+                    <p [ngClass]=" showAnswerSeven? 'answer-show' : 'answer'">Requests to access datasets will be approved within 48hours. Once your request has been approved, you will receive an email with instructions on how the data can be accessed/downloaded.</p>
+                </div>
+                <div class="quiz">
+                    <button (click)="showAnswerEight = !showAnswerEight">
+                        <p>How long will they have access to the datasets?</p>
+                        <span [ngClass]=" !showAnswerEight? 'icon' : 'rotate-icon'"><i class="fas fa-caret-down"></i></span>
+                    </button>
+                    <p [ngClass]=" showAnswerEight? 'answer-show' : 'answer'">The time allotted for the use of the data is 6 months. If you want to use the same data after the six months, you will need to submit a new request.</p>
+                </div>
+                <div class="quiz">
+                    <button (click)="showAnswerNine = !showAnswerNine">
+                        <p>Can I download/request multiple datasets at the same time</p>
+                        <span [ngClass]=" !showAnswerNine? 'icon' : 'rotate-icon'"><i class="fas fa-caret-down"></i></span>
+                    </button>
+                    <p [ngClass]=" showAnswerNine? 'answer-show' : 'answer'">You can only download up to 3 datasets at an instance.</p>
+                </div>
+                <div class="quiz">
+                    <button (click)="showAnswerTen = !showAnswerTen">
+                        <p>How often is the data updated?</p>
+                        <span [ngClass]=" !showAnswerTen? 'icon' : 'rotate-icon'"><i class="fas fa-caret-down"></i></span>
+                    </button>
+                    <p [ngClass]=" showAnswerTen? 'answer-show' : 'answer'">Annually.</p>
+                </div>
+                <div class="quiz">
+                    <button (click)="showAnswerEleven = !showAnswerEleven">
+                        <p>Who can request data?</p>
+                        <span [ngClass]=" !showAnswerEleven? 'icon' : 'rotate-icon'"><i class="fas fa-caret-down"></i></span>
+                    </button>
+                    <p [ngClass]=" showAnswerEleven? 'answer-show' : 'answer'">Researchers, learning institutions, and organisations may register on the WISH data sharing portal to access and obtain data. Some datasets have restriction on access due to data confidentiality.
+                    <br><br>You can use the search filter to get an overview of datasets that are open and restricted.</p>
+                </div>
+                <div class="quiz">
+                    <button (click)="showAnswerTwelve = !showAnswerTwelve">
+                        <p>How can I submit feedback about the portal?</p>
+                        <span [ngClass]=" !showAnswerTwelve? 'icon' : 'rotate-icon'"><i class="fas fa-caret-down"></i></span>
+                    </button>
+                    <p [ngClass]=" showAnswerTwelve? 'answer-show' : 'answer'">Users can leave comments and reviews on the feedback section located at the footer menu of the Data Portal, or use the contacts found at the ‘Contact us’ section still in the footer menu. </p>
+                </div>
             </div>
         </div>
     </div>
+    <app-footer class="mt-auto"></app-footer>
 </div>
-<app-footer></app-footer>

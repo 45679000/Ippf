@@ -115,11 +115,42 @@ export class AuthServiceService {
   getUserDetails(): any {
     let token = localStorage.getItem('auth_tkn')
     const userDetails = new Observable((observer) => {
+      // var settings = {
+      //   "url": "https://privacyidea.netknights.it/dariangroup/user?realm=localsql&username=iankips17@gmail.com",
+      //   "method": "GET",
+      //   "timeout": 0,
+      //   "headers": {
+      //     "Authorization": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VybmFtZSI6ImlhbmtpcHMxN0BnbWFpbC5jb20iLCJyZWFsbSI6ImxvY2Fsc3FsIiwibm9uY2UiOiIwYjIxZDYzNjVmZmQ2MGU0MmQzNjI2YjZmOTIwMjc3MzhlYWY3MWViIiwicm9sZSI6InVzZXIiLCJhdXRodHlwZSI6InBhc3N3b3JkIiwiZXhwIjoxNjYzNTg2NTM3LCJyaWdodHMiOlsiZW5hYmxlIiwiaG90cF9vdHBsZW49NiIsImhvdHBfaGFzaGxpYiIsInNldHBpbiIsInBhc3N3b3JkX3Jlc2V0IiwiZW5yb2xsSE9UUCIsImVucm9sbEVNQUlMIiwidXBkYXRldXNlciIsImhvdHBfb3RwbGVuIiwidXNlcmxpc3QiLCJob3RwX2hhc2hsaWI9c2hhMjU2IiwiaG90cF8yc3RlcCIsImVucm9sbHBpbiIsImhvdHBfMnN0ZXA9Zm9yY2UiLCJhdWRpdGxvZyIsImhvdHBfZm9yY2Vfc2VydmVyX2dlbmVyYXRlIl19.n6Cu24_0EjOfn4-gqLrmOlfkKnWwwGiD04r2J_lirEY"
+      //   },
+      // };
+      
+      // $.ajax(settings).done(function (response) {
+      //   observer.next(response.result)
+      // });
+      // this.http.get(
+      //   `https://privacyidea.netknights.it/dariangroup/user?username=iankips17@gmail.com&&realm=localsql`, {
+      //     "headers": {
+      //       "Authorization": ""+token,
+      //       "content-Type": "jsonp",
+      //       'Access-Control-Allow-Origin':'http://localhost:4200'
+      //     }
+      //   }
+      // ).subscribe((e:any) => {
+      //   observer.next(e.result)
+      //   console.log(e);
+        
+      // })
       $.ajax({
         method: "GET", 
         headers: {
-          "Authorization": localStorage.getItem('auth_tkn')
+          "Authorization": localStorage.getItem('auth_tkn'),
+          "Contet-Type": "application/json"
         },
+        data: {
+          username: 'iankips17@gmail.com',
+          realm: 'localsql',
+        },
+        // dataType: 'jsonp',
         url:`${this.auth_url}/user`,
         success: function (response){
           observer.next(response.result)
