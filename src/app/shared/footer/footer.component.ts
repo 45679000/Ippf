@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import Swal from 'sweetalert2';
+import { FeedbackService } from '../../services/feedback.service';
 
 @Component({
   selector: 'app-footer',
@@ -8,19 +9,38 @@ import Swal from 'sweetalert2';
   styleUrls: ['./footer.component.css']
 })
 export class FooterComponent implements OnInit {
-
+  load:boolean  = false
   feedbackForm = new FormGroup({
     feedback: new FormControl('', [Validators.required]),
     // name: new FormControl('', [Validators.required])
   })
 
-  constructor() { }
+  constructor(private feedback: FeedbackService) { }
 
   ngOnInit(): void {
   }
   submit(){
     if(this.feedbackForm.valid){
-      
+      Swal.fire({  
+        icon: 'info',  
+        text: 'Your feedback is being sent'
+      })
+      this.feedback.sendFeedBack("", this.feedbackForm.value.feedback).subscribe((e: any) => {
+        if(e.success){
+          Swal.fire({  
+            icon: 'success',  
+            text: 'Your feedback was sent'
+          })
+          this.feedbackForm.reset()
+        }else{
+          Swal.fire({  
+            icon: 'error',  
+            title: 'Oops...',  
+            text: "There was a proble"  
+          })
+        }
+        
+      })
     }else {
       Swal.fire({  
         icon: 'error',  
