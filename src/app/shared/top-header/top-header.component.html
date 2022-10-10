@@ -6,22 +6,28 @@
         <!-- </a> -->
     </div>
     <div class="avatar">
+        <div>
+            <a href="" class="blue-text text-globe"><i class="fas fa-globe"></i>Visit website</a>
+        </div>
+        <br>
         <div class="salutation">
-            <p   class="h3 ">Hi {{',' +user.username}}<button class="h3 mx-1 hov"><i class="fas fa-user-circle" ></i></button></p>
-            <div class="user-management" *ngIf="isSignedIn">
-                <a [routerLink]="['../change-password']">Change password</a>
-                <a [routerLink]="['/account-settings']">Account Settings</a>
-                <!-- <a [routerLink]="['../logout']">Logout</a> -->
-                <a [routerLink]="['../resources']">Resources Portal</a>
+            <p   class="h3 ">Profile<button class="h3 mx-1 hov"><i class="fas fa-user-circle" ></i></button></p>
+            <div class="user-management">
+                <div *ngIf="isSignedIn">
+                    <!-- <a [routerLink]="['../change-password']">Change password</a> -->
+                    <a [routerLink]="['/account-settings']" class="btn btn-danger-lg mb-2 redBtn">Account</a>
+                    <!-- <a [routerLink]="['../logout']">Logout</a> -->
+                    <!-- <a [routerLink]="['../resources']">Resources Portal</a> -->
+                </div>
+                <div *ngIf="!isSignedIn; else loggedOut">
+                    <a [routerLink]="['../login']" class="btn blueBtn searchBtnSmall">Sign in</a>
+                    <a [routerLink]="['../registration']" class="btn yellowBtn searchBtnSmall">Sign up</a>
+                </div>
+                <ng-template #loggedOut>
+                    <button (click)="signOut()"  class="btn btn-danger-lg mb-2 redBtn">Logout</button>
+                  </ng-template>
             </div> 
         </div>
-        <div *ngIf="!isSignedIn; else loggedOut">
-            <a [routerLink]="['../login']" class="btn blueBtn searchBtnSmall">Sign in</a>
-            <a [routerLink]="['../registration']" class="btn yellowBtn searchBtnSmall">Sign up</a>
-        </div>
-        <ng-template #loggedOut>
-            <button (click)="signOut()"  class="btn btn-danger redBtn">Logout</button>
-          </ng-template>
     </div>
     
 </div>

@@ -59,7 +59,7 @@ const routes: Routes = [
   { 
     path: 'account-settings',
     component: AccountSettingsComponent,
-    canActivate: [AuthGuard] 
+    // canActivate: [AuthGuard] 
   },
   {
     path: 'login', 
@@ -68,13 +68,13 @@ const routes: Routes = [
   {
      path: 'home', 
      loadChildren: () => import('./home/home.module').then(m => m.HomeModule),
-     canActivate: [AuthGuard] 
+    //  canActivate: [AuthGuard] 
   },
   {
      path: 'datasets', 
      loadChildren: () => import('./datasets/datasets.module').then(m => m.DatasetsModule) ,
      pathMatch: 'prefix',
-     canActivate: [AuthGuard] 
+    //  canActivate: [AuthGuard] 
   },
   {
      path: 'resources', 
@@ -83,37 +83,37 @@ const routes: Routes = [
        footerDisp: false,
        headerDisp: false
      } ,
-     canActivate: [AuthGuard] 
+    //  canActivate: [AuthGuard] 
   },
   {
     path: 'resources/manage', 
     component: ResourceManagerHomeComponent  ,
-    canActivate: [AuthGuard] 
+    // canActivate: [AuthGuard] 
  },
  {
   path: 'resources/details', 
   component: ResourceDetailsComponent ,
-  canActivate: [AuthGuard] 
+  // canActivate: [AuthGuard] 
 },
 {
   path: 'resource/manage', 
   component: ResourceManageOneComponent,
-  canActivate: [AuthGuard] 
+  // canActivate: [AuthGuard] 
 },
 {
   path: 'resource/content', 
   component: ResourceContentComponent,
-  canActivate: [AuthGuard] 
+  // canActivate: [AuthGuard] 
 },
 {
   path: 'wishscope', 
   component: WishscopeComponent,
-  canActivate: [AuthGuard] 
+  // canActivate: [AuthGuard] 
 },
 {
   path: 'request-dataset',
   component: DataRequestComponent,
-  canActivate: [AuthGuard]
+  // canActivate: [AuthGuard]
 }
 ];
 

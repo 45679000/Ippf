@@ -11,7 +11,7 @@ export class FooterComponent implements OnInit {
 
   feedbackForm = new FormGroup({
     feedback: new FormControl('', [Validators.required]),
-    name: new FormControl('', [Validators.required])
+    // name: new FormControl('', [Validators.required])
   })
 
   constructor() { }

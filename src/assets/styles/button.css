@@ -27,7 +27,7 @@
 }
 .searchBtnBig {
     font-weight: bold !important;
-    padding: 1rem 1.3rem !important;
+    padding: 0.5rem 1rem !important;
     border-radius: 45px !important;
     line-height: 2rem;
 }
@@ -52,9 +52,11 @@
 }
 .redBtn {
     background-color: var(--redish);
+    color: #0a1352;
 }
 .redBtn:hover {
     background-color: #c0046c;
+    color: #ffffff;
 }
 .yellowBtn {
     background-color: var(--yellow);

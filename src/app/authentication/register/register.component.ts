@@ -33,7 +33,6 @@ export class RegisterComponent implements OnInit {
   register(){
     
     // if(this.registrationForm.status == 'VALID'){
-      console.log(this.registrationForm);
 
       if(this.registrationForm.value.password == this.registrationForm.value.passwordConfirmation){
         this.load = true
@@ -65,6 +64,7 @@ export class RegisterComponent implements OnInit {
                 text: 'You created an account successfully. View your email inbox to complete the process',  
                 // footer: 'You '  
               })  
+              this.registrationForm.reset()
               this.load = false
             }
             else{

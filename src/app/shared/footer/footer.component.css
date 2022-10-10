@@ -46,6 +46,18 @@ label{
     width: 35% !important;
     margin: 0 px;
 }
+.subscribe {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+.subscribe .fields {
+    display: flex;
+    flex-direction: column;
+}
+.subscribe .feedback-btn {
+    align-self: flex-end;
+}
 @media (max-width: 375px) {
     footer, .inputFields {
         display: block;

@@ -16,36 +16,31 @@
                         <input type="submit" value="Search" class="btn col-12 searchBtnBig blueBtn" >
                     </div>
                 </div>
-                <div class="col-12 col-md-8 row mx-auto">
-                    <p class="">* Refined Search</p>
-                    <div class=" col-10 col-md-8 col-sm-6 inputWrap">
-                        <select type="text" placeholder="Country Name" class="topSearchInput" formControlName="tag">
-                            <option [ngValue]="null" [disabled]="true" class="suggestion">Tags</option>
-                            <option *ngFor="let tag of tags" value="{{tag}}">{{ tag | titlecase}}</option>
-                        </select>
-                        <select type="text" placeholder="Year" class="topSearchInput" formControlName="group">
-                            <option [ngValue]="null" [disabled]="true" class="suggestion">Group</option>
-                            <option *ngFor="let group of groups" value="{{group}}"value="{{group}}">Volvo</option>
-                        </select>
-                    </div>
-                    <div class="col-2 col-md-4 col-sm-6 clear-btn">
-                        <button class="btn col-12 searchBtnBig blueBtn" (click)="clearTags()">Clear selection</button>
-
-                    </div>
-                </div>
             </form>
         </div>
         <div class="page-content mb-5">
-
-            <div class="datasets px-5 container">
-                <div class="box" *ngIf="loader">
-                    <div class="contain">
-                        <span class="circle"></span>
-                        <span class="circle"></span>
-                        <span class="circle"></span>
-                        <span class="circle"></span>
-                    </div>
+            <div class="sidebar">
+                <h2 class="my-3 mx-2">Refined Search</h2>
+                <div class="card">
+                    <h3>Filter results</h3>
+                    <form action="" [formGroup]="filterForm">
+                        <select type="text" placeholder="Country Name" class="sidebarInput" formControlName="tag">
+                            <option [ngValue]="null" [disabled]="true" class="suggestion">Tags</option>
+                            <option *ngFor="let tag of tags" value="{{tag}}">{{ tag | titlecase}}</option>
+                        </select>
+                        <select type="text" placeholder="Year" class="sidebarInput my-4" formControlName="group">
+                            <option [ngValue]="null" [disabled]="true" class="suggestion">Group</option>
+                            <option *ngFor="let group of groups" value="{{group}}"value="{{group}}">Volvo</option>
+                        </select>
+                        <div class="btn-group">
+                            <input type="submit" value="Search" class="btn btn-primary filterBtn">
+                            <input type="submit" value="Reset" class="btn btn-primary resetBtn" (click)="clearTags()">
+                        </div>
+                    </form>
                 </div>
+            </div>
+    
+            <div class="datasets px-5 container">
                 <div class="row col-12">
 
                     <div class="col-8">

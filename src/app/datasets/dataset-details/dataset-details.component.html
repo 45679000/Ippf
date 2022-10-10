@@ -107,9 +107,6 @@
                                         <div class="col-6 m-auto" *ngIf="!resourceExistUrl(resource)">
                                             No file uploaded
                                         </div>
-                                        <div class="col-3 m-auto">
-                                            <a [routerLink]="['/datasets/dataset-upload']" [queryParams]="{ id: dataOfDataset.id, resource_id: resource.id}" class="btn btn-primary btnBlue"><span class="mx-2"><i class="fas fa-pen"></i></span>Edit</a>
-                                        </div>
                                         <div class="col-3 m-auto" *ngIf="resourceExistUrl(resource)">
                                             <a  href="{{resource.original_url || resource.url}}" class="download-link blue-text"><span class="mx-2"><i class="fas fa-download"></i></span>Download</a>
                                         </div>
