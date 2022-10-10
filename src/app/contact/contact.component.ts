@@ -20,10 +20,14 @@ export class ContactComponent implements OnInit {
     })
   }
   send(){
+    Swal.fire({  
+      icon: 'success',  
+      text: 'Your message wass sent'
+    })
     this.load = true
     let country = this.contactForm.value.country
     let message = this.contactForm.value.message
-    this.feedback.sendFeedBack(country, message).subscribe((e: any) => {
+    this.feedback.sendFeedBack(country, message, "contact").subscribe((e: any) => {
       this.load = false
       if(e.success){
         Swal.fire({  
