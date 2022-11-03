@@ -63,7 +63,7 @@ export class DatasetsComponent implements OnInit {
   })
   datasets:any = []
   someDataset:any =[]
-  aalData:dataDaset[] = []
+  aalData:any[] = []
   xxy: any
   searchCount: Number = 0
   loader:boolean = true
@@ -108,22 +108,23 @@ export class DatasetsComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.datasetService.allDatasets.subscribe(
-      value => { 
-        this.datasets = value
-        this.xxy = this.datasets.length
-        this.loader = false
-      }
-    );
+    // this.datasetService.allDatasets.subscribe(
+    //   value => { 
+    //     this.datasets = value
+    //     this.xxy = this.datasets.length
+    //     this.loader = false
+    //   }
+    // );
     this.datasetService.getAllTags().subscribe((val: any)=>{
       this.tags = val
     })
-    this.datasetService.getAllGroups().subscribe((val: any) => {
-      this.groups = val
-    })
+    // this.datasetService.getAllGroups().subscribe((val: any) => {
+    //   this.groups = val
+    // })
     this.datasetService.getAllData().
     subscribe((val: any)=>{
-      this.aalData = [ ...this.aalData, val];
+      
+      this.aalData = val;
       this.loader = false
     })
     
@@ -131,10 +132,12 @@ export class DatasetsComponent implements OnInit {
   onSubmit() {
     this.loader = true
     this.changeHeader()
-    this.datasetService.searchDataset(this.searchForm.value.q, this.searchForm.value.tag, this.searchForm.value.group).subscribe((val: any) => {
+    this.datasetService.searchDataset(this.searchForm.value.q, this.filterForm.value.tag, this.filterForm.value.group).subscribe((val: any) => {
+      console.log(val);
+      
       this.loader = false
-      this.xxy = val.result.count
-      this.aalData = val.result.results
+      this.xxy = val.length
+      this.aalData = val
       
     })
     
@@ -142,7 +145,7 @@ export class DatasetsComponent implements OnInit {
   changeHeader(){
     this.header = "Available datasets"
     if(this.searchForm.value.q !== null || this.searchForm.value.tag !== null || this.searchForm.value.group !== null){
-      this.header = "Search results - " 
+      // this.header = "Search results - " 
       // if (this.searchForm.value.q !=null ) {
       //   this.header += " of " + this.searchForm.value.q
       // }
@@ -152,6 +155,14 @@ export class DatasetsComponent implements OnInit {
   }
   clearTags(){
     this.searchForm.reset();
+    
+    this.loader = true
+    this.datasetService.getAllData().
+    subscribe((val: any)=>{
+      this.xxy = val.length
+      this.aalData = val;
+      this.loader = false
+    })
   }
 
   

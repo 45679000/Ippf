@@ -12,38 +12,9 @@ import { DatasetService } from '../../services/datasets-services.service';
 })
 export class DatasetDetailsComponent implements OnInit {
   id: any
-  dataOfDataset: Dataset = {
-    author: '',
-    author_email: '',
-    creator_user_id: '',
-    extras: [],
-    groups: [],
-    id: '',
-    isopen: false,
-    license_id: '',
-    license_title: '',
-    maintainer: '',
-    maintainer_email: '',
-    metadata_created: '',
-    metadata_modified: '',
-    name: '',
-    notes: '',
-    num_resources: 0,
-    num_tags: 0,
-    organization: {},
-    owner_org: '',
-    private: false,
-    relationships_as_object: [],
-    relationships_as_subject: [],
-    resources: [],
-    state: '',
-    tags: {},
-    title: '',
-    type: '',
-    url: '',
-    version: '',
-  }
-  resourcesArray: Resource[] = []
+  dataOfDataset: any = {}
+  resourcesArray: any[] = []
+  metedata: any = []
   resource: Resource = {
     cache_last_updated: '',
     cache_url: '',
@@ -92,11 +63,13 @@ export class DatasetDetailsComponent implements OnInit {
     const data = this.datasetService.getADataset(this.id)
     data.subscribe((val: any) => {
       this.dataOfDataset = val
-      console.log(val);
+      this.resourcesArray = val.latestVersion.files
+      this.metedata = val.latestVersion.metadataBlocks.citation.fields
+      console.log(val.latestVersion);
       
-      val.resources.forEach((val: any) => {
-        this.resourcesArray = [...this.resourcesArray, val]
-      })
+      // val.resources.forEach((val: any) => {
+      //   this.resourcesArray = [...this.resourcesArray, val]
+      // })
     })
     const csvData = this.datasetService.viewCsv('yee')
     csvData.subscribe((val: any) => {
@@ -113,4 +86,12 @@ export class DatasetDetailsComponent implements OnInit {
       return false
     }
   }
+  // return_value(multiple:boolean, value:any){
+  //   let val
+  //   if(multiple){
+  //     value.forEach(element => {
+  //       val        
+  //     });
+  //   }
+  // }
 }

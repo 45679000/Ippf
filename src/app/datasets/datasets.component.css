@@ -145,3 +145,7 @@ thead {
 .pink-text, .blue-text {
     font-size: 3rem;
 }
+.load {
+    z-index: 0 !important;
+    opacity: 0.3 !important;
+}

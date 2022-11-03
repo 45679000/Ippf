@@ -12,6 +12,7 @@ import { UploadDatasetComponent } from './upload-dataset/upload-dataset.componen
 import { WishscopeComponent } from './wishscope/wishscope.component';
 import { FormsModule } from '@angular/forms';
 import {NgbPaginationModule, NgbAlertModule} from '@ng-bootstrap/ng-bootstrap';
+import { FlexmonsterPivotModule } from 'ng-flexmonster';
 
 @NgModule({
   declarations: [
@@ -30,6 +31,8 @@ import {NgbPaginationModule, NgbAlertModule} from '@ng-bootstrap/ng-bootstrap';
     FormsModule,
     NgbPaginationModule, 
     NgbAlertModule,
+    FlexmonsterPivotModule
+
   ]
 })
 export class DatasetsModule { }

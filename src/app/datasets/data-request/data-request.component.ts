@@ -23,6 +23,8 @@ export class DataRequestComponent implements OnInit {
     editable: false,
     email: "",
     givenname: "",
+    firstName: "",
+    otherNames:'',
     id: 0,
     password: "",
     resolver: "",

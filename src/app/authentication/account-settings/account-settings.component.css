@@ -79,3 +79,6 @@ label{
 .realm {
     display: none !important;
 }
+.password .registerBtn{
+    width: 180px !important;
+}

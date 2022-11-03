@@ -19,9 +19,24 @@ export class FaqComponent implements OnInit {
   public showAnswerTen: boolean = false
   public showAnswerEleven: boolean = false
   public showAnswerTwelve: boolean = false
+  public faq:string = 'one'
+  public isActive:boolean = true;
+
   constructor() { }
 
   ngOnInit(): void {
+    console.log(this.faq)
   }
-
+  faq_number(number: string) {
+    this.faq = number
+    console.log(this.faq);
+    
+  }
+  activeLink(number:string){
+    if(this.faq == number){
+      return true
+    }else{
+      return false
+    }
+  }
 }
