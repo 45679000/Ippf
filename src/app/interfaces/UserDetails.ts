@@ -6,5 +6,7 @@ export interface User {
     password: string,
     resolver: string,
     userid: number,
-    username: string
+    username: string,
+    firstName:string,
+    otherNames:string
 }

@@ -13,10 +13,10 @@ import { RoutesService } from '../../services/routes.service'
 export class RegisterComponent implements OnInit {
 
   registrationForm = new FormGroup({
-    username: new FormControl('',[Validators.required]),
-    givenname: new FormControl('',[Validators.required]),
-    surname: new FormControl('',[Validators.required]),
-    email: new FormControl('',[Validators.required]),
+    firstName: new FormControl('',[Validators.required]),
+    otherNames: new FormControl('',[Validators.required]),
+    // surname: new FormControl('',[Validators.required]),
+    email: new FormControl('',[Validators.required, Validators.pattern("^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$")]),
     password: new FormControl('',[Validators.required]),
     passwordConfirmation: new FormControl('',[Validators.required]),
     // remember: [true]
@@ -36,43 +36,30 @@ export class RegisterComponent implements OnInit {
 
       if(this.registrationForm.value.password == this.registrationForm.value.passwordConfirmation){
         this.load = true
-        this.auth.signup(this.registrationForm.value.givenname, this.registrationForm.value.surname, this.registrationForm.value.email, this.registrationForm.value.password).subscribe((res: any)=>{
-          // console.log(res);
-          if(res == 500) {
-            Swal.fire({  
-              icon: 'error',  
-              title: 'Oops...',  
-              text: 'Something went wrong!',  
-              footer: 'Try again. If problems persist contact the admin'  
-            })
-            this.load = false
-          }else if(res.error && res.error.code == 402){
-            Swal.fire({  
-              icon: 'error',  
-              title: 'Oops...',  
-              text: res.error.message + ". Try a different username",  
-              footer: 'Try again. If problems persist contact the admin'  
-            })
-            this.load = false
-          }else{
-            if(res.result.status != false){
+        this.auth.signup(this.registrationForm.value.firstName, this.registrationForm.value.otherNames, this.registrationForm.value.email, this.registrationForm.value.password).subscribe((res: any)=>{
+            if(res.succces){
               this.success = true
               this.failed = false
               Swal.fire({  
                 icon: 'success',  
                 title: 'Done',  
-                text: 'You created an account successfully. View your email inbox to complete the process',  
+                text: 'You created an account successfully. View your email inbox to verify email address',  
                 // footer: 'You '  
               })  
               this.registrationForm.reset()
               this.load = false
-            }
-            else{
+            }else{
               this.success = false
               this.failed = true
-              this.load = true
+              this.load = false
+              Swal.fire({  
+                icon: 'error',  
+                title: 'Oops...',  
+                text: res.message.description,  
+                footer: 'Try again. If problems persist contact the admin'  
+              })
             }
-          }
+          // }
           
         })
       }else{

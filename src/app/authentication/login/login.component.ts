@@ -37,42 +37,27 @@ export class LoginComponent implements OnInit {
   login() {
     if(this.loginForm.valid){
       this.load = true
-        this.auth.login(this.loginForm.value.email, this.loginForm.value.password, this.loginForm.value.remember).subscribe((token: any) => {          
-          if(token == 500 || token == 0){
+        this.auth.login(this.loginForm.value.email, this.loginForm.value.password, this.loginForm.value.remember).subscribe((token: any) => {   
+          console.log(token);
+                 
+          if(!token.success){
             this.error = ''
             Swal.fire({  
               icon: 'error',  
               title: 'Oops...',  
-              text: 'Something went wrong!',  
-              footer: 'Try again. If problems persist contact the admin'  
+              text: token.message,  
+              // footer: 'Try again. If problems persist contact the admin'  
             })
             this.load = false
-          }else if(token == 401) {
-              this.load = false
-              this.error = "Wrong credentials"
-              Swal.fire({  
-                icon: 'error',  
-                title: 'Oops...',  
-                text: 'Wrong credentials'
-              })
-          }else if(token.result.status){
-            this.error = ''
+          }else{
             this.load = false
-            if(this.routesService.previousUrl == 'registration' || this.routesService.previousUrl == 'password-change'){
-              this.routesService.changePrevious('home')
+            // if(this.routesService.previousUrl == 'registration' || this.routesService.previousUrl == 'password-change'){
+            //   this.routesService.changePrevious('home')
               this.route.navigate(['/'])
-            } else {  
-              this.routesService.changePrevious('home')          
-              this._location.back();
-            }
-          } else {
-            Swal.fire({  
-              icon: 'error',  
-              title: 'Oops...',  
-              text: 'Something went wrong!',  
-              footer: 'Try again. If problems persist contact the admin'  
-            })
-            this.load = false
+            // } else {  
+            //   this.routesService.changePrevious('home')          
+            //   this._location.back();
+            // }
           }
           
         })

@@ -1,3 +1,13 @@
+:root {
+    --blue: #151F6D;
+    --white: #ffffff; 
+    --redish: #E6007E;
+    --lightblue: #7e88d6;
+    --yellow: #EAB511;
+    --green: #00625B;
+    --dark: #1D1D1B;
+    --anotherblue: #00A7E1;
+}
 .lead-heading {
     text-align: center;
     margin-bottom: 2rem;
@@ -40,3 +50,44 @@ span {
 .rotate-icon {
     transform: rotate(360deg);
 }
+.quizes {
+    height: 60vh;
+    scroll-behavior: smooth;
+    overflow-y: scroll;
+}
+.quizes button {
+    width: 95%;
+    background-color: white;
+    color: var(--blue);
+    border: none;
+    padding-top: 1rem;
+    padding-right: 5px;
+    padding-left: 5px;
+    /* font-size: 10px; */
+    transition-timing-function: ease-in;
+    transition: 1s;
+    text-align: left;
+}
+.quizes div {
+    margin-bottom: 2px;
+    display: flex;
+    color: var(--blue);
+    border: 1px rgb(179, 174, 174);
+    transition-timing-function: ease-in;
+    transition: 1s;
+    /* background-color: var(--blue);     */
+}
+.quizes div:hover, .quizes button:hover, .active {
+    color: white !important;
+    background-color: var(--blue) !important;    
+}
+.quizes span {
+    align-self: center;
+    padding-right: 1rem;
+    color: white;
+}
+.quiz-answers{
+    font-size: 16px;
+}
+/* <i class="fa-solid fa-arrow-right"></i> */
+/* <span [ngClass]=" !showAnswerOne? 'icon' : 'rotate-icon'"><i class="fas fa-caret-down"></i></span> */

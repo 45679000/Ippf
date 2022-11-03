@@ -39,22 +39,48 @@ export class AuthServiceService {
   headers = new HttpHeaders().set('Content-Type', 'application/json');
   login(email: string, password:string, remember: boolean){
     const token = new Observable((observer) => {
-      $.ajax({
-        method: "POST",
-        data: {
-          username: email,
-          password: password
+      var settings = {
+        "url": this.auth_url+"/Account/Loginapi",
+        "method": "POST",
+        "timeout": 0,
+        "headers": {
+          "Content-Type": "application/x-www-form-urlencoded",
         },
-        url:`${this.auth_url}/auth`,
-        success: function (response){
-          this.decodedToken = jwt.decodeToken(response.result.value.token);
-          localStorage.setItem('auth_tkn', response.result.value.token);
-          localStorage.setItem('auth_meta', JSON.stringify(this.decodedToken));
-          observer.next(response)
-        },
-        error: function (error){
-          observer.next(error.status)
+        "data": {
+          "username": email,
+          "password": password
         }
+      };
+      
+      $.ajax(settings).done(function (response) {
+        console.log(response);
+        if(response.email != null){
+          localStorage.setItem('email', response.email);
+          localStorage.setItem('id', response.id);
+          localStorage.setItem('name', response.firstName);
+          localStorage.setItem("middleName", response.middleName),
+          localStorage.setItem("otherNames",response.otherNames),
+          // "isEnabled": true,
+          // "emailConfirmed": false,
+          localStorage.setItem("staffLevel",response.staffLevel),
+          localStorage.setItem("staffPosition",response.Accountant),
+          localStorage.setItem("staffPartner",response.testpartner)
+          observer.next( {
+            "success": true,
+            "message": response.firstName
+          })
+        }else if(!response.succeeded){
+          observer.next({
+            "success": false,
+            "message": "Password or email incorrect"
+          })
+        }
+
+      }).fail(function(response) {
+        observer.next({
+          "success": false,
+          "message": "There was a problem, try again"
+        })
       });
     });
     return token
@@ -65,46 +91,54 @@ export class AuthServiceService {
     localStorage.setItem('auth_meta', JSON.stringify(this.decodedToken));
     return token;
   }
-  signup(givenname: string,surname:string, email:string, password:string){
+  signup(firstName: string,OtherNames:string, email:string, password:string){
     let data = {
-        username: email,
-        givenname: givenname,
-        surname: surname,
-        email: email,
-        password: password
+        // username: email,
+        // givenname: givenname,
+        // surname: surname,
+        // email: email,
+        // password: password
       }
     const newUSer = new Observable((observer) => {
-      $.ajax({
-        method: "POST",
-        data: data,
-        url:`${this.auth_url}/register`,
-        success: function (response){
-          observer.next(response)
+      var settings = {
+        "url": `${this.auth_url}/api/users/register`,
+        "method": "POST",
+        "timeout": 0,
+        "headers": {
+          "Content-Type": "application/x-www-form-urlencoded"
         },
-        error: function (error){
-          if(error.status == 400){
-            let response = error.responseJSON.result
-            observer.next(response)
-          }else {
-            observer.next(error.status)
-          }
+        "data": {
+          "FirstName": firstName,
+          "OtherNames": OtherNames,
+          "Email": email,
+          "Password": password,
+          "MobileContact": "111111"
         }
-      });
+      };
+      
+      $.ajax(settings).done(function (response) {
+        observer.next({
+          succces: true,
+          message: response
+        })
+      }).fail(function(error) {
+        observer.next({
+          success: false,
+          message: error.responseJSON ?error.responseJSON[0] : "There was an error in network, if the problems persist, contact the system admin"
+        })
+      })
     });
     return newUSer
   }
   logout() {
-    localStorage.removeItem('auth_tkn');
-    localStorage.removeItem('auth_meta');
-
-    this.decodedToken = null;
+    localStorage.removeItem('id');
+    localStorage.removeItem('email');
+    localStorage.removeItem('name');
     this.route.navigate(['/login'])
   }
   public isAuthenticated(): any {
-    if(localStorage.getItem('auth_meta') != null){
-      this.decodedToken = localStorage.getItem('auth_meta') 
-      
-      return moment().isBefore(moment.unix(JSON.parse(this.decodedToken).exp));
+    if(localStorage.getItem('id') != null){
+      return true
     }else {
       return false
     }
@@ -115,96 +149,92 @@ export class AuthServiceService {
   getUserDetails(): any {
     let token = localStorage.getItem('auth_tkn')
     const userDetails = new Observable((observer) => {
-      // var settings = {
-      //   "url": "https://privacyidea.netknights.it/dariangroup/user?realm=localsql&username=iankips17@gmail.com",
-      //   "method": "GET",
-      //   "timeout": 0,
-      //   "headers": {
-      //     "Authorization": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VybmFtZSI6ImlhbmtpcHMxN0BnbWFpbC5jb20iLCJyZWFsbSI6ImxvY2Fsc3FsIiwibm9uY2UiOiIwYjIxZDYzNjVmZmQ2MGU0MmQzNjI2YjZmOTIwMjc3MzhlYWY3MWViIiwicm9sZSI6InVzZXIiLCJhdXRodHlwZSI6InBhc3N3b3JkIiwiZXhwIjoxNjYzNTg2NTM3LCJyaWdodHMiOlsiZW5hYmxlIiwiaG90cF9vdHBsZW49NiIsImhvdHBfaGFzaGxpYiIsInNldHBpbiIsInBhc3N3b3JkX3Jlc2V0IiwiZW5yb2xsSE9UUCIsImVucm9sbEVNQUlMIiwidXBkYXRldXNlciIsImhvdHBfb3RwbGVuIiwidXNlcmxpc3QiLCJob3RwX2hhc2hsaWI9c2hhMjU2IiwiaG90cF8yc3RlcCIsImVucm9sbHBpbiIsImhvdHBfMnN0ZXA9Zm9yY2UiLCJhdWRpdGxvZyIsImhvdHBfZm9yY2Vfc2VydmVyX2dlbmVyYXRlIl19.n6Cu24_0EjOfn4-gqLrmOlfkKnWwwGiD04r2J_lirEY"
-      //   },
-      // };
+      let user_id= localStorage.getItem('id') 
+      var settings = {
+        "url": `${this.auth_url}/Account/user/${user_id}`,
+        "method": "GET",
+        "timeout": 0,
+      };
       
-      // $.ajax(settings).done(function (response) {
-      //   observer.next(response.result)
-      // });
-      // this.http.get(
-      //   `https://privacyidea.netknights.it/dariangroup/user?username=iankips17@gmail.com&&realm=localsql`, {
-      //     "headers": {
-      //       "Authorization": ""+token,
-      //       "content-Type": "jsonp",
-      //       'Access-Control-Allow-Origin':'http://localhost:4200'
-      //     }
-      //   }
-      // ).subscribe((e:any) => {
-      //   observer.next(e.result)
-      //   console.log(e);
-        
-      // })
-      $.ajax({
-        method: "GET", 
-        headers: {
-          "Authorization": localStorage.getItem('auth_tkn'),
-          "Contet-Type": "application/json"
-        },
-        data: {
-          username: 'iankips17@gmail.com',
-          realm: 'localsql',
-        },
-        // dataType: 'jsonp',
-        url:`${this.auth_url}/user`,
-        success: function (response){
-          observer.next(response.result)
-        },
-        error: function (error){
-          observer.next(error.status)
-        }
+      $.ajax(settings).done(function (response) {
+        console.log(response)
+        observer.next({
+          "success":true,
+          "data":response
+        })
+      }).fail(function(response) {
+        observer.next({
+          "success": false,
+          "message": "There was a problem, try again"
+        })
       });
-    });
+    })
     return userDetails 
 
   }
-  changePassword(email:any): any {
+  changePassword(email:any, password:any): any {
     let data = {
       email : email,
       user : email
     }
     const userReset = new Observable((observer) => {
-      $.ajax({
-        method: "POST", 
-        data: data,
-        url:`https://privacyidea.netknights.it/dariangroup/recover`,
-        success: function (response){
-          observer.next(response.result)
-        },
-        error: function (error){
-          observer.next(error.status)
-        }
-      });
-    });
+        
+    // var form = new FormData();
+    // form.append("email", "iankips17@gmail.com");
+    // form.append("password", "Test12");
+
+    var settings = {
+      "url": "http://52.87.191.19:5007/Account/ForgotPasswordApi",
+      "method": "POST",
+      "timeout": 0,
+      "mimeType": "multipart/form-data",
+      "data": {
+        "email": email,
+        // "password": password
+      }
+    };
+
+    $.ajax(settings).done(function (response) {
+      observer.next({success:true,message:response});
+    }).fail(function(err){
+      observer.next({success: false,
+        message:err})
+    })
+  });
     return userReset 
 
   }
-  updateUser(givenname:string, email:String): any {
-    let token = localStorage.getItem('auth_tkn')
-    let data = {
-      givenname: givenname,
-      email: email
-    }
+  updateUser(firstName:string,otherNames:string, email:String): any {
     const userReset = new Observable((observer) => {
-      $.ajax({
-        method: "PUT", 
-        data: JSON.stringify(data),
-        headers: {
-          "Authorization": localStorage.getItem('auth_tkn')
+      let user_id = localStorage.getItem('id');
+      var settings = {
+        "url": `${this.auth_url}/api/users/updateregister/${user_id}`,
+        "method": "POST",
+        "timeout": 0,
+        "headers": {
+          "Content-Type": "application/x-www-form-urlencoded"
         },
-        url:`${this.auth_url}/user/`,
-        success: function (response){
-          observer.next(response.result)
-        },
-        error: function (error){
-          observer.next(error.status)
+        "data": {
+          "firstName": firstName,
+          "middleName": localStorage.getItem("middleName"),
+          "otherNames": otherNames,
+          "staffLevel": localStorage.getItem('staffLevel'),
+          "staffPosition": localStorage.getItem('staffPosition'),
+          "staffPartner": localStorage.getItem('staffPartner'),
+          "userName": localStorage.getItem('email'),
+          "email": localStorage.getItem('email'),
+          // "emailConfirmed": "false",
+          "MobileContact": "111111",
         }
-      });
+      };
+      
+      $.ajax(settings).done(function (response) {
+        console.log(response);
+        observer.next({success:true,message:response.result})
+      }).fail(function(err){
+        console.log(err)
+        observer.next({success:false,message:err})
+      })
     });
     return userReset 
   }

@@ -1,12 +1,34 @@
 * {
     margin: 0;
 }
+.home-wrap {
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    justify-content: stretch;
+    align-content: stretch;
+}
 .landing-page{
-    scroll-behavior: smooth;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    /* flex: 1; */
+    justify-content: stretch;
+}
+/* app-top-header{
+    height: 10%;
+}
+app-footer {
+    height: 20%;
+} */
+.section1 {
+    height: 100%;
 }
 .intro-content {
     color: rgb(247, 242, 242);
-    min-height: 70vh;
+    /* height: 100%; */
+    /* padding-bottom: 4rem; */
     display: flex;
     flex-direction: column;
     justify-content: center;

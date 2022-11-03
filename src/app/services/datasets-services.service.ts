@@ -42,7 +42,7 @@ export class DatasetService {
       method: "GET",
       // contentType:'application/json',
       dataType: 'jsonp',
-      url: this.baseURL +'/package_list',
+      url: 'https://demo.dataverse.org/api/search?q=*&type=dataset',
       success: function (response){
         observer.next(response.result)
         
@@ -57,22 +57,11 @@ export class DatasetService {
     const allDatas = new Observable((observer) => {
       $.ajax({
         method: "GET",
-        // contentType:'application/json',
-        dataType: 'jsonp',
-        url:  this.baseURL +'/package_list',
+        contentType:'application/json',
+        // dataType: 'jsonp',
+        url:  'https://demo.dataverse.org/api/search?q=*&type=dataset',
         success: function (response){
-          let url = this.baseURL
-          response.result.forEach((el: any) =>{
-            $.ajax({
-              method: "GET",
-              // contentType:'application/json',
-              dataType: 'jsonp',
-              url: `http://54.157.112.194/api/3/action/package_show?id=${el}`,
-              success: function (response){
-                observer.next(response.result)
-              }
-            })
-          })
+          observer.next(response.data.items)
         }
       })
       
@@ -83,11 +72,12 @@ export class DatasetService {
     const aDataset = new Observable((observer) => {
       $.ajax({
         method: "GET",
-        // contentType:'application/json',
-        dataType: 'jsonp',
-        url: this.baseURL + `/package_show?id=${id}`,
+        contentType:'application/json',
+        // dataType: 'jsonp',
+        url: "https://demo.dataverse.org/api/datasets/:persistentId/?persistentId="+id,
         success: function (response){
-          observer.next(response.result)
+          // console.log(response)
+          observer.next(response.data)
         }
       })
       
@@ -113,11 +103,13 @@ export class DatasetService {
     const tags = new Observable((observer) => {
       $.ajax({
         method: "GET",
-        // contentType:'application/json',
-        dataType: 'jsonp',
-        url:this.baseURL + `/tag_list`,
+        contentType:'application/json',
+        // dataType: 'jsonp',
+        url: `https://demo.dataverse.org/api/search?q=*&type=dataverse`,
         success: function (response){
-          observer.next(response.result)
+          console.log(response);
+          
+          observer.next(response.data.items)
         }
       })
       
@@ -125,7 +117,7 @@ export class DatasetService {
     return tags
   }
   searchDataset(q: string, tag: string, group: string): any{
-    let url = this.baseURL + '/package_search?'
+    // let url = 
     let data:string = ""
     if(tag != null && q != null){
       data = "q="+q +"fq="+tag
@@ -136,7 +128,21 @@ export class DatasetService {
     }else if (q != null){
       data = "q="+q
     }
-    return this.http.jsonp(`${this.baseURL}/package_search?${data}`, 'callback')
+    // return this.http.jsonp(`${this.baseURL}/package_search?${data}`, 'callback')
+    const allDatas = new Observable((observer) => {
+      $.ajax({
+        method: "GET",
+        contentType:'application/json',
+        // dataType: 'jsonp',
+        url:  `https://demo.dataverse.org/api/search?q=${q}&type=dataset`,
+        success: function (response){
+          
+          observer.next(response.data.items)
+        }
+      })
+      
+    });
+    return allDatas
    
   }
   viewCsv(csv_link: string): any{

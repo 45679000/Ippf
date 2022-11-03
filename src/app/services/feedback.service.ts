@@ -18,7 +18,7 @@ export class FeedbackService {
     }else{
       subject = "Contact Us"
     }
-    return this.http.get(`https://production.techsavanna.technology/melvins_db_backup/send_mail.php?subject=${subject}&to=kkip762@gmail.com&body=${country}  ${message}`);
+    return this.http.get(`https://production.techsavanna.technology/melvins_db_backup/send_mail.php?subject=${subject}&to=wish2action@ippf.org&body=${country}  ${message}`);
 
   }
 }

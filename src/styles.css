@@ -5,9 +5,10 @@
 @import './assets/styles/typography.css';
 @import './assets/styles/container.css';
 @import './assets/styles/spinner.css';
+@import "flexmonster/flexmonster.min.css";
 
 @font-face {
-    font-family: Frutiger;
+    font-family: Frutiger !important;
     src: url(assets/fonts/frutiger/FrutigerLTProRoman.otf) format("opentype");
 }
 html, body { height: 100%; }

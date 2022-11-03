@@ -16,7 +16,7 @@ export class PasswordChangeComponent implements OnInit {
   warn:string = ''
   load:boolean = false
   passwordResetForm = new FormGroup({
-    email: new FormControl('',[Validators.required]),
+    email: new FormControl('',[Validators.required, , Validators.pattern("^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$")]),
     realm: new FormControl('localsql', [Validators.required])
   })
   emailSent() {
@@ -30,27 +30,11 @@ export class PasswordChangeComponent implements OnInit {
   changePassword() {
     if(this.passwordResetForm.value.email){
       this.load = true
-      this.auth.changePassword(this.passwordResetForm.value.email).subscribe((response:any) => {
+      this.auth.changePassword(this.passwordResetForm.value.email,"").subscribe((response:any) => {
         console.log(response);
-        if(response == 500 || 0){
+        if(response.success){
           this.load = false
-          Swal.fire({  
-            icon: 'error',  
-            title: 'Oops...',  
-            text: 'Something went wrong!',  
-            footer: 'Try again. If problems persist contact the admin'  
-          })
-        } else if(response == 400) {
-          this.load = false
-          Swal.fire({  
-            icon: 'error',  
-            title: 'Oops...',  
-            text: 'Email or username mismatch',  
-            footer: 'Make sure you have entered the rigth credentials. However, if problems persist, contact the admin.'  
-          })
-        } else {
-          this.load = false
-          if(response.status){
+          // if(response.status){
             setTimeout(function (){
               Swal.fire({  
                 icon: 'success',  
@@ -61,7 +45,14 @@ export class PasswordChangeComponent implements OnInit {
             }, 2000)
             this.routesService.changePrevious('password-change')
             this.route.navigate(['/login'])
-          }
+        }else{
+          this.load = false
+          Swal.fire({  
+            icon: 'error',  
+            title: 'Failed',  
+            text: "Make sure to input email address used to register",  
+            // footer: 'Check your email inbox. Then sign in.'  
+          })
         }
       })
     }else {

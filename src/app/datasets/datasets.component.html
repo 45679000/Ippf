@@ -24,16 +24,16 @@
                 <div class="card">
                     <h3>Filter results</h3>
                     <form action="" [formGroup]="filterForm">
-                        <select type="text" placeholder="Country Name" class="sidebarInput" formControlName="tag">
+                        <select type="text" placeholder="Country Name" class="sidebarInput" formControlName="tag" (change)="onSubmit()">
                             <option [ngValue]="null" [disabled]="true" class="suggestion">Tags</option>
-                            <option *ngFor="let tag of tags" value="{{tag}}">{{ tag | titlecase}}</option>
+                            <option *ngFor="let tag of tags" value="{{tag.name}}">{{ tag.name | titlecase}}</option>
                         </select>
                         <select type="text" placeholder="Year" class="sidebarInput my-4" formControlName="group">
                             <option [ngValue]="null" [disabled]="true" class="suggestion">Group</option>
                             <option *ngFor="let group of groups" value="{{group}}"value="{{group}}">Volvo</option>
                         </select>
                         <div class="btn-group">
-                            <input type="submit" value="Search" class="btn btn-primary filterBtn">
+                            <!-- <input type="submit" value="Search" class="btn btn-primary filterBtn"> -->
                             <input type="submit" value="Reset" class="btn btn-primary resetBtn" (click)="clearTags()">
                         </div>
                     </form>
@@ -44,7 +44,21 @@
                 <div class="row col-12">
 
                     <div class="col-8">
-                        <h3 class="lead-heading-mid">{{header}} <span class="text-capitalize">{{searchForm.value.q !== null ? searchForm.value.q :""}} {{searchForm.value.tag != null ? "with tag - " + searchForm.value.tag :""}} {{searchForm.value.group != null ? "with group - " + searchForm.value.group :""}}</span></h3>
+                        <div class="spin" *ngIf="loader">
+                            <div class="lds-roller">
+                                <div></div>
+                                <div></div>
+                                <div></div>
+                                <div></div>
+                                <div></div>
+                                <div></div>
+                                <div></div>
+                                <div></div>
+                            </div>
+                        </div>
+                        <h3 class="lead-heading-mid">{{header}} 
+                            <!-- <span class="text-capitalize">{{searchForm.value.q !== null ? searchForm.value.q :""}} {{searchForm.value.tag != null ? "with tag - " + searchForm.value.tag :""}} {{searchForm.value.group != null ? "with group - " + searchForm.value.group :""}}</span> -->
+                        </h3>
                         <p>Showing {{xxy}} Survey(s)</p>
                     </div>
                     <div class="col-4">
@@ -58,17 +72,24 @@
                         <ng-template #elseBlock><p class="pink-text"><i class="fas fa-lock"></i></p></ng-template>
                     </div>
                     <div class="right-side col-11">
-                        <h3 class="lead-heading-mid">{{data.title | titlecase}}</h3>
-                        <p class="lead-heading-small"><a [routerLink]="['../datasets/dataset-details',data.name]">View {{data.title | titlecase}} in detail</a></p>
+                        <h3 class="lead-heading-mid">{{data.name | titlecase}}</h3>
+                        <p class="lead-heading-small">
+                            
+                            <!-- _href="https://demo.dataverse.org/dataset.xhtml?persistentId="+data.global_id -->
+                            <a 
+                            [routerLink]="['../datasets/dataset-details',data.global_id]"
+
+                            >View {{data.name | titlecase}} in detail</a>
+                        </p>
                         <p class="lead-heading-small-black">{{data.name}}</p>
-                        <p><span class="text-bold">Collection: </span>{{data.title | titlecase}}</p>
+                        <!-- <p><span class="text-bold">Collection: </span>{{data.title | titlecase}}</p> -->
                         <div class="meta-data">
-                            <p class="date-created">Created on: {{data.metadata_created}}</p>
-                            <p class="date-modified mx-4">Last Modified: {{data.metadata_modified}}</p>
+                            <p class="date-created">Created on: {{data.createdAt}}</p>
+                            <p class="date-modified mx-4">Last Modified: {{data.updatedAt}}</p>
                         </div>
-                        <div>
-                            <p class="number-of-times-viewed">Resources number: {{data.resources.length}}</p>
-                        </div>
+                        <!-- <div>
+                            <p class="number-of-times-viewed">Resources number: {{data.files.length}}</p>
+                        </div> -->
                     </div>
                     
                 </div>
