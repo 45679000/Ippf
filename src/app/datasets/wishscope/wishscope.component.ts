@@ -1,10 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { DatasetService } from '../../services/datasets-services.service';
 import { FormGroup, FormControl, Validators ,FormBuilder} from '@angular/forms';
 import { Resource } from '../../interfaces/resource'
 import { ActivatedRoute } from '@angular/router'
 import { DomSanitizer } from "@angular/platform-browser";
 import { Constants } from "../../config/constants"
+import { FlexmonsterPivot } from "ng-flexmonster";
 
 interface Item {
   item: string[]
@@ -19,6 +20,7 @@ interface Pie {
   styleUrls: ['./wishscope.component.css']
 })
 export class WishscopeComponent implements OnInit {
+  dataverse_url: string = Constants.dataverse_url 
   load: boolean = false
   datasets:any = []
   dataFiles: Resource []= []
@@ -46,7 +48,14 @@ export class WishscopeComponent implements OnInit {
   resource_id: any
   url: string = ''
   displayIframe: boolean = false
+  dataset_id:number = 0
+  data_type:string = ''
   // countries: Country[] = [];
+  // @ViewChild("pivot") pivot!: FlexmonsterPivot;
+  @ViewChild('pivot')pivot!: FlexmonsterPivot;
+   report: Object = {
+    
+  };
   constructor(private appService: DatasetService, private route: ActivatedRoute, private sanitizer: DomSanitizer) { 
     // this.refreshCountries()
     // console.log(this.collectionSize)
@@ -62,12 +71,45 @@ export class WishscopeComponent implements OnInit {
       this.datasetForm.value.datafile = this.resource_id
       // console.log('Query params ',this.pageNo) 
     });
-    // this.id = this.route.snapshot.paramMap.get('id')
-    // this.resource_id = this.route.snapshot.paramMap.get('resource_id')
-    console.log('id: ' + this.id + ' resource id:' + this.resource_id);
-    
-    // this.getCsv()
-    // this.generateBasicLineChart()
+    this.dataset_id = this.appService.dataset_id
+    if(this.appService.file_type == "application/json"){
+      this.data_type = "json"
+    }else if(this.appService.file_type == "text/csv"){
+      this.data_type = "csv"
+    }
+    this.data_type = this.appService.file_type 
+    console.log(this.data_type)
+    if(this.dataset_id){
+      this.report = {
+          dataSource: {
+          // type: this.data_type,
+          filename: this.dataverse_url+"/access/datafile/"+this.dataset_id,
+        }
+      }
+    }
+    // else {
+    //   alert("Chooses the data to visalize in the datasets page")
+    // }
+  }
+    onLoadRemoteJSON() {
+    let filename = prompt("Open remote JSON", "https://filesamples.com/samples/code/json/sample1.json");
+    if (filename != null) {
+      this.pivot.flexmonster.connectTo({
+        type: "json",
+        filename: filename,
+      });
+    }
+  }
+  onLoadRemoteCSV(id:any) {
+    // let filename = prompt("Open remote CSV", "https://www.sample-videos.com/csv/Sample-Spreadsheet-10000-rows.csv");
+    let filename = this.dataverse_url+"/access/datafile/"+id
+    if (filename != null) {
+      // this.pivot.flexmonster.setReport(this.report);
+      this.pivot.flexmonster.connectTo({
+        type: "csv",
+        filename: filename,
+      });
+    }
   }
   transform(url:string) {
     return this.sanitizer.bypassSecurityTrustResourceUrl(url);
@@ -76,15 +118,13 @@ export class WishscopeComponent implements OnInit {
     return item
   }
   getListOfDatasets(){
-    this.appService.allDatasets.subscribe((e) => {
-      this.datasets = e
-    })
+    this.appService.getAllData().subscribe((e) => {
+      this.datasets = e    })
   }
   getListOfDatafiles(){
     this.appService.getADataset(this.datasetForm.value.dataset).subscribe((e:any) => {
-      this.dataFiles = e.resources
-      console.log(this.dataFiles);
-      
+      this.dataFiles = e.latestVersion.files
+      console.log(e.latestVersion.files)
     })
   }
   getCsv(){

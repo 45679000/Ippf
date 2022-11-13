@@ -83,6 +83,17 @@ export class AuthServiceService {
         })
       });
     });
+   
+    // return this.http.post("http://192.168.1.212:8080/login.xhtml", {
+    //   "credentials": "include",
+    //   "headers": {
+    //       "Content-Type": "application/x-www-form-urlencoded",
+    //   },
+    
+    //   "body": "j_idt4=j_idt4&j_idt4%3Aj_idt6=dataverseAdmin&j_idt4%3Aj_idt7=admin123&j_idt4%3Apopdistancecalc=Submit&javax.faces.ViewState=stateless",
+    //   "method": "POST",
+    //   "mode": "cors"
+    // });
     return token
   }
   saveToken(token: any): Observable<any>{    

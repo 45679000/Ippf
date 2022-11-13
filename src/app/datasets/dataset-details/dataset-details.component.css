@@ -58,3 +58,7 @@ table {
 .question-data-bold {
     font-weight: bold;
 }
+.load {
+    z-index: 0 !important;
+    opacity: 0.3 !important;
+}
