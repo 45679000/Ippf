@@ -145,6 +145,11 @@ thead {
 .pink-text, .blue-text {
     font-size: 3rem;
 }
+.sort-header {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
 .load {
     z-index: 0 !important;
     opacity: 0.3 !important;

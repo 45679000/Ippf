@@ -34,7 +34,9 @@ export class DatasetService {
  
   baseURL: string = Constants.CKAN_ENDPOINT;
   datasetsAr = []
-
+  root_url:string = Constants.dataverse_url
+  dataset_id:number = 0
+  file_type:string = ""
   constructor(private http: HttpClient) {
   }
   allDatasets = new Observable<Data>((observer) => {
@@ -42,7 +44,7 @@ export class DatasetService {
       method: "GET",
       // contentType:'application/json',
       dataType: 'jsonp',
-      url: 'https://demo.dataverse.org/api/search?q=*&type=dataset',
+      url: this.root_url+'/search?q=*&type=dataset&per_page=1000',
       success: function (response){
         observer.next(response.result)
         
@@ -53,15 +55,40 @@ export class DatasetService {
     })
   });
   getAllData(): any{
-    
+    // this.trySth().subscribe((e:any) => {
+    //   console.log(e);
+      
+    // })
     const allDatas = new Observable((observer) => {
       $.ajax({
         method: "GET",
         contentType:'application/json',
         // dataType: 'jsonp',
-        url:  'https://demo.dataverse.org/api/search?q=*&type=dataset',
+        url:  this.root_url+'/search?q=*&type=dataset&per_page=100',
         success: function (response){
           observer.next(response.data.items)
+        }
+      })
+      
+    });
+    return allDatas
+  }
+  requestDataset(id: number):any{
+    // http://$SERVER/api/access/datafile/{id}/requestAccess
+    const allDatas = new Observable((observer) => {
+      $.ajax({
+        method: "PUT",
+        // contentType:'application/json',
+        headers: {
+          "X-Dataverse-key": "ecbc4c40-cbba-4cc1-b8d3-b8a816951f1e"
+        },
+        // dataType: 'jsonp',
+        url:  this.root_url+'/access/datafile/'+id+'/requestAccess',
+        success: function (response){
+          // console.log(response)
+          observer.next(response)
+        },error: function(res){
+          observer.next(res.responseJSON)
         }
       })
       
@@ -74,15 +101,32 @@ export class DatasetService {
         method: "GET",
         contentType:'application/json',
         // dataType: 'jsonp',
-        url: "https://demo.dataverse.org/api/datasets/:persistentId/?persistentId="+id,
+        url: this.root_url+"/datasets/:persistentId/?persistentId="+id,
         success: function (response){
-          // console.log(response)
-          observer.next(response.data)
+          // console.log(response
+          let res = response.data
+          observer.next(res)
         }
       })
       
     });
     return aDataset
+  }
+  getMetaData(id:string){
+    // 2012044
+    const meta = new Observable((observer) => {
+      $.ajax({
+        method: "GET",
+        contentType:'application/json',
+        // dataType: 'jsonp',
+        url: this.root_url+`/datasets/${id}/versions/1.0/metadata/citation`,
+        success: function (response){
+          // console.log(response)
+          observer.next(response.data)
+        }
+      })
+    })
+    return meta
   }
   getAllGroups(): any{
     const groups = new Observable((observer) => {
@@ -105,8 +149,9 @@ export class DatasetService {
         method: "GET",
         contentType:'application/json',
         // dataType: 'jsonp',
-        url: `https://demo.dataverse.org/api/search?q=*&type=dataverse`,
+        url: `${this.root_url}/search?q=*&type=dataverse`,
         success: function (response){
+          console.log('dsd')
           console.log(response);
           
           observer.next(response.data.items)
@@ -116,9 +161,10 @@ export class DatasetService {
     });
     return tags
   }
-  searchDataset(q: string, tag: string, group: string): any{
+  searchDataset(q: string, tag: string, group: string,sort:any = 0): any{
     // let url = 
     let data:string = ""
+    let sort_string: string = ""
     if(tag != null && q != null){
       data = "q="+q +"fq="+tag
         // q: q,
@@ -128,13 +174,17 @@ export class DatasetService {
     }else if (q != null){
       data = "q="+q
     }
+    console.log(sort)
+    if(sort.length > 0){
+      sort_string = "&sort="+sort[0]+"&order="+sort[1]
+    }
     // return this.http.jsonp(`${this.baseURL}/package_search?${data}`, 'callback')
     const allDatas = new Observable((observer) => {
       $.ajax({
         method: "GET",
         contentType:'application/json',
         // dataType: 'jsonp',
-        url:  `https://demo.dataverse.org/api/search?q=${q}&type=dataset`,
+        url:  `${this.root_url}/search?q=${q.length > 0? q: '*'}&type=dataset${sort_string}&start=0&per_page=100`,
         success: function (response){
           
           observer.next(response.data.items)
@@ -170,6 +220,27 @@ export class DatasetService {
         data: form_data,
         url:`${this.baseURL}/package_create`,
         success: function (response){
+          observer.next(response)
+        }
+      });
+      
+    });
+    return dataset
+  }
+  trySth():any{
+    const dataset = new Observable((observer) => {
+      $.ajax({
+        method: "GET",
+        headers: {
+          "X-Dataverse-key": "a62e870b-9f08-405f-949b-ab46bccb504c"
+        },
+        // Authorization: ,
+        // data: form_data,
+        // url: 'http://192.168.1.212:8080/api/access/dataset/:persistentId/?persistentId=doi:10.5072/FK2/JK2TPG',
+        url: 'http://192.168.1.212:8080/api/access/datafile/persistentId=doi:10.5072/FK2/JK2TPG&format=prep',
+        success: function (response){
+          console.log(response);
+          
           observer.next(response)
         }
       });

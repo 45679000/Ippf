@@ -43,7 +43,7 @@
             <div class="datasets px-5 container">
                 <div class="row col-12">
 
-                    <div class="col-8">
+                    <div class="col-12">
                         <div class="spin" *ngIf="loader">
                             <div class="lds-roller">
                                 <div></div>
@@ -56,21 +56,37 @@
                                 <div></div>
                             </div>
                         </div>
-                        <h3 class="lead-heading-mid">{{header}} 
-                            <!-- <span class="text-capitalize">{{searchForm.value.q !== null ? searchForm.value.q :""}} {{searchForm.value.tag != null ? "with tag - " + searchForm.value.tag :""}} {{searchForm.value.group != null ? "with group - " + searchForm.value.group :""}}</span> -->
-                        </h3>
-                        <p>Showing {{xxy}} Survey(s)</p>
+                        <div class="sort-header">
+                            <div>
+                                <h3 class="lead-heading-mid">{{header}} 
+                                    <!-- <span class="text-capitalize">{{searchForm.value.q !== null ? searchForm.value.q :""}} {{searchForm.value.tag != null ? "with tag - " + searchForm.value.tag :""}} {{searchForm.value.group != null ? "with group - " + searchForm.value.group :""}}</span> -->
+                                </h3>
+                                <p>Total  Survey(s) - {{xxy}}</p>
+                            </div>
+                            <div class="sort-div">
+                                <div>
+                                    <form [formGroup] = "sortForm" (change)="onSort($event)">
+                                    <select>
+                                        <option value="date,desc">Sort by date - Newest</option>
+                                        <option value="date,asc">Sort by date - Oldest</option>
+                                        <option value="name,asc">Sort by name - Ascending</option>
+                                        <option value="name,desc">Sort by name - Descending</option>
+                                    </select>
+                                </form>
+                                </div>
+                            </div>
+                        </div>
                     </div>
-                    <div class="col-4">
+                    <!-- <div class="col-4"> -->
                         <!-- <a [routerLink]="['/datasets/dataset-upload']" class="btn searchBtnBig"><span class="mx-3"><i class="fas fa-plus"></i></span>Upload new dataset</a> -->
-                    </div>
+                    <!-- </div> -->
                 </div>
                 <div class="text-center text-danger h6" *ngIf="xxy <= 0">No results for this search, try something else</div>
-                <div class="mb-3 dataset-info" *ngFor="let data of aalData">
-                    <div class="left-side col-1">
+                <div class="mb-3 dataset-info" *ngFor="let data of aalData | slice: (page-1) * pageSize : (page-1) * pageSize + pageSize">
+                    <!-- <div class="left-side col-1">
                         <p *ngIf="data.state; else elseBlock"class="blue-text"><i class="fas fa-lock-open"></i></p>
                         <ng-template #elseBlock><p class="pink-text"><i class="fas fa-lock"></i></p></ng-template>
-                    </div>
+                    </div> -->
                     <div class="right-side col-11">
                         <h3 class="lead-heading-mid">{{data.name | titlecase}}</h3>
                         <p class="lead-heading-small">
@@ -93,6 +109,9 @@
                     </div>
                     
                 </div>
+                <!-- <div *ngIf="xxy.length =>100">
+                    <ngb-pagination [collectionSize]="50" [(page)]="page" [directionLinks]="false"></ngb-pagination>
+                </div> -->
             </div>
         </div>
     </div>

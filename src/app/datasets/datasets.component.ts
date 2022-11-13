@@ -61,6 +61,11 @@ export class DatasetsComponent implements OnInit {
     tag: new FormControl(),
     group: new FormControl()
   })
+  sortForm = new FormGroup({
+    sort: new FormControl()
+  })
+  page:any = 1;
+  pageSize: any = 20
   datasets:any = []
   someDataset:any =[]
   aalData:any[] = []
@@ -115,6 +120,7 @@ export class DatasetsComponent implements OnInit {
     //     this.loader = false
     //   }
     // );
+    this.loader = true
     this.datasetService.getAllTags().subscribe((val: any)=>{
       this.tags = val
     })
@@ -125,6 +131,7 @@ export class DatasetsComponent implements OnInit {
     subscribe((val: any)=>{
       
       this.aalData = val;
+      this.xxy = val.length
       this.loader = false
     })
     
@@ -141,6 +148,21 @@ export class DatasetsComponent implements OnInit {
       
     })
     
+  }
+  onSort(valu: any){
+    console.log(valu.target.value)
+    this.loader = true 
+    let sort_val = valu.target.value
+    let sort = sort_val.split(',')
+    this.datasetService.searchDataset('', '', '',sort).subscribe((val: any) => {
+      console.log(val);
+      
+      this.loader = false
+      this.xxy = val.length
+      this.aalData = val
+      
+    })
+
   }
   changeHeader(){
     this.header = "Available datasets"

@@ -16,6 +16,18 @@
             <!-- <p class="number-of-times-viewed">Views: 1021</p> -->
             <!-- <p class="number-of-times-viewed mx-4">Downloads: 300</p> -->
         </div>
+        <div class="spin" *ngIf="load">
+            <div class="lds-roller">
+                <div></div>
+                <div></div>
+                <div></div>
+                <div></div>
+                <div></div>
+                <div></div>
+                <div></div>
+                <div></div>
+            </div>
+        </div>
         <div class="dataset-content">
             <div class="btn-group mb-3">
                 <button class="btn lead-heading" [ngClass]=" studyDescriptionDisp? 'pink-border' : ''" (click)="dispStudyDescription()">Survey Description</button>
@@ -28,18 +40,19 @@
                         <h2 class="h2">SURVEY ID NUMBER</h2>
                         <p>{{dataOfDataset.id }}</p>
                     </div>
-                    <!-- <div class="survey-title">
-                        <h2 class="lead-heading">TITLE</h2>
-                        <p>{{dataOfDataset.title }}</p>
-                    </div> -->
+                    <div class="survey-title">
+                        <!-- <h2 class="lead-heading">TITLE</h2> -->
+                        <p>Published by: {{dataOfDataset.publisher }}</p>
+                    </div>
+                    <!-- <p>{{meta.}}</p> -->
                     <div class="col-md-6 col-12">
-                        <div class="author row col-12">
-                            <table class="table">
-                                <tbody *ngFor="let meta of metedata">
-                                    <tr *ngIf="!meta.multiple">
-                                        <td>{{meta.typeName}}</td>
-                                        <td>{{meta.value}}</td>
-                                    </tr>
+                        <div class="author row col-12" >
+                            <!-- <table class="table"> -->
+                                <!-- <tbody> -->
+                                    <div *ngFor="let file of meta.fields">
+                                        <!-- <h3>{{camelToUnderscore(file.typeName)}}</h3> -->
+                                        <div [innerHtml] = "!file.multiple? check(file.value) : mutlipleValues(file.value)"></div>
+                                    </div>
                                     <!-- <tr>
                                         <td>Author's email:</td>
                                         <td>{{dataOfDataset.author_email}}</td>
@@ -52,8 +65,8 @@
                                         <td>Maintainer's email:</td>
                                         <td>{{dataOfDataset.maintainer_email}}</td>
                                     </tr> -->
-                                </tbody>
-                            </table>
+                                <!-- </tbody> -->
+                            <!-- </table> -->
                         </div>
                     </div>
                     
@@ -89,36 +102,52 @@
                             <div class="questionnaire">
                                 <div class="question-title">
                                     <div class="question-name">
-                                        <h2 class="lead-heading">{{resource.label | uppercase}}</h2>
+                                        <h2 class="lead-heading">File description: {{resource.description }}</h2>
+                                        <p>FIle name: {{resource.label }}</p>
                                     </div>
                                     
                                     
                                 </div>
                                 <div>
-                                    <div *ngIf="resource.restricted; else loggedOut">
-                                        Request dataset.
-                                      </div>
-                                      
-                                      <ng-template #loggedOut>
-                                        View file.
-                                      </ng-template>
+                                    
                                 </div>
                                 <div class="question-data">
-                                    <p>{{resource.description}}</p>
+                                    <!-- <p>{{resource.description}}</p> -->
                                     <!-- <p><span class="question-data-bold">Download: </span><a href="https://ippf.org/index.php/catlog/1912/download/29499">https://ippf.org/index.php/catlog/1912/download/29499</a></p> -->
                                     <div class="bottom-items row col-12">
+                                        
+                                        <div class="col-3 m-auto" *ngIf="resource.restricted; else visualize">
+                                            <button (click)="requestData(resource.dataFile.id)" class="btn btn-primary redBtn">Request the dataset</button>
+                                            </div>                
+                                              
+                                            <ng-template #visualize>
+                                                <!-- *ngIf=" resource.dataFile.contentType == 'text/comma-separated-values' || resource.dataFile.contentType == 'text/csv'; else download" -->
+                                                <div class="col-3 m-auto" >
+                                                <button (click)="setDatasetId(resource.dataFile.id,resource.dataFile.contentType)" class="btn btn-primary redBtn"><span class="mx-2"><i class="fas fa-chart-line"></i></span>Visualize in Wishscope</button>
+                                                </div>
+                                               <!--  this.dataverse_url+"access/datafile/"+this.dataset_id -->
+                                                <ng-template #download>
+                                                    <div class="col-3">
+                                                        <a href="{{base_url}}/access/datafile/{{resource.dataFile.id}}"><span class="mx-2"><i class="fas fa-download"></i></span>Download file</a>
+                                                    </div>
+                                                </ng-template>
+                                            </ng-template>
+                                        
                                         <div class="col-3 m-auto">
-                                            Date Created: <span class="text-info">{{resource.created | date:'mediumDate'}}</span>
+                                            Date Created: <span class="text-info">{{resource.dataFile.creationDate }}</span>
                                         </div>
-                                        <div class="col-3 m-auto" *ngIf="resourceExistUrl(resource)">
+                                        <div class="col-3 m-auto">
+                                            <button (click)="setDatasetId(resource.dataFile.id,resource.dataFile.contentType)">Go to wishscope</button>
+                                        </div>
+                                        <!-- <div class="col-3 m-auto" *ngIf="resourceExistUrl(resource)">
                                             <a [routerLink]="['/wishscope']" [queryParams]="{ id: 99, resource_id: 20}" class="btn btn-link" ><span class="mx-2"><i class="fas fa-chart-line"></i></span>Visualize in Wishscope</a>
                                         </div>
                                         <div class="col-6 m-auto" *ngIf="!resourceExistUrl(resource)">
                                             No file uploaded
                                         </div>
-                                        <div class="col-3 m-auto" *ngIf="resourceExistUrl(resource)">
-                                            <a  href="{{resource.original_url || resource.url}}" class="download-link blue-text"><span class="mx-2"><i class="fas fa-download"></i></span>Download</a>
-                                        </div>
+                                        <div class="col-3 m-auto" *ngIf="resourceExistUrl(resource)"> -->
+                                            <!-- <a  href="{{resource.original_url || resource.url}}" class="download-link blue-text"><span class="mx-2"><i class="fas fa-download"></i></span>Download</a>
+                                        </div> -->
                                     </div>
                                 </div>
                             </div>

@@ -8,20 +8,20 @@
       </div>
       
       <div class="container-fluid py-3" [class.load] = "load">
-          <h2 class="lead-heading text-center">Select the dataset to visualize it's data</h2>
-          <div class="col-12 top-form">
+          <h2 class="lead-heading text-center" style="display: none;">Select the dataset to visualize it's data</h2>
+          <div class="col-12 top-form" style="">
               <form action="" [formGroup]="datasetForm" >
                   <div class="mb-3 col-md-6 col-12 mx-auto">
                     <label for="" class="form-label">Choose the dataset</label>
                     <div>
                       <select class="sidebarInput col-12" name="" id="" formControlName="dataset" (change)="getListOfDatafiles()">
-                          <option *ngFor="let item of datasets | keyvalue" value="{{item.value}}">{{item.value}}</option>
+                          <option *ngFor="let item of datasets" value="{{item.global_id}}">{{item.name}}</option>
                         </select>
                     </div>
 
                     <label for="" class="form-label">Select the data file to visualize</label>
-                    <select class="sidebarInput col-12" name="" id="" formControlName="datafile" (change)="setCsvFile()">
-                      <option *ngFor="let item of dataFiles" value="{{item.id}}">{{item.name}}</option>
+                    <select class="sidebarInput col-12" name="" id="" formControlName="datafile" (change)="onLoadRemoteCSV($event.target.value)">
+                      <option *ngFor="let item of dataFiles" value="{{item.dataFile.id}}">{{item.dataFile.filename}}</option>
                     </select>
                   </div>
               </form>
@@ -37,9 +37,17 @@
                 <div></div>
                 <div></div>
             </div>
-        </div>
+        </div>      
+       <!--  <button (click)="onLoadRemoteJSON()">Load remote JSON</button>
+        <button (click)="onLoadRemoteCSV(17)">Load remote CSV</button> -->
+      
+      <div class="mb-5">
         <fm-pivot
-          [toolbar]="true">
+          #pivot
+          [toolbar]="true"
+          [report]="report"
+          [height]="600"
+          >
         </fm-pivot>
         <iframe *ngIf="displayIframe" [src]="transform(url)" title="W3Schools Free Online Web Tutorials" class="iframe"></iframe> 
       </div>
