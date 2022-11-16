@@ -81,6 +81,17 @@
     .avatar{
         width: 50%;
     }
+    .blue-text , .salutation p, .salutation a {
+        font-size: 1rem !important;
+    }
+    .br { 
+        display:none; 
+    }
+    .user-management {
+        top: 60px !important;
+        width: 125px !important;
+        padding: 0px;
+    }
 }
 @media (max-width: 375px) {
     .logoz img{

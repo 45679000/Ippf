@@ -23,7 +23,7 @@ export class FooterComponent implements OnInit {
     if(this.feedbackForm.valid){
       Swal.fire({  
         icon: 'info',  
-        text: 'Your feedback has been sent'
+        text: 'Your feedback has been sent. <br>Thank you for you valued input.'
       })
       this.feedback.sendFeedBack("", this.feedbackForm.value.feedback, "feedback").subscribe((e: any) => {
         // if(e.success){

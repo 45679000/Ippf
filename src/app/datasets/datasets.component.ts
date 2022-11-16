@@ -64,13 +64,18 @@ export class DatasetsComponent implements OnInit {
   sortForm = new FormGroup({
     sort: new FormControl()
   })
+  sizeForm = new FormGroup({
+    size: new FormControl()
+  })
   page:any = 1;
   pageSize: any = 20
   datasets:any = []
   someDataset:any =[]
   aalData:any[] = []
-  xxy: any
+  aalDataDuplicare: any[] = []
+  xxy: any = 20
   searchCount: Number = 0
+  subjects:any = []
   loader:boolean = true
   dataOfDataset: dataDaset = {
     author: '',
@@ -130,31 +135,61 @@ export class DatasetsComponent implements OnInit {
     this.datasetService.getAllData().
     subscribe((val: any)=>{
       
-      this.aalData = val;
-      this.xxy = val.length
+      this.aalData = val.items;
+      console.log(this.aalData[0].metadataBlocks.ippf.fields[0].value.meta_title.value)
+      this.aalDataDuplicare = this.aalData
+      this.searchCount = val.total_count
+      this.xxy = val.items.length
       this.loader = false
+      
     })
-    
+    if(this.aalData.length >= 0){
+        this.loader = false
+      }
   }
   onSubmit() {
+    if(this.filterForm.value.tag){
+      let filteredData = []
+      this.aalDataDuplicare.forEach((data:any)=>{
+        if(this.compareSubjects(this.filterForm.value.tag, data.subjects)){
+          filteredData.push(data)
+        }
+      } )
+      // this.loader = true
+      this.xxy = filteredData.length
+      this.aalData = filteredData
+    }
     this.loader = true
     this.changeHeader()
-    this.datasetService.searchDataset(this.searchForm.value.q, this.filterForm.value.tag, this.filterForm.value.group).subscribe((val: any) => {
-      console.log(val);
-      
+    this.datasetService.searchDataset(this.searchForm.value.q, this.filterForm.value.tag, this.filterForm.value.group).subscribe((val: any) => {      
       this.loader = false
       this.xxy = val.length
       this.aalData = val
       
     })
-    
+  }
+  compareSubjects(form_value:string, subject_array:any){
+    let equal = true
+    subject_array.forEach((item: string)=>{
+        if(item == form_value){
+          equal =true
+        }else{
+          equal = false
+        }
+    })
+    return equal
+  }
+  sliceString(description:string){
+    console.log(description.length)
+    let x = description.length > 100 ? description.slice(0,100) + "..." : description
+    return "x"
   }
   onSort(valu: any){
     console.log(valu.target.value)
     this.loader = true 
     let sort_val = valu.target.value
     let sort = sort_val.split(',')
-    this.datasetService.searchDataset('', '', '',sort).subscribe((val: any) => {
+    this.datasetService.searchDataset('*', '', '',sort).subscribe((val: any) => {
       console.log(val);
       
       this.loader = false
@@ -163,6 +198,18 @@ export class DatasetsComponent implements OnInit {
       
     })
 
+  }
+  onChangeSize(size:any){
+    console.log(size.target.value)
+    this.loader = true 
+    let sort_val = size.target.value
+    let size_of_data = sort_val.split(',')
+    this.datasetService.searchDataset('*', '', '','',size_of_data).subscribe((val: any) => {
+      this.loader = false
+      this.xxy = val.length
+      this.aalData = val
+      
+    })
   }
   changeHeader(){
     this.header = "Available datasets"
@@ -177,14 +224,30 @@ export class DatasetsComponent implements OnInit {
   }
   clearTags(){
     this.searchForm.reset();
-    
-    this.loader = true
-    this.datasetService.getAllData().
-    subscribe((val: any)=>{
-      this.xxy = val.length
-      this.aalData = val;
-      this.loader = false
+    this.aalData = this.aalDataDuplicare
+    // this.loader = true
+    // this.datasetService.getAllData().
+    // subscribe((val: any)=>{
+    //   this.xxy = val.length
+    //   this.aalData = val;
+    //   this.loader = false
+    // })
+  }
+  addSubjects(subjectArray: any){
+    subjectArray.forEach((item:any) => {
+      if(!this.checkSubject(item)){
+        this.subjects.push(item)
+      }
     })
+  }
+  checkSubject(sub:string){
+    let exists = false
+    this.subjects.forEach((subject:string) => {
+      if(subject == sub){
+        exists = true
+      }
+    })
+    return exists
   }
 
   

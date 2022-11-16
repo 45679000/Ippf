@@ -1,21 +1,21 @@
 <div class="menu-holder">
-    <button class="bread" (click)="showMenu()" >
+    <!-- <button class="bread" (click)="showMenu()" >
         <div class="crumb"></div>
         <div class="crumb"></div>
         <div class="crumb"></div>
-    </button>
-    <ul class="menu" [ngClass]="breadCrumb?'display' : ''">
-        <li class="menu-items">
-            <a [routerLink]="['/home']" class="list-item h3" [ngClass]=" fontColorBlue? 'blueText' : 'whiteText'" routerLinkActive="active"><span class="mx-3"><i class="fas fa-home"></i></span>Home</a>
-        </li>
-        <li class="menu-items">
-            <a [routerLink]="['/datasets']" class="list-item h3" [ngClass]=" fontColorBlue? 'blueText' : 'whiteText'" routerLinkActive="active"><span class="mx-3"><i class="fas fa-book"></i></span>Datasets</a>
-        </li>
-        <li class="menu-items">
-            <a [routerLink]="['/wishscope']" class="list-item h3" [ngClass]=" fontColorBlue? 'blueText' : 'whiteText'" routerLinkActive="active" ><span class="mx-3"><i class="fas fa-chart-line"></i></span>WISHScope</a>
-        </li>
-        <li class="menu-items">
-            <a [routerLink]="['/request-dataset']" class="list-item h3" [ngClass]=" fontColorBlue? 'blueText' : 'whiteText'" routerLinkActive="active" style="cursor: not-allowed; pointer-events: none;"><span class="mx-3"><i class="fas fa-question"></i></span>Data Requests</a>
-        </li>
+    </button> [ngClass]="breadCrumb?'display' : ''" -->
+    <ul class="menu row" >
+            <li class="menu-items col-5 col-sm-3">
+                <a [routerLink]="['/home']" class="list-item h3" [ngClass]=" fontColorBlue? 'blueText' : 'whiteText'" routerLinkActive="active"><span class="mx-sm-3"><i class="fas fa-home"></i></span>Home</a>
+            </li>
+            <li class="menu-items col-5 col-sm-3">
+                <a [routerLink]="['/datasets']" class="list-item h3" [ngClass]=" fontColorBlue? 'blueText' : 'whiteText'" routerLinkActive="active"><span class="mx-sm-3"><i class="fas fa-book"></i></span>Datasets</a>
+            </li>
+            <li class="menu-items col-5 col-sm-3">
+                <a [routerLink]="['/wishscope']" class="list-item h3" [ngClass]=" fontColorBlue? 'blueText' : 'whiteText'" routerLinkActive="active" ><span class="mx-sm-3"><i class="fas fa-chart-line"></i></span>WISHScope</a>
+            </li>
+            <li class="menu-items col-5 col-sm-3">
+                <a [routerLink]="['/request-dataset']" class="list-item h3" [ngClass]=" fontColorBlue? 'blueText' : 'whiteText'" routerLinkActive="active" style="cursor: not-allowed; pointer-events: none;"><span class="mx-sm-3"><i class="fas fa-question"></i></span>Data Requests</a>
+            </li>
     </ul>
 </div>

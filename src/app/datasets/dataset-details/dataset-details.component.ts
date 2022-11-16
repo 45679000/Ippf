@@ -46,6 +46,7 @@ export class DatasetDetailsComponent implements OnInit {
     url_type: ''
   }
   table:boolean = false
+  faq: string = "meta_identification"
   public studyDescriptionDisp: boolean = true;
   public documentationDisp: boolean = false;
   public dataDescriptionDisp: boolean = false;
@@ -70,15 +71,15 @@ export class DatasetDetailsComponent implements OnInit {
     this.id = this.route.snapshot.paramMap.get('id')
     const data = this.datasetService.getADataset(this.id)
     data.subscribe((val: any) => {
-      console.log(val)
+      // console.log(val)
       this.dataOfDataset = val
       this.resourcesArray = val.latestVersion.files
       // 
         if(this.dataOfDataset != null){
-          this.datasetService.getMetaData(this.dataOfDataset.id).subscribe((e:any)=>{
-            console.log(e);
-            
+          this.load = true
+          this.datasetService.getMetaData(this.dataOfDataset.id).subscribe((e:any)=>{            
             this.meta = e
+            this.dataset_info = e.fields[0].value
             this.table = true
             // console.log(this.meta);
             this.load = false
@@ -112,6 +113,7 @@ export class DatasetDetailsComponent implements OnInit {
     let tet = ""
     if(typeof(value) == "object"){
       value.forEach((item:any)=>{
+        // console.log(item)
         if(typeof(item) == "string"){
           tet += `<p>${item}</p>`
         }else{
@@ -155,12 +157,13 @@ export class DatasetDetailsComponent implements OnInit {
         if(e[item].multiple){
           // x += this.mutlipleValues(e[item].multiple)
           let mutli_values = e[item].value
+          let typeName = e[item].typeName
           mutli_values.forEach((val:any) => {
             // console.log(mutli_values)
-            x += `<p>${val}</p>`
+            x += `<span class='lead_line'><b>${this.camelToUnderscore(e[item].typeName)}: </b></span><span>${val}</span>`
           })
         }else{
-          x += `<h2 class='lead_heading'>${this.camelToUnderscore(item)}</h2><p>${e[item].value}</p>`
+          x += `<div><span class='lead_line'><b>${this.camelToUnderscore(e[item].typeName)}: </b></span><span>${e[item].value}</span></div>`
         }
       }      
     }else if(typeof(e) == "string"){
@@ -172,10 +175,18 @@ export class DatasetDetailsComponent implements OnInit {
     return x
   }
   camelToUnderscore(key:any) {
-    
-   let result = key.replace( /([A-Z])/g, " $1" );
-    let result_two = result.toLowerCase()
-   return result_two.charAt(0).toUpperCase() + result_two.slice(1);
+     // /([A-Z])/g
+   let result = key.replace(/[^a-zA-Z0-9]+(.)/g, " $1" );
+   let result_one = result.replace(/([A-Z])/g, " $1" );
+    let result_two = result_one.toLowerCase().replace('meta','')
+   return result_two.charAt(1).toUpperCase() + result_two.slice(2);
+  }
+  findIdentification(fields:any){
+    fields.forEach((item:any)=>{
+      if(item.typeName == 'meta_identification'){
+        return item
+      }
+    })
   }
   // return_value(multiple:boolean, value:any){
   //   let val
@@ -211,5 +222,17 @@ export class DatasetDetailsComponent implements OnInit {
     this.datasetService.dataset_id = id
     this.datasetService.file_type = content_type
     this.routing.navigate(['/wishscope'])
+  }
+  faq_number(number: string) {
+    this.faq = number
+    console.log(this.faq);
+    
+  }
+  activeLink(number:string){
+    if(this.faq == number){
+      return true
+    }else{
+      return false
+    }
   }
 }

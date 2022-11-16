@@ -91,7 +91,7 @@ export class WishscopeComponent implements OnInit {
     //   alert("Chooses the data to visalize in the datasets page")
     // }
   }
-    onLoadRemoteJSON() {
+  onLoadRemoteJSON() {
     let filename = prompt("Open remote JSON", "https://filesamples.com/samples/code/json/sample1.json");
     if (filename != null) {
       this.pivot.flexmonster.connectTo({
@@ -100,6 +100,32 @@ export class WishscopeComponent implements OnInit {
       });
     }
   }
+   customizeToolbar(toolbar: any) {
+    let tabs = toolbar.getTabs();
+       toolbar.getTabs = () => {
+         tabs.shift()
+          tabs.shift()
+        // tabs = [];
+        // // adding a new tab
+        // tabs.push({
+        //     id: "fm-tab-newtab",
+        //     title: "New Tab",
+        //     // specifying a custom handler
+        //     // handler: () => this.showInfo(),
+        //     icon: toolbar.icons.open,
+        // });
+        return tabs;
+    };
+  }
+  // function customizeToolbar(toolbar:any) { 
+  //   // get all tabs 
+  //   let tabs = toolbar.getTabs(); 
+  //   toolbar.getTabs = function () {
+  //       // remove the Connect tab using its id
+  //       tabs = tabs.filter(tab => tab.id != "fm-tab-connect");
+  //       return tabs; 
+  //   } 
+  // }
   onLoadRemoteCSV(id:any) {
     // let filename = prompt("Open remote CSV", "https://www.sample-videos.com/csv/Sample-Spreadsheet-10000-rows.csv");
     let filename = this.dataverse_url+"/access/datafile/"+id
@@ -119,7 +145,9 @@ export class WishscopeComponent implements OnInit {
   }
   getListOfDatasets(){
     this.appService.getAllData().subscribe((e) => {
-      this.datasets = e    })
+      this.datasets = e.items
+      console.log(e)    
+    })
   }
   getListOfDatafiles(){
     this.appService.getADataset(this.datasetForm.value.dataset).subscribe((e:any) => {

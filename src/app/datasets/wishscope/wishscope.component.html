@@ -15,7 +15,7 @@
                     <label for="" class="form-label">Choose the dataset</label>
                     <div>
                       <select class="sidebarInput col-12" name="" id="" formControlName="dataset" (change)="getListOfDatafiles()">
-                          <option *ngFor="let item of datasets" value="{{item.global_id}}">{{item.name}}</option>
+                          <option *ngFor="let item of datasets" value="{{item.global_id}}">{{item?.metadataBlocks?.ippf?.fields[0].value?.meta_title?.value | titlecase}}</option>
                         </select>
                     </div>
 
@@ -47,6 +47,7 @@
           [toolbar]="true"
           [report]="report"
           [height]="600"
+          (beforetoolbarcreated)="customizeToolbar($event)"
           >
         </fm-pivot>
         <iframe *ngIf="displayIframe" [src]="transform(url)" title="W3Schools Free Online Web Tutorials" class="iframe"></iframe> 

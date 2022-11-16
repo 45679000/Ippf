@@ -195,7 +195,7 @@ export class AuthServiceService {
     // form.append("password", "Test12");
 
     var settings = {
-      "url": "http://52.87.191.19:5007/Account/ForgotPasswordApi",
+      "url": this.auth_url+"/Account/ForgotPasswordApi",
       "method": "POST",
       "timeout": 0,
       "mimeType": "multipart/form-data",
@@ -223,7 +223,7 @@ export class AuthServiceService {
         "method": "POST",
         "timeout": 0,
         "headers": {
-          "Content-Type": "application/x-www-form-urlencoded"
+          "Content-Type": "application/form"
         },
         "data": {
           "firstName": firstName,
