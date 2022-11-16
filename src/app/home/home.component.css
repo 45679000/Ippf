@@ -158,7 +158,10 @@ app-navbar {
         display: none !important;
     }
 }
-@media (max-width: 350px) {
+@media (max-width: 425px) {
+    .home-wrap {
+        height: auto !important;
+    }
     .section1 .container {
         margin-bottom: 3rem !important;
     }

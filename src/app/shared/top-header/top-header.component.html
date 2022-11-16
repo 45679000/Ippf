@@ -1,4 +1,4 @@
-<div class="header px-md-5">
+<div class="header px-md-5 px-2">
     <div class="logoz col-sm-3 col-xl-2 col-md-4  mx-2" (click)="takeMeHome()">
         <!-- <a routerLink]="['../']"> -->
             <img src="assets/images/wish-header.png" class="float-left" alt="" >
@@ -9,12 +9,12 @@
         <div>
             <a href="https://www.ippf.org/about-wish" class="blue-text text-globe"><i class="fas fa-globe"></i>Visit website</a>
         </div>
-        <br>
+        <br class="br">
         <div class="salutation">
             <p   class="h3 ">Profile<button class="h3 mx-1 hov"><i class="fas fa-user-circle" ></i></button></p>
             <div class="user-management">
                 <div *ngIf="isSignedIn">
-                    <a [routerLink]="['/account-settings']" class="btn btn-danger-lg mb-2 redBtn">Account</a>
+                    <a [routerLink]="['/account-settings']" class="btn btn-danger-lg mb-sm-2 redBtn">Account</a>
                 </div>
                 <div *ngIf="!isSignedIn; else loggedOut">
                     <a [routerLink]="['../login']" class="btn blueBtn searchBtnSmall">Sign in</a>

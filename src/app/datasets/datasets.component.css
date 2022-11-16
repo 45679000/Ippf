@@ -154,3 +154,67 @@ thead {
     z-index: 0 !important;
     opacity: 0.3 !important;
 }
+.lead-btn a, .file-icon span{
+    color: #151F6D;
+    text-decoration: none;
+}
+.lead-btn a:hover {
+    color: #4e57a0;
+}
+.file-icon span{
+    color: #151F6D; 
+    font-size: 50px;
+}
+.dataset-info {
+    padding: 5px;
+    transition-timing-function: ease-in-out;
+    border: 1px solid #fff;
+}
+.dataset-info:hover {
+    border: 1px solid #C4C4C4;
+}
+@media (max-width: 425px) {
+    .page-content {
+        flex-direction: column;
+    }
+    .sidebar, .datasets {
+        width: 100%;
+    }
+    .datasets {
+        padding: 0px 10px !important;
+        margin: 0px;
+    }
+    .menu-container {
+        margin-top: 60px;
+        margin-bottom: 5px;
+    }
+    .sort-div select {
+        width: 60px;
+    }
+    .sidebar .card {
+        border: none;
+    }
+    .form-search input {
+        height: 43px !important;
+    }
+    .sidebar h2 {
+        display: none;
+    }
+    .sidebar h3 .sort-header h3 {
+        font-size: 1rem;
+        margin-bottom: 0px;
+    }
+    .sidebar form {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+    }
+    .sidebar select, .sidebar form .btn-group{
+        width: 40%;
+        height: 40px !important;
+        font-size: 1rem;
+    }
+    .sidebar select {
+    }
+}

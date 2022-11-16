@@ -9,10 +9,10 @@
         <div class="menu-container">
             <form action="" class="" [formGroup]="searchForm" (ngSubmit)="onSubmit()" (change)="onSubmit()">
                 <div class="col-12 col-md-8 mx-auto form-search">
-                    <div class="col-10 pr-3">
+                    <div class="col-md-10 col-7 pr-sm-3">
                         <input type="text" name="" id="" placeholder="Search Datasets" class="topSearchInput" formControlName="q">
                     </div>
-                    <div class="col-2">
+                    <div class="col-md-2 col-4">
                         <input type="submit" value="Search" class="btn col-12 searchBtnBig blueBtn" >
                     </div>
                 </div>
@@ -20,19 +20,19 @@
         </div>
         <div class="page-content mb-5">
             <div class="sidebar">
-                <h2 class="my-3 mx-2">Refined Search</h2>
+                <h2 class="my-md-3 mx-2">Refined Search</h2>
                 <div class="card">
                     <h3>Filter results</h3>
                     <form action="" [formGroup]="filterForm">
                         <select type="text" placeholder="Country Name" class="sidebarInput" formControlName="tag" (change)="onSubmit()">
-                            <option [ngValue]="null" [disabled]="true" class="suggestion">Tags</option>
-                            <option *ngFor="let tag of tags" value="{{tag.name}}">{{ tag.name | titlecase}}</option>
+                            <option [ngValue]="null" [disabled]="true" class="suggestion">Subjects</option>
+                            <option *ngFor="let subject of subjects" value="{{subject}}">{{subject}}</option>
                         </select>
-                        <select type="text" placeholder="Year" class="sidebarInput my-4" formControlName="group">
+                       <!--  <select type="text" placeholder="Year" class="sidebarInput my-4" formControlName="group">
                             <option [ngValue]="null" [disabled]="true" class="suggestion">Group</option>
                             <option *ngFor="let group of groups" value="{{group}}"value="{{group}}">Volvo</option>
-                        </select>
-                        <div class="btn-group">
+                        </select> -->
+                        <div class="btn-group mt-sm-3">
                             <!-- <input type="submit" value="Search" class="btn btn-primary filterBtn"> -->
                             <input type="submit" value="Reset" class="btn btn-primary resetBtn" (click)="clearTags()">
                         </div>
@@ -40,7 +40,7 @@
                 </div>
             </div>
     
-            <div class="datasets px-5 container">
+            <div class="datasets px-5 container-fluid">
                 <div class="row col-12">
 
                     <div class="col-12">
@@ -59,7 +59,6 @@
                         <div class="sort-header">
                             <div>
                                 <h3 class="lead-heading-mid">{{header}} 
-                                    <!-- <span class="text-capitalize">{{searchForm.value.q !== null ? searchForm.value.q :""}} {{searchForm.value.tag != null ? "with tag - " + searchForm.value.tag :""}} {{searchForm.value.group != null ? "with group - " + searchForm.value.group :""}}</span> -->
                                 </h3>
                                 <p>Total  Survey(s) - {{xxy}}</p>
                             </div>
@@ -68,7 +67,7 @@
                                     <form [formGroup] = "sortForm" (change)="onSort($event)">
                                     <select>
                                         <option value="date,desc">Sort by date - Newest</option>
-                                        <option value="date,asc">Sort by date - Oldest</option>
+                                        <option value="date,asc">sSort by date - Oldest</option>
                                         <option value="name,asc">Sort by name - Ascending</option>
                                         <option value="name,desc">Sort by name - Descending</option>
                                     </select>
@@ -76,42 +75,47 @@
                                 </div>
                             </div>
                         </div>
+                        <form [formGroup] = "sizeForm" (change)="onChangeSize($event)">
+                                    <select>
+                                        <option value="20">20</option>
+                                        <option value="50">50</option>
+                                        <option value="100">100</option>
+                                    </select>
+                                </form>
                     </div>
-                    <!-- <div class="col-4"> -->
-                        <!-- <a [routerLink]="['/datasets/dataset-upload']" class="btn searchBtnBig"><span class="mx-3"><i class="fas fa-plus"></i></span>Upload new dataset</a> -->
-                    <!-- </div> -->
                 </div>
-                <div class="text-center text-danger h6" *ngIf="xxy <= 0">No results for this search, try something else</div>
-                <div class="mb-3 dataset-info" *ngFor="let data of aalData | slice: (page-1) * pageSize : (page-1) * pageSize + pageSize">
-                    <!-- <div class="left-side col-1">
-                        <p *ngIf="data.state; else elseBlock"class="blue-text"><i class="fas fa-lock-open"></i></p>
-                        <ng-template #elseBlock><p class="pink-text"><i class="fas fa-lock"></i></p></ng-template>
-                    </div> -->
-                    <div class="right-side col-11">
-                        <h3 class="lead-heading-mid">{{data.name | titlecase}}</h3>
-                        <p class="lead-heading-small">
-                            
-                            <!-- _href="https://demo.dataverse.org/dataset.xhtml?persistentId="+data.global_id -->
-                            <a 
-                            [routerLink]="['../datasets/dataset-details',data.global_id]"
+                <div class="text-center text-danger h6" *ngIf="aalData.length <= 0">No results </div>
+                <div class="mb-3 dataset-info" *ngFor="let data of aalData">
+                    <div style="display:none;">
+                        {{addSubjects(data.subjects)}}
+                    </div>
+                    <div class="right-side col-12 col-sm-11">
+                        <div class="row col-12">
+                            <div class="file-icon col-2 col-lg-1">
+                                <span><i class="fas fa-file"></i></span>
+                            </div>
+                            <div class="col-10 col-lg-11 dataset-div">
+                                <h3 class="lead-heading-mid lead-btn"><a 
+                                    [routerLink]="['../datasets/dataset-details',data.global_id]"
 
-                            >View {{data.name | titlecase}} in detail</a>
-                        </p>
-                        <p class="lead-heading-small-black">{{data.name}}</p>
-                        <!-- <p><span class="text-bold">Collection: </span>{{data.title | titlecase}}</p> -->
-                        <div class="meta-data">
-                            <p class="date-created">Created on: {{data.createdAt}}</p>
-                            <p class="date-modified mx-4">Last Modified: {{data.updatedAt}}</p>
+                                    >
+                                {{data?.metadataBlocks?.ippf?.fields[0].value?.meta_title?.value | titlecase}}</a></h3>
+                                <div class="meta-data">
+                                    <p class="date-created">Created on: {{data.createdAt}}</p>
+                                    <p class="date-modified mx-4">Last Modified: {{data.updatedAt}}</p>
+                                </div>
+                            </div>
                         </div>
+                        <p class="">{{data?.metadataBlocks?.ippf?.fields[0].value?.meta_summary?.value.length > 300 ? data?.metadataBlocks?.ippf?.fields[0].value?.meta_summary?.value.slice(0,300) + "..." : data.description}}</p>
+                        <!-- <p><span class="text-bold">Collection: </span>{{data.title | titlecase}}</p> -->
+                        
                         <!-- <div>
                             <p class="number-of-times-viewed">Resources number: {{data.files.length}}</p>
                         </div> -->
                     </div>
                     
                 </div>
-                <!-- <div *ngIf="xxy.length =>100">
-                    <ngb-pagination [collectionSize]="50" [(page)]="page" [directionLinks]="false"></ngb-pagination>
-                </div> -->
+                    <!-- <ngb-pagination [collectionSize]="50" [(page)]="page" [directionLinks]="false"></ngb-pagination> -->
             </div>
         </div>
     </div>

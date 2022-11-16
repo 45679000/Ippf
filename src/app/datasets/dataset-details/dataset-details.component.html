@@ -6,15 +6,9 @@
 </div>
 <div class="container px-md-5 mt-5 min-vh-100">
     <div class="dataset">
-        <h2 class="lead-heading-mid">{{dataOfDataset.publisher}}</h2>
-        <!-- <p class="lead-heading-small">Angola, 2021-2022 <span class="mx-4">{{(dataOfDataset.title.length > 0) ? dataOfDataset.title : 'No title'}}</span></p>
-        <p class="lead-heading-small-black">National Bureau of Statistics</p> -->
-        
+        <h2 class="lead-heading-mid">{{ dataset_info.meta_title.value}}</h2>
         <div class="meta-data">
             <p class="date-created">Created on: <span class="h6 text-info">{{dataOfDataset.publicationDate | date:'mediumDate' }}</span></p>
-            <!-- <p class="date-modified mx-4">Last Modified: <span class="h6 text-info">{{dataOfDataset.metadata_modified | date:'mediumDate' }}</span></p> -->
-            <!-- <p class="number-of-times-viewed">Views: 1021</p> -->
-            <!-- <p class="number-of-times-viewed mx-4">Downloads: 300</p> -->
         </div>
         <div class="spin" *ngIf="load">
             <div class="lds-roller">
@@ -34,23 +28,38 @@
                 <button class="btn lead-heading" [ngClass]=" documentationDisp? 'pink-border' : ''" (click)="dispDocumentation()">Documentation & Resources</button>
             </div>
             <div class="study-description row" *ngIf="studyDescriptionDisp">
-                <div class="content-data col-12 col-sm-10">
-                    <h2 class="lead-heading">Identification</h2>
-                    <div class="id-number mb-4">
-                        <h2 class="h2">SURVEY ID NUMBER</h2>
-                        <p>{{dataOfDataset.id }}</p>
-                    </div>
-                    <div class="survey-title">
-                        <!-- <h2 class="lead-heading">TITLE</h2> -->
-                        <p>Published by: {{dataOfDataset.publisher }}</p>
+                <div class="content-data col-12">
+                    <div class="col-12">
+                        <div class="row identity col-12">
+                            <div class="id-number mb-4 col-6 col-md-3 col-sm-4">
+                                <h2 class="h2">Id number: {{dataset_info.meta_idNumber.value }}</h2>
+                                <p><b>Title: </b>{{dataset_info.meta_title.value}}</p>
+                            </div>
+                            <div class="survey-title col-6 col-md-3 col-sm-4">
+                                <h2 class="h2">Publication info</h2>
+                                <!-- <p>Published by: {{dataOfDataset.publisher }}</p> -->
+                                <p>Published on: {{dataOfDataset.publicationDate}}</p>
+                            </div>
+                            <div class="col-6 col-md-3 col-sm-4">
+                                <h2 class="h2">Number of files: {{dataOfDataset.latestVersion.files.length}}</h2>
+                                <p *ngFor="let file of dataOfDataset.latestVersion.files" class="">
+                                    <a href="{{base_url}}/access/datafile/{{file.dataFile.id}}" class="btn btn-link"><span>  <i class="fas fa-download"></i></span>{{file.label}}</a>
+                                </p>
+                            </div>
+                        </div>
                     </div>
                     <!-- <p>{{meta.}}</p> -->
-                    <div class="col-md-6 col-12">
-                        <div class="author row col-12" >
+                    <div class="col-12 row">
+                        <div class="col-3">
+                            <div *ngFor="let file of meta.fields" class="meta-fields">
+                                <h3 class="lead-heading"><button class="btn-link typeName" (click)="faq_number(file.typeName)">{{camelToUnderscore(file.typeName)}}</button></h3>
+                            </div>
+                        </div>
+                        <div class="author meta col-9" >
                             <!-- <table class="table"> -->
                                 <!-- <tbody> -->
-                                    <div *ngFor="let file of meta.fields">
-                                        <!-- <h3>{{camelToUnderscore(file.typeName)}}</h3> -->
+                                    <div *ngFor="let file of meta.fields" class="th" [class.active]="activeLink(file.typeName)">
+                                        <h3 class="lead-heading">{{camelToUnderscore(file.typeName)}}</h3>
                                         <div [innerHtml] = "!file.multiple? check(file.value) : mutlipleValues(file.value)"></div>
                                     </div>
                                     <!-- <tr>
@@ -69,15 +78,6 @@
                             <!-- </table> -->
                         </div>
                     </div>
-                    
-                    <!-- <div class="study-type">
-                        <h2 class="lead-heading">STUDY TYPE</h2>
-                        <p>{{(dataOfDataset.notes.length > 0) ? dataOfDataset.title : 'Study type not specified'}}</p>
-                    </div> -->
-                    <!-- <div class="col-12 series-info" id="series-info">
-                        <h2 class="lead-heading">SERIES INFORMATION</h2>
-                        {{(dataOfDataset.notes.length > 0) ? dataOfDataset.title : 'Series information not available'}}
-                    </div> -->
                     <div class="data-description" id="data-description">
                         <!-- <div class="links col-12 col-sm-2">
                             <h2 class="lead-heading-small">Data files</h2>
@@ -102,7 +102,7 @@
                             <div class="questionnaire">
                                 <div class="question-title">
                                     <div class="question-name">
-                                        <h2 class="lead-heading">File description: {{resource.description }}</h2>
+                                        <p><span class="lead-heading">File description: </span>{{resource.description }}</p>
                                         <p>FIle name: {{resource.label }}</p>
                                     </div>
                                     
@@ -112,33 +112,31 @@
                                     
                                 </div>
                                 <div class="question-data">
-                                    <!-- <p>{{resource.description}}</p> -->
-                                    <!-- <p><span class="question-data-bold">Download: </span><a href="https://ippf.org/index.php/catlog/1912/download/29499">https://ippf.org/index.php/catlog/1912/download/29499</a></p> -->
                                     <div class="bottom-items row col-12">
                                         
-                                        <div class="col-3 m-auto" *ngIf="resource.restricted; else visualize">
+                                        <div class="col-6 m-auto" *ngIf="resource.restricted; else visualize">
                                             <button (click)="requestData(resource.dataFile.id)" class="btn btn-primary redBtn">Request the dataset</button>
                                             </div>                
                                               
                                             <ng-template #visualize>
                                                 <!-- *ngIf=" resource.dataFile.contentType == 'text/comma-separated-values' || resource.dataFile.contentType == 'text/csv'; else download" -->
-                                                <div class="col-3 m-auto" >
+                                                <div class="col-6 m-auto" >
                                                 <button (click)="setDatasetId(resource.dataFile.id,resource.dataFile.contentType)" class="btn btn-primary redBtn"><span class="mx-2"><i class="fas fa-chart-line"></i></span>Visualize in Wishscope</button>
                                                 </div>
                                                <!--  this.dataverse_url+"access/datafile/"+this.dataset_id -->
                                                 <ng-template #download>
-                                                    <div class="col-3">
+                                                    <div class="col-6">
                                                         <a href="{{base_url}}/access/datafile/{{resource.dataFile.id}}"><span class="mx-2"><i class="fas fa-download"></i></span>Download file</a>
                                                     </div>
                                                 </ng-template>
                                             </ng-template>
                                         
-                                        <div class="col-3 m-auto">
+                                        <div class="col-6 m-auto">
                                             Date Created: <span class="text-info">{{resource.dataFile.creationDate }}</span>
                                         </div>
-                                        <div class="col-3 m-auto">
+                                       <!--  <div class="col-3 m-auto">
                                             <button (click)="setDatasetId(resource.dataFile.id,resource.dataFile.contentType)">Go to wishscope</button>
-                                        </div>
+                                        </div> -->
                                         <!-- <div class="col-3 m-auto" *ngIf="resourceExistUrl(resource)">
                                             <a [routerLink]="['/wishscope']" [queryParams]="{ id: 99, resource_id: 20}" class="btn btn-link" ><span class="mx-2"><i class="fas fa-chart-line"></i></span>Visualize in Wishscope</a>
                                         </div>

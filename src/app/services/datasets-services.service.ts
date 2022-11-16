@@ -64,9 +64,9 @@ export class DatasetService {
         method: "GET",
         contentType:'application/json',
         // dataType: 'jsonp',
-        url:  this.root_url+'/search?q=*&type=dataset&per_page=100',
+        url:  this.root_url+'/search?q=*&type=dataset&per_page=20&metadata_fields=ippf:meta_identification',
         success: function (response){
-          observer.next(response.data.items)
+          observer.next(response.data)
         }
       })
       
@@ -80,7 +80,7 @@ export class DatasetService {
         method: "PUT",
         // contentType:'application/json',
         headers: {
-          "X-Dataverse-key": "ecbc4c40-cbba-4cc1-b8d3-b8a816951f1e"
+          "X-Dataverse-key": "3e50c694-dc5d-4fe9-8f56-bfa7cae79c51"
         },
         // dataType: 'jsonp',
         url:  this.root_url+'/access/datafile/'+id+'/requestAccess',
@@ -114,12 +114,29 @@ export class DatasetService {
   }
   getMetaData(id:string){
     // 2012044
+    // ippf
     const meta = new Observable((observer) => {
       $.ajax({
         method: "GET",
         contentType:'application/json',
         // dataType: 'jsonp',
-        url: this.root_url+`/datasets/${id}/versions/1.0/metadata/citation`,
+        url: this.root_url+`/datasets/${id}/versions/1.0/metadata/ippf`,
+        success: function (response){
+          // console.log(response)
+          observer.next(response.data)
+        }
+      })
+    })
+    return meta
+  }
+  getDataDesc(id:string){
+    // 2012044
+    const meta = new Observable((observer) => {
+      $.ajax({
+        method: "GET",
+        contentType:'application/json',
+        // dataType: 'jsonp',
+        url: this.root_url+`/datasets/${id}/versions/1.0/metadata/datasetdesc`,
         success: function (response){
           // console.log(response)
           observer.next(response.data)
@@ -161,7 +178,7 @@ export class DatasetService {
     });
     return tags
   }
-  searchDataset(q: string, tag: string, group: string,sort:any = 0): any{
+  searchDataset(q: string, tag: string, group: string,sort:any = 0, per_page:number = 0): any{
     // let url = 
     let data:string = ""
     let sort_string: string = ""
@@ -184,7 +201,7 @@ export class DatasetService {
         method: "GET",
         contentType:'application/json',
         // dataType: 'jsonp',
-        url:  `${this.root_url}/search?q=${q.length > 0? q: '*'}&type=dataset${sort_string}&start=0&per_page=100`,
+        url:  `${this.root_url}/search?q=${q.length > 0? q: '*'}&type=dataset${sort_string}&start=0&per_page=${per_page=0 ? 100 : per_page}&metadata_fields=ippf:meta_identification`,
         success: function (response){
           
           observer.next(response.data.items)

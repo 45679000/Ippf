@@ -58,13 +58,19 @@ label{
 .subscribe .feedback-btn {
     align-self: flex-end;
 }
-@media (max-width: 375px) {
+@media (max-width: 425px) {
     footer, .inputFields {
         display: block;
     }
     .menu-links {
         width: 100%;
+        
     }
+    /*.menu-links ul {
+        display: flex ;
+        flex-direction: row;
+        justify-content: space-between;
+    }*/
     .subscribe {
         width: 100%;
     }

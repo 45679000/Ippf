@@ -8,3 +8,6 @@ iframe {
 .sidebarInput  {
     padding: 0.5rem 1rem;
 }
+#fm-tab-connect{
+    display: none !important;
+}
