@@ -1,11 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthServiceService } from '../../auth-service.service'
+import { DatasetService } from '../../services/datasets-services.service';
 import { User } from '../../interfaces/UserDetails';
 import Swal from 'sweetalert2';
 import { FormControl, FormGroup, Validators,FormBuilder } from '@angular/forms';
 import { Router } from '@angular/router';
 import { RoutesService } from '../../services/routes.service'
 // import { group } from 'console';
+import { Constants } from '../../config/constants'
 
 @Component({
   selector: 'app-account-settings',
@@ -13,8 +15,9 @@ import { RoutesService } from '../../services/routes.service'
   styleUrls: ['./account-settings.component.css']
 })
 export class AccountSettingsComponent implements OnInit {
-
+  base_url: string = Constants.dataverse_url
   load:boolean = false
+  load_two:boolean = true
   error:string =''
   result:any
   isShown: boolean = true ; // hidden by default
@@ -29,22 +32,32 @@ export class AccountSettingsComponent implements OnInit {
     password: "",
     resolver: "",
     userid: 0,
-    username: ""
+    username: "",
+    country:"",
+    organisation:""
   }
-  
+  mydata:any []= []
   accountDetailsForm :any;
   passwordResetForm :any
-  constructor(private auth: AuthServiceService, private routesService: RoutesService, private route: Router, private fb: FormBuilder) { }
+  constructor(private auth: AuthServiceService, private routesService: RoutesService, private route: Router, private fb: FormBuilder, private datasetService: DatasetService) { }
 
   ngOnInit(): void {
     this.auth.getUserDetails().subscribe((item:any) => {
+      this.datasetService.getRequestedData().subscribe((e:any)=>{
+        this.load_two = false
+        this.mydata = e.items
+        console.log(this.mydata)
+      })
       if(item.success){
         let user_det = item.data
         console.log(user_det);
-        
+        this.user.id = user_det.id
         this.user.email = user_det.email
         this.user.firstName = user_det.firstName
         this.user.otherNames = user_det.otherNames
+        this.user.country = user_det.country
+        this.user.organisation = user_det.organisation
+        console.log(this.user)
       }else{
         Swal.fire({  
           icon: 'error',  
@@ -57,6 +70,8 @@ export class AccountSettingsComponent implements OnInit {
         firstName: [this.user.firstName?this.user.firstName:''],
         otherNames: [this.user.otherNames?this.user.otherNames:'',[Validators.required]],
         email: [{value:this.user.email?this.user.email:'', disabled: true},[Validators.required]],
+        country: [this.user.country?this.user.country:'',[Validators.required]],
+        organisation: [this.user.organisation?this.user.organisation:'',[Validators.required]],
         password: new FormControl(''),
       })
       this.passwordResetForm = this.fb.group({
@@ -71,7 +86,7 @@ export class AccountSettingsComponent implements OnInit {
   updateUser(){
     if(this.accountDetailsForm.status == 'VALID') {
       this.load = true
-      this.auth.updateUser(this.accountDetailsForm.value.firstName,this.accountDetailsForm.value.otherNames, this.accountDetailsForm.value.email).subscribe((response: any) => {
+      this.auth.updateUser(this.accountDetailsForm.value.firstName,this.accountDetailsForm.value.otherNames, this.accountDetailsForm.value.email, this.accountDetailsForm.value.country, this.accountDetailsForm.value.organisation).subscribe((response: any) => {
         console.log(response.success);
         let res = response
         if(res.success){

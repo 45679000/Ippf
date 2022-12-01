@@ -36,7 +36,9 @@ export class DatasetService {
   datasetsAr = []
   root_url:string = Constants.dataverse_url
   dataset_id:number = 0
+  dataFile:any = {}
   file_type:string = ""
+  label:string = ""
   constructor(private http: HttpClient) {
   }
   allDatasets = new Observable<Data>((observer) => {
@@ -73,27 +75,56 @@ export class DatasetService {
     });
     return allDatas
   }
-  requestDataset(id: number):any{
+  requestDataset(id: number, reason:string, country:string, organisation:string):any{
+    let token = localStorage.getItem('id')
     // http://$SERVER/api/access/datafile/{id}/requestAccess
+      const formData=new FormData();
+    formData.append("reason",reason);
+    // formData.append("country",country);
+    // formData.append("organisation",organisation);
     const allDatas = new Observable((observer) => {
       $.ajax({
         method: "PUT",
         // contentType:'application/json',
         headers: {
-          "X-Dataverse-key": "3e50c694-dc5d-4fe9-8f56-bfa7cae79c51"
+          "X-Dataverse-key": token
         },
+        data: formData,
+        mimeType: "multipart/form-data",
+        contentType: false,
+        processData: false,
+
         // dataType: 'jsonp',
         url:  this.root_url+'/access/datafile/'+id+'/requestAccess',
         success: function (response){
           // console.log(response)
           observer.next(response)
         },error: function(res){
-          observer.next(res.responseJSON)
+          // console.log(res)
+          observer.next(res)
         }
       })
       
     });
     return allDatas
+  }
+  getRequestedData(){
+    let user_id = localStorage.getItem('id')
+    const data = new Observable((observer) => {
+      $.ajax({
+        method: "GET",
+        contentType:'application/json',
+        // dataType: 'jsonp',
+        url: this.root_url+"/v1/mydata/retrieve?selected_page=1&dvobject_types=DataFile&published_states=Published&published_states=Unpublished&published_states=Draft&published_states=In+Review&published_states=Deaccessioned&role_ids=1&role_ids=2&role_ids=6&key="+user_id,
+        success: function (response){
+          console.log(response)
+          let res = response.data
+          observer.next(res)
+        }
+      })
+      
+    });
+    return data
   }
   getADataset(id: string): any{
     const aDataset = new Observable((observer) => {
@@ -131,18 +162,32 @@ export class DatasetService {
   }
   getDataDesc(id:string){
     // 2012044
+    let url = this.root_url
     const meta = new Observable((observer) => {
       $.ajax({
         method: "GET",
         contentType:'application/json',
         // dataType: 'jsonp',
-        url: this.root_url+`/datasets/${id}/versions/1.0/metadata/datasetdesc`,
+        url: this.root_url+`/datasets/${id}/versions/1.0/metadata/v1_datasetdesc`,
         success: function (response){
           // console.log(response)
           observer.next(response.data)
+        },
+        error: function(err){
+          $.ajax({
+            method: "GET",
+            contentType:'application/json',
+            // dataType: 'jsonp',
+            url: url+`/datasets/${id}/versions/1.0/metadata/datasetdesc`,
+            success: function (response){
+              console.log(response)
+              observer.next(response.data)
+            }
+          })
         }
       })
     })
+    
     return meta
   }
   getAllGroups(): any{
@@ -332,6 +377,21 @@ export class DatasetService {
         
       });
       return dataset
+  }
+  getWishScope(){
+    const meta = new Observable((observer) => {
+      $.ajax({
+        method: "GET",
+        contentType:'application/json',
+        // dataType: 'jsonp',
+        url: this.root_url+`/search?q=wishscope`,
+        success: function (response){
+          // console.log(response)
+          observer.next(response.data)
+        }
+      })
+    })
+    return meta
   }
 }
  

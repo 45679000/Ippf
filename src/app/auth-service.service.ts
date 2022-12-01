@@ -54,21 +54,31 @@ export class AuthServiceService {
       
       $.ajax(settings).done(function (response) {
         console.log(response);
+        let date = new Date()
+        let save = date.toJSON()
         if(response.email != null){
-          localStorage.setItem('email', response.email);
-          localStorage.setItem('id', response.id);
-          localStorage.setItem('name', response.firstName);
-          localStorage.setItem("middleName", response.middleName),
-          localStorage.setItem("otherNames",response.otherNames),
-          // "isEnabled": true,
-          // "emailConfirmed": false,
-          localStorage.setItem("staffLevel",response.staffLevel),
-          localStorage.setItem("staffPosition",response.Accountant),
-          localStorage.setItem("staffPartner",response.testpartner)
-          observer.next( {
-            "success": true,
-            "message": response.firstName
-          })
+          if(response.emailConfirmed){
+            localStorage.setItem('email', response.email);
+            localStorage.setItem('id', response.id);
+            localStorage.setItem('name', response.firstName);
+            localStorage.setItem("middleName", response.middleName),
+            localStorage.setItem("otherNames",response.otherNames),
+            // "isEnabled": true,
+            // "emailConfirmed": false,
+            localStorage.setItem("staffLevel",response.staffLevel),
+            localStorage.setItem("staffPosition",response.Accountant),
+            localStorage.setItem("staffPartner",response.testpartner)
+            localStorage.setItem("time", save)
+            observer.next( {
+              "success": true,
+              "message": response.firstName
+            })
+          }else{
+            observer.next({
+              "success": false,
+              "message": "Kindly complete the process of registration by confirming your email address."
+            })
+          }
         }else if(!response.succeeded){
           observer.next({
             "success": false,
@@ -83,18 +93,14 @@ export class AuthServiceService {
         })
       });
     });
-   
-    // return this.http.post("http://192.168.1.212:8080/login.xhtml", {
-    //   "credentials": "include",
-    //   "headers": {
-    //       "Content-Type": "application/x-www-form-urlencoded",
-    //   },
-    
-    //   "body": "j_idt4=j_idt4&j_idt4%3Aj_idt6=dataverseAdmin&j_idt4%3Aj_idt7=admin123&j_idt4%3Apopdistancecalc=Submit&javax.faces.ViewState=stateless",
-    //   "method": "POST",
-    //   "mode": "cors"
-    // });
-    return token
+       return token
+  }
+  checkConfirmation(emailConfirmed: boolean){
+    if(emailConfirmed){
+      return true
+    }else{
+      return false
+    }
   }
   saveToken(token: any): Observable<any>{    
     this.decodedToken = jwt.decodeToken(token);
@@ -102,17 +108,12 @@ export class AuthServiceService {
     localStorage.setItem('auth_meta', JSON.stringify(this.decodedToken));
     return token;
   }
-  signup(firstName: string,OtherNames:string, email:string, password:string){
+  signup(firstName: string,OtherNames:string, email:string, password:string, country:string, organization:string){
     let data = {
-        // username: email,
-        // givenname: givenname,
-        // surname: surname,
-        // email: email,
-        // password: password
       }
     const newUSer = new Observable((observer) => {
       var settings = {
-        "url": `${this.auth_url}/api/users/register`,
+        "url": `${this.auth_url}/Account/RegisterApi`,
         "method": "POST",
         "timeout": 0,
         "headers": {
@@ -123,7 +124,9 @@ export class AuthServiceService {
           "OtherNames": OtherNames,
           "Email": email,
           "Password": password,
-          "MobileContact": "111111"
+          "MobileContact": "111111",
+          "Country": country,
+          "Organisation": organization
         }
       };
       
@@ -141,6 +144,20 @@ export class AuthServiceService {
     });
     return newUSer
   }
+  get_to_day(){
+    let date = new Date()
+    date.setHours(date.getHours()+1)
+    return date
+    // .getFullYear()+"-"+date.getMonth()+"-"+date.getDate()+" "+date.getHours()+":"+date.getMinutes()+":"+date.getSeconds()
+  }
+  diff_hours(dt2:any, dt1:any) 
+  {
+
+    var diff =(dt2.getTime() - dt1.getTime()) / 1000;
+    diff /= (60 * 60);
+    return Math.abs(Math.round(diff));
+
+  }
   logout() {
     localStorage.removeItem('id');
     localStorage.removeItem('email');
@@ -148,9 +165,17 @@ export class AuthServiceService {
     this.route.navigate(['/login'])
   }
   public isAuthenticated(): any {
+    let day = new Date()
+    let dt2 = new Date(localStorage.getItem('time'))
+    let diff = this.diff_hours(day, dt2)
     if(localStorage.getItem('id') != null){
-      return true
-    }else {
+      if(diff > 0){
+        this.logout();
+        return false;
+      }else{
+        return true
+      }
+    } else {
       return false
     }
   }
@@ -168,7 +193,7 @@ export class AuthServiceService {
       };
       
       $.ajax(settings).done(function (response) {
-        console.log(response)
+        // console.log(response)
         observer.next({
           "success":true,
           "data":response
@@ -189,11 +214,6 @@ export class AuthServiceService {
       user : email
     }
     const userReset = new Observable((observer) => {
-        
-    // var form = new FormData();
-    // form.append("email", "iankips17@gmail.com");
-    // form.append("password", "Test12");
-
     var settings = {
       "url": this.auth_url+"/Account/ForgotPasswordApi",
       "method": "POST",
@@ -215,35 +235,34 @@ export class AuthServiceService {
     return userReset 
 
   }
-  updateUser(firstName:string,otherNames:string, email:String): any {
+  updateUser(firstName:string,otherNames:string, email:string, country:string, organisation:string): any {
     const userReset = new Observable((observer) => {
       let user_id = localStorage.getItem('id');
       var settings = {
-        "url": `${this.auth_url}/api/users/updateregister/${user_id}`,
+        "url": `${this.auth_url}/api/users/updateuser/${user_id}`,
         "method": "POST",
         "timeout": 0,
         "headers": {
-          "Content-Type": "application/form"
+          "Content-Type": "application/x-www-form-urlencoded"
         },
         "data": {
-          "firstName": firstName,
-          "middleName": localStorage.getItem("middleName"),
-          "otherNames": otherNames,
-          "staffLevel": localStorage.getItem('staffLevel'),
-          "staffPosition": localStorage.getItem('staffPosition'),
-          "staffPartner": localStorage.getItem('staffPartner'),
-          "userName": localStorage.getItem('email'),
-          "email": localStorage.getItem('email'),
-          // "emailConfirmed": "false",
-          "MobileContact": "111111",
+          "FirstName": firstName,
+          "OtherNames": otherNames,
+          "Email":  localStorage.getItem('email'),
+          // "Password": "Peter1313&24",
+          "MobileContact": "1111",
+          "Country": country,
+          "Organisation": organisation,
+          "StaffLevel": localStorage.getItem('staffLevel'),
+          "StaffPartner": localStorage.getItem('staffPartner'),
+          "MiddleName": localStorage.getItem("middleName"),
+          "EmailVerified": "true",
+          "StaffPosition": localStorage.getItem('staffPosition'),
         }
       };
-      
       $.ajax(settings).done(function (response) {
-        console.log(response);
         observer.next({success:true,message:response.result})
       }).fail(function(err){
-        console.log(err)
         observer.next({success:false,message:err})
       })
     });

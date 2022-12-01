@@ -14,6 +14,7 @@
     </div>
 </div>
 <div class="home-container row fluid-container p-5" [class.load] = "load">
+    <app-navbar class="mb-md-5"></app-navbar>
     <div class="settings col-12 col-md-3">
         <h2 class="lead-heading-mid">Account Settings</h2>
         <div class="avatar pink-text">
@@ -28,6 +29,14 @@
                 <div class="form-group">
                     <label for="name">Second name</label>
                     <input type="text" class="form-control form-control-lg" formControlName="otherNames" [class.is-invalid] = "accountDetailsForm.controls.otherNames.status == 'INVALID' && accountDetailsForm.controls.otherNames.touched == true">
+                </div>
+                <div class="form-group">
+                    <label for="name">Country</label>
+                    <input type="text" class="form-control form-control-lg" formControlName="country" [class.is-invalid] = "accountDetailsForm.controls.country.status == 'INVALID' && accountDetailsForm.controls.country.touched == true">
+                </div>
+                <div class="form-group">
+                    <label for="name">Organisation</label>
+                    <input type="text" class="form-control form-control-lg" formControlName="organisation" [class.is-invalid] = "accountDetailsForm.controls.organisation.status == 'INVALID' && accountDetailsForm.controls.organisation.touched == true">
                 </div>
                 <div class="form-group">
                     <label for="email">Email Address</label>
@@ -57,42 +66,38 @@
     <div class="activity px-4 col-12 col-md-9">
         <h2 class="lead-heading-mid">Account Activity</h2>
         <div class="saved-datasets col-12 col-md-9 pt-3">
-            <h2 class="lead-heading-small-black">No recorded user activity</h2>
+            <h2 class="lead-heading-small-black">Approved reqested datasets</h2>
+            <div class="spin" *ngIf="load_two">
+                <div class="lds-roller">
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                </div>
+            </div>
+            <!-- <h3>{{mydata.success}}</h3> -->
+            <div *ngIf="mydata.length > 0; else no_data">
+                <div *ngFor="let resource of mydata" class="approved_data p-2">
+                    <div class="col-12 row ">
+                        <p class="col-4">Dataset name: {{resource.dataset_name}}</p>
+                        <div class="col-8">
+                            <a [routerLink]="['../datasets/dataset-details',resource.dataset_persistent_id]" >View meta data and data description</a>
+                            <br>
+                            <a href="{{base_url}}/access/datafile/{{resource.file_id}}?{{user.id}}" class="btn btn-link" target="_href"><span>  <i class="fas fa-download"></i></span>{{resource.name}}</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <ng-template #no_data>
+                <div class="p-2">No data approved for you yet</div>
+            </ng-template>
             <!-- <a href="#">Survey 2021-2022, Angola</a> -->
         </div>
-        <!-- <div class="downloaded-datasets col-12 col-md-9 pt-3">
-            <h2 class="lead-heading-small-black">Downloaded Datasets</h2>
-            <a href="#">Survey 2021-2022, Benin</a>
-        </div>
-        <div class="requested-datasets col-12 col-md-9 pt-3">
-            <table class="table">
-                <thead>
-                    <tr>
-                        <th>
-                            <h2 class="lead-heading-small-black">Requested Datasets</h2>
-                        </th>
-                        <th>
-                            <h2 class="lead-heading-small-black">Status</h2>
-                        </th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td scope="row">
-                            <a href="#">Survey 2021-2022, Angola</a>
-                        </td>
-                        <td class="pink-text">Pending</td>
-                    </tr>
-                    <tr>
-                        <td scope="row">
-                            <a href="#">Survey 2021-2022, Angola</a>
-                        </td>
-                        <td class="">Approved</td>
-                        <td></td>
-                    </tr>
-                </tbody>
-            </table>
-        </div> -->
+        
     </div>
     
 </div>

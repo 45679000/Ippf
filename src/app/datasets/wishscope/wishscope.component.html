@@ -12,17 +12,18 @@
           <div class="col-12 top-form" style="">
               <form action="" [formGroup]="datasetForm" >
                   <div class="mb-3 col-md-6 col-12 mx-auto">
-                    <label for="" class="form-label">Choose the dataset</label>
+                    <label for="" class="form-label">Choose collection</label>
                     <div>
                       <select class="sidebarInput col-12" name="" id="" formControlName="dataset" (change)="getListOfDatafiles()">
-                          <option *ngFor="let item of datasets" value="{{item.global_id}}">{{item?.metadataBlocks?.ippf?.fields[0].value?.meta_title?.value | titlecase}}</option>
+                          <option *ngFor="let item of datasets" value="{{item.global_id}}">{{item.name?item.name: "Dataset - " | titlecase}}</option>
                         </select>
                     </div>
-
-                    <label for="" class="form-label">Select the data file to visualize</label>
-                    <select class="sidebarInput col-12" name="" id="" formControlName="datafile" (change)="onLoadRemoteCSV($event.target.value)">
-                      <option *ngFor="let item of dataFiles" value="{{item.dataFile.id}}">{{item.dataFile.filename}}</option>
-                    </select>
+                    <div *ngIf ="show_files" >
+                      <label for="" class="form-label">Select the data file to visualize</label>
+                      <select class="sidebarInput col-12" name="" id="" formControlName="datafile" (change)="onLoadRemoteCSV($event.target.value)">
+                        <option *ngFor="let item of dataFiles" value="{{item.dataFile.id}}">{{item.dataFile.filename}}</option>
+                      </select>
+                    </div>
                   </div>
               </form>
           </div>

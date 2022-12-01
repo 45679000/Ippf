@@ -28,10 +28,10 @@ export class NavbarComponent implements OnInit {
     this.screenObserver.observe(['(max-width: 768px)']).subscribe((state: BreakpointState) => {
       
       if(state.matches){
-        this.breadCrumb = true
+        // this.breadCrumb = true
         
       } else {
-        this.breadCrumb = false
+        // this.breadCrumb = false
       }
     })
   }

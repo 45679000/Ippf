@@ -1,29 +1,5 @@
 <div class="g-container">
-    <!-- <script>
-    await fetch("http://192.168.1.212:8080/login.xhtml", {
-    "credentials": "include",
-    "headers": {
-        "User-Agent": "Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:105.0) Gecko/20100101 Firefox/105.0",
-        "Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,*/*;q=0.8",
-        "Accept-Language": "en-US,en;q=0.5",
-        "Content-Type": "application/x-www-form-urlencoded",
-        "Upgrade-Insecure-Requests": "1",
-        "Pragma": "no-cache",
-        "Cache-Control": "no-cache"
-    },
-    "referrer": "http://192.168.1.212:8080/login.xhtml",
-    "body": "j_idt4=j_idt4&j_idt4%3Aj_idt6=Sam&j_idt4%3Aj_idt7=Sam@@saf674&j_idt4%3Apopdistancecalc=Submit&javax.faces.ViewState=stateless",
-    "method": "POST",
-    "mode": "cors"
-}).then(function(){
-  this.http.get("http://192.168.1.212:8080/dataset.xhtml", { withCredentials: true });
-});
-
-    </script> -->
-    <!-- <div class="split-container col-md-6">
-        <img src="assets/images/surface.jpg" class="banner" width="400"/>
-    </div> -->
-    <div class="split-container col-md-6" [class.load] = "load">
+    <div class="split-container col-md-6 col-12" [class.load] = "load">
         <div class="logos col-12">
             <img src="assets/images/wish-header.png" class="float-left" width="500" height="100" alt="">
             <img src="assets/images/mainlogo.png" class="float-left" alt="" width="500">
@@ -59,8 +35,8 @@
                 <label for="password">Password</label>
                 <input type="password" class="form-control form-control-lg" formControlName="password" name="password" [class.is-invalid] = "loginForm.get('password').invalid && loginForm.get('password').touched">
             </div>
-            <div class="form-group checkbox-div">
-                <div>
+            <div class="form-group checkbox-div px-3 px-sm-3">
+                <div class="mx-2 mx-sm-0">
                     <input type="checkbox" name="remember" id="remember" class=" mr-4"  formControlName="remember">
                     <label for="remember" class="form-check-label">Remember Me</label>
                 </div>

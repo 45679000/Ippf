@@ -34,17 +34,28 @@ export class PasswordChangeComponent implements OnInit {
         console.log(response);
         if(response.success){
           this.load = false
-          // if(response.status){
-            setTimeout(function (){
+          let message = JSON.parse(response.message)
+          // if(JSON.parse(response.message)){
+            if(message.status == 400){
               Swal.fire({  
-                icon: 'success',  
-                title: 'Done',  
-                text: 'You have been sent an email to reset your password. ',  
-                footer: 'Check your email inbox. Then sign in.'  
+                icon: 'error',  
+                title: 'Failed',  
+                text: message.message,  
+                // footer: 'Check your email inbox. Then sign in.'  
               })
-            }, 2000)
+            // } 
+          }else if(message.status == 200){
+              setTimeout(function (){
+                Swal.fire({  
+                  icon: 'success',  
+                  title: 'Done',  
+                  text: 'You have been sent an email to reset your password. ',  
+                  footer: 'Check your email inbox. Then sign in.'  
+                })
+              }, 2000)
             this.routesService.changePrevious('password-change')
             this.route.navigate(['/login'])
+          }
         }else{
           this.load = false
           Swal.fire({  

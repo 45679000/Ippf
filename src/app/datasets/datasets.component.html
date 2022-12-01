@@ -19,7 +19,7 @@
             </form>
         </div>
         <div class="page-content mb-5">
-            <div class="sidebar">
+            <div class="sidebar" style="display: none;">
                 <h2 class="my-md-3 mx-2">Refined Search</h2>
                 <div class="card">
                     <h3>Filter results</h3>
@@ -28,10 +28,6 @@
                             <option [ngValue]="null" [disabled]="true" class="suggestion">Subjects</option>
                             <option *ngFor="let subject of subjects" value="{{subject}}">{{subject}}</option>
                         </select>
-                       <!--  <select type="text" placeholder="Year" class="sidebarInput my-4" formControlName="group">
-                            <option [ngValue]="null" [disabled]="true" class="suggestion">Group</option>
-                            <option *ngFor="let group of groups" value="{{group}}"value="{{group}}">Volvo</option>
-                        </select> -->
                         <div class="btn-group mt-sm-3">
                             <!-- <input type="submit" value="Search" class="btn btn-primary filterBtn"> -->
                             <input type="submit" value="Reset" class="btn btn-primary resetBtn" (click)="clearTags()">
@@ -56,7 +52,7 @@
                                 <div></div>
                             </div>
                         </div>
-                        <div class="sort-header">
+                        <div class="sort-header mt-3 mt-md-0">
                             <div>
                                 <h3 class="lead-heading-mid">{{header}} 
                                 </h3>
@@ -67,9 +63,9 @@
                                     <form [formGroup] = "sortForm" (change)="onSort($event)">
                                     <select>
                                         <option value="date,desc">Sort by date - Newest</option>
-                                        <option value="date,asc">sSort by date - Oldest</option>
-                                        <option value="name,asc">Sort by name - Ascending</option>
-                                        <option value="name,desc">Sort by name - Descending</option>
+                                        <option value="date,asc">Sort by date - Oldest</option>
+                                        <!-- <option value="name,asc">Sort by name - Ascending</option>
+                                        <option value="name,desc">Sort by name - Descending</option> -->
                                     </select>
                                 </form>
                                 </div>
@@ -86,10 +82,10 @@
                 </div>
                 <div class="text-center text-danger h6" *ngIf="aalData.length <= 0">No results </div>
                 <div class="mb-3 dataset-info" *ngFor="let data of aalData">
-                    <div style="display:none;">
+                    <!-- <div style="display:none;">
                         {{addSubjects(data.subjects)}}
-                    </div>
-                    <div class="right-side col-12 col-sm-11">
+                    </div> -->
+                    <div class="right-side col-12 col-sm-11" *ngIf="checkName(data)">
                         <div class="row col-12">
                             <div class="file-icon col-2 col-lg-1">
                                 <span><i class="fas fa-file"></i></span>

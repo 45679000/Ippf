@@ -10,7 +10,7 @@
             <img src="assets/images/wish-header.png" class="float-left" width="500" height="100" alt="">
             <img src="assets/images/mainlogo.png" class="float-left" alt="" width="500">
         </div>
-        <h4 class="text-center my-4 font-weight-bold divHeading">Register</h4>
+        <h4 class="text-center font-weight-bold divHeading">Register</h4>
         <div class="spin" *ngIf="load">
             <div class="lds-roller">
                 <div></div>
@@ -41,6 +41,14 @@
             <div class="form-group">
                 <label for="name">Last Name</label>
                 <input type="text" class="form-control form-control-lg" formControlName="otherNames" [class.is-invalid] = "registrationForm.controls.otherNames.status == 'INVALID' && registrationForm.controls.otherNames.touched == true" >
+            </div>
+            <div class="form-group">
+                <label for="name">Country</label>
+                <input type="text" class="form-control form-control-lg" formControlName="country" [class.is-invalid] = "registrationForm.controls.country.status == 'INVALID' && registrationForm.controls.country.touched == true" >
+            </div>
+            <div class="form-group">
+                <label for="name">Organisation</label>
+                <input type="text" class="form-control form-control-lg" formControlName="organization" [class.is-invalid] = "registrationForm.controls.organization.status == 'INVALID' && registrationForm.controls.organization.touched == true" >
             </div>
             <div class="form-group">
                 <label for="email">Email</label>

@@ -14,8 +14,6 @@ declare const fun:any
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent implements OnInit {
-  // loginForm: FormGroup
-  
   loginForm: any;
   accountCreated = this.auth.accountCreated
   username = this.auth.username;
@@ -34,7 +32,6 @@ export class LoginComponent implements OnInit {
       password: ['',  [Validators.required]],
       remember: [true]
     });
-    // this.auth.signup()
     
   }
   login() {
@@ -54,22 +51,10 @@ export class LoginComponent implements OnInit {
           this.load = false
         }else{
           this.load = false
-          
-          // if(this.routesService.previousUrl == 'registration' || this.routesService.previousUrl == 'password-change'){
-          //   this.routesService.changePrevious('home')
-            this.route.navigate(['/'])
-          // } else {  
-          //   this.routesService.changePrevious('home')          
-          //   this._location.back();
-          // }
+          this.route.navigate(['/'])
         }
         
       })
-      // fun(this.loginForm.value.email, this.loginForm.value.password)
-      // .subscribe((e:any)=>{
-      //   console.log(e);
-        
-      // })
     }
     
   }

@@ -15,7 +15,8 @@ export class RegisterComponent implements OnInit {
   registrationForm = new FormGroup({
     firstName: new FormControl('',[Validators.required]),
     otherNames: new FormControl('',[Validators.required]),
-    // surname: new FormControl('',[Validators.required]),
+    country: new FormControl('',[Validators.required]),
+    organization: new FormControl('',[Validators.required]),
     email: new FormControl('',[Validators.required, Validators.pattern("^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$")]),
     password: new FormControl('',[Validators.required]),
     passwordConfirmation: new FormControl('',[Validators.required]),
@@ -36,7 +37,7 @@ export class RegisterComponent implements OnInit {
 
       if(this.registrationForm.value.password == this.registrationForm.value.passwordConfirmation){
         this.load = true
-        this.auth.signup(this.registrationForm.value.firstName, this.registrationForm.value.otherNames, this.registrationForm.value.email, this.registrationForm.value.password).subscribe((res: any)=>{
+        this.auth.signup(this.registrationForm.value.firstName, this.registrationForm.value.otherNames, this.registrationForm.value.email, this.registrationForm.value.password,this.registrationForm.value.country, this.registrationForm.value.organization).subscribe((res: any)=>{
             if(res.succces){
               this.success = true
               this.failed = false

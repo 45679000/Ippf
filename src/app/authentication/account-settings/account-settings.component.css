@@ -82,3 +82,7 @@ label{
 .password .registerBtn{
     width: 180px !important;
 }
+.approved_data {
+    border-bottom: 1px solid rgb(252, 223, 223);
+    margin-bottom: 10px;
+}

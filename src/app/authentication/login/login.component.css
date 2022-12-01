@@ -29,3 +29,12 @@ label{
 .text-center {
     margin-bottom: 2rem !important;
 }
+@media (max-width: 425px) {
+    .form-control, .form-control div {
+        width: 90% !important;
+        margin: 1px auto;
+    }
+    .form-group { 
+        width: 100%;
+     }
+}

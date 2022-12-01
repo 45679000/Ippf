@@ -134,6 +134,11 @@ table {
         margin: 0px !important;
 /*        padding: ;*/
     }
+    .nav-btn button {
+        letter-spacing: 0px;
+        font-size: 1rem;
+        margin: 3px !important;
+    }
 }
 @media (max-width: 350px) {
     

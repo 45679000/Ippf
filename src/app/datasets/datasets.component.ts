@@ -249,6 +249,12 @@ export class DatasetsComponent implements OnInit {
     })
     return exists
   }
-
+  checkName(data:any){
+    if(data.name === ""){
+      return false
+    }else{
+      return true
+    }
+  }
   
 }
