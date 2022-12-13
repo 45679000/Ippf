@@ -7,6 +7,8 @@ import { FooterComponent } from './footer/footer.component';
 import { PortalFooterComponent } from './portal-footer/portal-footer.component';
 import { FormsModule } from '@angular/forms';
 import { ReactiveFormsModule } from '@angular/forms';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { NgbTooltip } from '@ng-bootstrap/ng-bootstrap';
 
 
 @NgModule({
@@ -20,7 +22,9 @@ import { ReactiveFormsModule } from '@angular/forms';
     CommonModule,
     RouterModule,
     FormsModule,
-    ReactiveFormsModule
+    NgbModule,
+    ReactiveFormsModule,
+    // NgbTooltip
   ],
   exports: [
     NavbarComponent,

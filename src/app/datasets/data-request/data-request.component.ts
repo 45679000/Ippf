@@ -15,9 +15,10 @@ import { ActivatedRoute } from '@angular/router';
 export class DataRequestComponent implements OnInit {
 
   datasets:any = []
-  dataFiles: Resource []= []
+  dataFiles: any = {}
   datasetRequested: string = ''
   id: any
+  name:any
   resource_id: any
   user: User ={
     editable: false,
@@ -29,13 +30,15 @@ export class DataRequestComponent implements OnInit {
     password: "",
     resolver: "",
     userid: 0,
-    username: ""
+    username: "",
+    country:"",
+    organisation:""
   }
   dataRequest = new FormGroup({
-    name: new FormControl(this.user.username, [Validators.required]),
-    email: new FormControl(this.user.email, [Validators.required]),
+    // name: new FormControl(this.user.username, [Validators.required]),
+    // email: new FormControl(this.user.email, [Validators.required]),
     country: new FormControl('', [Validators.required]),
-    dataset: new FormControl('', [Validators.required]),
+    // dataset: new FormControl('', [Validators.required]),
     organisation: new FormControl('', [Validators.required]),
     reason: new FormControl('', [Validators.required])
   })
@@ -46,45 +49,43 @@ export class DataRequestComponent implements OnInit {
   constructor(private auth: AuthServiceService, private datasetService: DatasetService, private route: ActivatedRoute) { }
 
   ngOnInit(): void {
-    this.getListOfDatasets()
-    this.dataRequest.controls.name.disable()
-    this.dataRequest.controls.email.disable()
-    // this.dataRequest.controls.dataset.disable()
-    this.auth.getUserDetails().subscribe((item:any) => {
-      
-      if(item == 500 || item == 0){
-        Swal.fire({  
-          icon: 'error',  
-          title: 'Oops...',  
-          text: 'Something went wrong!',  
-          footer: 'Reload the page. If problems persist contact the admin'  
-        })
-      } else {
-        if(item.status == true) {
-          this.user = item.result
-          
-        }
-      }
-    })
-    this.route.queryParamMap.subscribe(params => { 
-      this.id = params.get('id');
-      this.resource_id = params.get('resource_id')
-      this.datasetForm.value.dataset = this.id
-      this.datasetForm.value.datafile = this.resource_id
-      // console.log('Query params ',this.pageNo) 
-    });
+    this.id = this.route.snapshot.paramMap.get('id')
+    this.name = this.route.snapshot.paramMap.get('name')
+    this.dataFiles.id = this.id
+    this.dataFiles.filename = this.name
+    // this.dataFiles = this.datasetService.dataFile
+    // this.dataRequest.value.dataset = this.dataFiles.filename
   }
   submit(){
-    if(this.dataRequest.status == "INVALID"){
-      Swal.fire({  
-        icon: 'error',  
-        title: 'Oops...',  
-        text: 'Make sure to fill all the required fields',    
-      })
-    } else {
-      // send request
-    }
-    
+       // this.load = true
+    this.datasetService.requestDataset(this.dataFiles.id,this.dataRequest.value.reason,this.dataRequest.value.country, this.dataRequest.value.organisation ).subscribe((res:any) => {
+      // this.load = false
+      // || res.responseJSON.status == "ERROR"
+      console.log(res)
+        if(res.status == 500){
+          Swal.fire({  
+            icon: 'error',  
+            // title: 'Oops...',  
+            text: res.statusText?res.statusText:"There was a problem",  
+            // footer: 'Try again. If problems persist contact the admin'  
+          })
+        } else if(res.status == 400){
+          let response_message = JSON.parse(res.responseText)
+          Swal.fire({  
+            icon: 'error',  
+            // title: 'Oops...',  
+            text: response_message ? response_message.message : "There was a problem",  
+            // footer: 'Try again. If problems persist contact the admin'  
+          })
+        }else {
+          Swal.fire({  
+            icon: 'success',  
+            title: "Your request was sent, you'll receive a response via email",  
+            text: res.message,  
+            // footer: 'Try again. If problems persist contact the admin'  
+          })
+        }
+    })
   }
   setDataset(){
     this.datasetRequested = this.datasetForm.value.dataset

@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import Swal from 'sweetalert2';
 import { FeedbackService } from '../../services/feedback.service';
+import { Constants } from "../../config/constants"
+
 
 @Component({
   selector: 'app-footer',
@@ -10,6 +12,7 @@ import { FeedbackService } from '../../services/feedback.service';
 })
 export class FooterComponent implements OnInit {
   load:boolean  = false
+  data_verse : string = Constants.dataverse
   feedbackForm = new FormGroup({
     feedback: new FormControl('', [Validators.required]),
     // name: new FormControl('', [Validators.required])
@@ -23,7 +26,7 @@ export class FooterComponent implements OnInit {
     if(this.feedbackForm.valid){
       Swal.fire({  
         icon: 'info',  
-        text: 'Your feedback has been sent. <br>Thank you for you valued input.'
+        html: '<p>Your feedback has been sent. <br>Thank you for you valued input.</p>'
       })
       this.feedback.sendFeedBack("", this.feedbackForm.value.feedback, "feedback").subscribe((e: any) => {
         // if(e.success){

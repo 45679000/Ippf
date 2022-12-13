@@ -8,5 +8,7 @@ export interface User {
     userid: number,
     username: string,
     firstName:string,
-    otherNames:string
+    otherNames:string,
+    country:string,
+    organisation:string
 }

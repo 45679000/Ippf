@@ -25,6 +25,7 @@
         <div class="dataset-content">
             <div class="btn-group mb-3">
                 <button class="btn lead-heading" [ngClass]=" studyDescriptionDisp? 'pink-border' : ''" (click)="dispStudyDescription()">Survey Description</button>
+                <button class="btn lead-heading" [ngClass]="dataDescriptionDisp? 'pink-border' : ''" (click)="dispDataDescription()">Dataset description</button>
                 <button class="btn lead-heading" [ngClass]=" documentationDisp? 'pink-border' : ''" (click)="dispDocumentation()">Documentation & Resources</button>
             </div>
             <div class="study-description row" *ngIf="studyDescriptionDisp">
@@ -42,9 +43,9 @@
                             </div>
                             <div class="col-6 col-md-3 col-sm-4">
                                 <h2 class="h2">Number of files: {{dataOfDataset.latestVersion.files.length}}</h2>
-                                <p *ngFor="let file of dataOfDataset.latestVersion.files" class="">
+                               <!--  <p *ngFor="let file of dataOfDataset.latestVersion.files" class="">
                                     <a href="{{base_url}}/access/datafile/{{file.dataFile.id}}" class="btn btn-link"><span>  <i class="fas fa-download"></i></span>{{file.label}}</a>
-                                </p>
+                                </p> -->
                             </div>
                         </div>
                     </div>
@@ -60,7 +61,7 @@
                                 <!-- <tbody> -->
                                     <div *ngFor="let file of meta.fields" class="th" [class.active]="activeLink(file.typeName)">
                                         <h3 class="lead-heading">{{camelToUnderscore(file.typeName)}}</h3>
-                                        <div [innerHtml] = "!file.multiple? check(file.value) : mutlipleValues(file.value)"></div>
+                                        <div [innerHtml] = "!file.multiple? check(file.value) : mutlipleValues(file.value)" class="row col-12"></div>
                                     </div>
                                     <!-- <tr>
                                         <td>Author's email:</td>
@@ -78,18 +79,17 @@
                             <!-- </table> -->
                         </div>
                     </div>
-                    <div class="data-description" id="data-description">
-                        <!-- <div class="links col-12 col-sm-2">
-                            <h2 class="lead-heading-small">Data files</h2>
-                            <div class="meta-data" *ngFor="let item of resourcesArray">
-                                <a href="{{item.url}}" class="blue-text"><i class="fas fa-download"></i>{{item.format}}</a>
-                            </div>
-                        </div> -->
-                        <!-- <div class="description-data col-12 col-sm-10">
-                            <p>This part basically gives a legend for the user to know what the different abbreviations used in the data mean (for eaample hh would mean data collected in a household, and hs data collected from a school, etc.)</p>
-                        </div> -->
-                    </div>
+                    
                 </div>
+            </div>
+            <div class="data-description" id="data-description" *ngIf="dataDescriptionDisp">
+              <!-- <p>Data description</p> -->
+              <div class="data-description" id="data-description">
+                        <div *ngFor="let file of data_description" >
+                            <h3 class="lead-heading">{{camelToUnderscore(file.typeName)}}</h3>
+                            <div [innerHtml] = "!file.multiple? check(file.value) : mutlipleValues(file.value)"></div>
+                        </div>
+                    </div>
             </div>
             <div class="documentation" *ngIf="documentationDisp">
                 <div *ngIf="resourcesArray.length < 1">
@@ -115,15 +115,13 @@
                                     <div class="bottom-items row col-12">
                                         
                                         <div class="col-6 m-auto" *ngIf="resource.restricted; else visualize">
-                                            <button (click)="requestData(resource.dataFile.id)" class="btn btn-primary redBtn">Request the dataset</button>
+                                            <button (click)="setDatasetIdRequest(resource.dataFile)" class="btn btn-primary redBtn">Request the dataset</button>
                                             </div>                
                                               
                                             <ng-template #visualize>
-                                                <!-- *ngIf=" resource.dataFile.contentType == 'text/comma-separated-values' || resource.dataFile.contentType == 'text/csv'; else download" -->
                                                 <div class="col-6 m-auto" >
-                                                <button (click)="setDatasetId(resource.dataFile.id,resource.dataFile.contentType)" class="btn btn-primary redBtn"><span class="mx-2"><i class="fas fa-chart-line"></i></span>Visualize in Wishscope</button>
+                                                    <a href="{{base_url}}/access/datafile/{{resource.dataFile.id}}" class="btn btn-link"><span>  <i class="fas fa-download"></i></span>{{resource.label}}</a>
                                                 </div>
-                                               <!--  this.dataverse_url+"access/datafile/"+this.dataset_id -->
                                                 <ng-template #download>
                                                     <div class="col-6">
                                                         <a href="{{base_url}}/access/datafile/{{resource.dataFile.id}}"><span class="mx-2"><i class="fas fa-download"></i></span>Download file</a>

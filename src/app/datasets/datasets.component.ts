@@ -118,19 +118,9 @@ export class DatasetsComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    // this.datasetService.allDatasets.subscribe(
-    //   value => { 
-    //     this.datasets = value
-    //     this.xxy = this.datasets.length
-    //     this.loader = false
-    //   }
-    // );
     this.loader = true
-    this.datasetService.getAllTags().subscribe((val: any)=>{
-      this.tags = val
-    })
-    // this.datasetService.getAllGroups().subscribe((val: any) => {
-    //   this.groups = val
+    // this.datasetService.getAllTags().subscribe((val: any)=>{
+    //   this.tags = val
     // })
     this.datasetService.getAllData().
     subscribe((val: any)=>{
@@ -144,7 +134,7 @@ export class DatasetsComponent implements OnInit {
       
     })
     if(this.aalData.length >= 0){
-        this.loader = false
+        // this.loader = false
       }
   }
   onSubmit() {
@@ -249,6 +239,12 @@ export class DatasetsComponent implements OnInit {
     })
     return exists
   }
-
+  checkName(data:any){
+    if(data.name.length == 0){
+      return false
+    }else{
+      return true
+    }
+  }
   
 }

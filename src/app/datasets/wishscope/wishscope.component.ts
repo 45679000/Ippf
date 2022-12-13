@@ -6,6 +6,7 @@ import { ActivatedRoute } from '@angular/router'
 import { DomSanitizer } from "@angular/platform-browser";
 import { Constants } from "../../config/constants"
 import { FlexmonsterPivot } from "ng-flexmonster";
+import Swal from 'sweetalert2';
 
 interface Item {
   item: string[]
@@ -22,6 +23,7 @@ interface Pie {
 export class WishscopeComponent implements OnInit {
   dataverse_url: string = Constants.dataverse_url 
   load: boolean = false
+  show_files:boolean = false
   datasets:any = []
   dataFiles: Resource []= []
   chartsType:any = ['pie','Bar/Line'] 
@@ -80,12 +82,7 @@ export class WishscopeComponent implements OnInit {
     this.data_type = this.appService.file_type 
     console.log(this.data_type)
     if(this.dataset_id){
-      this.report = {
-          dataSource: {
-          // type: this.data_type,
-          filename: this.dataverse_url+"/access/datafile/"+this.dataset_id,
-        }
-      }
+      this.checkFiletype(this.appService.file_type,this.dataset_id, this.appService.label)
     }
     // else {
     //   alert("Chooses the data to visalize in the datasets page")
@@ -126,16 +123,61 @@ export class WishscopeComponent implements OnInit {
   //       return tabs; 
   //   } 
   // }
-  onLoadRemoteCSV(id:any) {
-    // let filename = prompt("Open remote CSV", "https://www.sample-videos.com/csv/Sample-Spreadsheet-10000-rows.csv");
-    let filename = this.dataverse_url+"/access/datafile/"+id
-    if (filename != null) {
-      // this.pivot.flexmonster.setReport(this.report);
-      this.pivot.flexmonster.connectTo({
-        type: "csv",
-        filename: filename,
-      });
+  checkFiletype(file_type:any, datafile_id:any, label:string){
+    if(file_type != "application/json" || file_type != "text/csv"){
+        Swal.fire({  
+              icon: 'error',  
+              // title: 'Oops...',  
+              text: "The file you want to visualize is neither a csv file nor json, kindly choose a dataset that is either in json or csv format",  
+               html: 'File type incompatibility'+'<br>'+'Download and visualize using other tools ' +'<a href="'+this.dataverse_url+'/access/datafile/'+datafile_id+'" class="btn btn-link"><span>  <i class="fas fa-download"></i></span>'+label+'</a>'
+            })
+    } else {
+       this.report = {
+          dataSource: {
+          // type: this.data_type,
+          filename: this.dataverse_url+"/access/datafile/"+this.dataset_id,
+        }
+      }
     }
+  }
+  onLoadRemoteCSV(id:any) {
+    this.dataFiles.forEach((item:any) => {
+      if(id ==item.dataFile.id){
+        if(item.restricted){
+          console.log(item)
+          this.appService.getRequestedData().subscribe((response:any) => {
+            response.items.forEach((file:any) => {
+              if(file.file_id == item.dataFile.id){
+                let filename = this.dataverse_url+"/access/datafile/"+id+"?key="+localStorage.getItem("id")
+                if (filename != null) {
+                  this.pivot.flexmonster.connectTo({
+                    type: "csv",
+                    filename: filename,
+                  });
+                }
+              }else{
+                Swal.fire({  
+                  icon: 'error',  
+                  title: 'The file you want to visualize is private and you have to request for permision for it.',  
+                  text: "",  
+                  html: `<a href="/request/${id}/${item.label}" class="btn btn-link">Request for permision</a>`
+                })
+              }
+            })
+          })
+          
+        }else{
+          let filename = this.dataverse_url+"/access/datafile/"+id
+          if (filename != null) {
+          // this.pivot.flexmonster.setReport(this.report);
+            this.pivot.flexmonster.connectTo({
+              type: "csv",
+              filename: filename,
+            });
+          }
+        }
+      }
+    })
   }
   transform(url:string) {
     return this.sanitizer.bypassSecurityTrustResourceUrl(url);
@@ -144,15 +186,25 @@ export class WishscopeComponent implements OnInit {
     return item
   }
   getListOfDatasets(){
-    this.appService.getAllData().subscribe((e) => {
+    this.appService.getWishScope().subscribe((e:any) => {
       this.datasets = e.items
-      console.log(e)    
+      this.datasets.forEach((item:any) => {
+        this.appService.getADataset(item.global_id).subscribe((file:any) => {
+          // console.log(file)
+          file.latestVersion.files.forEach((f:any)=>{
+            this.dataFiles.push(f)
+          })
+        })
+      })  
     })
   }
   getListOfDatafiles(){
+    this.dataFiles = []
+    this.show_files = false
+    this.show_files = true
     this.appService.getADataset(this.datasetForm.value.dataset).subscribe((e:any) => {
-      this.dataFiles = e.latestVersion.files
-      console.log(e.latestVersion.files)
+        this.dataFiles = e.latestVersion.files
+        console.log(e)
     })
   }
   getCsv(){
@@ -166,6 +218,9 @@ export class WishscopeComponent implements OnInit {
  
   setCsvFile(){
     this.getCsv()
+  }
+  getLicenseKey(){
+    return "Z7R1-XCJF18-036124-6F5O64"
   }
 
 }

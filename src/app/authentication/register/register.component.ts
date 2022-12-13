@@ -4,6 +4,7 @@ import { ActivatedRoute } from '@angular/router';
 import { AuthServiceService } from '../../auth-service.service';
 import Swal from 'sweetalert2';
 import { RoutesService } from '../../services/routes.service'
+import { Constants } from '../../config/constants'
 
 @Component({
   selector: 'app-register',
@@ -11,11 +12,12 @@ import { RoutesService } from '../../services/routes.service'
   styleUrls: ['./register.component.css']
 })
 export class RegisterComponent implements OnInit {
-
+  logo = Constants.logo_location
   registrationForm = new FormGroup({
     firstName: new FormControl('',[Validators.required]),
     otherNames: new FormControl('',[Validators.required]),
-    // surname: new FormControl('',[Validators.required]),
+    country: new FormControl('',[Validators.required]),
+    organization: new FormControl('',[Validators.required]),
     email: new FormControl('',[Validators.required, Validators.pattern("^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$")]),
     password: new FormControl('',[Validators.required]),
     passwordConfirmation: new FormControl('',[Validators.required]),
@@ -25,10 +27,15 @@ export class RegisterComponent implements OnInit {
   failed:boolean = false
   warn:string = ''
   load:boolean = false
+  countries:any = []
   constructor(private fb: FormBuilder, private auth: AuthServiceService, private route: ActivatedRoute, private routesService: RoutesService) { }
 
   ngOnInit(): void {
     this.routesService.changePrevious('registration')
+    this.auth.getCountries().subscribe((res)=>{
+      this.countries = res
+      console.log(this.countries)
+    })
   }
   register(){
     
@@ -36,7 +43,7 @@ export class RegisterComponent implements OnInit {
 
       if(this.registrationForm.value.password == this.registrationForm.value.passwordConfirmation){
         this.load = true
-        this.auth.signup(this.registrationForm.value.firstName, this.registrationForm.value.otherNames, this.registrationForm.value.email, this.registrationForm.value.password).subscribe((res: any)=>{
+        this.auth.signup(this.registrationForm.value.firstName, this.registrationForm.value.otherNames, this.registrationForm.value.email, this.registrationForm.value.password,this.registrationForm.value.country, this.registrationForm.value.organization).subscribe((res: any)=>{
             if(res.succces){
               this.success = true
               this.failed = false

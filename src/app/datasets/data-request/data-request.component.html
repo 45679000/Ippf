@@ -11,27 +11,29 @@
         <h2 class="lead-heading">Please provide the following details:</h2>
         <div>
             <label for="" class="form-label">Dataset to request</label>
-            <input type="text" class="form-control form-control-lg" placeholder="" formControlName="dataset" [class.is-invalid] = "dataRequest.controls.dataset.status == 'INVALID' && dataRequest.controls.dataset.touched == true">
+            <br>
+            <label><h3>{{dataFiles.filename}}</h3></label>
+            <!-- <input type="text" class="form-control form-control-lg" placeholder="" formControlName="dataset" [class.is-invalid] = "dataRequest.controls.dataset.status == 'INVALID' && dataRequest.controls.dataset.touched == true"> -->
         </div>
-        <div>
+        <!-- <div>
             <label for="" class="form-label">Full name</label>
             <input type="text" class="form-control form-control-lg" placeholder="" formControlName="name" [class.is-invalid] = "dataRequest.controls.name.status == 'INVALID' && dataRequest.controls.name.touched == true">
         </div>
         <div>
             <label for="" class="form-label">Email Address</label>
             <input type="text" class="form-control form-control-lg" placeholder="" formControlName="email" [class.is-invalid] = "dataRequest.controls.email.status == 'INVALID' && dataRequest.controls.email.touched == true">
-        </div>
-        <div>
+        </div> -->
+        <!-- <div>
             <label for="" class="form-label">Country</label>
             <input type="text" class="form-control form-control-lg" placeholder="" formControlName="country" [class.is-invalid] = "dataRequest.controls.country.status == 'INVALID' && dataRequest.controls.country.touched == true">
         </div>
         <div>
             <label for="" class="form-label">Organization</label>
             <input type="text" class="form-control form-control-lg" placeholder="" formControlName="organisation" [class.is-invalid] = "dataRequest.controls.organisation.status == 'INVALID' && dataRequest.controls.organisation.touched == true">
-        </div>
+        </div>  -->
         <div>
             <label for="" class="form-label">What will this data be used for?</label>
-            <textarea class="form-control" name="" id="" rows="3" formControlName="reason" [class.is-invalid] = "dataRequest.controls.reason.status == 'INVALID' && dataRequest.controls.reason.touched == true"></textarea>
+            <textarea class="form-control" name="" id="" rows="3" cols="3" formControlName="reason" [class.is-invalid] = "dataRequest.controls.reason.status == 'INVALID' && dataRequest.controls.reason.touched == true"></textarea>
         </div>
         <div class="text-center">
             <input type="submit" class="btn btn-primary mb-4 registerBtn" id="registerBtn" value="Request">

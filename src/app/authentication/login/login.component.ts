@@ -7,6 +7,8 @@ import Swal from 'sweetalert2';
 import {Location} from '@angular/common';
 import { RoutesService } from '../../services/routes.service'
 // import * as login_dataverse from '../../../assets/js/login.js'
+import { Constants } from '../../config/constants'
+
 declare const fun:any
 @Component({
   selector: 'app-login',
@@ -14,8 +16,7 @@ declare const fun:any
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent implements OnInit {
-  // loginForm: FormGroup
-  
+  logo = Constants.logo_location
   loginForm: any;
   accountCreated = this.auth.accountCreated
   username = this.auth.username;
@@ -34,14 +35,12 @@ export class LoginComponent implements OnInit {
       password: ['',  [Validators.required]],
       remember: [true]
     });
-    // this.auth.signup()
     
   }
   login() {
     if(this.loginForm.valid){
       this.load = true
       this.auth.login(this.loginForm.value.email, this.loginForm.value.password, this.loginForm.value.remember).subscribe((token: any) => {   
-        console.log(token);
         fun(this.loginForm.value.email, this.loginForm.value.password)
         if(!token.success){
           this.error = ''
@@ -54,22 +53,10 @@ export class LoginComponent implements OnInit {
           this.load = false
         }else{
           this.load = false
-          
-          // if(this.routesService.previousUrl == 'registration' || this.routesService.previousUrl == 'password-change'){
-          //   this.routesService.changePrevious('home')
-            this.route.navigate(['/'])
-          // } else {  
-          //   this.routesService.changePrevious('home')          
-          //   this._location.back();
-          // }
+          this.route.navigate(['/'])
         }
         
       })
-      // fun(this.loginForm.value.email, this.loginForm.value.password)
-      // .subscribe((e:any)=>{
-      //   console.log(e);
-        
-      // })
     }
     
   }

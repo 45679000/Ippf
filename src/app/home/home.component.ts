@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { DatasetService } from '../services/datasets-services.service'
 import { Dataset } from '../interfaces/dataset'
 import { FormGroup, FormControl, Validators } from '@angular/forms'
+import { AuthServiceService } from '../auth-service.service';
 
 @Component({
   selector: 'app-home',
@@ -16,9 +17,10 @@ export class HomeComponent implements OnInit {
     tag: new FormControl(),
     group: new FormControl()
   })
-  constructor(private datasetService: DatasetService) { }
+  constructor(private datasetService: DatasetService, private auth: AuthServiceService) { }
 
   ngOnInit(): void {
+    this.auth.isLoggedIn ()
   }
   onSubmit() {
     this.datasetService.searchDataset(this.searchForm.value.q, this.searchForm.value.tag , this.searchForm.value.group).subscribe((val: any) => {

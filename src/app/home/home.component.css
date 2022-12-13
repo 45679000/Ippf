@@ -134,6 +134,9 @@ app-navbar {
     /* .avatar{
         
     } */
+    .home-wrap {
+        height: auto !important;
+    }
     .section1 .container {
         margin: 0 !important;
         padding: 0 !important;
@@ -159,11 +162,11 @@ app-navbar {
     }
 }
 @media (max-width: 425px) {
-    .home-wrap {
-        height: auto !important;
-    }
     .section1 .container {
         margin-bottom: 3rem !important;
+    }
+    .intro-content {
+        height: auto !important;
     }
     .logos img{
         width: 70px;

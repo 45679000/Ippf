@@ -4,6 +4,7 @@ import { AuthServiceService } from 'src/app/auth-service.service';
 import Swal from 'sweetalert2';
 import { Router } from '@angular/router';
 import { RoutesService } from '../../services/routes.service'
+import { Constants } from '../../config/constants'
 
 @Component({
   selector: 'app-password-change',
@@ -11,7 +12,7 @@ import { RoutesService } from '../../services/routes.service'
   styleUrls: ['./password-change.component.css']
 })
 export class PasswordChangeComponent implements OnInit {
-
+  logo = Constants.logo_location
   isShown: boolean = true ; // hidden by default
   warn:string = ''
   load:boolean = false
@@ -34,17 +35,28 @@ export class PasswordChangeComponent implements OnInit {
         console.log(response);
         if(response.success){
           this.load = false
-          // if(response.status){
-            setTimeout(function (){
+          let message = JSON.parse(response.message)
+          // if(JSON.parse(response.message)){
+            if(message.status == 400){
               Swal.fire({  
-                icon: 'success',  
-                title: 'Done',  
-                text: 'You have been sent an email to reset your password. ',  
-                footer: 'Check your email inbox. Then sign in.'  
+                icon: 'error',  
+                title: 'Failed',  
+                text: message.message,  
+                // footer: 'Check your email inbox. Then sign in.'  
               })
-            }, 2000)
+            // } 
+          }else if(message.status == 200){
+              setTimeout(function (){
+                Swal.fire({  
+                  icon: 'success',  
+                  title: 'Done',  
+                  text: 'You have been sent an email to reset your password. ',  
+                  footer: 'Check your email inbox. Then sign in.'  
+                })
+              }, 2000)
             this.routesService.changePrevious('password-change')
             this.route.navigate(['/login'])
+          }
         }else{
           this.load = false
           Swal.fire({  
