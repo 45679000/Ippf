@@ -18,6 +18,7 @@ export class DataRequestComponent implements OnInit {
   dataFiles: any = {}
   datasetRequested: string = ''
   id: any
+  name:any
   resource_id: any
   user: User ={
     editable: false,
@@ -48,8 +49,12 @@ export class DataRequestComponent implements OnInit {
   constructor(private auth: AuthServiceService, private datasetService: DatasetService, private route: ActivatedRoute) { }
 
   ngOnInit(): void {
-    this.dataFiles = this.datasetService.dataFile
-    this.dataRequest.value.dataset = this.dataFiles.filename
+    this.id = this.route.snapshot.paramMap.get('id')
+    this.name = this.route.snapshot.paramMap.get('name')
+    this.dataFiles.id = this.id
+    this.dataFiles.filename = this.name
+    // this.dataFiles = this.datasetService.dataFile
+    // this.dataRequest.value.dataset = this.dataFiles.filename
   }
   submit(){
        // this.load = true

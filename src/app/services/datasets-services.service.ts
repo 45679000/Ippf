@@ -310,6 +310,44 @@ export class DatasetService {
     });
     return dataset
   }
+  addLog(user_id: string, action:string, dataset_id: string){
+    const res = new Observable((observer) => {
+      var settings = {
+        "url": this.root_url+"/logs",
+        "method": "POST",
+        "timeout": 0,
+        "headers": {
+          "Content-Type": "application/json"
+        },
+        "data": JSON.stringify({
+          "action": action,
+          "dataset_id": dataset_id,
+          "user_id": user_id
+        }),
+      };
+
+      $.ajax(settings).done(function (response) {
+        console.log(response);
+        observer.next(response)
+      });
+    });
+       return res
+  }
+  getLogs(user_id){
+    const logs = new Observable((observer) => {
+      var settings = {
+        "url": this.root_url+"/logs/user/"+user_id,
+        "method": "GET",
+        "timeout": 0,
+      };
+
+      $.ajax(settings).done(function (response) {
+        console.log(response);
+        observer.next(response)
+      });
+    })
+    return logs
+  }
   updateDataset(form_data:any,id:any):any{
     let data = form_data
     form_data.id = id

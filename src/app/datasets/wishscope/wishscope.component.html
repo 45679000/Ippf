@@ -12,16 +12,18 @@
           <div class="col-12 top-form" style="">
               <form action="" [formGroup]="datasetForm" >
                   <div class="mb-3 col-md-6 col-12 mx-auto">
-                    <label for="" class="form-label">Choose collection</label>
+                    <!-- <label for="" class="form-label">Choose collection</label>
                     <div>
                       <select class="sidebarInput col-12" name="" id="" formControlName="dataset" (change)="getListOfDatafiles()">
+                        <option [ngValue]="null" [disabled]="true" class="suggestion">Choose a collection</option>
                           <option *ngFor="let item of datasets" value="{{item.global_id}}">{{item.name?item.name: "Dataset - " | titlecase}}</option>
                         </select>
-                    </div>
-                    <div *ngIf ="show_files" >
+                    </div> -->
+                    <!-- *ngIf ="show_files"  -->
+                    <div *ngIf ="dataFiles.length>0">
                       <label for="" class="form-label">Select the data file to visualize</label>
                       <select class="sidebarInput col-12" name="" id="" formControlName="datafile" (change)="onLoadRemoteCSV($event.target.value)">
-                        <option *ngFor="let item of dataFiles" value="{{item.dataFile.id}}">{{item.dataFile.filename}}</option>
+                        <option *ngFor="let item of dataFiles" value="{{item.dataFile.id}}">{{item.description? item.description : item.dataFile.filename | titlecase}}</option>
                       </select>
                     </div>
                   </div>
@@ -49,6 +51,7 @@
           [report]="report"
           [height]="600"
           (beforetoolbarcreated)="customizeToolbar($event)"
+          [licenseKey]="getLicenseKey()">
           >
         </fm-pivot>
         <iframe *ngIf="displayIframe" [src]="transform(url)" title="W3Schools Free Online Web Tutorials" class="iframe"></iframe> 

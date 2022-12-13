@@ -144,6 +144,15 @@ export class AuthServiceService {
     });
     return newUSer
   }
+  getCountries(){
+    const countries = new Observable((observer) => {
+      this.http.get('https://restcountries.com/v3.1/all').subscribe((response)=>{
+        console.log(response)
+        observer.next(response)
+      })
+    })
+    return countries
+  }
   get_to_day(){
     let date = new Date()
     date.setHours(date.getHours()+1)

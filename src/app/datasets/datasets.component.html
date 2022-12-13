@@ -13,7 +13,7 @@
                         <input type="text" name="" id="" placeholder="Search Datasets" class="topSearchInput" formControlName="q">
                     </div>
                     <div class="col-md-2 col-4">
-                        <input type="submit" value="Search" class="btn col-12 searchBtnBig blueBtn" >
+                        <input type="submit" value="Search" class="btn col-12 searchBtnBig blueBtn" (change)="onSubmit()">
                     </div>
                 </div>
             </form>
@@ -25,7 +25,7 @@
                     <h3>Filter results</h3>
                     <form action="" [formGroup]="filterForm">
                         <select type="text" placeholder="Country Name" class="sidebarInput" formControlName="tag" (change)="onSubmit()">
-                            <option [ngValue]="null" [disabled]="true" class="suggestion">Subjects</option>
+                            <option [ngValue]="null" [disabled]="true" class="suggestion" selected>Subjects</option>
                             <option *ngFor="let subject of subjects" value="{{subject}}">{{subject}}</option>
                         </select>
                         <div class="btn-group mt-sm-3">
@@ -95,14 +95,14 @@
                                     [routerLink]="['../datasets/dataset-details',data.global_id]"
 
                                     >
-                                {{data?.metadataBlocks?.ippf?.fields[0].value?.meta_title?.value | titlecase}}</a></h3>
+                                {{data?.name | titlecase}}</a></h3>
                                 <div class="meta-data">
-                                    <p class="date-created">Created on: {{data.createdAt}}</p>
-                                    <p class="date-modified mx-4">Last Modified: {{data.updatedAt}}</p>
+                                    <p class="date-created">Created on: {{data.createdAt | date}}</p>
+                                    <p class="date-modified mx-4">Last Modified: {{data.updatedAt | date}}</p>
                                 </div>
                             </div>
                         </div>
-                        <p class="">{{data?.metadataBlocks?.ippf?.fields[0].value?.meta_summary?.value.length > 300 ? data?.metadataBlocks?.ippf?.fields[0].value?.meta_summary?.value.slice(0,300) + "..." : data.description}}</p>
+                        <p class="d">{{data?.metadataBlocks?.ippf?.fields[0].value?.meta_summary?.value.length > 300 ? data?.metadataBlocks?.ippf?.fields[0].value?.meta_summary?.value.slice(0,300) + "..." : data.description}}</p>
                         <!-- <p><span class="text-bold">Collection: </span>{{data.title | titlecase}}</p> -->
                         
                         <!-- <div>

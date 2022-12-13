@@ -141,15 +141,43 @@ export class WishscopeComponent implements OnInit {
     }
   }
   onLoadRemoteCSV(id:any) {
-    // let filename = prompt("Open remote CSV", "https://www.sample-videos.com/csv/Sample-Spreadsheet-10000-rows.csv");
-    let filename = this.dataverse_url+"/access/datafile/"+id
-    if (filename != null) {
-      // this.pivot.flexmonster.setReport(this.report);
-      this.pivot.flexmonster.connectTo({
-        type: "csv",
-        filename: filename,
-      });
-    }
+    this.dataFiles.forEach((item:any) => {
+      if(id ==item.dataFile.id){
+        if(item.restricted){
+          console.log(item)
+          this.appService.getRequestedData().subscribe((response:any) => {
+            response.items.forEach((file:any) => {
+              if(file.file_id == item.dataFile.id){
+                let filename = this.dataverse_url+"/access/datafile/"+id+"?key="+localStorage.getItem("id")
+                if (filename != null) {
+                  this.pivot.flexmonster.connectTo({
+                    type: "csv",
+                    filename: filename,
+                  });
+                }
+              }else{
+                Swal.fire({  
+                  icon: 'error',  
+                  title: 'The file you want to visualize is private and you have to request for permision for it.',  
+                  text: "",  
+                  html: `<a href="/request/${id}/${item.label}" class="btn btn-link">Request for permision</a>`
+                })
+              }
+            })
+          })
+          
+        }else{
+          let filename = this.dataverse_url+"/access/datafile/"+id
+          if (filename != null) {
+          // this.pivot.flexmonster.setReport(this.report);
+            this.pivot.flexmonster.connectTo({
+              type: "csv",
+              filename: filename,
+            });
+          }
+        }
+      }
+    })
   }
   transform(url:string) {
     return this.sanitizer.bypassSecurityTrustResourceUrl(url);
@@ -160,7 +188,14 @@ export class WishscopeComponent implements OnInit {
   getListOfDatasets(){
     this.appService.getWishScope().subscribe((e:any) => {
       this.datasets = e.items
-      console.log(e)    
+      this.datasets.forEach((item:any) => {
+        this.appService.getADataset(item.global_id).subscribe((file:any) => {
+          // console.log(file)
+          file.latestVersion.files.forEach((f:any)=>{
+            this.dataFiles.push(f)
+          })
+        })
+      })  
     })
   }
   getListOfDatafiles(){
@@ -168,8 +203,8 @@ export class WishscopeComponent implements OnInit {
     this.show_files = false
     this.show_files = true
     this.appService.getADataset(this.datasetForm.value.dataset).subscribe((e:any) => {
-      this.dataFiles = e.latestVersion.files
-      console.log(e.latestVersion.files)
+        this.dataFiles = e.latestVersion.files
+        console.log(e)
     })
   }
   getCsv(){
@@ -183,6 +218,9 @@ export class WishscopeComponent implements OnInit {
  
   setCsvFile(){
     this.getCsv()
+  }
+  getLicenseKey(){
+    return "Z7R1-XCJF18-036124-6F5O64"
   }
 
 }

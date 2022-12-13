@@ -100,6 +100,9 @@ export class DatasetDetailsComponent implements OnInit {
         }
     })
     
+    this.datasetService.addLog(localStorage.getItem('id'),"browse",this.id).subscribe((res:any) => {
+      console.log(res)
+    })
     const csvData = this.datasetService.viewCsv('yee')
     csvData.subscribe((val: any) => {
       console.log(val);
@@ -157,10 +160,10 @@ export class DatasetDetailsComponent implements OnInit {
           let typeName = e[item].typeName
           mutli_values.forEach((val:any) => {
             // console.log(mutli_values)
-            x += `<span class='lead_line'><b>${this.camelToUnderscore(e[item].typeName)}: </b></span><span>${val}</span>`
+            x += `<div class='row col-12'><span class='lead_line col-2 mb-2'><b>${this.camelToUnderscore(e[item].typeName)}: </b></span><span class='col-9'>${val}</span></div>`
           })
         }else{
-          x += `<div><span class='lead_line'><b>${this.camelToUnderscore(e[item].typeName)}: </b></span><span>${e[item].value}</span></div>`
+          x += `<div class='row col-12 mb-2'><span class='lead_line col-2'><b>${this.camelToUnderscore(e[item].typeName)}: </b></span><span class='col-9'>${e[item].value}</span></div>`
         }
       }      
     }else if(typeof(e) == "string"){
@@ -187,28 +190,6 @@ export class DatasetDetailsComponent implements OnInit {
       }
     })
   }
-  // requestData(id:number){
-  //   this.load = true
-  //   this.datasetService.requestDataset(id).subscribe((res) => {
-  //     this.load = false
-  //     console.log(res)
-  //       if(res.status == "ERROR"){
-  //         Swal.fire({  
-  //           icon: 'error',  
-  //           // title: 'Oops...',  
-  //           text: res.message,  
-  //           // footer: 'Try again. If problems persist contact the admin'  
-  //         })
-  //       }else {
-  //         Swal.fire({  
-  //           icon: 'success',  
-  //           title: "our request was sent, you'll receive a response via email",  
-  //           text: res.message,  
-  //           // footer: 'Try again. If problems persist contact the admin'  
-  //         })
-  //       }
-  //   })
-  // }
   setDatasetId(id:number, content_type:string,label:string){
     this.datasetService.dataset_id = id
     this.datasetService.file_type = content_type
@@ -216,8 +197,9 @@ export class DatasetDetailsComponent implements OnInit {
     this.routing.navigate(['/wishscope'])
   }
   setDatasetIdRequest(dataFile:any){
+    console.log(dataFile)
     this.datasetService.dataFile = dataFile
-    this.routing.navigate(['/request-dataset'])
+    this.routing.navigate(['/request/'+dataFile.id+'/'+dataFile.filename])
   }
   faq_number(number: string) {
     this.faq = number

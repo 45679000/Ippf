@@ -63,7 +63,7 @@
             </form>
         </div>
     </div>
-    <div class="activity px-4 col-12 col-md-9">
+    <div class=" px-4 col-12 col-md-9">
         <h2 class="lead-heading-mid">Account Activity</h2>
         <div class="saved-datasets col-12 col-md-9 pt-3">
             <h2 class="lead-heading-small-black">Approved reqested datasets</h2>
@@ -87,7 +87,7 @@
                         <div class="col-8">
                             <a [routerLink]="['../datasets/dataset-details',resource.dataset_persistent_id]" >View meta data and data description</a>
                             <br>
-                            <a href="{{base_url}}/access/datafile/{{resource.file_id}}?{{user.id}}" class="btn btn-link" target="_href"><span>  <i class="fas fa-download"></i></span>{{resource.name}}</a>
+                            <a href="{{base_url}}/access/datafile/{{resource.file_id}}?key={{user.id}}" class="btn btn-link" target="_href"><span>  <i class="fas fa-download"></i></span>{{resource.name}}</a>
                         </div>
                     </div>
                 </div>
@@ -96,6 +96,25 @@
                 <div class="p-2">No data approved for you yet</div>
             </ng-template>
             <!-- <a href="#">Survey 2021-2022, Angola</a> -->
+            <div class="viewed_datasets">
+                <h2 class="lead-heading-small-black">Recently viewed datasets</h2>
+                <div *ngFor="let item of recently_viewed" class="approved_data p-2">
+                    <div class="col-12 row ">
+                        <p class="col-4">Dataset name: {{ item.data }}</p>
+                        <div class="col-8">
+                            <a [routerLink]="['../datasets/dataset-details',item.dataset_id]" >View meta data and data description</a>
+                            <br>
+                            <!-- <a href="{{base_url}}/access/datafile/{{resource.file_id}}?key={{user.id}}" class="btn btn-link" target="_href"><span>  <i class="fas fa-download"></i></span>{{resource.name}}</a> -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- <div class="downloaded_datasets">
+                <h2 class="lead-heading-small-black">Datasets you recently downloaded</h2>
+                <div>
+                    blah blah
+                </div>
+            </div> -->
         </div>
         
     </div>

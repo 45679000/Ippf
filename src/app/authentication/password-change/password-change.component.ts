@@ -4,6 +4,7 @@ import { AuthServiceService } from 'src/app/auth-service.service';
 import Swal from 'sweetalert2';
 import { Router } from '@angular/router';
 import { RoutesService } from '../../services/routes.service'
+import { Constants } from '../../config/constants'
 
 @Component({
   selector: 'app-password-change',
@@ -11,7 +12,7 @@ import { RoutesService } from '../../services/routes.service'
   styleUrls: ['./password-change.component.css']
 })
 export class PasswordChangeComponent implements OnInit {
-
+  logo = Constants.logo_location
   isShown: boolean = true ; // hidden by default
   warn:string = ''
   load:boolean = false

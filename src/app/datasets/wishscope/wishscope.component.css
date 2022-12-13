@@ -11,3 +11,6 @@ iframe {
 #fm-tab-connect{
     display: none !important;
 }
+.suggestion {
+    color: lightgray !important;
+}

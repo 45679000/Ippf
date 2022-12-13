@@ -61,7 +61,7 @@
                                 <!-- <tbody> -->
                                     <div *ngFor="let file of meta.fields" class="th" [class.active]="activeLink(file.typeName)">
                                         <h3 class="lead-heading">{{camelToUnderscore(file.typeName)}}</h3>
-                                        <div [innerHtml] = "!file.multiple? check(file.value) : mutlipleValues(file.value)"></div>
+                                        <div [innerHtml] = "!file.multiple? check(file.value) : mutlipleValues(file.value)" class="row col-12"></div>
                                     </div>
                                     <!-- <tr>
                                         <td>Author's email:</td>
@@ -119,12 +119,9 @@
                                             </div>                
                                               
                                             <ng-template #visualize>
-                                                <!-- *ngIf=" resource.dataFile.contentType == 'text/comma-separated-values' || resource.dataFile.contentType == 'text/csv'; else download" -->
                                                 <div class="col-6 m-auto" >
-                                                <!-- <button (click)="setDatasetId(resource.dataFile.id,resource.dataFile.contentType,resource.label)" class="btn btn-primary redBtn"><span class="mx-2"><i class="fas fa-chart-line"></i></span>Visualize in Wishscope</button> -->
-                                                <a href="{{base_url}}/access/datafile/{{resource.dataFile.id}}" class="btn btn-link"><span>  <i class="fas fa-download"></i></span>{{resource.label}}</a>
+                                                    <a href="{{base_url}}/access/datafile/{{resource.dataFile.id}}" class="btn btn-link"><span>  <i class="fas fa-download"></i></span>{{resource.label}}</a>
                                                 </div>
-                                               <!--  this.dataverse_url+"access/datafile/"+this.dataset_id -->
                                                 <ng-template #download>
                                                     <div class="col-6">
                                                         <a href="{{base_url}}/access/datafile/{{resource.dataFile.id}}"><span class="mx-2"><i class="fas fa-download"></i></span>Download file</a>

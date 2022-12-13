@@ -9,7 +9,7 @@ a {
     text-align: center;
 }
 .settings, .activity {
-    min-height: 80vh;
+/*    min-height: 80vh;*/
 }
 .form-control {
     /* width: 60%; */

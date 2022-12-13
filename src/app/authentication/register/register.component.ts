@@ -4,6 +4,7 @@ import { ActivatedRoute } from '@angular/router';
 import { AuthServiceService } from '../../auth-service.service';
 import Swal from 'sweetalert2';
 import { RoutesService } from '../../services/routes.service'
+import { Constants } from '../../config/constants'
 
 @Component({
   selector: 'app-register',
@@ -11,7 +12,7 @@ import { RoutesService } from '../../services/routes.service'
   styleUrls: ['./register.component.css']
 })
 export class RegisterComponent implements OnInit {
-
+  logo = Constants.logo_location
   registrationForm = new FormGroup({
     firstName: new FormControl('',[Validators.required]),
     otherNames: new FormControl('',[Validators.required]),
@@ -26,10 +27,15 @@ export class RegisterComponent implements OnInit {
   failed:boolean = false
   warn:string = ''
   load:boolean = false
+  countries:any = []
   constructor(private fb: FormBuilder, private auth: AuthServiceService, private route: ActivatedRoute, private routesService: RoutesService) { }
 
   ngOnInit(): void {
     this.routesService.changePrevious('registration')
+    this.auth.getCountries().subscribe((res)=>{
+      this.countries = res
+      console.log(this.countries)
+    })
   }
   register(){
     

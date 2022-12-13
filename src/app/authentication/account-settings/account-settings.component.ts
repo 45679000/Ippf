@@ -36,7 +36,10 @@ export class AccountSettingsComponent implements OnInit {
     country:"",
     organisation:""
   }
+  data:any
   mydata:any []= []
+  recently_viewed:any [] = []
+  recently_downloaded:any [] = []
   accountDetailsForm :any;
   passwordResetForm :any
   constructor(private auth: AuthServiceService, private routesService: RoutesService, private route: Router, private fb: FormBuilder, private datasetService: DatasetService) { }
@@ -47,6 +50,21 @@ export class AccountSettingsComponent implements OnInit {
         this.load_two = false
         this.mydata = e.items
         console.log(this.mydata)
+      })
+      this.datasetService.getLogs(localStorage.getItem('id')).subscribe((e:any)=>{
+          e.forEach((item) => {
+            if(this.recently_viewed.length < 5){
+              if(item.action == "browse"){
+                this.datasetService.getADataset(item.dataset_id).subscribe((res:any) => {
+                  item.data = res.latestVersion.metadataBlocks.ippf.fields[0].value.meta_title.value
+                })
+                  this.recently_viewed.push(item) 
+              }
+              // else if(item.action == "download"){
+              //   this.recently_downloaded.push(item)
+              // }
+            }
+          })
       })
       if(item.success){
         let user_det = item.data
@@ -80,8 +98,14 @@ export class AccountSettingsComponent implements OnInit {
         confirm_password: new FormControl('', [Validators.required]),
         realm: new FormControl('localsql', [Validators.required])
       })
+      // this.getName('doi:10.5072/FK2/7HKKJW')
     })
 
+  }
+  getName(data){
+    let value = {}
+    console.log(data)
+    return "value";
   }
   updateUser(){
     if(this.accountDetailsForm.status == 'VALID') {
