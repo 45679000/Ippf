@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import * as $ from "jquery";
 import { DatasetService } from '../services/datasets-services.service';
+import { MatomotrackerserviceService } from '../services/matomotrackerservice.service';
 import { Observable } from 'rxjs';
 import { data } from 'jquery';
 import { Group } from '../interfaces/groups'
@@ -65,7 +66,7 @@ export class DatasetsComponent implements OnInit {
     sort: new FormControl()
   })
   sizeForm = new FormGroup({
-    size: new FormControl()
+    size: new FormControl('20')
   })
   page:any = 1;
   pageSize: any = 20
@@ -109,15 +110,17 @@ export class DatasetsComponent implements OnInit {
     version: '',
   }
   groups:Group []= []
+  datasets_info:any[] = []
   groupsLength: boolean = false
   tags: any
   header: string = 'Available datasets'
   
-  constructor(private datasetService: DatasetService) { 
+  constructor(private datasetService: DatasetService, private matomo: MatomotrackerserviceService) { 
     
   }
 
   ngOnInit(): void {
+    this.matomo.trackPageView()
     this.loader = true
     // this.datasetService.getAllTags().subscribe((val: any)=>{
     //   this.tags = val
@@ -126,7 +129,7 @@ export class DatasetsComponent implements OnInit {
     subscribe((val: any)=>{
       
       this.aalData = val.items;
-      console.log(this.aalData[0].metadataBlocks.ippf.fields[0].value.meta_title.value)
+      // console.log(this.aalData[0].metadataBlocks.ippf.fields[0].value.meta_title.value)
       this.aalDataDuplicare = this.aalData
       this.searchCount = val.total_count
       this.xxy = val.items.length
@@ -169,13 +172,10 @@ export class DatasetsComponent implements OnInit {
     })
     return equal
   }
-  sliceString(description:string){
-    console.log(description.length)
-    let x = description.length > 100 ? description.slice(0,100) + "..." : description
+  sliceString(description:string){    let x = description.length > 100 ? description.slice(0,100) + "..." : description
     return "x"
   }
   onSort(valu: any){
-    console.log(valu.target.value)
     this.loader = true 
     let sort_val = valu.target.value
     let sort = sort_val.split(',')
@@ -190,13 +190,23 @@ export class DatasetsComponent implements OnInit {
 
   }
   onChangeSize(size:any){
-    console.log(size.target.value)
     this.loader = true 
-    let sort_val = size.target.value
+    let sort_val = size.target.value 
     let size_of_data = sort_val.split(',')
     this.datasetService.searchDataset('*', '', '','',size_of_data).subscribe((val: any) => {
       this.loader = false
       this.xxy = val.length
+      this.aalData = val
+      
+    })
+  }
+  onChangePage(page: number){
+    this.loader = true 
+    let sort_val = this.sizeForm.value.size ? this.sizeForm.value.size : 10
+    // let size_of_data = sort_val.split(',')
+    this.datasetService.searchDataset('*', '', '','',sort_val,page).subscribe((val: any) => {
+      this.loader = false
+      // this.xxy = val.length
       this.aalData = val
       
     })
@@ -246,5 +256,9 @@ export class DatasetsComponent implements OnInit {
       return true
     }
   }
-  
+  getDatasetFiles(global_id:any){
+      this.datasetService.getADataset(global_id).subscribe((val:any)=>{
+          return val.data.latestVersion.files[0].restricted
+      })
+  }
 }

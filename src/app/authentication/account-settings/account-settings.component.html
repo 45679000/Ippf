@@ -13,9 +13,9 @@
         <div></div>
     </div>
 </div>
-<div class="home-container row fluid-container p-5" [class.load] = "load">
+<div class="home-container row col-12 fluid-container p-md-5 p-1" [class.load] = "load">
     <app-navbar class="mb-md-5"></app-navbar>
-    <div class="settings col-12 col-md-3">
+    <div class="settings col-12 col-lg-3 col-md-5">
         <h2 class="lead-heading-mid">Account Settings</h2>
         <div class="avatar pink-text">
             <i class="fas fa-user-circle"></i>
@@ -38,15 +38,18 @@
                     <label for="name">Organisation</label>
                     <input type="text" class="form-control form-control-lg" formControlName="organisation" [class.is-invalid] = "accountDetailsForm.controls.organisation.status == 'INVALID' && accountDetailsForm.controls.organisation.touched == true">
                 </div>
-                <div class="form-group">
+                <div class="form-group form-email" (mouseenter)="showPopover = true" (mouseleave)="showPopover = false">
                     <label for="email">Email Address</label>
-                    <input type="text" class="form-control form-control-lg" formControlName="email" [class.is-invalid] = "accountDetailsForm.controls.email.status == 'INVALID' && accountDetailsForm.controls.email.touched == true">
+                    <input type="text" class="form-control form-control-lg email-" formControlName="email" [class.is-invalid] = "accountDetailsForm.controls.email.status == 'INVALID' && accountDetailsForm.controls.email.touched == true" >
+                    <div class="popover" *ngIf="showPopover">
+                        This field is disabled.
+                    </div>
                 </div>
                 <input type="submit" class="btn btn-primary mb-2 registerBtn" id="" value="Update">
             </form>
         </div>
         <div class="password mt-3">
-            <h4 class="text-center my-4 font-weight-bold divHeading">Change Password</h4>
+            <h4 class="lead-heading-mid">Change Password</h4>
             <form [formGroup]="passwordResetForm" (submit)="changePassword()" class="col-12">
                 <div class="form-group" *ngIf="isShown">
                     <div class="text-center">
@@ -63,9 +66,9 @@
             </form>
         </div>
     </div>
-    <div class=" px-4 col-12 col-md-9">
+    <div class=" px-4 col-12 col-lg-9 col-md-7">
         <h2 class="lead-heading-mid">Account Activity</h2>
-        <div class="saved-datasets col-12 col-md-9 pt-3">
+        <div class="saved-datasets col-12 pt-3">
             <h2 class="lead-heading-small-black">Approved reqested datasets</h2>
             <div class="spin" *ngIf="load_two">
                 <div class="lds-roller">
@@ -83,11 +86,9 @@
             <div *ngIf="mydata.length > 0; else no_data">
                 <div *ngFor="let resource of mydata" class="approved_data p-2">
                     <div class="col-12 row ">
-                        <p class="col-4">Dataset name: {{resource.dataset_name}}</p>
+                        <p class="col-4"><a [routerLink]="['../datasets/dataset-details',resource.dataset_persistent_id]" >{{resource.data?resource.data : "Dataset"}}</a></p>
                         <div class="col-8">
-                            <a [routerLink]="['../datasets/dataset-details',resource.dataset_persistent_id]" >View meta data and data description</a>
-                            <br>
-                            <a href="{{base_url}}/access/datafile/{{resource.file_id}}?key={{user.id}}" class="btn btn-link" target="_href"><span>  <i class="fas fa-download"></i></span>{{resource.name}}</a>
+                            <a href="{{base_url}}/access/datafile/{{resource.file_id}}?key={{user.id}}" class="btn btn-link" target="_href">Download <span>  <i class="fas fa-download"></i></span>{{resource.name}}</a>
                         </div>
                     </div>
                 </div>
@@ -100,14 +101,14 @@
                 <h2 class="lead-heading-small-black">Recently viewed datasets</h2>
                 <div *ngFor="let item of recently_viewed" class="approved_data p-2">
                     <div class="col-12 row ">
-                        <p class="col-4">Dataset name: {{ item.data }}</p>
+                        <p class="col-4">{{ item.data }}</p>
                         <div class="col-8">
                             <a [routerLink]="['../datasets/dataset-details',item.dataset_id]" >View meta data and data description</a>
                             <br>
-                            <!-- <a href="{{base_url}}/access/datafile/{{resource.file_id}}?key={{user.id}}" class="btn btn-link" target="_href"><span>  <i class="fas fa-download"></i></span>{{resource.name}}</a> -->
                         </div>
                     </div>
                 </div>
+                <!-- <ngb-pagination [collectionSize]="searchCount" [(page)]="page" [directionLinks]="true" (pageChange)="onChangePage(page)"></ngb-pagination> -->
             </div>
             <!-- <div class="downloaded_datasets">
                 <h2 class="lead-heading-small-black">Datasets you recently downloaded</h2>

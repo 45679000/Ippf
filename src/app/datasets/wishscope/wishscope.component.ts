@@ -7,6 +7,7 @@ import { DomSanitizer } from "@angular/platform-browser";
 import { Constants } from "../../config/constants"
 import { FlexmonsterPivot } from "ng-flexmonster";
 import Swal from 'sweetalert2';
+import { MatomotrackerserviceService } from '../../services/matomotrackerservice.service';
 
 interface Item {
   item: string[]
@@ -22,14 +23,14 @@ interface Pie {
 })
 export class WishscopeComponent implements OnInit {
   dataverse_url: string = Constants.dataverse_url 
-  load: boolean = false
+  load: boolean = true
   show_files:boolean = false
   datasets:any = []
   dataFiles: Resource []= []
   chartsType:any = ['pie','Bar/Line'] 
   datasetForm = new FormGroup({
     dataset: new FormControl(),
-    datafile: new FormControl()
+    datafile: new FormControl('0')
   })
   seriesSetForm = new FormGroup({
     xAxisValues: new FormControl(),
@@ -58,13 +59,14 @@ export class WishscopeComponent implements OnInit {
    report: Object = {
     
   };
-  constructor(private appService: DatasetService, private route: ActivatedRoute, private sanitizer: DomSanitizer) { 
+  constructor(private matomo: MatomotrackerserviceService,private appService: DatasetService, private route: ActivatedRoute, private sanitizer: DomSanitizer) { 
     // this.refreshCountries()
     // console.log(this.collectionSize)
     
   }
 
   ngOnInit(): void {
+    this.matomo.trackPageView()
     this.getListOfDatasets()
     this.route.queryParamMap.subscribe(params => { 
       this.id = params.get('id');
@@ -144,26 +146,27 @@ export class WishscopeComponent implements OnInit {
     this.dataFiles.forEach((item:any) => {
       if(id ==item.dataFile.id){
         if(item.restricted){
-          console.log(item)
+          let ids = []
           this.appService.getRequestedData().subscribe((response:any) => {
             response.items.forEach((file:any) => {
-              if(file.file_id == item.dataFile.id){
-                let filename = this.dataverse_url+"/access/datafile/"+id+"?key="+localStorage.getItem("id")
-                if (filename != null) {
-                  this.pivot.flexmonster.connectTo({
-                    type: "csv",
-                    filename: filename,
-                  });
-                }
-              }else{
-                Swal.fire({  
-                  icon: 'error',  
-                  title: 'The file you want to visualize is private and you have to request for permision for it.',  
-                  text: "",  
-                  html: `<a href="/request/${id}/${item.label}" class="btn btn-link">Request for permision</a>`
-                })
-              }
+              ids.push(parseInt(file.file_id))
             })
+            if(ids.includes(parseInt(id))){
+              let filename = this.dataverse_url+"/access/datafile/"+id+"?key="+localStorage.getItem("id")
+              if (filename != null) {
+                this.pivot.flexmonster.connectTo({
+                  type: "csv",
+                  filename: filename,
+                });
+              }
+            }else{
+              Swal.fire({  
+                icon: 'error',  
+                title: 'The file you want to visualize is private and you have to request for permision for it.',  
+                text: "",  
+                html: `<a href="/request/${id}/${item.label}" class="btn btn-link">Request for permision</a>`
+              })
+            }
           })
           
         }else{
@@ -191,6 +194,7 @@ export class WishscopeComponent implements OnInit {
       this.datasets.forEach((item:any) => {
         this.appService.getADataset(item.global_id).subscribe((file:any) => {
           // console.log(file)
+          this.load = false
           file.latestVersion.files.forEach((f:any)=>{
             this.dataFiles.push(f)
           })
@@ -208,19 +212,19 @@ export class WishscopeComponent implements OnInit {
     })
   }
   getCsv(){
-    this.load = true
-    this.url = `${Constants.ckan_url}/dataset/${this.datasetForm.value.dataset}/resource/${this.datasetForm.value.datafile}`
-    // this.url = `http://3.236.19.31/dataset/family-planning/resource/e75b0996-3a0b-4e6e-921f-f7e5a1892781/view/8af72bce-43a7-41f3-b7de-eb9fac8f2edb`
+    // this.load = true
+    // this.url = `${Constants.ckan_url}/dataset/${this.datasetForm.value.dataset}/resource/${this.datasetForm.value.datafile}`
+    // // this.url = `http://3.236.19.31/dataset/family-planning/resource/e75b0996-3a0b-4e6e-921f-f7e5a1892781/view/8af72bce-43a7-41f3-b7de-eb9fac8f2edb`
 
-    this.displayIframe = true
-    this.load = false
+    // this.displayIframe = true
+    // this.load = false
   }
  
   setCsvFile(){
     this.getCsv()
   }
   getLicenseKey(){
-    return "Z7R1-XCJF18-036124-6F5O64"
+    return "Z7XC-XD4963-036648-0X5J0Y"
   }
 
 }

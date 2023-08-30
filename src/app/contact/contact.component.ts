@@ -15,33 +15,34 @@ export class ContactComponent implements OnInit {
 
   ngOnInit(): void {
     this.contactForm = this.fb.group({
-      country: ['', [Validators.required]],
+      country: ['0', [Validators.required]],
       message: ['', [Validators.required]]
     })
   }
   send(){
-    Swal.fire({  
-      icon: 'success',  
-      text: 'Your message wass sent'
-    })
+    // Swal.fire({  
+    //   icon: 'success',  
+    //   text: 'Your message wass sent'
+    // })
     this.load = true
     let country = this.contactForm.value.country
     let message = this.contactForm.value.message
     this.feedback.sendFeedBack(country, message, "contact").subscribe((e: any) => {
       this.load = false
-      if(e.success){
+      // if(e.success){
         Swal.fire({  
           icon: 'success',  
-          text: 'Your message wass sent'
+          text: 'Your message was sent'
         })
         this.contactForm.reset()
-      }else{
-        Swal.fire({  
-          icon: 'error',  
-          title: 'Oops...',  
-          text: "There was a proble"  
-        })
-      }
+      // }
+      // else{
+      //   Swal.fire({  
+      //     icon: 'error',  
+      //     title: 'Oops...',  
+      //     text: "There was a problem"  
+      //   })
+      // }
       
     })
   }

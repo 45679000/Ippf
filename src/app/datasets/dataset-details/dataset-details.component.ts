@@ -15,6 +15,7 @@ import { Constants } from '../../config/constants'
 })
 export class DatasetDetailsComponent implements OnInit {
   id: any
+  user_id:string = localStorage.getItem('id')
   dataOfDataset: any = {}
   resourcesArray: any[] = []
   dataset_info: any = []
@@ -46,6 +47,7 @@ export class DatasetDetailsComponent implements OnInit {
     original_url: '',
     url_type: ''
   }
+  approved_data:any[] = [] 
   table:boolean = false
   faq: string = "meta_identification"
   public studyDescriptionDisp: boolean = true;
@@ -94,18 +96,24 @@ export class DatasetDetailsComponent implements OnInit {
           })
           this.datasetService.getDataDesc(this.dataOfDataset.id).subscribe((desc:any)=>{
             this.data_description = desc.fields
-            console.log(this.data_description )
+            // console.log(this.data_description )
           })
-          
+          this.datasetService.addLog(localStorage.getItem('id'),"browse",this.id).subscribe((res:any) => {
+            // console.log(res)
+          })
         }
     })
+    this.datasetService.getRequestedData().subscribe((data:any) => {
+        let ids = []
+        data.items.forEach((i:any)=>{
+          ids.push(parseInt(i.file_id))
+        })
+        this.approved_data = ids
+      })
     
-    this.datasetService.addLog(localStorage.getItem('id'),"browse",this.id).subscribe((res:any) => {
-      console.log(res)
-    })
     const csvData = this.datasetService.viewCsv('yee')
     csvData.subscribe((val: any) => {
-      console.log(val);
+      // console.log(val);
       
     })
   }
@@ -160,10 +168,10 @@ export class DatasetDetailsComponent implements OnInit {
           let typeName = e[item].typeName
           mutli_values.forEach((val:any) => {
             // console.log(mutli_values)
-            x += `<div class='row col-12'><span class='lead_line col-2 mb-2'><b>${this.camelToUnderscore(e[item].typeName)}: </b></span><span class='col-9'>${val}</span></div>`
+            x += `<div class='row col-12'><span class='lead_line col-lg-2 col-12 mb-2'><b>${this.camelToUnderscore(e[item].typeName)}: </b></span><span class='col-lg-9 col-12'>${val}</span></div>`
           })
         }else{
-          x += `<div class='row col-12 mb-2'><span class='lead_line col-2'><b>${this.camelToUnderscore(e[item].typeName)}: </b></span><span class='col-9'>${e[item].value}</span></div>`
+          x += `<div class='row col-12 mb-2'><span class='lead_line col-lg-2 col-12'><b>${this.camelToUnderscore(e[item].typeName)}: </b></span><span class='col-lg-9 col-12'>${e[item].value}</span></div>`
         }
       }      
     }else if(typeof(e) == "string"){
@@ -197,9 +205,14 @@ export class DatasetDetailsComponent implements OnInit {
     this.routing.navigate(['/wishscope'])
   }
   setDatasetIdRequest(dataFile:any){
-    console.log(dataFile)
     this.datasetService.dataFile = dataFile
     this.routing.navigate(['/request/'+dataFile.id+'/'+dataFile.filename])
+  }
+  checkIfApproved(id:any){
+    console.log(id)
+    console.log(this.approved_data)
+    console.log(this.approved_data.includes(id))
+    return this.approved_data.includes(id)
   }
   faq_number(number: string) {
     this.faq = number

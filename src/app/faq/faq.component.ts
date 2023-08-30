@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { FeedbackService } from '../services/feedback.service';
 
 @Component({
   selector: 'app-faq',
@@ -21,11 +22,15 @@ export class FaqComponent implements OnInit {
   public showAnswerTwelve: boolean = false
   public faq:string = 'one'
   public isActive:boolean = true;
-
-  constructor() { }
+  faqs: any [] = []
+  constructor(private feedback: FeedbackService) { }
 
   ngOnInit(): void {
-    console.log(this.faq)
+    this.feedback.getFaqs().subscribe((res:any) => {
+      this.faq = '1'
+      this.faqs = res
+      console.log(res)
+    })
   }
   faq_number(number: string) {
     this.faq = number
@@ -36,6 +41,13 @@ export class FaqComponent implements OnInit {
     if(this.faq == number){
       return true
     }else{
+      return false
+    }
+  }
+  checkShow(id:any){
+    if(this.faq == id){
+      return true
+    }else {
       return false
     }
   }

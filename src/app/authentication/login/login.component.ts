@@ -41,7 +41,7 @@ export class LoginComponent implements OnInit {
     if(this.loginForm.valid){
       this.load = true
       this.auth.login(this.loginForm.value.email, this.loginForm.value.password, this.loginForm.value.remember).subscribe((token: any) => {   
-        fun(this.loginForm.value.email, this.loginForm.value.password)
+        // fun(this.loginForm.value.email, this.loginForm.value.password)
         if(!token.success){
           this.error = ''
           Swal.fire({  

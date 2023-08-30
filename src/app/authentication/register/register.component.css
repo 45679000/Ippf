@@ -13,7 +13,7 @@
     background-color: #F0F0F0 !important;
     border: none !important;
     height: 30px;
-    width: 476px;
+/*    width: 476px;*/
     border-radius: 53px; 
     /* margin: 2rem auto !important; */
 }
@@ -29,4 +29,23 @@ label{
 }
 .is-invalid {
     border: 1px solid red;
+}
+.flex-div{
+    display: flex;
+    justify-content: flex-start;
+}
+.wrap-terms {
+    scroll-behavior: smooth;
+    overflow-y: scroll;
+    max-height: 60vh;
+}
+@media (max-width: 426px){
+    .form-group {
+        width: 100vw !important;
+        padding: 0 1rem !important;
+        margin: auto !important; 
+    }
+    /*.form-control, .form-select {
+        width: auto !important;
+    }*/
 }

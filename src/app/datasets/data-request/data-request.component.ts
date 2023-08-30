@@ -59,30 +59,22 @@ export class DataRequestComponent implements OnInit {
   submit(){
        // this.load = true
     this.datasetService.requestDataset(this.dataFiles.id,this.dataRequest.value.reason,this.dataRequest.value.country, this.dataRequest.value.organisation ).subscribe((res:any) => {
-      // this.load = false
-      // || res.responseJSON.status == "ERROR"
-      console.log(res)
         if(res.status == 500){
           Swal.fire({  
-            icon: 'error',  
-            // title: 'Oops...',  
+            icon: 'error',
             text: res.statusText?res.statusText:"There was a problem",  
-            // footer: 'Try again. If problems persist contact the admin'  
           })
         } else if(res.status == 400){
           let response_message = JSON.parse(res.responseText)
           Swal.fire({  
             icon: 'error',  
-            // title: 'Oops...',  
             text: response_message ? response_message.message : "There was a problem",  
-            // footer: 'Try again. If problems persist contact the admin'  
           })
         }else {
           Swal.fire({  
             icon: 'success',  
             title: "Your request was sent, you'll receive a response via email",  
             text: res.message,  
-            // footer: 'Try again. If problems persist contact the admin'  
           })
         }
     })

@@ -8,6 +8,8 @@ import {RouterModule} from '@angular/router';
 import { PasswordChangeComponent } from './password-change/password-change.component';
 import { AccountSettingsComponent } from './account-settings/account-settings.component';
 import { SharedModule } from '../shared/shared.module'
+import {NgbPaginationModule, NgbAlertModule} from '@ng-bootstrap/ng-bootstrap';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 @NgModule({
   declarations: [
@@ -20,7 +22,9 @@ import { SharedModule } from '../shared/shared.module'
     CommonModule,
     ReactiveFormsModule,
     RouterModule,
-    SharedModule 
+    SharedModule,
+    NgbModule,    
+    NgbPaginationModule 
   ],
   exports: [
     RegisterComponent,

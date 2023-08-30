@@ -2,11 +2,13 @@ import { Injectable } from '@angular/core';
 import * as $ from "jquery";
 import { Observable, throwError } from 'rxjs';
 import { HttpClient, HttpParams, HttpHeaders } from '@angular/common/http';
+import { Constants } from '../config/constants'
 
 @Injectable({
   providedIn: 'root'
 })
 export class FeedbackService {
+    baseURL: string = Constants.dataverse_url;
 
   constructor(private http: HttpClient) {
     
@@ -18,7 +20,16 @@ export class FeedbackService {
     }else{
       subject = "Contact Us"
     }
-    return this.http.get(`https://production.techsavanna.technology/melvins_db_backup/send_mail.php?subject=${subject}&to=wish2action@ippf.org&body=${country}  ${message}`);
+    let country_text = country + ":\n"
+    const body = { "subject": subject,"email": "wish2action@ippf.org", "body": country_text+ "  " + message };
+    return this.http.post<any>(this.baseURL+'/users/support', body)
+    // return this.http.get(`https://production.techsavanna.technology/melvins_db_backup/send_mail.php?subject=${subject}&to=kkip762@gmail.com&body=${country}  ${message}`);
 
+  }
+  getFaqs(){
+    return this.http.get(this.baseURL+'/faqs')
+  }
+  getAbout(){
+    return this.http.get(this.baseURL+'/contact')
   }
 }

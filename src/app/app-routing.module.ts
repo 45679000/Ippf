@@ -40,7 +40,15 @@ const routes: Routes = [
     // canActivate: [!AuthGuard] 
   },
   {
-    path: 'about',
+    path: 'about-us',
+    component: AboutComponent
+  },
+  {
+    path: 'privacy-policy',
+    component: AboutComponent
+  },
+  {
+    path: 'terms-and-conditions',
     component: AboutComponent
   },
   {

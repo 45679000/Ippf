@@ -2,3 +2,13 @@
 .split-container {
     padding: 0 !important;
 }
+@media (max-width: 425px) {
+
+    .form-group {
+        width: 90% !important;
+        margin: auto !important;
+    }
+    textarea {
+        width: 100% !important;
+    }
+}

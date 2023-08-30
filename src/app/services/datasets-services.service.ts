@@ -66,8 +66,10 @@ export class DatasetService {
         method: "GET",
         contentType:'application/json',
         // dataType: 'jsonp',
-        url:  this.root_url+'/search?q=*&type=dataset&per_page=20&metadata_fields=ippf:meta_identification',
+        url:  this.root_url+'/search?q=*&type=dataset&start=1&per_page=20&metadata_fields=ippf:meta_identification',
         success: function (response){
+          let arr = []
+          
           observer.next(response.data)
         }
       })
@@ -77,11 +79,8 @@ export class DatasetService {
   }
   requestDataset(id: number, reason:string, country:string, organisation:string):any{
     let token = localStorage.getItem('id')
-    // http://$SERVER/api/access/datafile/{id}/requestAccess
       const formData=new FormData();
     formData.append("reason",reason);
-    // formData.append("country",country);
-    // formData.append("organisation",organisation);
     const allDatas = new Observable((observer) => {
       $.ajax({
         method: "PUT",
@@ -223,7 +222,7 @@ export class DatasetService {
     });
     return tags
   }
-  searchDataset(q: string, tag: string, group: string,sort:any = 0, per_page:number = 0): any{
+  searchDataset(q: string, tag: string, group: string,sort:any = 0, per_page:number = 0, start:number = 0): any{
     // let url = 
     let data:string = ""
     let sort_string: string = ""
@@ -240,13 +239,12 @@ export class DatasetService {
     if(sort.length > 0){
       sort_string = "&sort="+sort[0]+"&order="+sort[1]
     }
-    // return this.http.jsonp(`${this.baseURL}/package_search?${data}`, 'callback')
     const allDatas = new Observable((observer) => {
       $.ajax({
         method: "GET",
         contentType:'application/json',
         // dataType: 'jsonp',
-        url:  `${this.root_url}/search?q=${q.length > 0? q: '*'}&type=dataset${sort_string}&start=0&per_page=${per_page=0 ? 100 : per_page}&metadata_fields=ippf:meta_identification`,
+        url:  `${this.root_url}/search?q=${q.length > 0? q: '*'}&type=dataset${sort_string}&start=${start ==1 || start ==0 ? 0 : start }&per_page=${per_page=0 ? 100 : per_page}&metadata_fields=ippf:meta_identification`,
         success: function (response){
           
           observer.next(response.data.items)
@@ -259,7 +257,7 @@ export class DatasetService {
   }
   viewCsv(csv_link: string): any{
     const groups = new Observable((observer) => {
-      var settings = {
+      let settings = {
         "url": csv_link,
         "method": "GET",
         "timeout": 0,
@@ -335,14 +333,13 @@ export class DatasetService {
   }
   getLogs(user_id){
     const logs = new Observable((observer) => {
-      var settings = {
+      let settings = {
         "url": this.root_url+"/logs/user/"+user_id,
         "method": "GET",
         "timeout": 0,
       };
 
       $.ajax(settings).done(function (response) {
-        console.log(response);
         observer.next(response)
       });
     })

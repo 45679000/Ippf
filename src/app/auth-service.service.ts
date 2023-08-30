@@ -53,7 +53,6 @@ export class AuthServiceService {
       };
       
       $.ajax(settings).done(function (response) {
-        console.log(response);
         let date = new Date()
         let save = date.toJSON()
         if(response.email != null){
@@ -99,7 +98,8 @@ export class AuthServiceService {
     if(emailConfirmed){
       return true
     }else{
-      return false
+      // return false
+      return true
     }
   }
   saveToken(token: any): Observable<any>{    
@@ -113,7 +113,7 @@ export class AuthServiceService {
       }
     const newUSer = new Observable((observer) => {
       var settings = {
-        "url": `${this.auth_url}/Account/RegisterApi`,
+        "url": `${this.auth_url}/Account/Registerapi`,
         "method": "POST",
         "timeout": 0,
         "headers": {
@@ -147,7 +147,6 @@ export class AuthServiceService {
   getCountries(){
     const countries = new Observable((observer) => {
       this.http.get('https://restcountries.com/v3.1/all').subscribe((response)=>{
-        console.log(response)
         observer.next(response)
       })
     })
@@ -202,7 +201,6 @@ export class AuthServiceService {
       };
       
       $.ajax(settings).done(function (response) {
-        // console.log(response)
         observer.next({
           "success":true,
           "data":response

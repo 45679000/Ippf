@@ -1,74 +1,211 @@
-<div class="navbar-holder">
-    <app-top-header></app-top-header>
-</div>
-<div class="g-container row">
-    <div class="split-container col-md-6">
-        <!-- <img src="assets/images/surface.jpg" class="banner" width="400" height="300"/> -->
+<div class="col-12">
+    <div class="navbar-holder">
+        <app-top-header></app-top-header>
     </div>
-    <div class="split-container col-12" [class.load] = "load">
-        <div class="logos col-12 mb-2">
-            <img src="{{logo}}" class="float-left" width="500" height="100" alt="">
-        </div>
-        <h4 class="text-center font-weight-bold divHeading">Register</h4>
-        <div class="spin" *ngIf="load">
-            <div class="lds-roller">
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
+    <div class="g-container row">
+        <div class="split-container col-12" [class.load] = "load">
+            <div class="logos col-12 mb-2">
+                <img src="{{logo}}" class="float-left" width="500" height="100" alt="">
             </div>
-        </div>
-        <div *ngIf="success" class="col-12 col-md-6 p-3 text-success mx-auto text-center">
-            <p>The user was successfully registered. Check your email to complete registration</p>
-        </div>
-        <div *ngIf="failed" class="col-12 col-md-6 p-3 text-danger mx-auto text-center">
-            <p>The user was not successfully registered. try again</p>
-        </div>
-        <div *ngIf="warn.length > 1" class="col-12 col-md-6 p-3 text-danger mx-auto text-center">
-            <p>{{warn}}</p>
-        </div>
-        <form [formGroup]="registrationForm" (ngSubmit)="register()">
-            
-            <div class="form-group">
-                <label for="name">First Name</label>
-                <input type="text" class="form-control form-control-lg" formControlName="firstName" [class.is-invalid] = "registrationForm.controls.firstName.status == 'INVALID' && registrationForm.controls.firstName.touched == true">
+            <h4 class="text-center font-weight-bold divHeading mt-3">Register</h4>
+            <div class="spin" *ngIf="load">
+                <div class="lds-roller">
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                </div>
             </div>
-            <div class="form-group">
-                <label for="name">Last Name</label>
-                <input type="text" class="form-control form-control-lg" formControlName="otherNames" [class.is-invalid] = "registrationForm.controls.otherNames.status == 'INVALID' && registrationForm.controls.otherNames.touched == true" >
+            <div *ngIf="success" class="col-12 col-md-6 p-3 text-success mx-auto text-center">
+                <p>The user was successfully registered. Check your email to complete registration</p>
             </div>
-            <div class="form-group">
-                <label for="name">Country</label>
-                <select class="form-control form-control-lg" formControlName="country" [class.is-invalid] = "registrationForm.controls.country.status == 'INVALID' && registrationForm.controls.country.touched == true">
-                    <option *ngFor="let item of countries" value="{{item.name.common}}">{{item.name.common}}</option>
+            <div *ngIf="failed" class="col-12 col-md-6 p-3 text-danger mx-auto text-center">
+                <p>The user was not successfully registered. try again</p>
+            </div>
+            <div *ngIf="warn.length > 1" class="col-12 col-md-6 p-3 text-danger mx-auto text-center">
+                <p>{{warn}}</p>
+            </div>
+            <form [formGroup]="registrationForm" (ngSubmit)="register()">
+                
+                <div class="form-group">
+                    <label for="name">First Name</label>
+                    <input type="text" class="form-control form-control-lg" formControlName="firstName" [class.is-invalid] = "registrationForm.controls.firstName.status == 'INVALID' && registrationForm.controls.firstName.touched == true">
+                </div>
+                <div class="form-group">
+                    <label for="name">Last Name</label>
+                    <input type="text" class="form-control form-control-lg" formControlName="otherNames" [class.is-invalid] = "registrationForm.controls.otherNames.status == 'INVALID' && registrationForm.controls.otherNames.touched == true" >
+                </div>
+                <div class="form-group">
+                    <label for="name">Country</label>
+                    <select class="form-control form-control-lg" formControlName="country" [class.is-invalid] = "registrationForm.controls.country.status == 'INVALID' && registrationForm.controls.country.touched == true">
+                        <option *ngFor="let item of countries" value="{{item}}">{{item}}</option>
 
-                </select>
-            </div>
-            <div class="form-group">
-                <label for="name">Organisation</label>
-                <input type="text" class="form-control form-control-lg" formControlName="organization" [class.is-invalid] = "registrationForm.controls.organization.status == 'INVALID' && registrationForm.controls.organization.touched == true" >
-            </div>
-            <div class="form-group">
-                <label for="email">Email</label>
-                <input type="text" name="email" class="form-control form-control-lg" formControlName="email" [class.is-invalid] = "registrationForm.controls.email.status == 'INVALID' && registrationForm.controls.email.touched == true">
-            </div>
-            <div class="form-group">
-                <label for="password">Password</label>
-                <input type="password" class="form-control form-control-lg" formControlName="password" [class.is-invalid] = "registrationForm.controls.password.status == 'INVALID' && registrationForm.controls.password.touched == true" >
-            </div>
-            <div class="form-group">
-                <label for="Confirm password">Confirm Password</label>
-                <input type="password" class="form-control form-control-lg" formControlName="passwordConfirmation" [class.is-invalid] = "registrationForm.controls.passwordConfirmation.status == 'INVALID' && registrationForm.controls.passwordConfirmation.touched == true" >
-            </div>
-            <div class="text-center">
-                <input type="submit" class="btn btn-primary mb-2 registerBtn" id="" value="Register">
-                <p>Already part of the community? <a [routerLink]="['/login']" class="text-danger">Login</a></p>
-            </div>
-        </form>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="name">Organisation</label>
+                    <input type="text" class="form-control form-control-lg" formControlName="organization" [class.is-invalid] = "registrationForm.controls.organization.status == 'INVALID' && registrationForm.controls.organization.touched == true" >
+                </div>
+                <div class="form-group">
+                    <label for="email">Email</label>
+                    <input type="text" name="email" class="form-control form-control-lg" formControlName="email" [class.is-invalid] = "registrationForm.controls.email.status == 'INVALID' && registrationForm.controls.email.touched == true">
+                </div>
+                <div class="form-group">
+                    <label for="password">Password</label>
+                    <input type="password" class="form-control form-control-lg" formControlName="password" [class.is-invalid] = "registrationForm.controls.password.status == 'INVALID' && registrationForm.controls.password.touched == true" >
+                </div>
+                <div class="form-group">
+                    <label for="Confirm password">Confirm Password</label>
+                    <input type="password" class="form-control form-control-lg" formControlName="passwordConfirmation" [class.is-invalid] = "registrationForm.controls.passwordConfirmation.status == 'INVALID' && registrationForm.controls.passwordConfirmation.touched == true" >
+                </div>
+                <div class="text-center">
+                    <input type="submit" class="btn btn-primary mb-2 registerBtn" id="" value="Register" (click)="open(content)">
+                    <p>Already part of the community? <a [routerLink]="['/login']" class="text-danger">Login</a></p>
+
+                </div>
+            </form>
+        </div>
+        <div>
+            <ng-template #content let-modal>
+                <div class="modal-header">
+                    <h1 class="modal-title" id="modal-basic-title">Terms And Agreements</h1>
+                    <button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')"></button>
+                </div>
+                <div class="container wrap-terms">
+                      <p>Please read these Terms and Agreements carefully before using the Data Sharing Portal. By accessing or using the Portal, you agree to be bound by these Terms and Agreements.</p>
+
+                      <h2>I. Acceptance of Terms</h2>
+                      <ol>
+                        <li>
+                          <h4>a. By accessing or using the Portal, you acknowledge that you have read, understood, and agreed to these Terms and Agreements. If you do not agree with any part of these terms, you should refrain from using the Portal.</h4>
+                        </li>
+                      </ol>
+
+                      <h2>II. User Eligibility</h2>
+                      <ol>
+                        <li>
+                          <h4>a. You must be at least 18 years old or the legal age in your jurisdiction to use the Portal.</h4>
+                        </li>
+                        <li>
+                          <h4>b. By using the Portal, you represent and warrant that you have the legal capacity to enter into these Terms and Agreements.</h4>
+                        </li>
+                      </ol>
+
+                      <h2>III. User Obligations</h2>
+                      <ol>
+                        <li>
+                          <h4>a. You agree to provide accurate and truthful information when creating your account and using the Portal.</h4>
+                        </li>
+                        <li>
+                          <h4>b. You are responsible for maintaining the confidentiality and security of your account credentials.</h4>
+                        </li>
+                        <li>
+                          <h4>c. You agree not to share your account credentials with any third party or allow unauthorized access to your account.</h4>
+                        </li>
+                        <li>
+                          <h4>d. You are solely responsible for all activities that occur under your account.</h4>
+                        </li>
+                      </ol>
+
+                      <h2>IV. Data Sharing and Usage</h2>
+                      <ol>
+                        <li>
+                          <h4>a. The Portal enables users to share, upload, and access datasets.</h4>
+                        </li>
+                        <li>
+                          <h4>b. By uploading or sharing datasets, you affirm that you have the necessary rights, permissions, and consents to share the data.</h4>
+                        </li>
+                        <li>
+                          <h4>c. You retain ownership of the datasets you upload, but you grant IPPF a non-exclusive, royalty-free license to host, display, and distribute the datasets through the Portal.</h4>
+                        </li>
+                        <li>
+                          <h4>d. IPPF does not claim ownership of any datasets shared through the Portal.</h4>
+                        </li>
+                      </ol>
+
+                      <h2>V. Acceptable Use</h2>
+                      <ol>
+                        <li>
+                          <h4>a. You agree to use the Portal in compliance with all applicable laws and regulations.</h4>
+                        </li>
+                        <li>
+                          <h4>b. You shall not engage in any activity that may interfere with or disrupt the functionality of the Portal or its associated systems.</h4>
+                        </li>
+                        <li>
+                          <h4>c. You shall not upload, share, or distribute any unlawful, offensive, or inappropriate content through the Portal.</h4>
+                        </li>
+                        <li>
+                          <h4>d. You shall not attempt to gain unauthorized access to the Portal or any user accounts.</h4>
+                        </li>
+                      </ol>
+
+                      <h2>VI. Intellectual Property</h2>
+                      <ol>
+                        <li>
+                          <h4>a. The Portal and its contents, including but not limited to text, graphics, logos, and software, are the property of IPPF or its licensors and are protected by copyright and other intellectual property laws.</h4>
+                        </li>
+                        <li>
+                          <h4>b. You may not reproduce, modify, distribute, or create derivative works of any portion of the Portal without the prior written consent of IPPF.</h4>
+                        </li>
+                      </ol>
+
+                      <h2>VII. Disclaimer of Warranties</h2>
+                      <ol>
+                        <li>
+                          <h4>a. The Portal is provided on an "as-is" and "as available" basis. IPPF makes no warranties, whether express, implied, or statutory, regarding the Portal's availability, accuracy, reliability, or suitability for any purpose.</h4>
+                        </li>
+                        <li>
+                          <h4>b. IPPF does not warrant that the Portal will be uninterrupted, error-free, or free from viruses or other harmful components.</h4>
+                        </li>
+                      </ol>
+
+                      <h2>VIII. Limitation of Liability</h2>
+                      <ol>
+                        <li>
+                          <h4>a. In no event shall IPPF be liable for any direct, indirect, incidental, consequential, or punitive damages arising out of or in connection with the use or inability to use the Portal.</h4>
+                        </li>
+                        <li>
+                          <h4>b. IPPF shall not be liable for any damages resulting from the reliance on the accuracy or completeness of any datasets available on the Portal.</h4>
+                        </li>
+                      </ol>
+
+                      <h2>IX. Termination</h2>
+                      <ol>
+                        <li>
+                          <h4>a. IPPF reserves the right to suspend or terminate your access to the Portal at any time and for any reason, without prior notice.</h4>
+                        </li>
+                        <li>
+                          <h4>b. Upon termination, all provisions of these Terms and Agreements that would reasonably be expected to survive termination shall remain in full force and effect.</h4>
+                        </li>
+                      </ol>
+
+                      <h2>X. Governing Law and Jurisdiction</h2>
+                      <p>These Terms and Agreements shall be governed by and construed in accordance with the laws of Kenya. Any disputes arising from or related to the Portal or these Terms and Agreements shall be subject to the exclusive jurisdiction of the courts in Kenya.</p>
+
+                      <p>By using the Portal, you agree to abide by these Terms and Agreements. If you do not agree with any part of these terms, you should refrain from using the Portal.</p>
+
+                      <p><strong>Date of Last Update:</strong> [Insert Date]</p>
+
+                      <p>Please review these Terms and Agreements regularly to stay informed about any changes.</p>
+                    </div>
+                    <hr>
+                <div class="modal-body">
+                    <form [formGroup]="acceptTermsForm">
+                        <div class="mb-3 flex-div">
+                            <input type="checkbox" name="confirm" formControlName="accepted" class="form-check" required (change)="checkbox()"/>
+                            <label for="dateOfBirth">Accept Terms and conditions</label>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-outline-dark" (click)="modal.close('Save click'); register();" [disabled]="!accepted_terms">Confirm Registration </button>
+                </div>
+            </ng-template>
+        </div>
     </div>
+    <app-footer></app-footer>
 </div>
-<app-footer></app-footer>

@@ -64,15 +64,14 @@
                                     <select>
                                         <option value="date,desc">Sort by date - Newest</option>
                                         <option value="date,asc">Sort by date - Oldest</option>
-                                        <!-- <option value="name,asc">Sort by name - Ascending</option>
-                                        <option value="name,desc">Sort by name - Descending</option> -->
                                     </select>
                                 </form>
                                 </div>
                             </div>
                         </div>
                         <form [formGroup] = "sizeForm" (change)="onChangeSize($event)">
-                                    <select>
+                                    <select formControlName="size">
+                                        <option value="10">10</option>
                                         <option value="20">20</option>
                                         <option value="50">50</option>
                                         <option value="100">100</option>
@@ -81,37 +80,31 @@
                     </div>
                 </div>
                 <div class="text-center text-danger h6" *ngIf="aalData.length <= 0">No results </div>
-                <div class="mb-3 dataset-info" *ngFor="let data of aalData">
-                    <!-- <div style="display:none;">
-                        {{addSubjects(data.subjects)}}
-                    </div> -->
-                    <div class="right-side col-12 col-sm-11" *ngIf="checkName(data)">
-                        <div class="row col-12">
-                            <div class="file-icon col-2 col-lg-1">
-                                <span><i class="fas fa-file"></i></span>
-                            </div>
-                            <div class="col-10 col-lg-11 dataset-div">
-                                <h3 class="lead-heading-mid lead-btn"><a 
-                                    [routerLink]="['../datasets/dataset-details',data.global_id]"
+                <div class="mb-3 " *ngFor="let data of aalData" >
+                    <div class="dataset-info" *ngIf="data.name.length > 0">
+                        <div class="right-side col-12 col-sm-11" *ngIf="checkName(data)">
+                            <div class="row col-12">
+                                <div class="file-icon col-2 col-lg-1">
+                                    <span><i class="fas fa-file"></i></span>
+                                </div>
+                                <div class="col-10 col-lg-11 dataset-div">
+                                    <h3 class="lead-heading-mid lead-btn"><a 
+                                        [routerLink]="['../datasets/dataset-details',data.global_id]"
 
-                                    >
-                                {{data?.name | titlecase}}</a></h3>
-                                <div class="meta-data">
-                                    <p class="date-created">Created on: {{data.createdAt | date}}</p>
-                                    <p class="date-modified mx-4">Last Modified: {{data.updatedAt | date}}</p>
+                                        >
+                                    {{data?.name | titlecase}}</a></h3>
+                                    <div class="meta-data">
+                                        <p class="date-created">Created on: {{data.createdAt | date}}</p>
+                                        <p class="date-modified mx-4">Last Modified: {{data.updatedAt | date}}</p>
+                                    </div>
                                 </div>
                             </div>
+                            <p class="d">{{data?.metadataBlocks?.ippf?.fields[0].value?.meta_summary?.value.length > 300 ? data?.metadataBlocks?.ippf?.fields[0].value?.meta_summary?.value.slice(0,300) + "..." : data.description}}</p>
                         </div>
-                        <p class="d">{{data?.metadataBlocks?.ippf?.fields[0].value?.meta_summary?.value.length > 300 ? data?.metadataBlocks?.ippf?.fields[0].value?.meta_summary?.value.slice(0,300) + "..." : data.description}}</p>
-                        <!-- <p><span class="text-bold">Collection: </span>{{data.title | titlecase}}</p> -->
-                        
-                        <!-- <div>
-                            <p class="number-of-times-viewed">Resources number: {{data.files.length}}</p>
-                        </div> -->
                     </div>
                     
                 </div>
-                    <!-- <ngb-pagination [collectionSize]="50" [(page)]="page" [directionLinks]="false"></ngb-pagination> -->
+                    <ngb-pagination [collectionSize]="searchCount" [(page)]="page" [directionLinks]="true" (pageChange)="onChangePage(page)" *ngIf="searchCount > 20"></ngb-pagination>
             </div>
         </div>
     </div>

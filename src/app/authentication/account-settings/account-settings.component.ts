@@ -15,6 +15,7 @@ import { Constants } from '../../config/constants'
   styleUrls: ['./account-settings.component.css']
 })
 export class AccountSettingsComponent implements OnInit {
+  showPopover: boolean = false;
   base_url: string = Constants.dataverse_url
   load:boolean = false
   load_two:boolean = true
@@ -42,13 +43,23 @@ export class AccountSettingsComponent implements OnInit {
   recently_downloaded:any [] = []
   accountDetailsForm :any;
   passwordResetForm :any
+  searchCount:number = 50
+  page:number = 4
   constructor(private auth: AuthServiceService, private routesService: RoutesService, private route: Router, private fb: FormBuilder, private datasetService: DatasetService) { }
 
   ngOnInit(): void {
     this.auth.getUserDetails().subscribe((item:any) => {
       this.datasetService.getRequestedData().subscribe((e:any)=>{
         this.load_two = false
-        this.mydata = e.items
+        // this.mydata = e.items
+        let data_ar = []
+        e.items.forEach((i:any) => {
+          this.datasetService.getADataset(i.dataset_persistent_id).subscribe((res:any) => {
+            i.data = res.latestVersion.metadataBlocks.ippf.fields[0].value.meta_title.value
+          })
+          data_ar.push(i)
+        })
+        this.mydata = data_ar
         console.log(this.mydata)
       })
       this.datasetService.getLogs(localStorage.getItem('id')).subscribe((e:any)=>{
@@ -68,14 +79,12 @@ export class AccountSettingsComponent implements OnInit {
       })
       if(item.success){
         let user_det = item.data
-        console.log(user_det);
         this.user.id = user_det.id
         this.user.email = user_det.email
         this.user.firstName = user_det.firstName
         this.user.otherNames = user_det.otherNames
         this.user.country = user_det.country
         this.user.organisation = user_det.organisation
-        console.log(this.user)
       }else{
         Swal.fire({  
           icon: 'error',  
@@ -104,14 +113,12 @@ export class AccountSettingsComponent implements OnInit {
   }
   getName(data){
     let value = {}
-    console.log(data)
     return "value";
   }
   updateUser(){
     if(this.accountDetailsForm.status == 'VALID') {
       this.load = true
       this.auth.updateUser(this.accountDetailsForm.value.firstName,this.accountDetailsForm.value.otherNames, this.accountDetailsForm.value.email, this.accountDetailsForm.value.country, this.accountDetailsForm.value.organisation).subscribe((response: any) => {
-        console.log(response.success);
         let res = response
         if(res.success){
           
@@ -149,7 +156,6 @@ export class AccountSettingsComponent implements OnInit {
         this.load = true
         
         this.auth.changePassword(localStorage.getItem('email'), "").subscribe((response:any) => {
-          console.log(response);
           if(response.success){
             this.error = ''
             this.load = false
@@ -190,5 +196,11 @@ export class AccountSettingsComponent implements OnInit {
       })
     }
     
+  }
+  onChangePage(page: number){
+    console.log('fafsa')
+  }
+  displayPop(text:any){
+    console.log(text)
   }
 }
