@@ -48,8 +48,6 @@ export class RegisterComponent implements OnInit {
     })
   }
   register(){
-    // if(this.registrationForm.status == 'VALID'){
-
       if(this.registrationForm.value.password == this.registrationForm.value.passwordConfirmation){
         this.accepted_terms = this.acceptTermsForm.value.accepted
         if(this.accepted_terms==true){
@@ -86,11 +84,9 @@ export class RegisterComponent implements OnInit {
       }else{
         this.warn = "Passwords did not match"
       }
-      // console.log(this.registrationForm.value)
-    // } else {
-    //   alert('All required form fields not filled')
-    // }
-    
+  }
+  triggerModal(){
+    this.modalService.open('')
   }
   checkbox(){
     this.accepted_terms=this.acceptTermsForm.value.accepted

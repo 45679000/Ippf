@@ -36,13 +36,15 @@
 .user-management {
     display: none;
 }
-.salutation:hover .user-management {
+.salutation-active .user-management {
     display: flex;
     flex-direction: column;
 }
+.h3-salutation:hover {
+    color: #151F6D;
+}
 .user-management{
     padding: 1rem;
-    /* border: 1px solid #333; */
     width: 180px;
     position: absolute;
     right: 0;

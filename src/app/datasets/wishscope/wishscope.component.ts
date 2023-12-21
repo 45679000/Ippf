@@ -22,7 +22,8 @@ interface Pie {
   styleUrls: ['./wishscope.component.css']
 })
 export class WishscopeComponent implements OnInit {
-  dataverse_url: string = Constants.dataverse_url 
+  dataverse_url: string = Constants.dataverse_url
+   
   load: boolean = true
   show_files:boolean = false
   datasets:any = []
@@ -60,8 +61,6 @@ export class WishscopeComponent implements OnInit {
     
   };
   constructor(private matomo: MatomotrackerserviceService,private appService: DatasetService, private route: ActivatedRoute, private sanitizer: DomSanitizer) { 
-    // this.refreshCountries()
-    // console.log(this.collectionSize)
     
   }
 
@@ -86,9 +85,6 @@ export class WishscopeComponent implements OnInit {
     if(this.dataset_id){
       this.checkFiletype(this.appService.file_type,this.dataset_id, this.appService.label)
     }
-    // else {
-    //   alert("Chooses the data to visalize in the datasets page")
-    // }
   }
   onLoadRemoteJSON() {
     let filename = prompt("Open remote JSON", "https://filesamples.com/samples/code/json/sample1.json");
@@ -104,27 +100,9 @@ export class WishscopeComponent implements OnInit {
        toolbar.getTabs = () => {
          tabs.shift()
           tabs.shift()
-        // tabs = [];
-        // // adding a new tab
-        // tabs.push({
-        //     id: "fm-tab-newtab",
-        //     title: "New Tab",
-        //     // specifying a custom handler
-        //     // handler: () => this.showInfo(),
-        //     icon: toolbar.icons.open,
-        // });
         return tabs;
     };
   }
-  // function customizeToolbar(toolbar:any) { 
-  //   // get all tabs 
-  //   let tabs = toolbar.getTabs(); 
-  //   toolbar.getTabs = function () {
-  //       // remove the Connect tab using its id
-  //       tabs = tabs.filter(tab => tab.id != "fm-tab-connect");
-  //       return tabs; 
-  //   } 
-  // }
   checkFiletype(file_type:any, datafile_id:any, label:string){
     if(file_type != "application/json" || file_type != "text/csv"){
         Swal.fire({  
@@ -191,14 +169,17 @@ export class WishscopeComponent implements OnInit {
   getListOfDatasets(){
     this.appService.getWishScope().subscribe((e:any) => {
       this.datasets = e.items
+      if(this.datasets.length <=0){
+        this.load = false
+      }
       this.datasets.forEach((item:any) => {
         this.appService.getADataset(item.global_id).subscribe((file:any) => {
-          // console.log(file)
           this.load = false
           file.latestVersion.files.forEach((f:any)=>{
             this.dataFiles.push(f)
           })
         })
+        this.load = false
       })  
     })
   }
@@ -212,19 +193,13 @@ export class WishscopeComponent implements OnInit {
     })
   }
   getCsv(){
-    // this.load = true
-    // this.url = `${Constants.ckan_url}/dataset/${this.datasetForm.value.dataset}/resource/${this.datasetForm.value.datafile}`
-    // // this.url = `http://3.236.19.31/dataset/family-planning/resource/e75b0996-3a0b-4e6e-921f-f7e5a1892781/view/8af72bce-43a7-41f3-b7de-eb9fac8f2edb`
-
-    // this.displayIframe = true
-    // this.load = false
   }
  
   setCsvFile(){
     this.getCsv()
   }
   getLicenseKey(){
-    return "Z7XC-XD4963-036648-0X5J0Y"
+    return Constants.flexKey
   }
 
 }

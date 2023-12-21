@@ -31,10 +31,11 @@
                         </select>
                     </div> -->
                     <!-- *ngIf ="show_files"  -->
-                    <div *ngIf ="dataFiles.length>0">
+                    <div *ngIf ="dataFiles.length>=0">
                       <label for="" class="form-label">Select the data file to visualize</label>
                       <select class="sidebarInput col-12" name="" id="" formControlName="datafile" (change)="onLoadRemoteCSV($event.target.value)">
                         <option selected value="0" disabled>Select file to visualize</option>
+                        <option *ngIf="dataFiles.length<=0" value="0" disabled>There are currently no files to visualize</option>
                         <option *ngFor="let item of dataFiles" value="{{item.dataFile.id}}">{{item.description? item.description : item.dataFile.filename | titlecase}}</option>
                       </select>
                     </div>

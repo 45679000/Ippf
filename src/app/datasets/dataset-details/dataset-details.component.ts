@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, TemplateRef,ViewChild } from '@angular/core';
 import { ActivatedRoute } from '@angular/router'
 import { Dataset } from '../../interfaces/dataset'
 import { Resource } from '../../interfaces/resource'
@@ -7,6 +7,8 @@ import { DatasetService } from '../../services/datasets-services.service';
 import Swal from 'sweetalert2';
 import { Router } from '@angular/router';
 import { Constants } from '../../config/constants'
+import { FormGroup, FormControl, Validators ,FormBuilder} from '@angular/forms';
+import { ModalDismissReasons, NgbDatepickerModule, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'app-dataset-details',
@@ -47,9 +49,11 @@ export class DatasetDetailsComponent implements OnInit {
     original_url: '',
     url_type: ''
   }
+  accepted_terms:boolean = false
   approved_data:any[] = [] 
   table:boolean = false
   faq: string = "meta_identification"
+  showModal: boolean = false
   public studyDescriptionDisp: boolean = true;
   public documentationDisp: boolean = false;
   public dataDescriptionDisp: boolean = false;
@@ -72,12 +76,24 @@ export class DatasetDetailsComponent implements OnInit {
     window.location.hash = '';
     window.location.hash = section;
   }
-  constructor(private route: ActivatedRoute, private datasetService: DatasetService, private routing: Router) { }
+  acceptTermsForm = new FormGroup({
+    accepted:new FormControl(false, [Validators.required])
+  })
+  @ViewChild('content',{ read: TemplateRef })  content: TemplateRef<any>;
+  constructor(private modalService: NgbModal,private route: ActivatedRoute, private datasetService: DatasetService, private routing: Router) { }
 
+  ngAfterViewInit() {
+    if(this.showModal){
+      this.modalService.open(this.content)
+    }
+  }
   ngOnInit(): void {
-    this.load = true
+    this.load = true    
     // data of a dataset
     this.id = this.route.snapshot.paramMap.get('id')
+    this.datasetService.getNoOfTimesViewed(localStorage.getItem("id"), this.id).subscribe((val:any) => {
+      this.showModal = val.count < 0        
+    })
     const data = this.datasetService.getADataset(this.id)
     data.subscribe((val: any) => {
       // console.log(val)
@@ -116,6 +132,11 @@ export class DatasetDetailsComponent implements OnInit {
       // console.log(val);
       
     })
+    
+
+  }
+  checkbox(){
+    this.accepted_terms=this.acceptTermsForm.value.accepted
   }
   mutlipleValues(value:any){
     let tet = ""

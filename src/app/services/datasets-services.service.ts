@@ -428,5 +428,8 @@ export class DatasetService {
     })
     return meta
   }
+  getNoOfTimesViewed(userId: string, datasetId: string){
+    return this.http.get(this.root_url+"/logs/user/access/"+userId+"?dataset="+datasetId)
+  }
 }
  

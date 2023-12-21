@@ -7,6 +7,141 @@
 <div class="container col-12 px-md-5 mt-5 min-vh-100">
     <div class="dataset">
         <h2 class="lead-heading-mid">{{ dataset_info.meta_title.value}}</h2>
+        <ng-template #content let-modal>
+            <div class="modal-header">
+                <h1 class="modal-title" id="modal-basic-title">Terms And Agreements</h1>
+                <button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')"></button>
+            </div>
+            <div class="container wrap-terms">
+                  <h4 class="mt-2">Please read these Terms and Agreements carefully before using the Data Sharing Portal. By accessing or using the Portal, you agree to be bound by these Terms and Agreements.</h4>
+
+                  <h5>I. Acceptance of Terms</h5>
+                  <ol>
+                    <li>
+                      <p>a. By accessing or using the Portal, you acknowledge that you have read, understood, and agreed to these Terms and Agreements. If you do not agree with any part of these terms, you should refrain from using the Portal.</p>
+                    </li>
+                  </ol>
+
+                  <h5>II. User Eligibility</h5>
+                  <ol>
+                    <li>
+                      <p>a. You must be at least 18 years old or the legal age in your jurisdiction to use the Portal.</p>
+                    </li>
+                    <li>
+                      <p>b. By using the Portal, you represent and warrant that you have the legal capacity to enter into these Terms and Agreements.</p>
+                    </li>
+                  </ol>
+
+                  <h5>III. User Obligations</h5>
+                  <ol>
+                    <li>
+                      <p>a. You agree to provide accurate and truthful information when creating your account and using the Portal.</p>
+                    </li>
+                    <li>
+                      <p>b. You are responsible for maintaining the confidentiality and security of your account credentials.</p>
+                    </li>
+                    <li>
+                      <p>c. You agree not to share your account credentials with any third party or allow unauthorized access to your account.</p>
+                    </li>
+                    <li>
+                      <p>d. You are solely responsible for all activities that occur under your account.</p>
+                    </li>
+                  </ol>
+
+                  <h5>IV. Data Sharing and Usage</h5>
+                  <ol>
+                    <li>
+                      <p>a. The Portal enables users to share, upload, and access datasets.</p>
+                    </li>
+                    <li>
+                      <p>b. By uploading or sharing datasets, you affirm that you have the necessary rights, permissions, and consents to share the data.</p>
+                    </li>
+                    <li>
+                      <p>c. You retain ownership of the datasets you upload, but you grant IPPF a non-exclusive, royalty-free license to host, display, and distribute the datasets through the Portal.</p>
+                    </li>
+                    <li>
+                      <p>d. IPPF does not claim ownership of any datasets shared through the Portal.</p>
+                    </li>
+                  </ol>
+
+                  <h5>V. Acceptable Use</h5>
+                  <ol>
+                    <li>
+                      <p>a. You agree to use the Portal in compliance with all applicable laws and regulations.</p>
+                    </li>
+                    <li>
+                      <p>b. You shall not engage in any activity that may interfere with or disrupt the functionality of the Portal or its associated systems.</p>
+                    </li>
+                    <li>
+                      <p>c. You shall not upload, share, or distribute any unlawful, offensive, or inappropriate content through the Portal.</p>
+                    </li>
+                    <li>
+                      <p>d. You shall not attempt to gain unauthorized access to the Portal or any user accounts.</p>
+                    </li>
+                  </ol>
+
+                  <h5>VI. Intellectual Property</h5>
+                  <ol>
+                    <li>
+                      <p>a. The Portal and its contents, including but not limited to text, graphics, logos, and software, are the property of IPPF or its licensors and are protected by copyright and other intellectual property laws.</p>
+                    </li>
+                    <li>
+                      <p>b. You may not reproduce, modify, distribute, or create derivative works of any portion of the Portal without the prior written consent of IPPF.</p>
+                    </li>
+                  </ol>
+
+                  <h5>VII. Disclaimer of Warranties</h5>
+                  <ol>
+                    <li>
+                      <p>a. The Portal is provided on an "as-is" and "as available" basis. IPPF makes no warranties, whether express, implied, or statutory, regarding the Portal's availability, accuracy, reliability, or suitability for any purpose.</p>
+                    </li>
+                    <li>
+                      <p>b. IPPF does not warrant that the Portal will be uninterrupted, error-free, or free from viruses or other harmful components.</p>
+                    </li>
+                  </ol>
+
+                  <h5>VIII. Limitation of Liability</h5>
+                  <ol>
+                    <li>
+                      <p>a. In no event shall IPPF be liable for any direct, indirect, incidental, consequential, or punitive damages arising out of or in connection with the use or inability to use the Portal.</p>
+                    </li>
+                    <li>
+                      <p>b. IPPF shall not be liable for any damages resulting from the reliance on the accuracy or completeness of any datasets available on the Portal.</p>
+                    </li>
+                  </ol>
+
+                  <h5>IX. Termination</h5>
+                  <ol>
+                    <li>
+                      <p>a. IPPF reserves the right to suspend or terminate your access to the Portal at any time and for any reason, without prior notice.</p>
+                    </li>
+                    <li>
+                      <p>b. Upon termination, all provisions of these Terms and Agreements that would reasonably be expected to survive termination shall remain in full force and effect.</p>
+                    </li>
+                  </ol>
+
+                  <h5>X. Governing Law and Jurisdiction</h5>
+                  <p>These Terms and Agreements shall be governed by and construed in accordance with the laws of Kenya. Any disputes arising from or related to the Portal or these Terms and Agreements shall be subject to the exclusive jurisdiction of the courts in Kenya.</p>
+
+                  <p>By using the Portal, you agree to abide by these Terms and Agreements. If you do not agree with any part of these terms, you should refrain from using the Portal.</p>
+
+                  <p><strong>Date of Last Update:</strong> [Insert Date]</p>
+
+                  <p>Please review these Terms and Agreements regularly to stay informed about any changes.</p>
+                </div>
+                <hr>
+            <div class="modal-body">
+                <form [formGroup]="acceptTermsForm">
+                    <div class="mb-3 flex-div">
+                        <input type="checkbox" name="confirm" formControlName="accepted" class="form-check" required (change)="checkbox()"/>
+                        <label for="dateOfBirth">Accept Terms and conditions</label>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="submit" class="btn btn-outline-dark" (click)="modal.close('Save click'); register();" [disabled]="!accepted_terms">Confirm Registration </button>
+            </div>
+        </ng-template>
         <div class="meta-data">
             <p class="date-created">Created on: <span class="h6 text-info">{{dataOfDataset.publicationDate | date:'mediumDate' }}</span></p>
         </div>
@@ -28,6 +163,7 @@
                 <button class="btn " [ngClass]="dataDescriptionDisp? 'pink-border' : ''" (click)="dispDataDescription()">Dataset description</button>
                 <button class="btn " [ngClass]=" documentationDisp? 'pink-border' : ''" (click)="dispDocumentation()">Documentation & resources</button>
             </div>
+            
             <div class="study-description row" *ngIf="studyDescriptionDisp">
                 <div class="content-data col-12">
                     <div class="col-12">
@@ -45,7 +181,6 @@
                             </div>
                         </div>
                     </div>
-                    <!-- <p>{{meta.}}</p> -->
                     <div class="col-12 row meta-data-fields">
                         <div class="col-3 author-btn">
                             <div *ngFor="let file of meta.fields" class="meta-fields">
@@ -53,33 +188,16 @@
                             </div>
                         </div>
                         <div class="author meta col-9" >
-                            <!-- <table class="table"> -->
-                                <!-- <tbody> -->
                                     <div *ngFor="let file of meta.fields" class="th" [class.active]="activeLink(file.typeName)">
                                         <h3 class="lead-heading">{{camelToUnderscore(file.typeName)}}</h3>
                                         <div [innerHtml] = "!file.multiple? check(file.value) : mutlipleValues(file.value)" class="row col-12"></div>
                                     </div>
-                                    <!-- <tr>
-                                        <td>Author's email:</td>
-                                        <td>{{dataOfDataset.author_email}}</td>
-                                    </tr>
-                                    <tr>
-                                        <td>Maintainer:</td>
-                                        <td>{{dataOfDataset.maintainer}}</td>
-                                    </tr>
-                                    <tr>
-                                        <td>Maintainer's email:</td>
-                                        <td>{{dataOfDataset.maintainer_email}}</td>
-                                    </tr> -->
-                                <!-- </tbody> -->
-                            <!-- </table> -->
                         </div>
                     </div>
                     
                 </div>
             </div>
             <div class="data-description" id="data-description" *ngIf="dataDescriptionDisp">
-              <!-- <p>Data description</p> -->
               <div class="data-description" id="data-description">
                         <div *ngFor="let file of data_description" >
                             <h3 class="lead-heading">{{camelToUnderscore(file.typeName)}}</h3>
@@ -94,7 +212,6 @@
                 <div *ngIf="resourcesArray.length > 0">
                     <div *ngFor="let resource of resourcesArray">
                         <div class="questionnaires mt-4">
-                            <!-- <h2 class="lead-heading">Questionnaires</h2> -->
                             <div class="questionnaire">
                                 <div class="question-title">
                                     <div class="question-name">
@@ -138,18 +255,6 @@
                                         <div class="col-6 m-auto">
                                             Date Created: <span class="text-info">{{resource.dataFile.creationDate }}</span>
                                         </div>
-                                       <!--  <div class="col-3 m-auto">
-                                            <button (click)="setDatasetId(resource.dataFile.id,resource.dataFile.contentType)">Go to wishscope</button>
-                                        </div> -->
-                                        <!-- <div class="col-3 m-auto" *ngIf="resourceExistUrl(resource)">
-                                            <a [routerLink]="['/wishscope']" [queryParams]="{ id: 99, resource_id: 20}" class="btn btn-link" ><span class="mx-2"><i class="fas fa-chart-line"></i></span>Visualize in Wishscope</a>
-                                        </div>
-                                        <div class="col-6 m-auto" *ngIf="!resourceExistUrl(resource)">
-                                            No file uploaded
-                                        </div>
-                                        <div class="col-3 m-auto" *ngIf="resourceExistUrl(resource)"> -->
-                                            <!-- <a  href="{{resource.original_url || resource.url}}" class="download-link blue-text"><span class="mx-2"><i class="fas fa-download"></i></span>Download</a>
-                                        </div> -->
                                     </div>
                                 </div>
                             </div>
@@ -158,7 +263,8 @@
                     </div>
 
                 </div>
-                <!-- <div class="questionnaires mt-4">
+                <div>
+                    
                     <h2 class="lead-heading">Questionnaires</h2>
                     <div class="questionnaire">
                         <div class="question-title">
@@ -234,7 +340,7 @@
                         <a href="#" class="download-link blue-text"><span class="mx-2"><i class="fas fa-download"></i></span>Download</a>
                     </div>
 
-                </div> -->
+                </div>
             </div>
         </div>
     </div>

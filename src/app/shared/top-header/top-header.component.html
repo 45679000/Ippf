@@ -7,8 +7,8 @@
             <a href="https://www.ippf.org/about-wish" class="blue-text text-globe"><i class="fas fa-globe"></i>Visit website</a>
         </div>
         <br class="br">
-        <div class="salutation">
-            <p   class="h3 ">Profile<button class="h3 mx-1 hov"><i class="fas fa-user-circle" ></i></button></p>
+        <div class="salutation" [ngClass]="isShowProfile==true?'salutation-active':''" (click)="showProfile()">
+            <p   class="h3 h3-salutation ">Profile<button class="h3 mx-1 hov"><i class="fas fa-user-circle" ></i></button></p>
             <div class="user-management">
                 <div *ngIf="isSignedIn">
                     <a [routerLink]="['/account-settings']" class="btn btn-danger-lg mb-sm-2 redBtn">Account</a>

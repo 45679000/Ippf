@@ -8,6 +8,7 @@ import { Router } from "@angular/router"
 })
 export class AboutComponent implements OnInit {
     about:any = ""
+    privacyPolicy:any = ""
     display:number = 1
   constructor(private feed: FeedbackService, private route: Router) { }
 
@@ -16,6 +17,9 @@ export class AboutComponent implements OnInit {
       this.about = res.data
     })
     if(this.route.url == "/privacy-policy"){
+      this.feed.getPrivacyPolicy().subscribe((res:any) => {
+        this.privacyPolicy = res.data
+      })
       this.display = 2
     }else if(this.route.url == '/terms-and-conditions'){
       this.display = 3

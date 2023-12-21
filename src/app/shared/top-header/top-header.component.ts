@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { use } from 'echarts';
 import { AuthServiceService } from '../../auth-service.service'
 import { Token } from '../../interfaces/Token'
 
@@ -14,6 +13,7 @@ export class TopHeaderComponent implements OnInit {
   constructor(private route: Router, private authService: AuthServiceService) { }
   isSignedIn: boolean = false ; // hidden by default
   salutation: string = 'Hi'
+  isShowProfile: boolean = false
   user:Token = {
     username: '',
     realm: '',
@@ -38,5 +38,8 @@ export class TopHeaderComponent implements OnInit {
   signOut() {
     this.authService.logout()
 
+  }
+  showProfile(){
+    this.isShowProfile = !this.isShowProfile
   }
 }
