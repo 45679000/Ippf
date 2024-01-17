@@ -47,7 +47,7 @@
         <button (click)="onLoadRemoteCSV(17)">Load remote CSV</button> -->
       
       <div class="mb-5">
-        <fm-pivot
+        <!-- <fm-pivot
           #pivot
           [toolbar]="true"
           [report]="report"
@@ -55,7 +55,16 @@
           (beforetoolbarcreated)="customizeToolbar($event)"
           [licenseKey]="getLicenseKey()">
           >
-        </fm-pivot>
+        </fm-pivot> -->
+        <app-wbr-pivot #pivot1
+          [toolbar]="true"
+          [width]="'100%'"
+          [height]="500"
+          [report]="report"
+          (ready)="onPivotReady($event)"
+          >
+            WebDataRocks will appear here
+        </app-wbr-pivot>
         <iframe *ngIf="displayIframe" [src]="transform(url)" title="W3Schools Free Online Web Tutorials" class="iframe"></iframe> 
       </div>
   </div>

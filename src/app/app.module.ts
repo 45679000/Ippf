@@ -51,8 +51,8 @@ import { FormsModule } from '@angular/forms';
     NgxEchartsModule.forRoot({
       echarts
     }),
-    FormsModule
-
+    FormsModule,
+    
   ],
   exports: [
     MenuComponent

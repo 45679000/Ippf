@@ -1,13 +1,15 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { DatasetService } from '../../services/datasets-services.service';
-import { FormGroup, FormControl, Validators ,FormBuilder} from '@angular/forms';
+import { FormGroup, FormControl, Validators, FormBuilder } from '@angular/forms';
 import { Resource } from '../../interfaces/resource'
 import { ActivatedRoute } from '@angular/router'
 import { DomSanitizer } from "@angular/platform-browser";
 import { Constants } from "../../config/constants"
-import { FlexmonsterPivot } from "ng-flexmonster";
+// import { FlexmonsterPivot } from "ng-flexmonster";
 import Swal from 'sweetalert2';
 import { MatomotrackerserviceService } from '../../services/matomotrackerservice.service';
+import { WebdatarocksComponent } from '@webdatarocks/ng-webdatarocks';
+
 
 interface Item {
   item: string[]
@@ -23,12 +25,12 @@ interface Pie {
 })
 export class WishscopeComponent implements OnInit {
   dataverse_url: string = Constants.dataverse_url
-   
+
   load: boolean = true
-  show_files:boolean = false
-  datasets:any = []
-  dataFiles: Resource []= []
-  chartsType:any = ['pie','Bar/Line'] 
+  show_files: boolean = false
+  datasets: any = []
+  dataFiles: Resource[] = []
+  chartsType: any = ['pie', 'Bar/Line']
   datasetForm = new FormGroup({
     dataset: new FormControl(),
     datafile: new FormControl('0')
@@ -47,27 +49,34 @@ export class WishscopeComponent implements OnInit {
   })
   page = 1;
   pageSize = 25;
-  collectionSize:number = 0;
-  id:any 
+  collectionSize: number = 0;
+  id: any
   resource_id: any
   url: string = ''
   displayIframe: boolean = false
-  dataset_id:number = 0
-  data_type:string = ''
+  dataset_id: number = 0
+  data_type: string = ''
+  selected_csv: any = ""
   // countries: Country[] = [];
   // @ViewChild("pivot") pivot!: FlexmonsterPivot;
-  @ViewChild('pivot')pivot!: FlexmonsterPivot;
-   report: Object = {
-    
+  @ViewChild('pivot1') child: WebdatarocksComponent;
+  report: Object = {
+    dataSource: {
+      type: this.data_type, // "json" or "csv" based on file type
+      filename: ""
+
+      // filename: this.dataverse_url+"/access/datafile/"+this.dataset_id,
+    },
+
   };
-  constructor(private matomo: MatomotrackerserviceService,private appService: DatasetService, private route: ActivatedRoute, private sanitizer: DomSanitizer) { 
-    
+  constructor(private matomo: MatomotrackerserviceService, private appService: DatasetService, private route: ActivatedRoute, private sanitizer: DomSanitizer) {
+
   }
 
   ngOnInit(): void {
     this.matomo.trackPageView()
     this.getListOfDatasets()
-    this.route.queryParamMap.subscribe(params => { 
+    this.route.queryParamMap.subscribe(params => {
       this.id = params.get('id');
       this.resource_id = params.get('resource_id')
       this.datasetForm.value.dataset = this.id
@@ -75,130 +84,166 @@ export class WishscopeComponent implements OnInit {
       // console.log('Query params ',this.pageNo) 
     });
     this.dataset_id = this.appService.dataset_id
-    if(this.appService.file_type == "application/json"){
+    if (this.appService.file_type == "application/json") {
       this.data_type = "json"
-    }else if(this.appService.file_type == "text/csv"){
+    } else if (this.appService.file_type == "text/csv") {
       this.data_type = "csv"
     }
-    this.data_type = this.appService.file_type 
+    this.data_type = this.appService.file_type
     console.log(this.data_type)
-    if(this.dataset_id){
-      this.checkFiletype(this.appService.file_type,this.dataset_id, this.appService.label)
+    if (this.dataset_id) {
+      this.checkFiletype(this.appService.file_type, this.dataset_id, this.appService.label)
     }
   }
-  onLoadRemoteJSON() {
-    let filename = prompt("Open remote JSON", "https://filesamples.com/samples/code/json/sample1.json");
-    if (filename != null) {
-      this.pivot.flexmonster.connectTo({
-        type: "json",
-        filename: filename,
-      });
+  onPivotReady(pivot: WebDataRocks.Pivot): void {
+    console.log('[ready] WebdatarocksPivotModule', this.child);
+  }
+
+  onCustomizeCell(
+    cell: WebDataRocks.CellBuilder,
+    data: WebDataRocks.CellData
+  ): void {
+    if (data.isClassicTotalRow) {
+      cell.addClass('fm-total-classic-r');
+    }
+    if (data.isGrandTotalRow) {
+      cell.addClass('fm-grand-total-r');
+    }
+    if (data.isGrandTotalColumn) {
+      cell.addClass('fm-grand-total-c');
     }
   }
-   customizeToolbar(toolbar: any) {
-    let tabs = toolbar.getTabs();
-       toolbar.getTabs = () => {
-         tabs.shift()
-          tabs.shift()
-        return tabs;
-    };
-  }
-  checkFiletype(file_type:any, datafile_id:any, label:string){
-    if(file_type != "application/json" || file_type != "text/csv"){
-        Swal.fire({  
-              icon: 'error',  
-              // title: 'Oops...',  
-              text: "The file you want to visualize is neither a csv file nor json, kindly choose a dataset that is either in json or csv format",  
-               html: 'File type incompatibility'+'<br>'+'Download and visualize using other tools ' +'<a href="'+this.dataverse_url+'/access/datafile/'+datafile_id+'" class="btn btn-link"><span>  <i class="fas fa-download"></i></span>'+label+'</a>'
-            })
+
+  // onReportComplete(): void {
+  //   this.child.webDataRocks.off('reportcomplete');
+  //   this.child.webDataRocks.setReport({
+  //     dataSource: {
+  //       filename: this.selected_csv,
+  //       // filename: 'https://cdn.webdatarocks.com/data/data.json',
+  //     },
+  //   });
+  // }
+  // onLoadRemoteJSON() {
+  //   let filename = prompt("Open remote JSON", "https://filesamples.com/samples/code/json/sample1.json");
+  //   if (filename != null) {
+  //     this.pivot.flexmonster.connectTo({
+  //       type: "json",
+  //       filename: filename,
+  //     });
+  //   }
+  // }
+  //  customizeToolbar(toolbar: any) {
+  //   let tabs = toolbar.getTabs();
+  //      toolbar.getTabs = () => {
+  //        tabs.shift()
+  //         tabs.shift()
+  //       return tabs;
+  //   };
+  // }
+  checkFiletype(file_type: any, datafile_id: any, label: string) {
+    if (file_type != "application/json" || file_type != "text/csv") {
+      Swal.fire({
+        icon: 'error',
+        // title: 'Oops...',  
+        text: "The file you want to visualize is neither a csv file nor json, kindly choose a dataset that is either in json or csv format",
+        html: 'File type incompatibility' + '<br>' + 'Download and visualize using other tools ' + '<a href="' + this.dataverse_url + '/access/datafile/' + datafile_id + '" class="btn btn-link"><span>  <i class="fas fa-download"></i></span>' + label + '</a>'
+      })
     } else {
-       this.report = {
-          dataSource: {
-          // type: this.data_type,
-          filename: this.dataverse_url+"/access/datafile/"+this.dataset_id,
+      this.report = {
+        dataSource: {
+          type: this.data_type,
+          filename: this.dataverse_url + "/access/datafile/" + this.dataset_id,
         }
       }
     }
   }
-  onLoadRemoteCSV(id:any) {
-    this.dataFiles.forEach((item:any) => {
-      if(id ==item.dataFile.id){
-        if(item.restricted){
+  onLoadRemoteCSV(id: any) {
+    this.dataFiles.forEach((item: any) => {
+      if (id == item.dataFile.id) {
+        if (item.restricted) {
           let ids = []
-          this.appService.getRequestedData().subscribe((response:any) => {
-            response.items.forEach((file:any) => {
+          this.appService.getRequestedData().subscribe((response: any) => {
+            response.items.forEach((file: any) => {
               ids.push(parseInt(file.file_id))
             })
-            if(ids.includes(parseInt(id))){
-              let filename = this.dataverse_url+"/access/datafile/"+id+"?key="+localStorage.getItem("id")
+            if (ids.includes(parseInt(id))) {
+              let filename = this.dataverse_url + "/access/datafile/" + id + "?key=" + localStorage.getItem("id")
               if (filename != null) {
-                this.pivot.flexmonster.connectTo({
-                  type: "csv",
-                  filename: filename,
-                });
+                this.report = {
+                  dataSource: {
+                    type: "csv", // Assuming CSV file type
+                    filename: filename,
+                  },
+                };
+                this.child.webDataRocks.setReport(this.report);
+                console.log('[ready] WebdatarocksPivotModule', this.child);
               }
-            }else{
-              Swal.fire({  
-                icon: 'error',  
-                title: 'The file you want to visualize is private and you have to request for permision for it.',  
-                text: "",  
+            } else {
+              Swal.fire({
+                icon: 'error',
+                title: 'The file you want to visualize is private and you have to request for permision for it.',
+                text: "",
                 html: `<a href="/request/${id}/${item.label}" class="btn btn-link">Request for permision</a>`
               })
             }
           })
-          
-        }else{
-          let filename = this.dataverse_url+"/access/datafile/"+id
+
+        } else {
+          let filename = this.dataverse_url + "/access/datafile/" + id
           if (filename != null) {
-          // this.pivot.flexmonster.setReport(this.report);
-            this.pivot.flexmonster.connectTo({
-              type: "csv",
-              filename: filename,
-            });
+            // this.pivot.flexmonster.setReport(this.report);
+            this.report = {
+              dataSource: {
+                type: "csv", // Assuming CSV file type
+                filename: filename,
+              },
+            };
+            this.child.webDataRocks.setReport(this.report);
+            console.log('[ready] WebdatarocksPivotModule', this.child);
           }
         }
       }
     })
   }
-  transform(url:string) {
+  transform(url: string) {
     return this.sanitizer.bypassSecurityTrustResourceUrl(url);
   }
-  returnRow(item:any){
+  returnRow(item: any) {
     return item
   }
-  getListOfDatasets(){
-    this.appService.getWishScope().subscribe((e:any) => {
+  getListOfDatasets() {
+    this.appService.getWishScope().subscribe((e: any) => {
       this.datasets = e.items
-      if(this.datasets.length <=0){
+      if (this.datasets.length <= 0) {
         this.load = false
       }
-      this.datasets.forEach((item:any) => {
-        this.appService.getADataset(item.global_id).subscribe((file:any) => {
+      this.datasets.forEach((item: any) => {
+        this.appService.getADataset(item.global_id).subscribe((file: any) => {
           this.load = false
-          file.latestVersion.files.forEach((f:any)=>{
+          file.latestVersion.files.forEach((f: any) => {
             this.dataFiles.push(f)
           })
         })
         this.load = false
-      })  
+      })
     })
   }
-  getListOfDatafiles(){
+  getListOfDatafiles() {
     this.dataFiles = []
     this.show_files = false
     this.show_files = true
-    this.appService.getADataset(this.datasetForm.value.dataset).subscribe((e:any) => {
-        this.dataFiles = e.latestVersion.files
-        console.log(e)
+    this.appService.getADataset(this.datasetForm.value.dataset).subscribe((e: any) => {
+      this.dataFiles = e.latestVersion.files
+      console.log(e)
     })
   }
-  getCsv(){
+  getCsv() {
   }
- 
-  setCsvFile(){
+
+  setCsvFile() {
     this.getCsv()
   }
-  getLicenseKey(){
+  getLicenseKey() {
     return Constants.flexKey
   }
 

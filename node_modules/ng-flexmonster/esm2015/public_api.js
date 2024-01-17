@@ -1,0 +1,7 @@
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,extraRequire,missingReturn,uselessCode} checked by tsc
+ */
+export { FlexmonsterPivotModule } from './flexmonster.module';
+export { FlexmonsterPivot } from './flexmonster.component';
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoicHVibGljX2FwaS5qcyIsInNvdXJjZVJvb3QiOiJuZzovL25nLWZsZXhtb25zdGVyLyIsInNvdXJjZXMiOlsicHVibGljX2FwaS50cyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiOzs7O0FBQUEsT0FBTyxFQUFFLHNCQUFzQixFQUFFLE1BQU0sc0JBQXNCLENBQUM7QUFDOUQsT0FBTyxFQUFFLGdCQUFnQixFQUFFLE1BQU0seUJBQXlCLENBQUMiLCJzb3VyY2VzQ29udGVudCI6WyJleHBvcnQgeyBGbGV4bW9uc3RlclBpdm90TW9kdWxlIH0gZnJvbSAnLi9mbGV4bW9uc3Rlci5tb2R1bGUnO1xyXG5leHBvcnQgeyBGbGV4bW9uc3RlclBpdm90IH0gZnJvbSAnLi9mbGV4bW9uc3Rlci5jb21wb25lbnQnO1xyXG4iXX0=

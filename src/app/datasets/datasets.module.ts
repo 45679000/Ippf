@@ -13,6 +13,8 @@ import { WishscopeComponent } from './wishscope/wishscope.component';
 import { FormsModule } from '@angular/forms';
 import {NgbPaginationModule, NgbAlertModule} from '@ng-bootstrap/ng-bootstrap';
 import { FlexmonsterPivotModule } from 'ng-flexmonster';
+import { WebdatarocksPivotModule } from '@webdatarocks/ng-webdatarocks';
+
 
 @NgModule({
   declarations: [
@@ -31,7 +33,9 @@ import { FlexmonsterPivotModule } from 'ng-flexmonster';
     FormsModule,
     NgbPaginationModule, 
     NgbAlertModule,
-    FlexmonsterPivotModule
+    // FlexmonsterPivotModule
+    WebdatarocksPivotModule,
+
 
   ]
 })
